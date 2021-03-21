@@ -1,0 +1,63 @@
+---
+- name: Install Docker Community Edition.
+  hosts: localhost
+  connection: local
+  become: true
+
+  tasks:
+  - name: Install apt key for official repository
+    apt_key:
+      url: https://download.docker.com/linux/raspbian/gpg
+      state: present
+  - name: Add official repository
+    apt_repository:
+      repo: deb [arch=armhf] https://download.docker.com/linux/raspbian buster stable
+  - name: Install Docker
+    apt:
+      name: docker-ce
+      state: latest
+    notify:
+    - Install community.docker from Ansible Galaxy
+
+  - name: Add pi user to docker group
+    user:
+      name: pi
+      groups: docker
+
+  - name: Start Docker
+    systemd:
+      name: docker
+      enabled: yes
+      state: started
+
+  - name: Install Docker Python module
+    pip:
+      name: docker
+      state: present
+
+  - name: Create a directory for Portainer volume
+    file:
+      path: /opt/docker/portainer/data
+      state: directory
+
+  - name: Install Portainer
+    docker_container:
+      image: portainer/portainer-ce
+      name: portainer
+      hostname: portainer
+      state: started
+      restart: yes
+      restart_policy: unless-stopped
+      ports:
+      - 8000:8000
+      - 9000:9000
+      volumes:
+      - /opt/docker/portainer/data:/data
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  handlers:
+  # As far as I know, there is no Ansible module to install Galaxy collections.
+  # So for now, this is a shell command that happens after Docker is installed.
+  - name: Install community.docker from Ansible Galaxy
+    shell:
+      cmd: ansible-galaxy collection install community.docker
