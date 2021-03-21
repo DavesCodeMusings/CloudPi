@@ -1,0 +1,25 @@
+---
+- name: Upgrade System to Latest Packages.
+  hosts: localhost
+  connection: local
+  become: true
+
+  tasks:
+  - name: Update Apt cache
+    apt:
+      update_cache: yes
+
+  - name: Upgrade all packages
+    apt:
+      upgrade: dist
+
+  - name: Determine if reboot is required
+    stat:
+      path: /var/run/reboot-required
+    notify:
+    - Reboot required
+
+  handlers:
+  - name: Reboot required
+    debug:
+      msg: A reboot is required.
