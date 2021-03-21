@@ -1,0 +1,35 @@
+---
+- name: Install NextCloud as a Docker container.
+  hosts: localhost
+  connection: local
+  become: true
+
+  tasks:
+  # NextCloud uses a SQLite database (among other options).
+  - name: Install SQLite client
+    apt:
+      name: sqlite3
+      state: latest
+  
+  # The html directory is where NextCloud stores pretty much everything.
+  - name: Ensure directory structure exists.
+    file:
+      path: /opt/docker/nextcloud/html
+      state: directory
+      mode: '0755'
+
+  # The html directory is bind-mounted to give local access to stored
+  # data. This ensures data persists when the container restarts and is
+  # also handy for backups.
+  - name: Install NextCloud.
+    docker_container:
+      image: nextcloud
+      name: nextcloud
+      hostname: nextcloud
+      state: started
+      restart: yes
+      restart_policy: unless-stopped
+      ports:
+      - 8080:80
+      volumes:
+      - /opt/docker/nextcloud/html:/var/www/html
