@@ -15,13 +15,18 @@
       apt:
         name: bind9
         state: latest
+        
     - name: Install dnsutils
       apt:
         name: dnsutils
         state: latest
+        
     - name: Verify good starting configuration
       shell:
         cmd: named-checkconf
+      register: named_checkconf
+      failed_when: named_checkconf.stdout_lines | length > 0
+
     - name: Configure forwarders
       blockinfile:
         path: /etc/bind/named.conf.options
@@ -32,14 +37,19 @@
           \t\t{{ upstream_secondary }};\n
           \t};\n\n
           \tallow-query { any; };"
+
     - name: Verify configuration
       shell:
         cmd: named-checkconf
+      register: named_checkconf
+      failed_when: named_checkconf.stdout_lines | length > 0
+        
     - name: Reload BIND9 config
       systemd:
         name: bind9
         enabled: yes
         state: reloaded
+        
     - name: Test DNS lookup for raspberrypi.org
       shell:
         cmd: nslookup raspberrypi.org 127.0.0.1
