@@ -28,5 +28,6 @@ is to add more Pi.
 Potential enhancements include:
 * Multiple Raspberry Pis running a Docker Swarm or Kubernetes cluster.
 * GlusterFS or other replicated filesystem.
+* Replicated database back-end for NextCloud.
 * Power supply and network redundancy.
 * Auto-restarting of unresponsive nodes.
