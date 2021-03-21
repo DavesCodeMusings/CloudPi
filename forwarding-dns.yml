@@ -30,7 +30,8 @@
         content: "\tforwarders {\n
           \t\t{{ upstream_primary }};\n
           \t\t{{ upstream_secondary }};\n
-          \t};"
+          \t};\n\n
+          \tallow-query { any; };"
     - name: Verify configuration
       shell:
         cmd: named-checkconf
