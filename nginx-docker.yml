@@ -1,0 +1,66 @@
+---
+- name: Install Nginx.
+  hosts: localhost
+  connection: local
+  become: true
+
+  tasks:
+  - name: Ensure directory structure exists.
+    file:
+      path: /opt/docker/nginx/content
+      state: directory
+      mode: '0755'
+
+    # Create a default.conf file, but only if none exists.
+  - name: Ensure configuration file exists.
+    copy:
+      dest: /opt/docker/nginx/default.conf
+      force: no
+      content: |
+        # This avoids an error message 'could not build server_names_hash'.
+        server_names_hash_bucket_size 64;
+
+        # Server static files on otto.local:80
+        server {
+            listen       80;
+            server_name  {{ ansible_hostname }};
+            location / {
+                root /usr/share/nginx/html;
+                index index.html index.htm;
+            }
+        }
+
+        # Redirections for virtual servers in the form: {app}.{{ ansible_hostname }}
+        server {
+            server_name portainer.{{ ansible_hostname }};
+            return 301 http://portainer.{{ ansible_hostname}}:9000;
+        }
+
+  - name: Create a simple index.html if none exists.
+    copy:
+      dest: /opt/docker/nginx/content/index.html
+      force: no
+      content: |
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <title>Not Dead</title>
+          </head>
+          <body>
+            <p>I'm not dead yet.</p>
+          </body>
+        </html>
+
+  - name: Install Nginx container.
+    docker_container:
+      image: nginx
+      name: nginx
+      hostname: nginx
+      state: started
+      restart: yes
+      restart_policy: unless-stopped
+      ports:
+      - 80:80
+      volumes:
+      - /opt/docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - /opt/docker/nginx/content:/usr/share/nginx/html:ro
