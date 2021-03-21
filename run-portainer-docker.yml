@@ -1,0 +1,21 @@
+---
+- name: Run Mosquitto MQTT as a Docker container.
+  hosts: localhost
+  connection: local
+  become: true
+  
+  tasks:
+  - name: Install Portainer
+    docker_container:
+      image: portainer/portainer-ce
+      name: portainer
+      hostname: portainer
+      state: started
+      restart: yes
+      restart_policy: unless-stopped
+      ports:
+      - 8000:8000
+      - 9000:9000
+      volumes:
+      - /opt/docker/portainer/data:/data
+      - /var/run/docker.sock:/var/run/docker.sock
