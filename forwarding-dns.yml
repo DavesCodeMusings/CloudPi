@@ -39,3 +39,8 @@
         name: bind9
         enabled: yes
         state: reloaded
+    - name: Test DNS lookup for raspberrypi.org
+      shell:
+        cmd: nslookup raspberrypi.org 127.0.0.1
+      register: nslookup
+      failed_when: nslookup.stdout is not search("raspberrypi.org")
