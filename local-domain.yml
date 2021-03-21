@@ -1,0 +1,48 @@
+---
+- name: Create DNS zone files for local domain.
+  hosts: localhost
+  connection: local
+  become: true
+
+  # The following should be adjusted based on your IP addressing.
+  # Only class C subnets are handled.
+  vars:
+    domain: .local
+    subnet: 192.168.0
+
+  tasks:
+  - name: Verify good starting configuration
+    shell:
+      cmd: named-checkconf
+    register: named_checkconf
+    failed_when: named_checkconf.stdout_lines | length > 0
+
+  # The delivered database for localhost is called db.local. This presents a
+  # naming problem if a .local domain (e.g. hostname.local) is desired.
+  # Therefore db.local is renamed to db.localhost.
+  - name: Rename localhost database
+    copy:
+      src: /etc/bind/db.local
+      dest: /etc/bind/db.localhost
+      force: no
+    notify:
+    - Update default-zones
+
+  - name: Verify good configuration after changes
+    shell:
+      cmd: named-checkconf
+    register: named_checkconf
+    failed_when: named_checkconf.stdout_lines | length > 0
+
+
+  handlers:
+  # If db.local was renamed, update the defult-zones entry to follow suit.
+  # But, limit to only lines before the 127.in-addr.arpa lookup zone. This
+  # should keep Ansible from clobbering any db.local file that is not part
+  # of the localhost / 127.in-addr.arpa combination.
+  - name: Update default-zones
+    replace:
+      path: /etc/bind/named.conf.default-zones
+      before: 'zone "127.in-addr.arpa"'
+      regexp: '^\tfile "/etc/bind/db.local";$'
+      replace: "\tfile \"/etc/bind/db.localhost\";"
