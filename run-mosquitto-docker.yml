@@ -32,7 +32,7 @@
       dest: /opt/docker/mosquitto/config/mosquitto.passwd
       force: no
       content: |
-        admin:$7$101$gwpz0HMrGuIAofMz$x5kKu8v0YnMBzfkfX/CZscnR6/u0Dz4nHa6/Wsrs7P5rD3LdZQ8wOLcEL/5py1XgskPrbwd8sCPp8jtVuvC9Vw==
+        mqtt:$7$101$L3ZATL+vdx7gZMtX$pUhr8x8hfowl77Nsv77UrTYAAfgH/WyzVK7MD2qtqTdNevoP2mkvfcf705ZcM/nJA7njrLKnD6YMDNj/O19TjA==
 
   - name: Run Mosquitto MQTT broker.
     docker_container:
