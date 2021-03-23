@@ -7,8 +7,8 @@
   # The following are OpenDNS public DNS servers. They will work, but you may
   # want to change the IP addresses to your service provider's DNS instead.
   vars:
-    upstream_primary: 208.67.222.222
-    upstream_secondary: 208.67.220.220
+    upstream_primary_dns: 208.67.222.222
+    upstream_secondary_dns: 208.67.220.220
 
   tasks:
     - name: Install bind9
@@ -21,24 +21,27 @@
         name: dnsutils
         state: latest
         
-    - name: Verify good starting configuration
+    - name: Verify valid starting configuration
       shell:
         cmd: named-checkconf
       register: named_checkconf
       failed_when: named_checkconf.stdout_lines | length > 0
 
     - name: Configure forwarders
-      blockinfile:
+      lineinfile:
         path: /etc/bind/named.conf.options
         insertafter: "\t// };"
-        marker: "\t// {mark} Ansible inserted block"
-        content: "\tforwarders {\n
-          \t\t{{ upstream_primary }};\n
-          \t\t{{ upstream_secondary }};\n
-          \t};\n\n
-          \tallow-query { any; };"
+        regexp: "^\tforwarders { {{ upstream_primary_dns }}; {{ upstream_secondary_dns }}; };$"
+        line: "\tforwarders { {{ upstream_primary_dns }}; {{ upstream_secondary_dns }}; };\n"
 
-    - name: Verify configuration
+    - name: Allow queries from hosts other than just localhost
+      lineinfile:
+        path: /etc/bind/named.conf.options
+        insertbefore: "};"
+        regexp: "^\tallow-query { any; };"
+        line: "\tallow-query { any; };"
+
+    - name: Verify final configuration
       shell:
         cmd: named-checkconf
       register: named_checkconf
