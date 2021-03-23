@@ -1,48 +1,97 @@
 ---
-- name: Create DNS zone files for local domain.
+- name: Create DNS zone files for intranet domain.
   hosts: localhost
   connection: local
   become: true
 
   # The following should be adjusted based on your IP addressing.
-  # Only class C subnets are handled.
+  # Any actual registered domain name may be used, or one of the
+  # Private namespaces as outlined in RFC6762 Appendix G.
+  # Additionally, only class C subnets are handled.
   vars:
-    domain: .local
+    domain: home
     subnet: 192.168.0
 
   tasks:
-  - name: Verify good starting configuration
+  - name: Verify zero-configuration .local domain is not being used.
+    debug:
+      msg: Configuring for {{ domain }}
+    failed_when: domain == "local"
+
+  - name: Verify good starting configuration.
     shell:
       cmd: named-checkconf
     register: named_checkconf
     failed_when: named_checkconf.stdout_lines | length > 0
 
-  # The delivered database for localhost is called db.local. This presents a
-  # naming problem if a .local domain (e.g. hostname.local) is desired.
-  # Therefore db.local is renamed to db.localhost.
-  - name: Rename localhost database
+  - name: Configure forward lookup zonefile.
     copy:
-      src: /etc/bind/db.local
-      dest: /etc/bind/db.localhost
+      dest: /etc/bind/db.{{ domain }}
       force: no
-    notify:
-    - Update default-zones
+      content: |
+        $ORIGIN {{ domain }}.
+        $TTL 3D                               ; default expiration time
+        @             SOA {{ domain }}. root.{{ domain }}. (
+                          20160325            ; serial number
+                          8H                  ; refresh interval
+                          2H                  ; retry interval
+                          4W                  ; expiration
+                          1D )                ; minimum TTL
+                      NS  localhost.
+        ;
+        {{ ansible_hostname }}   A   {{ ansible_eth0.ipv4.address }}
 
-  - name: Verify good configuration after changes
+  - name: Verify forward lookup zonefile.
+    shell:
+      cmd: named-checkzone {{ domain }} /etc/bind/db.{{ domain }}
+    register: named_checkzone
+    failed_when: "'OK' not in named_checkzone.stdout_lines"
+
+  - name: Separate subnet address into individual octets.
+    set_fact:
+      subnet_octets: "{{ subnet.split('.') }}"
+
+  - name: Join subnet octets in reverse order for zone name.
+    set_fact:
+      reverse_address: "{{ subnet_octets[2] }}.{{ subnet_octets[1] }}.{{ subnet_octets[0] }}"
+
+  - name: Configure reverse lookup zonefile.
+    copy:
+      dest: /etc/bind/db.{{ reverse_address }}
+      force: no
+      content: |
+        $ORIGIN {{ reverse_address }}.in-addr.arpa.
+        $TTL 3D                               ; default expiration time
+        @             SOA {{ domain }}. root.{{ domain }}. (
+                          20160325            ; serial number
+                          8H                  ; refresh interval
+                          2H                  ; retry interval
+                          4W                  ; expiration
+                          1D )                ; minimum TTL
+                      NS  localhost.
+        ;
+        {{ ansible_eth0.ipv4.address.split('.')[3] }}            PTR {{ ansible_hostname }}
+
+  - name: Verify reverse lookup zonefile.
+    shell:
+      cmd: named-checkzone {{ reverse_address }}.in-addr.arpa /etc/bind/db.{{ reverse_address }}
+    register: named_checkzone
+    failed_when: "'OK' not in named_checkzone.stdout_lines"
+
+  - name: Add forward lookup to local configuration.
+    lineinfile:
+      path: /etc/bind/named.conf.local
+      regexp: '^zone "{{ domain }}" { type master; file "/etc/bind/db.{{ domain }}"; };$'
+      line: "zone \"{{ domain }}\" { type master; file \"/etc/bind/db.{{ domain }}\"; };\n"
+
+  - name: Add reverse lookup to local configuration.
+    lineinfile:
+      path: /etc/bind/named.conf.local
+      regexp: '^zone "{{ reverse_address }}.in-addr.arpa" { type master; file "/etc/bind/db.{{ reverse_address }}"; };$'
+      line: "zone \"{{ reverse_address }}.in-addr.arpa\" { type master; file \"/etc/bind/db.{{ reverse_address }}\"; };\n"
+
+  - name: Verify good final configuration.
     shell:
       cmd: named-checkconf
     register: named_checkconf
     failed_when: named_checkconf.stdout_lines | length > 0
-
-
-  handlers:
-  # If db.local was renamed, update the defult-zones entry to follow suit.
-  # But, limit to only lines before the 127.in-addr.arpa lookup zone. This
-  # should keep Ansible from clobbering any db.local file that is not part
-  # of the localhost / 127.in-addr.arpa combination.
-  - name: Update default-zones
-    replace:
-      path: /etc/bind/named.conf.default-zones
-      before: 'zone "127.in-addr.arpa"'
-      regexp: '^\tfile "/etc/bind/db.local";$'
-      replace: "\tfile \"/etc/bind/db.localhost\";"
