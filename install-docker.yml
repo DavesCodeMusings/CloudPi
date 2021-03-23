@@ -1,5 +1,5 @@
 ---
-- name: Install Docker Community Edition.
+- name: Install Docker Community Edition
   hosts: localhost
   connection: local
   become: true

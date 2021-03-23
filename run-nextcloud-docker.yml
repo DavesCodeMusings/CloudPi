@@ -1,5 +1,5 @@
 ---
-- name: Install NextCloud as a Docker container.
+- name: Install NextCloud as a Docker container
   hosts: localhost
   connection: local
   become: true
@@ -12,7 +12,7 @@
       state: latest
   
   # The html directory is where NextCloud stores pretty much everything.
-  - name: Ensure directory structure exists.
+  - name: Ensure directory structure exists
     file:
       path: /opt/docker/nextcloud/html
       state: directory
@@ -21,7 +21,7 @@
   # The html directory is bind-mounted to give local access to stored
   # data. This ensures data persists when the container restarts and is
   # also handy for backups.
-  - name: Install NextCloud.
+  - name: Install NextCloud
     docker_container:
       image: nextcloud
       name: nextcloud

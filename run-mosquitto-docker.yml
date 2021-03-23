@@ -1,11 +1,11 @@
 ---
-- name: Run Mosquitto MQTT as a Docker container.
+- name: Run Mosquitto MQTT as a Docker container
   hosts: localhost
   connection: local
   become: true
 
   tasks:
-  - name: Ensure Mosquitto directory structure exists.
+  - name: Ensure Mosquitto directory structure exists
     file:
       path: /opt/docker/mosquitto/{{ item }}
       state: directory
@@ -15,7 +15,7 @@
     - data
     - log
 
-  - name: Create a simple mosquitto.conf if none exists.
+  - name: Create a simple mosquitto.conf if none exists
     copy:
       dest: /opt/docker/mosquitto/config/mosquitto.conf
       force: no
@@ -27,14 +27,14 @@
         persistence_location /mosquitto/data/
 
   # Totally lame admin/password credentials. Please change after install.
-  - name: Create default password file if none exists.
+  - name: Create default password file if none exists
     copy:
       dest: /opt/docker/mosquitto/config/mosquitto.passwd
       force: no
       content: |
         mqtt:$7$101$L3ZATL+vdx7gZMtX$pUhr8x8hfowl77Nsv77UrTYAAfgH/WyzVK7MD2qtqTdNevoP2mkvfcf705ZcM/nJA7njrLKnD6YMDNj/O19TjA==
 
-  - name: Run Mosquitto MQTT broker.
+  - name: Run Mosquitto MQTT broker
     docker_container:
       image: eclipse-mosquitto
       name: mosquitto

@@ -1,5 +1,5 @@
 ---
-- name: Run Mosquitto MQTT as a Docker container.
+- name: Run Portainer as a Docker container
   hosts: localhost
   connection: local
   become: true

@@ -1,5 +1,5 @@
 ---
-- name: Install BIND9 and configure DNS forwarding.
+- name: Install BIND9 and configure DNS forwarding
   hosts: localhost
   connection: local
   become: true

@@ -1,11 +1,11 @@
 ---
-- name: Run Postgres as a Docker container.
+- name: Run Postgres as a Docker container
   hosts: localhost
   connection: local
   become: true
 
   tasks:
-  - name: Ensure config and data directory exist.
+  - name: Ensure config and data directory exist
     file:
       path: /opt/docker/postgres/{{ item }}
       state: directory
@@ -13,7 +13,7 @@
     - config
     - data
 
-  - name: Run Postgres container.
+  - name: Run Postgres container
     docker_container:
       image: postgres
       name: postgres
@@ -29,7 +29,7 @@
       - /opt/docker/postgres/config:/etc/postgresql
       - /opt/docker/postgres/data:/var/lib/postgresql/data
 
-  - name: Run pgadmin administration tool.
+  - name: Run pgadmin administration tool
     docker_container:
       image: biarms/pgadmin4
       name: pgadmin

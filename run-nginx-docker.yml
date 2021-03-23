@@ -1,18 +1,18 @@
 ---
-- name: Install Nginx.
+- name: Install Nginx
   hosts: localhost
   connection: local
   become: true
 
   tasks:
-  - name: Ensure directory structure exists.
+  - name: Ensure directory structure exists
     file:
       path: /opt/docker/nginx/content
       state: directory
       mode: '0755'
 
     # Create a default.conf file, but only if none exists.
-  - name: Ensure configuration file exists.
+  - name: Ensure configuration file exists
     copy:
       dest: /opt/docker/nginx/default.conf
       force: no
@@ -36,7 +36,7 @@
             return 301 http://portainer.{{ ansible_hostname}}:9000;
         }
 
-  - name: Create a simple index.html if none exists.
+  - name: Create a simple index.html if none exists
     copy:
       dest: /opt/docker/nginx/content/index.html
       force: no
@@ -51,7 +51,7 @@
           </body>
         </html>
 
-  - name: Install Nginx container.
+  - name: Install Nginx container
     docker_container:
       image: nginx
       name: nginx
