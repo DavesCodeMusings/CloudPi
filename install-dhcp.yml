@@ -1,0 +1,77 @@
+---
+  # Although ISC's KEA is the newest offering for DHCP, the older dhcpd
+  # has the advantage when it comes to simplicity.
+  #
+  # NOTE:
+  #   Many of the default values used here are taken from the existing
+  #   network settings. Be sure the host is using a static IP and
+  #   everything else is properly configured before running this playbook.
+- name: Install ISC's DHCP Server
+  hosts: localhost
+  connection: local
+  become: true
+
+  vars:
+    dhcp_range:
+      start: 192.168.0.20
+      stop: 192.168.0.200
+    domain: "{{ ansible_domain }}"
+    dns_servers:
+      primary: "{{ ansible_dns.nameservers[0] }}"
+      secondary: "{{ ansible_dns.nameservers[1] }}"
+    network: "{{ ansible_default_ipv4.network }}"
+    netmask: "{{ ansible_default_ipv4.netmask }}"
+    gateway: "{{ ansible_default_ipv4.gateway }}"
+
+  tasks:
+  - name: Install ISC dhcpd
+    apt:
+      name: isc-dhcp-server
+      state: latest
+    register: install_status
+
+  - name: Look for existing configuration file
+    stat:
+      path: /etc/dhcp/dhcpd.conf
+    register: config_file
+
+  # This task runs only if dhcpd was freshly installed.
+  - name: Move configuration file
+    shell:
+      cmd: mv /etc/dhcp/dhcpd.conf /etc/dhcp/dhcpd.conf.{{ ansible_date_time.iso8601 }}
+    when: install_status is changed and config_file.stat.exists
+
+  - name: Create configuration file
+    copy:
+      dest: /etc/dhcp/dhcpd.conf
+      force: no
+      content: |
+        # dhcpd.conf
+
+        # Configuration for all subnets.
+        option domain-name "{{ domain }}";
+        option domain-name-servers {{ dns_servers.primary }}, {{ dns_servers.secondary }};
+        default-lease-time 86400;
+        max-lease-time 172800;
+
+        # DHCP Ranges.
+        subnet {{ network }} netmask {{ netmask }} {
+          range {{ dhcp_range.start }} {{ dhcp_range.stop }};
+          option routers {{ gateway }};
+        }
+
+  - name: Validate configuration file
+    shell:
+      cmd: dhcpd -t
+
+  - name: Assign interface to listen on
+    lineinfile:
+      path: /etc/default/isc-dhcp-server
+      regexp: '^INTERFACESv4=".*"$'
+      line: INTERFACESv4="eth0"
+
+  - name: Start dhcpd
+    systemd:
+      name: isc-dhcp-server
+      enabled: yes
+      state: started
