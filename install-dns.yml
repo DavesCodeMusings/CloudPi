@@ -7,8 +7,9 @@
   # The following are OpenDNS public DNS servers. They will work, but you may
   # want to change the IP addresses to your service provider's DNS instead.
   vars:
-    upstream_primary_dns: 208.67.222.222
-    upstream_secondary_dns: 208.67.220.220
+    upstream_dns:
+      primary: 208.67.222.222
+      secondary: 208.67.220.220
 
   tasks:
     - name: Install bind9
@@ -31,8 +32,8 @@
       lineinfile:
         path: /etc/bind/named.conf.options
         insertafter: "\t// };"
-        regexp: "^\tforwarders { {{ upstream_primary_dns }}; {{ upstream_secondary_dns }}; };$"
-        line: "\tforwarders { {{ upstream_primary_dns }}; {{ upstream_secondary_dns }}; };\n"
+        regexp: "^\tforwarders { {{ upstream_dns.primary }}; {{ upstream_dns.secondary }}; };$"
+        line: "\tforwarders { {{ upstream_dns.primary }}; {{ upstream_dns.secondary }}; };\n"
 
     - name: Allow queries from hosts other than just localhost
       lineinfile:
@@ -58,3 +59,7 @@
         cmd: nslookup raspberrypi.org 127.0.0.1
       register: nslookup
       failed_when: nslookup.stdout is not search("raspberrypi.org")
+
+    - name: Report new DNS server addresses
+      debug:
+        msg: You may now use {{ ansible_default_ipv4.address }} as a DNS server.
