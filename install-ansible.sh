@@ -6,7 +6,7 @@
 #
 if [ "$(command -v ansible)" == "" ]; then
   sudo apt update
-  sudo apt install python3-pip
+  sudo apt install -y python3-pip
   sudo pip3 install ansible
 else
   echo "Ansible is already installed."
