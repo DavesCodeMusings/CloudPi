@@ -1,0 +1,53 @@
+---
+# host_vars/localhost.yml
+
+# Uncommenting any of the variables below will allow custom values to
+# override the defaults used in the various playbooks. Please note that
+# most of the time the defaults work just fine. Particularly if you run
+# the playbooks in the order laid out in the instructions on the wiki.
+
+# Examples are given to illustrate the expected format. Do not uncomment
+# a variable without first changing its value to fit your network setup.
+
+# dhcp_range defines the first and last addresses in the DHCP pool.
+# It is used in DHCP server setup.
+#dhcp_range:
+#  start: 192.168.1.20
+#  stop: 192.168.1.200
+
+# Docker home is the directory where containers will store their
+# persistent data in individual subdirs like /opt/docker/nextcloud
+# This should be on a volume with a large amount of space. It is
+# used in all of the docker container setups.
+#docker_home: /opt/docker
+
+# This is the DNS domain name assigned to hosts. no leading dot is
+# required. Ex. for hosts like pi.cloudy.home the domain would be
+# set to cloudy.home
+#domain: home
+
+# These are the DNS servers that will be handed out with DHCP leases.
+# It's usually best set to the IP address of one or more servers on the
+# network rather than the ISP's server. See the variable upstream_dns
+# for definition of the ISP's servers.
+#internal_dns:
+#  primary: 192.168.1.2
+#  secondary: 192.168.1.1
+
+# This is the IP address of the network's internet router. It's used
+# when the DHCP server is setup.
+#gateway: 192.168.1.1
+
+# This is the subnet mask in dotted octet form. Example: 255.255.255.0
+# This value is used for DHCP setup.
+#netmask: 255.255.255.0
+
+# This is the IP address of the local area network segment.
+# It is used for DHCP and Local DNS setup. Example: 192.168.1.0
+#network: 192.168.1.0
+
+# The upstream_dns entries should be set to the IP addresses of the
+# ISP's DNS servers or something from the list of public DNS servers.
+#upstream_dns:
+#  primary: 208.67.222.222
+#  secondary: 208.67.220.220
