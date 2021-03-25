@@ -35,11 +35,6 @@
       name: docker
       state: present
 
-  - name: Create a directory for Portainer volume
-    file:
-      path: /opt/docker/portainer/data
-      state: directory
-
   handlers:
   # As far as I know, there is no Ansible module to install Galaxy collections.
   # So for now, this is a shell command that happens after Docker is installed.

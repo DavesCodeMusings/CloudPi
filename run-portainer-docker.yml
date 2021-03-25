@@ -5,6 +5,11 @@
   become: true
   
   tasks:
+    - name: Create a directory for Portainer volume
+    file:
+      path: /opt/docker/portainer/data
+      state: directory
+
   - name: Install Portainer
     docker_container:
       image: portainer/portainer-ce
