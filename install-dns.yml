@@ -4,12 +4,13 @@
   connection: local
   become: true
 
-  # The following are OpenDNS public DNS servers. They will work, but you may
-  # want to change the IP addresses to your service provider's DNS instead.
+  # This playbook uses information gathered from the current DNS configuration
+  # to determine what the forwarding DNS server addresses should be. Check the
+  # contents of /etc/resolve.conf to see what those addresses are currently.
   vars:
     upstream_dns:
-      primary: 208.67.222.222
-      secondary: 208.67.220.220
+      primary: "{{ ansible_dns.nameservers[0] }}"
+      secondary: "{{ ansible_dns.nameservers[1] }}"
 
   tasks:
     - name: Install bind9
@@ -35,6 +36,8 @@
         regexp: "^\tforwarders { {{ upstream_dns.primary }}; {{ upstream_dns.secondary }}; };$"
         line: "\tforwarders { {{ upstream_dns.primary }}; {{ upstream_dns.secondary }}; };\n"
 
+    # Allowing queried from anywhere simplifies things and on a home network,
+    # the Raspberry Pi DNS server should not be accessible from the internet.
     - name: Allow queries from hosts other than just localhost
       lineinfile:
         path: /etc/bind/named.conf.options
