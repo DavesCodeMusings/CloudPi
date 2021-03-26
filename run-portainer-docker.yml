@@ -5,7 +5,7 @@
   become: true
   
   tasks:
-    - name: Create a directory for Portainer volume
+  - name: Create a directory for Portainer volume
     file:
       path: /opt/docker/portainer/data
       state: directory
