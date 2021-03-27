@@ -7,7 +7,7 @@
   # The domain name is autodetected based on your network setup.
   # It can be overridden by editing or by using Ansible host_vars.
   vars:
-    domain: {{ ansible_domain }}
+    domain: "{{ ansible_domain }}"
 
   tasks:
 
