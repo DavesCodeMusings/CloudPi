@@ -1,0 +1,26 @@
+---
+- name: Run Node Red as a Docker container
+  hosts: localhost
+  connection: local
+  become: true
+  
+  tasks:
+  - name: Create a directory for data
+    file:
+      path: /opt/docker/node-red/data
+      state: directory
+
+  - name: Run Node Red
+    docker_container:
+      image: nodered/node-red
+      name: node-red
+      hostname: node-red
+      state: started
+      restart: yes
+      restart_policy: unless-stopped
+      env:
+        TZ: "{{ ansible_date_time.tz }}"
+      ports:
+      - 1880:1880
+      volumes:
+      - /opt/docker/node-red/data:/data
