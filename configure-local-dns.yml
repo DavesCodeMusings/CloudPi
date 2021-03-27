@@ -55,7 +55,7 @@
         ;
         router        A       {{ ansible_default_ipv4.gateway }}
         {{ ansible_hostname }}  A       {{ ansible_default_ipv4.address }}
-        *.{{ ansible_hostname }}  CNAME  {{ ansible_default_ipv4.address }}
+        *.{{ ansible_hostname }}  CNAME   {{ ansible_default_ipv4.address }}
 
   # A good zone file will result in OK being returned in the output.
   - name: Verify forward lookup zonefile.
