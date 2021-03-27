@@ -30,20 +30,20 @@
             }
         }
 
-        # Redirections for virtual servers in the form: {app}.{{ ansible_hostname }}
+        # Redirections for virtual servers in the form: {app}.{{ ansible_hostname }}.{{ ansible_domain }}
         server {
             server_name homeassistant.{{ ansible_hostname }};
-            return 301 http://homeassistant.{{ ansible_hostname}}:8123;
+            return 301 http://homeassistant.{{ ansible_hostname}}.{{ ansible_domain }}:8123;
         }
 
         server {
             server_name nextcloud.{{ ansible_hostname }};
-            return 301 http://nextcloud.{{ ansible_hostname}}:8080;
+            return 301 http://nextcloud.{{ ansible_hostname}}.{{ ansible_domain }}:8080;
         }
 
         server {
             server_name portainer.{{ ansible_hostname }};
-            return 301 http://portainer.{{ ansible_hostname}}:9000;
+            return 301 http://portainer.{{ ansible_hostname}}.{{ ansible_domain }}:9000;
         }
 
   - name: Create a simple index.html if none exists
