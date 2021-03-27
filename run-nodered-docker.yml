@@ -5,9 +5,13 @@
   become: true
   
   tasks:
+
+  # Node Red runs as UID 1000, so the data directory needs the same owner.
+  # Otherwise, the Node Red container will restart endlessly.
   - name: Create a directory for data
     file:
       path: /opt/docker/node-red/data
+      owner: '1000'
       state: directory
 
   - name: Run Node Red
