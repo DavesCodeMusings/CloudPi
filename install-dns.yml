@@ -4,9 +4,10 @@
   connection: local
   become: true
 
-  # This playbook uses information gathered from the current DNS configuration
-  # to determine what the forwarding DNS server addresses should be. Check the
-  # contents of /etc/resolve.conf to see what those addresses are currently.
+  # This playbook uses information gathered from the current network
+  # configuration to determine what the forwarding DNS server addresses
+  # should be. Check the contents of /etc/resolve.conf to see if those
+  # addresses are correct.
   vars:
     upstream_dns:
       primary: "{{ ansible_dns.nameservers[0] }}"
