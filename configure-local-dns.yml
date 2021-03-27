@@ -36,6 +36,8 @@
 
   # The gateway address and this host's address are include by default.
   # This playbook will not overwrite the file if it already exists.
+  # Some manual adjustment of spacing will be required for columns to
+  # line up properly.
   - name: Configure forward lookup zonefile.
     copy:
       dest: /etc/bind/db.{{ domain }}
