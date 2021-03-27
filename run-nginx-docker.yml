@@ -1,5 +1,5 @@
 ---
-- name: Install Nginx
+- name: Run Nginx in a Docker Container
   hosts: localhost
   connection: local
   become: true
@@ -31,6 +31,16 @@
         }
 
         # Redirections for virtual servers in the form: {app}.{{ ansible_hostname }}
+        server {
+            server_name homeassistant.{{ ansible_hostname }};
+            return 301 http://homeassistant.{{ ansible_hostname}}:8123;
+        }
+
+        server {
+            server_name nextcloud.{{ ansible_hostname }};
+            return 301 http://nextcloud.{{ ansible_hostname}}:8080;
+        }
+
         server {
             server_name portainer.{{ ansible_hostname }};
             return 301 http://portainer.{{ ansible_hostname}}:9000;
