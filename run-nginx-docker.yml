@@ -32,17 +32,17 @@
 
         # Redirections for virtual servers in the form: {app}.{{ ansible_hostname }}.{{ ansible_domain }}
         server {
-            server_name homeassistant.{{ ansible_hostname }};
+            server_name homeassistant.{{ ansible_hostname }}.{{ ansible_domain }};
             return 301 http://homeassistant.{{ ansible_hostname}}.{{ ansible_domain }}:8123;
         }
 
         server {
-            server_name nextcloud.{{ ansible_hostname }};
+            server_name nextcloud.{{ ansible_hostname }}.{{ ansible_domain }};
             return 301 http://nextcloud.{{ ansible_hostname}}.{{ ansible_domain }}:8080;
         }
 
         server {
-            server_name portainer.{{ ansible_hostname }};
+            server_name portainer.{{ ansible_hostname }}.{{ ansible_domain }};
             return 301 http://portainer.{{ ansible_hostname}}.{{ ansible_domain }}:9000;
         }
 
