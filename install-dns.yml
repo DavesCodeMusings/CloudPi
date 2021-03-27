@@ -46,6 +46,17 @@
         regexp: "^\tallow-query { any; };"
         line: "\tallow-query { any; };"
 
+    # Errors like "got insecure response; parent indicates it should be secure"
+    # will start showing up if dnssec-validation is left set to auto. You can
+    # troubleshoot them or accept that for a home network, DNS security can
+    # probably be a little lax.
+    - name: Disable DNSSEC
+      lineinfile:
+        path: /etc/bind/named.conf.options
+        insertbefore: "};"
+        regexp: "^\dnssec-validation .*$;"
+        line: "\tdnssec-validation no;"
+
     - name: Verify final configuration
       shell:
         cmd: named-checkconf
