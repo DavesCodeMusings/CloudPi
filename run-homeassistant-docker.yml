@@ -1,0 +1,28 @@
+---
+# This playbook only installs Home Assistant. For more funtionality for a
+# wider range of devices, see the Mosquitto MQTT and Node Red playbooks.
+- name: Run Home Assistant as a Docker container
+  hosts: localhost
+  connection: local
+  become: true
+  
+  tasks:
+  - name: Create a directory for configuration data
+    file:
+      path: /opt/docker/homeassistant/config
+      state: directory
+
+  # Home Assistant runs on the actual network interface (network_mode: host)
+  # instead of having its port redirected. This lets Home Assistant listen
+  # for devices and auto-detect them.
+  - name: Run Home Assistant
+    docker_container:
+      image: homeassistant/raspberrypi4-homeassistant
+      name: homeassistant
+      hostname: homeassistant
+      state: started
+      restart: yes
+      restart_policy: unless-stopped
+      network_mode: host
+      volumes:
+      - /opt/docker/homeassistant/config:/config
