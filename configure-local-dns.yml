@@ -44,17 +44,18 @@
       force: no
       content: |
         $ORIGIN {{ domain }}.
-        $TTL 3D                               ; default expiration time
-        @             SOA {{ domain }}. root.{{ domain }}. (
-                          20160325            ; serial number
-                          8H                  ; refresh interval
-                          2H                  ; retry interval
-                          4W                  ; expiration
-                          1D )                ; minimum TTL
-                      NS  localhost.
+        $TTL 3D                                   ; default expiration time
+        @             SOA     {{ domain }}. root.{{ domain }}. (
+                              20160325            ; serial number
+                              8H                  ; refresh interval
+                              2H                  ; retry interval
+                              4W                  ; expiration
+                              1D )                ; minimum TTL
+                      NS      localhost.
         ;
-        router        A   {{ ansible_default_ipv4.gateway }}
-        {{ ansible_hostname }}   A   {{ ansible_default_ipv4.address }}
+        router        A       {{ ansible_default_ipv4.gateway }}
+        {{ ansible_hostname }}  A       {{ ansible_default_ipv4.address }}
+        *.{{ ansible_hostname }}  CNAME  {{ ansible_default_ipv4.address }}
 
   # A good zone file will result in OK being returned in the output.
   - name: Verify forward lookup zonefile.
@@ -71,17 +72,17 @@
       force: no
       content: |
         $ORIGIN {{ reverse_address }}.in-addr.arpa.
-        $TTL 3D                               ; default expiration time
-        @             SOA {{ domain }}. root.{{ domain }}. (
-                          20160325            ; serial number
-                          8H                  ; refresh interval
-                          2H                  ; retry interval
-                          4W                  ; expiration
-                          1D )                ; minimum TTL
-                      NS  localhost.
+        $TTL 3D                                   ; default expiration time
+        @             SOA     {{ domain }}. root.{{ domain }}. (
+                              20160325            ; serial number
+                              8H                  ; refresh interval
+                              2H                  ; retry interval
+                              4W                  ; expiration
+                              1D )                ; minimum TTL
+                      NS      localhost.
         ;
-        1             PTR router
-        {{ ansible_eth0.ipv4.address.split('.')[3] }}            PTR {{ ansible_hostname }}
+        1             PTR     router
+        {{ ansible_eth0.ipv4.address.split('.')[3] }}            PTR     {{ ansible_hostname }}
 
   - name: Verify reverse lookup zonefile.
     shell:
