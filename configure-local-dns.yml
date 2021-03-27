@@ -4,26 +4,38 @@
   connection: local
   become: true
 
-  # The following should be adjusted based on your IP addressing.
-  # Any actual registered domain name may be used, or one of the
-  # Private namespaces as outlined in RFC6762 Appendix G.
-  # Additionally, only class C subnets are handled.
+  # The domain name is autodetected based on your network setup.
+  # It can be overridden by editing or by using Ansible host_vars.
   vars:
-    domain: home
-    subnet: 192.168.0
+    domain: {{ ansible_domain }}
 
   tasks:
+
+  # RFC6762 reserves .local for Multicast DNS. See Appendix G to find
+  # acceptable names for a local area network top-level domain.
   - name: Verify zero-configuration .local domain is not being used.
     debug:
-      msg: Configuring for {{ domain }}
-    failed_when: domain == "local"
+      msg: Configuring for {{ ansible_domain }}
+    failed_when: ansible_domain == "local" or ansible_domain == ""
 
+  # Turn a network like 192.168.1.0 into a 1.168.192 zone file name.
+  # This playbook is only equiped to deal with a Class C subnet.
+  # While this should sufice for 99% of home network installations,
+  # this step will fail when it's not Class C as expected.
+  - name: Create Numeric Part of Reverse Lookup Zone Name
+    set_fact:
+      reverse_address: "{{ ansible_default_ipv4.network.split('.')[2] }}.{{ ansible_default_ipv4.network.split('.')[1] }}.{{ ansible_default_ipv4.network.split('.')[0] }}"
+    failed_when: ansible_default_ipv4.netmask != '255.255.255.0'
+
+  # A good configuration should return no errors in the output.
   - name: Verify good starting configuration.
     shell:
       cmd: named-checkconf
     register: named_checkconf
     failed_when: named_checkconf.stdout_lines | length > 0
 
+  # The gateway address and this host's address are include by default.
+  # This playbook will not overwrite the file if it already exists.
   - name: Configure forward lookup zonefile.
     copy:
       dest: /etc/bind/db.{{ domain }}
@@ -39,22 +51,18 @@
                           1D )                ; minimum TTL
                       NS  localhost.
         ;
-        {{ ansible_hostname }}   A   {{ ansible_eth0.ipv4.address }}
+        router        A   {{ ansible_default_ipv4.gateway }}
+        {{ ansible_hostname }}   A   {{ ansible_default.ipv4.address }}
 
+  # A good zone file will result in OK being returned in the output.
   - name: Verify forward lookup zonefile.
     shell:
       cmd: named-checkzone {{ domain }} /etc/bind/db.{{ domain }}
     register: named_checkzone
     failed_when: "'OK' not in named_checkzone.stdout_lines"
 
-  - name: Separate subnet address into individual octets.
-    set_fact:
-      subnet_octets: "{{ subnet.split('.') }}"
-
-  - name: Join subnet octets in reverse order for zone name.
-    set_fact:
-      reverse_address: "{{ subnet_octets[2] }}.{{ subnet_octets[1] }}.{{ subnet_octets[0] }}"
-
+  # The gateway address and this host's address are include by default.
+  # This playbook will not overwrite the file if it already exists.
   - name: Configure reverse lookup zonefile.
     copy:
       dest: /etc/bind/db.{{ reverse_address }}
@@ -70,6 +78,7 @@
                           1D )                ; minimum TTL
                       NS  localhost.
         ;
+        1             PTR router
         {{ ansible_eth0.ipv4.address.split('.')[3] }}            PTR {{ ansible_hostname }}
 
   - name: Verify reverse lookup zonefile.
@@ -78,6 +87,9 @@
     register: named_checkzone
     failed_when: "'OK' not in named_checkzone.stdout_lines"
 
+  # After the zones are added to named.conf.local, it is advisable to not
+  # hand-edit the entries. Doing so can confuse Ansible's lineinfile and
+  # result in an unstable configuration if this playbook is run again.
   - name: Add forward lookup to local configuration.
     lineinfile:
       path: /etc/bind/named.conf.local
