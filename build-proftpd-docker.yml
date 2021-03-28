@@ -1,0 +1,66 @@
+---
+# Build a Debian-based Docker image with ProFTPd configured to serve
+# anonymous content from /srv/ftp. See also: run-proftpd-docker.yml.
+- name: Build a ProFTPd Docker Image for Anonymous FTP
+  hosts: localhost
+  connection: local
+
+  tasks:
+  - name: Create temporary directory
+    tempfile:
+      state: directory
+    register: tempdir
+
+  - name: Show tempdir name
+    debug:
+      msg: "Temp Directory: {{ tempdir.path }}"
+
+  - name: Create Dockerfile
+    copy:
+      dest: "{{ tempdir.path }}/Dockerfile"
+      content: |
+        FROM debian:latest
+        RUN apt-get update && apt-get install -y proftpd-basic
+        COPY proftpd.conf /etc/proftpd/proftpd.conf
+        EXPOSE 20
+        EXPOSE 21
+        CMD ["proftpd", "--nodaemon"]
+
+  - name: Create proftpd.conf for anonymous FTP
+    copy:
+      dest: "{{ tempdir.path }}/proftpd.conf"
+      content: |
+        # A basic ProFTPd config file for anaonymous FTP
+        ServerName                      "Anonymous FTP"
+        ServerType                      standalone
+        DefaultServer                   on
+        RequireValidShell               off
+
+        UseIPv6                         off
+        Port                            21
+        PassivePorts                    49152 65534
+        Umask                           022
+        MaxInstances                    30
+
+        <Anonymous /srv/ftp>
+          User                          ftp
+          Group                         ftp
+          UserAlias                     anonymous ftp
+          DisplayLogin                  welcome.msg
+          <Limit WRITE>
+            DenyAll
+          </Limit>
+        </Anonymous>
+
+  - name: Build the image
+    shell:
+      cmd: docker build -t proftpd-anon {{ tempdir.path }}
+
+  - name: Verify image exists
+    shell:
+      cmd: docker images | grep proftpd-anon
+
+  - name: Clean up temp files
+    file:
+      path: "{{ tempdir.path }}"
+      state: absent

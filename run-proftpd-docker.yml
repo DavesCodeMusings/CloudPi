@@ -1,0 +1,29 @@
+---
+# This playbook uses a custom-built container called proftp-anon.
+# It is not on Docker Hub. Build it with build-proftpd-docker.yml.
+- name: Run proftpd-anon as a Docker container
+  hosts: localhost
+  connection: local
+  become: true
+
+  tasks:
+  - name: Create a directory for anonymously accessible files
+    file:
+      path: /opt/docker/proftpd-anon/ftp
+      state: directory
+
+  # ProFTPd runs on the actual network interface (network_mode: host)
+  # instead of having its ports redirected. Port mapping proved to be
+  # troublesome for passive mode and not all clients do active mode.
+  - name: Run ProFTPd
+    docker_container:
+      image: proftpd-anon
+      pull: no
+      name: proftpd-anon
+      hostname: proftpd-anon
+      state: started
+      restart: yes
+      restart_policy: unless-stopped
+      network_mode: host
+      volumes:
+      - /opt/docker/proftpd-anon/ftp:/srv/ftp
