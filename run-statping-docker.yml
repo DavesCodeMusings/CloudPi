@@ -1,0 +1,26 @@
+---
+- name: Run Statping as a Docker container
+  hosts: localhost
+  connection: local
+  become: true
+  
+  tasks:
+  - name: Create a directory for Statping volume
+    file:
+      path: /opt/docker/statping/config
+      state: directory
+
+  - name: Run Statping
+    docker_container:
+      image: statping/statping
+      name: statping
+      hostname: statping
+      state: started
+      restart: yes
+      restart_policy: unless-stopped
+      env:
+        TZ: "{{ ansible_date_time.tz }}"
+      ports:
+      - 8081:8080
+      volumes:
+      - /opt/docker/statping/config:/config
