@@ -11,10 +11,6 @@
       state: directory
     register: tempdir
 
-  - name: Show tempdir name
-    debug:
-      msg: "Temp Directory: {{ tempdir.path }}"
-
   - name: Create Dockerfile
     copy:
       dest: "{{ tempdir.path }}/Dockerfile"
