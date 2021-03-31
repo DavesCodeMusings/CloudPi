@@ -5,7 +5,7 @@ What you get:
 
 * NextCloud as an on-premise file sharing and collaboration application.
 * Docker Community Edition container environment.
-* Portainer management app for easy Docker management.
+* Portainer management app for easy Docker administration.
 * Locally hosted DNS and DHCP.
 * Nginx to redirect DNS names like portainer.raspberrypi.home
 * Headless server operation.
