@@ -33,3 +33,7 @@
       - 8080:80
       volumes:
       - /opt/docker/nextcloud/html:/var/www/html
+# Remove comments and adjust /srv/data path to mount the Nextcloud data
+# directory elsewhere on the Pi. /var/www/html/data is where all the
+# user files are located and can consume a lot of space.
+#      - /srv/data:/var/www/html/data
