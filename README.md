@@ -6,16 +6,16 @@ What you get:
 * NextCloud as an on-premise file sharing and collaboration application.
 * Docker Community Edition container environment.
 * Portainer management app for easy Docker administration.
-* Locally hosted DNS and DHCP.
-* Nginx to redirect DNS names like portainer.raspberrypi.home
+* Locally hosted DNS with optional DHCP and LDAP.
+* Nginx to redirect virtual DNS names like portainer.raspberrypi.home
 * Headless server operation.
 
 How does it work?
 
-Starting with a fresh install of Raspberry Pi OS Lite, everything is managed
-with the open-source software deployment tool, Ansible. Each Ansible playbook
-performs a specifc installation and configuration task in the overall system.
-Tweak a few settings, run the playbooks, and you're ready to go.
+Starting with a fresh install of Raspberry Pi OS Lite, nearly everything is
+managed with the open-source software deployment tool, Ansible. Each Ansible
+playbook performs a specifc installation and configuration task in the overall
+system. Tweak a few settings, run the playbooks, and you're ready to go.
 
 Hardware and OS requirements:
 
