@@ -7,7 +7,7 @@
   tasks:
   - name: Create a directory for Statping volume
     file:
-      path: /opt/docker/statping/config
+      path: /opt/docker/statping/app
       state: directory
 
   - name: Run Statping
@@ -21,6 +21,6 @@
       env:
         TZ: "{{ ansible_date_time.tz }}"
       ports:
-      - 8081:8080
+      - 8080:8080
       volumes:
-      - /opt/docker/statping/config:/config
+      - /opt/docker/statping/app:/app
