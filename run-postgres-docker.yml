@@ -39,5 +39,7 @@
       restart_policy: unless-stopped
       env:
         PGADMIN_DEFAULT_PASSWORD: password
+      labels:
+        io.portainer.accesscontrol.teams: "Portainer Admins"
       ports:
       - 5050:5050

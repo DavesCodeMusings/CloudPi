@@ -29,6 +29,8 @@
       state: started
       restart: yes
       restart_policy: unless-stopped
+      labels:
+        io.portainer.accesscontrol.teams: "Portainer Admins"
       ports:
       - 8910:80
       volumes:

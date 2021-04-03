@@ -24,6 +24,8 @@
       restart_policy: unless-stopped
       env:
         TZ: "{{ ansible_date_time.tz }}"
+      labels:
+        io.portainer.accesscontrol.teams: "Portainer Admins"
       ports:
       - 1880:1880
       volumes:

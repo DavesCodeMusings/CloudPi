@@ -23,6 +23,8 @@
       state: started
       restart: yes
       restart_policy: unless-stopped
+      labels:
+        io.portainer.accesscontrol.teams: "Portainer Admins"
       network_mode: host
       volumes:
       - /opt/docker/homeassistant/config:/config
