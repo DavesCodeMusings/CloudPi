@@ -4,15 +4,18 @@
   connection: local
   become: true
 
+  vars:
+    samba_public_dir: /srv/public
+    samba_shared_dir: /srv/shared
   tasks:
   - name: Create a directory for read-only public files
     file:
-      path: /opt/docker/samba-anon/public
+      path: "{{ samba_public_dir }}"
       state: directory
 
   - name: Create a directory for read-write shared files
     file:
-      path: /opt/docker/samba-anon/shared
+      path: "{{ samba_shared_dir }}"
       state: directory
 
   - name: Run samba-anon
@@ -23,7 +26,10 @@
       state: started
       restart: yes
       restart_policy: unless-stopped
-      network_mode: host
+      labels:
+        io.portainer.accesscontrol.teams: "Portainer Admins"
+      ports:
+      - 445:445
       volumes:
-      - /opt/docker/samba-anon/public:/srv/public
-      - /opt/docker/samba-anon/shared:/srv/shared
+      - "{{ samba_public_dir }}:/srv/public"
+      - "{{ samba_shared_dir }}:/srv/shared"
