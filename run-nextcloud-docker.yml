@@ -1,5 +1,5 @@
 ---
-- name: Install NextCloud as a Docker container
+- name: Run NextCloud as a Docker container
   hosts: localhost
   connection: local
   become: true
@@ -21,7 +21,7 @@
   # The html directory is bind-mounted to give local access to stored
   # data. This ensures data persists when the container restarts and is
   # also handy for backups.
-  - name: Install NextCloud
+  - name: Run NextCloud
     docker_container:
       image: nextcloud
       name: nextcloud
@@ -30,10 +30,10 @@
       restart: yes
       restart_policy: unless-stopped
       ports:
-      - 8080:80
+      - 8910:80
       volumes:
       - /opt/docker/nextcloud/html:/var/www/html
-# Remove comments and adjust /srv/data path to mount the Nextcloud data
-# directory elsewhere on the Pi. /var/www/html/data is where all the
-# user files are located and can consume a lot of space.
-#      - /srv/data:/var/www/html/data
+  # Remove comments and adjust /srv/data path to mount the Nextcloud data
+  # directory elsewhere on the Pi. /var/www/html/data is where all the
+  # user files are located and can consume a lot of space.
+  #    - /srv/data:/var/www/html/data
