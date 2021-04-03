@@ -1,0 +1,29 @@
+---
+- name: Run samba-anon as a Docker container
+  hosts: localhost
+  connection: local
+  become: true
+
+  tasks:
+  - name: Create a directory for read-only public files
+    file:
+      path: /opt/docker/samba-anon/public
+      state: directory
+
+  - name: Create a directory for read-write shared files
+    file:
+      path: /opt/docker/samba-anon/shared
+      state: directory
+
+  - name: Run samba-anon
+    docker_container:
+      image: davescodemusings/samba-anon
+      name: samba-anon
+      hostname: samba-anon
+      state: started
+      restart: yes
+      restart_policy: unless-stopped
+      network_mode: host
+      volumes:
+      - /opt/docker/samba-anon/public:/srv/public
+      - /opt/docker/samba-anon/shared:/srv/shared
