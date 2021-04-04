@@ -22,22 +22,6 @@ Hardware and OS requirements:
 * Raspberry Pi 3B+ and up.
 * Raspberry Pi OS Lite is recommended over the desktop or full install.
 
-Sound interesting yet?
-
-Take a look at [the wiki](https://github.com/DavesCodeMusings/CloudPi/wiki) to get started installing.
-
-
-Future Plans
-
-Docker, and cloud technology in general, is meant to be easily scalable while
-also providing a high degree of fault tolerance. Obviously, running everything
-on a single Raspberry Pi falls short of that ideal. The solution. of course,
-is to add more Pi.
-
-Potential enhancements include:
-
-* Multiple Raspberry Pis running a Docker Swarm or Kubernetes cluster.
-* GlusterFS or other replicated filesystem.
-* Replicated database back-end for NextCloud.
-* Power supply and network redundancy.
-* Auto-restarting of unresponsive nodes.
+Sound interesting yet? Take a look at
+[the wiki](https://github.com/DavesCodeMusings/CloudPi/wiki) to get started
+installing.
