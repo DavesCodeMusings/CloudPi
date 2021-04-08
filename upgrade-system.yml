@@ -11,7 +11,7 @@
 
   - name: Upgrade all packages
     apt:
-      upgrade: dist
+      upgrade: full
 
   - name: Determine if reboot is required
     stat:
