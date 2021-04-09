@@ -16,6 +16,7 @@
     apt:
       name: docker-ce
       state: latest
+      update_cache: true
     notify:
     - Install community.docker from Ansible Galaxy
 
