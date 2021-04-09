@@ -1,0 +1,23 @@
+---
+# Node.js is a programming language interpreter used for running JavaScript
+# outside of the traditional confines of the web browser.
+- name: Install Node.js 14 from NodeSource
+  hosts: localhost
+  connection: local
+  become: true
+
+  tasks:
+  - name: Install apt key for NodeSource repository
+    apt_key:
+      url: https://deb.nodesource.com/gpgkey/nodesource.gpg.key
+      state: present
+
+  - name: Add NodeSource repository
+    apt_repository:
+      repo: deb [arch=armhf] https://deb.nodesource.com/node_14.x buster main
+
+  - name: Install node.js
+    apt:
+      name: nodejs
+      state: latest
+      update_cache: true
