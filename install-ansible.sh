@@ -5,8 +5,8 @@
 # needed to install the community.docker collection from Ansible Galaxy.
 #
 if [ "$(command -v ansible)" == "" ]; then
-  sudo apt update
-  sudo apt install -y python3-pip
+  sudo apt-get update
+  sudo apt-get install -y python3-pip
   sudo pip3 install ansible
 else
   echo "Ansible is already installed."
