@@ -54,7 +54,7 @@
       lineinfile:
         path: /etc/bind/named.conf.options
         insertbefore: "};"
-        regexp: "^\dnssec-validation .*$;"
+        regexp: "^\tdnssec-validation .*$;"
         line: "\tdnssec-validation no;"
 
     - name: Verify final configuration
