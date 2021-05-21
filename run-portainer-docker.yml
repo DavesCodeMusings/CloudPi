@@ -10,7 +10,7 @@
       path: /opt/docker/portainer/data
       state: directory
 
-  - name: Install Portainer
+  - name: Run Portainer
     docker_container:
       image: portainer/portainer-ce
       name: portainer
