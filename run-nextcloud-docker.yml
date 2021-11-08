@@ -42,7 +42,7 @@
   - name: Schedule Background Jobs
     cron:
       name: Nextcloud Jobs
-      minute: "0/5"
+      minute: "*/5"
       job: /usr/bin/docker exec -u www-data nextcloud php cron.php
 
   # Remove comments and adjust /srv/data path to mount the Nextcloud data
