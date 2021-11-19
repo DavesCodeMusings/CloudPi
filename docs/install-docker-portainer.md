@@ -21,7 +21,7 @@ Installation of Docker is done by running the Ansible playbook called [install-d
 > Any users running docker commands from command prompt will need to use sudo unless they are in the docker group. The Ansible playbook takes care of adding the pi user to the docker group, though you will need to log out and back in for the changes to take effect. Any other users will need to be added to the group manually or preface all docker commands with sudo.
 
 # Why Portainer?
-Technically, you could complete the remaining steps without Portainer, using the Docker command-line tools instead. But, Portainer has a nice feature called Stacks that lets you define your applications in a Docker Compose format. So rather than typing `docker run` and a bunch of command-line arguments, you define the parameters in a YAML file. No more typing commands. Application deployments are now cut and paste.
+Technically, you could run all your containers without Portainer, using Docker Compose instead. But, Portainer has a nice feature called Stacks that lets you define your applications in a Docker Compose format along with other more advanced features, like git integration.
 
 # Portainer Community Edition
 Portainer is used to administer Docker and to deploy containerized applications. Portainer itself is a containerized application. So for this one instance, docker-compose is used. Copy the [docker-compose.yml for Portainer](https://github.com/DavesCodeMusings/CloudPi/blob/main/portainer/docker-compose.yml) onto your Pi. Change to the directory contining the file and run it with the command `sudo docker-compose up -d`.
@@ -31,4 +31,4 @@ If all goes well, wait a bit and open a web browser for the IP address of your R
 Explore Portainer on your own or check out [the docs on their web site](https://documentation.portainer.io/).
 
 # Next Steps
-When you're comfortable with Docker and Portainer, it's time to [run Nextcloud](Running-Nextcloud).
+When you're comfortable with Docker and Portainer, it's time to look at [installing DNS](install-dns.md) so you don't have to type IP addresses in your browser's address bar all the time.
