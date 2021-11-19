@@ -129,7 +129,7 @@ Syncing disks.
 Now that the disk partitions are set up, it's time to create the filesystems.
  
 # Creating an ext4 Filesystem
-After planning and creating the proper partition scheme, creating a filesystem is simple. I'm using the ext4 filesystem. You may have noticed it is the same one used by the Raspberry Pi OS root partition.
+After planning and creating the proper partition scheme, creating the filesystems is simple. I'm using the ext4 filesystem. You may have noticed it is the same one used by the Raspberry Pi OS root partition.
 
 The command is simply `sudo mkfs.ext4 /dev/sda1` to create it. Depending on the size of the drive it can take a little while to finish.
 
@@ -138,7 +138,7 @@ When it's done, run a filesystem check on it with the command `sudo fsck /dev/sd
 Repeat the process for all of the partitions you've created.
 
 # Editing /etc/fstab
-To ensure the new filesystem gets mounted on the directory /opt/docker every time the system starts up, it needs to be put into /etc/fstab. looking at /etc/fstab on the Raspberry Pi, you'll notice there is no mention of /dev/sda or /dev/mccblk0. Instead everything is referred to by PARTUUID, or partition universally unique identifier.
+To ensure the new filesystems get mounted on their directories every time the system starts up, they needs to be put into /etc/fstab. Looking at /etc/fstab on the Raspberry Pi, you'll notice there is no mention of devices /dev/sda or /dev/mccblk0. Instead everything is referred to by PARTUUID, or partition universally unique identifier. This is necessary, because USB devices are hot-plugable and could conceivably show up in any order.
 
 Finding the PARTUUID for a device is as easy as running the command `lsblk -dno PARTUUID /dev/sda1`
 > Yes, there is a fair amount of sarcasm in that statement. I had to search high and low to find that command, eventually discovering it on an ArchLinux discussion forum. So kudos to that project for sharing the knowledge.
@@ -157,7 +157,7 @@ PARTUUID=1234abcd-01 /srv             ext4    defaults,noatime  0       2
 ```
 
 # Mounting the new Filesystems
-The hard part is over. Now all that remains is to create the filesystems on their respective directories. Some of these directories do not exist yet, so you may have to create them first. Here's and example using the three partition scheme from the previous examples:
+The hard part is over. Now, all that remains is to create the filesystems on their respective directories. Some of these directories do not exist yet, so you may have to create them first. Here's and example using the three partition scheme from the previous examples:
 
 ```
 sudo mkdir /opt/docker
