@@ -57,23 +57,10 @@ Partition 1 has been deleted.
 
 You can verify it's gone by using the `p` command again.
 
-# Creating a Linux Partition
-Now you can create a new partition using the `n` command. The following example shows how you can allocate the entire disk to a single partition, simply by accepting default values for the questions.
+# Creating Linux Partitions
+Rather than can allocating the entire disk to a single partition, we'll create three of them. One will hold the filesystem for `/opt/docker` and this will be used for Docker container config files. The second partition will be for `/var/lib/docker`. The third partition will be for the `/srv` filesystem and will hold the bulk of the data being stored by various network services.
 
-```
-Command (m for help): n
-Partition type
-   p   primary (0 primary, 0 extended, 4 free)
-   e   extended (container for logical partitions)
-Select (default p): p
-Partition number (1-4, default 1):
-First sector (2048-312581807, default 2048):
-Last sector, +/-sectors or +/-size{K,M,G,T,P} (2048-312581807, default 312581807):
-
-Created a new partition 1 of type 'Linux' and of size 149 GiB.
-```
-
-You can also create a more complex partition scheme, setting aside a fixed amount of space for various filesystems. Here's an example of that:
+Here's an example of the fdisk commands used:
 
 ```
 Command (m for help): n
@@ -112,7 +99,7 @@ Created a new partition 3 of type 'Linux' and of size 119 GiB.
 
 >The example above shows three partitions on my 160G drive. My plan is to use the first, 10G partition for `/opt/docker` to store configuration files and other persistent data for Docker containers using [bind mounts](https://docs.docker.com/storage/bind-mounts/). The second, 20G partition is where I plan to mount the `/var/lib/docker` filesystem. This is the area where Docker stores container images, running containers, and volumes. The third partition, with the rest of the space, will get mounted on /srv. This is where I will create sub-directories to store miscellaneous documents, media files, and everything else I want to make available over my home network.
 
-As it is now, the partition table has not been written to the disk yet. You can still quit fdisk without losing data. Before making the changes permanent, give the partition table one final check using the `p` command to print it. Below is what my three partition scheme looks like. Yours will look different depending on the disk size and how you chose to divide the space.
+As it is now, the partition table is in memory only and has not been written to the disk. You can still quit fdisk without losing your original partition scheme. Before making the changes permanent, give the partition table one final check using the `p` command to print it. Below is what my three partition scheme looks like. Yours will look different depending on the disk size and how you chose to divide the space.
 
 ```
 Command (m for help): p
@@ -142,7 +129,7 @@ Syncing disks.
 Now that the disk partitions are set up, it's time to create the filesystems.
  
 # Creating an ext4 Filesystem
-After creating the proper partition scheme, creating a filesystem is simple. I'm using the ext4 filesystem. You may have noticed it is the same one used by the Raspberry Pi OS root partition.
+After planning and creating the proper partition scheme, creating a filesystem is simple. I'm using the ext4 filesystem. You may have noticed it is the same one used by the Raspberry Pi OS root partition.
 
 The command is simply `sudo mkfs.ext4 /dev/sda1` to create it. Depending on the size of the drive it can take a little while to finish.
 
