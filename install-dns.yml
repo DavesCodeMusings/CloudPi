@@ -51,11 +51,10 @@
     # troubleshoot them or accept that for a home network, DNS security can
     # probably be a little lax.
     - name: Disable DNSSEC
-      lineinfile:
+      replace:
         path: /etc/bind/named.conf.options
-        insertbefore: "};"
-        regexp: "^\tdnssec-validation .*$;"
-        line: "\tdnssec-validation no;"
+        regexp: "dnssec-validation auto;"
+        replace: "dnssec-validation no;"
 
     - name: Verify final configuration
       shell:
