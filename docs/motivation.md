@@ -18,3 +18,8 @@ So after years of Samba file sharing, I moved into the 21st century with: Nextcl
 With all this stuff running, it requires a lot of administration. So again, I put my day job skills into practice and automated the install and configuration with Ansible. I deploy my Docker containers as Stack with Portainer. I even have a Gitea git repository to store the docker-compose.yml files.
 
 Best of all, everything is self-hosted. No worrying about my data on someone else's servers and what exactly they're doing (or not doing) to protect it. The downside, of course, is that I am the one resposible for maintaining the system and the safe keeping of my data. There is no tech support, only me. Though, given some of the recent tech news headlines, I don't neccessarily see that as a bad thing.
+
+To sum it up, Cloud Pi to me is:
+* Modern applications on inexpensive hardware giving me more for my money
+* Containers and Ansible automation to ease installation and maintenance
+* Self-hosting my apps and data to save money and stick it to The Man
