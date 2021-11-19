@@ -1,5 +1,8 @@
 # Cloud Pi
-Turn a raspberry pi into a modern cloud computing solution for your home. Sure, that sounds cool, but what does it mean?
+
+## Turn a raspberry pi into a modern cloud computing solution for your home.
+
+Sure, that sounds cool, but what does it actually mean?
 
 With a single Raspberry Pi 4, you can:
 * Replicate personal files between your various devices using Nextcloud storage.
