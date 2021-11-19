@@ -11,5 +11,5 @@ fi
 echo -n "Create a new SSL key pair for $HOSTNAME [y/N]? "
 read REPLY
 if [ "$REPLY" == "y" ] || [ "$REPLY" == "Y" ]; then
-  openssl req -new -x509 -newkey rsa:2048 -sha256 -nodes -keyout /etc/ssl/private/${HOSTNAME}.key -days 356 -out /etc/ssl/certs/${HOSTNAME}.crt -config ${HOSTNAME}.cnf
+  openssl req -new -x509 -newkey rsa:2048 -sha256 -nodes -keyout /etc/ssl/private/${HOSTNAME}.key -days 365 -out /etc/ssl/certs/${HOSTNAME}.crt -config ${HOSTNAME}.cnf
 fi
