@@ -25,4 +25,4 @@ Planned enhancements:
 * Documentation in GitHub Pages rather than wiki.
 * Redeploy wiki as specific tasks supplemental to documentation.
 
-In the meantime, the original documentation for Raspberry Pi OS Buster is here: https://github.com/DavesCodeMusings/CloudPi/wiki
+In the meantime, the original documentation for Raspberry Pi OS Buster is here: [https://github.com/DavesCodeMusings/CloudPi/wiki](https://github.com/DavesCodeMusings/CloudPi/wiki)
