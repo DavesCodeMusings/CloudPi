@@ -29,4 +29,4 @@ If all goes well, it will do the same as if you had typed `sudo apt-get update`,
 >Regular upgrades ensure the system is current and secure. Keep the playbook handy and run it periodically. Running the update playbook can take a while, particularly when running it the first time. Patience is the key.
 
 # Next Steps
-With updates done, it's time to start the cloud journey by [preparing a drive](Preparing-a-drive-for--opt-docker) for Docker's persistent data.
+With updates done, it's time to [provision storage](provisioning-storage.md) for everything that's going to be hosted on the Pi.
