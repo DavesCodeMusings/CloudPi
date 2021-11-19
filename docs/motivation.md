@@ -2,7 +2,7 @@
 
 I used to run repurposed old hardware as an inexpensive network server. When a PC wasn't up to par for the next version of Windows, it got and sent to the basement with a copy of Linux or FreeBSD. I could do all sorts of cool stuff, like run a web server and share files with Samba. I was happy.
 
-Then, along came the Raspberry Pi. Suddenly, I could do the same things I did with those old x86 machines in a much smaller package, with less noise and power consumption. Neat! But the Pi was kind of a step backward in terms of computing power.
+Then, along came the Raspberry Pi. Suddenly, I could do the same things I did with those old x86 machines in a much smaller package, with less noise and power consumption. I could even hook it up to my TV as a media center. Neat! But the Pi was kind of a step backward in terms of computing power.
 
 I considered several options:
 * Buying a NAS appliance. Expensive!
