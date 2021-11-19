@@ -1,6 +1,6 @@
 # Cloud Pi
 
-## Turn a raspberry pi into a modern cloud computing solution for your home.
+**_Turn a raspberry pi into a modern cloud computing solution for your home._**
 
 Sure, that sounds cool, but what does it actually mean?
 
