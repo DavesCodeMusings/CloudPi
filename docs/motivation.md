@@ -5,9 +5,9 @@ I used to run repurposed old hardware as an inexpensive network server. When a P
 Then, along came the Raspberry Pi. Suddenly, I could do the same things I did with those old x86 machines in a much smaller package, with less noise and power consumption. I could even hook it up to my TV as a media center. Neat! But the Pi was kind of a step backward in terms of computing power.
 
 I considered several options:
-* Buying a NAS appliance. Expensive!
-* Building a high-end custom PC with virtualization. Expensive!
-* Using two or more Raspberry Pi to share the load. Do I really want to maintain all that hardware and OS configuration?
+* Buying a NAS appliance. _Expensive!_
+* Building a high-end custom PC with virtualization. _Expensive!_
+* Using two or more Raspberry Pi to share the load. _Do I really want to maintain all that hardware and OS configuration?_
 
 I settled on a Rapberry Pi 2 running FreeBSD and Samba file sharing and a Pi 3 as a media center. It was okay, and FreeBSD is a solid OS. But then two things happened: One, I started experimenting with Docker containers for my day job. And two, the Raspberry Pi 4 was released.
 
