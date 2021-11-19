@@ -7,7 +7,7 @@ By the end of this step you will have:
 3. Completed initial configuration for Portainer.
 
 # Can I skip it?
-No. Docker and Portainer form the foundation nearly all of the applications use to run. Without Docker and Portainer, there is no Cloud Pi.
+You can't skip Docker. It forms the foundation nearly all of the applications use to run. Technically, you could skip Portainer and use the docker-compose command-line tool instead.
 
 # Why Docker?
 A Docker container is a bit like a virtual machine, but it's a virtual machine without its own kernel. It shares the kernel with the underlying operating system. In the case of the Raspberry Pi OS, it's Linux running on ARM-based hardware.
@@ -21,14 +21,22 @@ Installation of Docker is done by running the Ansible playbook called [install-d
 > Any users running docker commands from command prompt will need to use sudo unless they are in the docker group. The Ansible playbook takes care of adding the pi user to the docker group, though you will need to log out and back in for the changes to take effect. Any other users will need to be added to the group manually or preface all docker commands with sudo.
 
 # Why Portainer?
-Technically, you could run all your containers without Portainer, using Docker Compose instead. But, Portainer has a nice feature called Stacks that lets you define your applications in a Docker Compose format along with other more advanced features, like git integration.
+Portainer provides a nice web front-end to the Docker system. You can plug any valid docker-compose.yml file into it's Stacks feature and have an application running within a matter of minutes. Portainer also offers advanced features like LDAP integration for user account and Git integration for docker-compose files.
 
 # Portainer Community Edition
-Portainer is used to administer Docker and to deploy containerized applications. Portainer itself is a containerized application. So for this one instance, docker-compose is used. Copy the [docker-compose.yml for Portainer](https://github.com/DavesCodeMusings/CloudPi/blob/main/portainer/docker-compose.yml) onto your Pi. Change to the directory contining the file and run it with the command `sudo docker-compose up -d`.
+Portainer itself is a containerized application. Obviously, you can't use Portainer to deploy Portainer. So for this one instance, docker-compose is used. Copy the [docker-compose.yml for Portainer](https://github.com/DavesCodeMusings/CloudPi/blob/main/portainer/docker-compose.yml) onto your Pi. Change to the directory contining the file and run it with the command `sudo docker-compose up -d`.
 
-If all goes well, wait a bit and open a web browser for the IP address of your Raspberry Pi on port 9000. (e.g. http://192.168.0.42:9000) You should see the Portainer logo and fields to set up administrative credentials. Set up you admin user and password and you'll be logged in.
+It should look something like this:
+```
+pi@raspberrypi:~/cloudpi/portainer $ docker-compose up -d
+Creating network "portainer_default" with the default driver
+Creating volume "portainer_data" with default driver
+Creating portainer ... done
+```
+
+If all goes well, wait a bit and open a web browser for the IP address of your Raspberry Pi on port 9000. (e.g. http://192.168.0.42:9000) You should see the Portainer logo and fields to set up administrative credentials. Set up your admin user and password and you'll be logged in.
 
 Explore Portainer on your own or check out [the docs on their web site](https://documentation.portainer.io/).
 
 # Next Steps
-When you're comfortable with Docker and Portainer, it's time to look at [installing DNS](install-dns.md) so you don't have to type IP addresses in your browser's address bar all the time.
+When you're comfortable with Docker and Portainer, it's time to look at [Install DNS](install-dns.md) so you don't have to type IP addresses in your browser's address bar all the time.
