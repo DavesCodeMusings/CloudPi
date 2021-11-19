@@ -1,5 +1,5 @@
 # Summary
-In this step, you'll prepare the external hard drive.
+In this step, you'll prepare the external storage device. This device will used to hold data and configuration files. Particularly, files that get written to often will be placed here in an attempt to extend the life of the micro SD card.
 
 # Can I skip it?
 You can run your entire system off of the micro-SD card if you want. There's not a lot of capacity, but if your needs are light, it will work. Where you will run into problems is with the constant writing of data, logs, and everything else to an inexpensive device that was never really designed for the task. Eventually, the SD card will get corrupted. When this happens, you'll no longer be able to access your operating system or the data it holds.
