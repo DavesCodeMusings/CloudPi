@@ -18,7 +18,7 @@ There are a very few domain names that are reserved for private use. The ones I'
 
 ## Overriding Defaults in the Ansible Playbook
 
-**_Important step. Not not skip over this._**
+**_Important information. Not not skip over this._**
 
 Because there's no way for Ansible to guess what hostname you might want, the playbook will default to the one already assigned to the system. (Not very useful, but it keeps you from doing any damage if you're not paying attention.)
 
