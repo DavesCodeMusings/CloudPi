@@ -20,7 +20,9 @@ There are a very few domain names that are reserved for private use. The ones I'
 
 **_Important step. Not not skip over this._**
 
-Because there's no way to guess what hostname you might want, the Ansible playbook will default to the one already assigned to the system. (Not very useful, but it keeps you from doing any damage.) You'll need to override the value to actually change the hostname. This can be done in one of two ways:
+Because there's no way for Ansible to guess what hostname you might want, the playbook will default to the one already assigned to the system. (Not very useful, but it keeps you from doing any damage if you're not paying attention.)
+
+You'll need to override the value to actually change the hostname. This can be done in one of two ways:
 
 1. You can edit the `configure-hostname.yml` playbook and provide a new value for the `host` variable.
 2. You can override the variable on the command-line.
