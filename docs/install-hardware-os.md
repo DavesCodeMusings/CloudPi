@@ -19,8 +19,6 @@ This tutorial refernces the following configuration:
 * Fujitsu 160G 2.5" SATA drive
 * Tripp-Lite USB to SATA
 
-There's no case. My Pi is held to a plywood sheet in my basement using plastic rivets I bought at True Value Hardware.
-
 As with everything in this project, there's plenty of room for you to customize.
 
 Here's my rational behind the configuration, if you care. If not, skip ahead to Assembing the Pi.
@@ -31,7 +29,7 @@ Here's my rational behind the configuration, if you care. If not, skip ahead to 
 >
 >I chose the CanaKit power supply, because the official Pi supply was out of stock when I ordered. I've used CanaKit stuff before and been very happy with it. Plus, Canadians are so nice!
 >
->I've used an official Raspberry Pi case in some of my builds. I even went with the official heatsink and fan kit. But honestly, it's in the basement next to all my network gear. It doesn't need to look pretty. Plus, I have a hard time sinking a bunch of money into accessories for a $35 board. GeeekPi sells a heatsink assortment that has enough to cover five Pis. The cool air and consistent temperature of the basement does the rest.
+> I'm not using a case. My Pi is held to a plywood sheet in my basement using plastic rivets I bought at True Value Hardware.I've used an official Raspberry Pi case in some of my builds. I even went with the official heatsink and fan kit. But honestly, it's in the basement next to all my network gear. It doesn't need to look pretty. Plus, I have a hard time sinking a bunch of money into accessories for a $35 board. GeeekPi sells a heatsink assortment that has enough to cover five Pis. The cool air and consistent temperature of the basement does the rest.
 >
 >If you've used Raspberry Pis for a while, you've probably run into a corrupted SD card. This can heppen when the power supply voltage sags (the CanaKit supply should prevent that) and from a high number of writes simply wearing out the SD card. I'm hoping the high-endurance card will help mitigate that problem. The cost difference is negligible these days. I'm also hoping to move the disk-intensive applications to the external drive.
 >
