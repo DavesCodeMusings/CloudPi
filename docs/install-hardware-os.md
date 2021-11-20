@@ -21,7 +21,7 @@ This tutorial refernces the following configuration:
 
 As with everything in this project, there's plenty of room for you to customize.
 
-Here's my rational behind the configuration, if you care. If not, skip ahead to Assembing the Pi.
+Here's my rational behind the configuration, if you care. If not, skip ahead to [Assembing the Pi](install-hardware-os.md#assembling-the-pi).
 
 >My first Cloud Pi install was a Pi 3. It was okay, but the 4 is much faster. The 4G Pi 4 gives the maximum memory without requiring a 64-bit OS, something the Raspbian distribution lacks at the moment.
 >
