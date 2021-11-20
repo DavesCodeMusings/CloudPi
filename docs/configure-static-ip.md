@@ -110,4 +110,4 @@ Now that the Pi is running with a new IP address and hostname, it time to make t
 
 ___
 
-_It is the way. &mdash;Pedro Pascal, The Mandalorean_ (I'm sure he was referring to Ansible when he said it.)
+_This is the way. &mdash;Pedro Pascal, The Mandalorean_ (I'm sure he was referring to Ansible when he said it.)
