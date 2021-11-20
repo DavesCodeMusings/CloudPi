@@ -106,7 +106,8 @@ dns-search home
 To ensure everything takes effect, you'll need to reboot the system.
 
 ## Next Steps
+Now that the system is running with a new IP address and hostname, it time to move on to [provisioning storage](provision-storage.md).
 
 ___
 
-_It is the way. &mdashPedro Pascal, The Mandalorean_ (I'm sure he was referring to Ansible.)
+_It is the way. &mdash;Pedro Pascal, The Mandalorean_ (I'm sure he was referring to Ansible.)
