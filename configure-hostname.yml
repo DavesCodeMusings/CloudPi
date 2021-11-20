@@ -7,15 +7,15 @@
   # Customize the variable values or use --extra-vars when running to override.
   # For example:
   #   vars:
-  #     host: raspberrypi
+  #     host: mypi
   #     domain: home
   #
   # Or specify on the command-line:
-  #   ansible-playbook --extra-vars host=raspberrypi --extra-vars domain=home
+  #   ansible-playbook --extra-vars host=mypi
 
   vars:
     host: "{{ ansible_hostname }}"
-    domain: "{{ ansible_domain }}"
+    domain: home
 
   tasks:
   - name: Check variables
