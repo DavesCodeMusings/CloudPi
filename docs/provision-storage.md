@@ -1,6 +1,4 @@
 # Provision Storage
-
-## Summary
 In this step, you'll prepare the external storage device. This device will used to hold data and configuration files. Particularly, files that get written to often will be placed here in an attempt to extend the life of the micro SD card.
 
 By the end of this step you will have:
