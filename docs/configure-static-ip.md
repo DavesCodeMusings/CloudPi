@@ -110,4 +110,4 @@ Now that the system is running with a new IP address and hostname, it time to mo
 
 ___
 
-_It is the way. &mdash;Pedro Pascal, The Mandalorean_ (I'm sure he was referring to Ansible.)
+_It is the way. &mdash;Pedro Pascal, The Mandalorean_ (I'm sure he was referring to Ansible when he said it.)
