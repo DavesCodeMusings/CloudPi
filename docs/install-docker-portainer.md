@@ -39,7 +39,7 @@ If all goes well, wait a bit and open a web browser for the IP address of your R
 Explore Portainer on your own or check out [the docs on their web site](https://documentation.portainer.io/).
 
 ## Next Steps
-When you're comfortable with Docker and Portainer, it's time to look at [Install DNS](install-dns.md) so you don't have to type IP addresses in your browser's address bar all the time.
+When you're comfortable with Docker and Portainer, it's time to look at [install DNS](install-dns.md) so you don't have to type IP addresses in your browser's address bar all the time.
 
 ___
 
