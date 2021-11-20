@@ -32,3 +32,7 @@ If all goes well, it will do the same as if you had typed `sudo apt-get update`,
 
 ## Next Steps
 With updates done, it's time to [provision storage](provisioning-storage.md) for everything that's going to be hosted on the Pi.
+
+___
+
+_This space for rent._
