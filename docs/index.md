@@ -4,16 +4,16 @@ Sure, that sounds cool, but what does it actually mean?
 
 With a single Raspberry Pi 4, you can:
 * Replicate personal files between your various devices using Nextcloud storage.
-* Create a media library and make it availble to your home entertainment system through CIFS share.
-* Monitor your home with Home Assistant and create complex integrations with Node-Red, and Mosquitto.
+* Create a media library and make it availble to your home entertainment system through Samba shares.
+* Monitor your home with Home Assistant and create custom integrations with Node-Red, and Mosquitto.
 * Create your own DNS infrastructure and refer to your devices by name instead of IP addresses.
 * Secure your services and network traffic with SSL certificates and keep The Man out of your business.
-* Centralize your account and passwords for any applications that support LDAP.
-* Stash all your nerdy code repositories locally using Gitea.
+* Centralize your account and passwords for any applications that support OpenLDAP.
+* Stash all your nerdy code repositories locally using a Gitea git server.
 
 Spend your time using the system, not maintaining it.
-* Deploy applications quickly using Docker containers.
-* Automate mundane system configuration tasks with Ansible.
+* Docker containers let you deploy applications quickly.
+* Ansible lets you automate the mundane tasks of installation and system configuration.
 
 Does this sound like your kind of thing? Get yourself a 4Gig Raspberry Pi 4 and let's go!
 
