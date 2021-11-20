@@ -1,0 +1,3 @@
+Go to URL: http://raspberrypi.home:9000
+Choose admin credentials and enter into the fields provided.
+On the Welcome page, click Get Started.
