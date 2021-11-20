@@ -1,6 +1,4 @@
 # Hardware and Operating System
-
-## Summary
 The first step in the journey is to flash a microSD card with the latest version of Raspberry Pi OS Lite and boot the Pi. I'm assuming this isn't your first Pi project and you've probably been through this procedure before. What might be new, however, is the idea of headless server operation (no monitor and keyboard.) Read on for more details.
 
 By the end of this step you will have:
