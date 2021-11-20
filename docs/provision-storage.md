@@ -180,8 +180,7 @@ Filesystem      Size  Used Avail Use% Mounted on
 ```
 
 ## Next Steps
-Now that there's plenty of available space for Docker persistent data of any future containers you might want to run, you can move on to the section to [install Docker and Portainer](install-docker-portainer.md).
-
+Now that there's plenty of available space for Docker persistent data of any future containers you might want to run, you can move on to [install Docker and Portainer](install-docker-portainer.md).
 ___
 
 _Life is too short to have anything but delusional notions about yourself._ &mdash;Gene Simmons
