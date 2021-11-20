@@ -17,14 +17,14 @@ Before you run the Ansible playbook, you need to do a little bit of planning. Yo
 There are a very few domain names that are reserved for private use. The ones I'm aware of are .home and .local. The .local domain is used for auto-configured DNS, so you should avoid really avoid it. That leaves .home. Because of this, .home is the domain name used by default in the Ansible playbook. You can override it.
 
 ## Overriding Defaults in the Ansible Playbook
-Because there's no way to guess what hostname you might want, the default in the Ansible playbook is to use the one already assigned to the system. You'll need to override the value to actually change the hostname. This can be done in one of two ways:
+Because there's no way to guess what hostname you might want, the Ansible playbook will default to the one already assigned to the system. (Not very useful, but it keeps you from doing any damage.) You'll need to override the value to actually change the hostname. This can be done in one of two ways:
 
 1. You can edit the `configure-hostname.yml` playbook and provide a new value for the `host` variable.
 2. You can override the variable on the command-line.
 
 To override a variable's value, you use the [`--extra-vars` command-line option](https://docs.ansible.com/ansible/latest/user_guide/playbooks_variables.html#defining-variables-at-runtime). There's also an example in the playbook's comments to help you.
 
-## Running the Playbook to Change the Hostname
+## Changing the Hostname
 First, copy the [configure-hostname.yml](https://github.com/DavesCodeMusings/CloudPi/blob/main/configure-hostname.yml) playbook locally. Then run it using the `--extra-vars` command-line option to specify your preferred hostname.
 
 Here's an example:
@@ -58,10 +58,10 @@ ok: [localhost] => {
 }
 ```
 
-There's no damage to the system configuration, you just aren't changing anything, so there's a helpful reminder to let you know.
+No changes are made without overriding variables, so this serves as a helpful reminder.
 
 ## Changing the Domain Name
-If you have a registered domain name and you don't want to use the default .home, you can override both host and domain names with `--extra-vars`. Here's an example:
+If you have a registered domain name and you don't want to use the playbook's default of .home, you can override both host and domain names with `--extra-vars`. Here's an example:
 
 ```
 ansible-playbook ansible-playbook configure-hostname.yml --extra-vars "host=mypi domain=myregistereddomain"
@@ -69,7 +69,7 @@ ansible-playbook ansible-playbook configure-hostname.yml --extra-vars "host=mypi
 
 Notice how there are quotes around the value passed to `--extra-vars` now. This is the way to override multiple variables using Ansible.
 
-## Configureing a Static IP Address
+## Configuring a Static IP Address
 Now that you've customized your host and domain names, you can move on to the IP address. The IP address, network mask and gateway are changed using an Ansible playbook called [configure-static-ip.yml](https://github.com/DavesCodeMusings/CloudPi/blob/main/configure-static-ip.yml). You'll need to override values with this one, just like you did to change the hostname.
 
 Here's an example:
@@ -79,7 +79,7 @@ ansible-playbook configure-static-ip.yml --extra-vars "ip=192.168.1.100 mask=255
 
 The ip variable sets the IP address, mask sets the network mask, and gateway sets the router address. There are other variables you can override as well. Refer to the playbook for a list.
 
-Defaults for ny variables you don't override are taken from the existing configuration. This is handy when you convert from DHCP to static, becuase all you have to specify is the IP address. All other parameters are defaulted to the existing network configuration. If this was provided by your DHCP server, all those defaults should be appropriate for your network.
+Defaults for any variables you don't override are taken from the existing configuration. This is handy when you convert from DHCP to static, becuase all you have to specify is the IP address. All other parameters are defaulted to the existing network configuration. If this was provided by your DHCP server, all those defaults should be appropriate for your network.
 
 Most of the time, this is all you need:
 
@@ -106,3 +106,7 @@ dns-search home
 To ensure everything takes effect, you'll need to reboot the system.
 
 ## Next Steps
+
+___
+
+_It is the way. &mdashPedro Pascal, The Mandalorean_ (I'm sure he was referring to Ansible.)
