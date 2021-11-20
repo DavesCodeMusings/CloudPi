@@ -106,7 +106,7 @@ dns-search home
 To ensure everything takes effect, you'll need to reboot the system.
 
 ## Next Steps
-Now that the system is running with a new IP address and hostname, it time to move on to [provisioning storage](provision-storage.md).
+Now that the Pi is running with a new IP address and hostname, it time to make this hosname to IP address relationship known to the other devices on our network. We can do this by [installing DNS](install-dns.md).
 
 ___
 
