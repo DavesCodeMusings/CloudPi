@@ -29,7 +29,7 @@ If all goes well, it will do the same as if you had typed `sudo apt-get update`,
 >Regular upgrades ensure the system is current and secure. Keep the playbook handy and run it periodically. Running the update playbook can take a while, particularly when running it the first time. Patience is the key.
 
 ## Next Steps
-With updates done, it's time to [provision storage](provision-storage.md) for everything that's going to be hosted on the Pi.
+With updates done, it's time to [configure a static IP address](configure-static-ip) for the Pi.
 
 ___
 
