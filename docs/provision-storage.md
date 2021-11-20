@@ -1,4 +1,6 @@
-# Summary
+# Provision Storage
+
+## Summary
 In this step, you'll prepare the external storage device. This device will used to hold data and configuration files. Particularly, files that get written to often will be placed here in an attempt to extend the life of the micro SD card.
 
 By the end of this step you will have:
@@ -8,7 +10,7 @@ By the end of this step you will have:
 
 If you haven't [installed Ansible](Installing-Ansible-and-System-Updates) yet, that's okay. These steps are all manual. When it comes to destroying disk partitions, I'm not quite brave enough to do it automatically.
 
-# Can I skip it?
+## Can I skip it?
 You can run your entire system off of the micro-SD card if you want. There's not a lot of capacity, but if your needs are light, it will work. Where you will run into problems is with the constant writing of data, logs, and everything else to an inexpensive device that was never really designed for the task. Eventually, the SD card will get corrupted. When this happens, you'll no longer be able to access your operating system or the data it holds.
 
 With an external storage device, particularly something like a Western Digital Red or Seagate IronWolf (either spinning disk or SSD), you're relying on something designed for 24/7 operation rather than a device intended to store MP3s and pictures for your phone. Do not be tempted by that USB "backup drive" or flash drive in the weekly sale advertising circular, either. These devices are designed for intermittent use and will eventually fail if pressed into constant duty.
@@ -17,7 +19,7 @@ With separate OS and data devices, you also have the possibility of recovering y
 
 >Of course, none of this helps in extreme situations like fire, flood, a plague locusts, etc. Be sure to keep [backup](https://en.wikipedia.org/wiki/Backup) copies for the important files for this reason.
 
-# Attaching and Identifying the External Storage
+## Attaching and Identifying the External Storage
 The first step is to plug the device into the SATA side of the USB to SATA adapter cable plug the USB side into the Raspberry Pi. Be sure to plug it into one of the blue USB3 ports. This will ensure the best performance. To make things easier, don't plug in any other storage devices at this time. Only the external storage device should be plugged in.
 
 The next step is to identify the device. For that, use the command `sudo fdisk -l`. You should see output like the following:
@@ -38,7 +40,7 @@ The important things to note are the first two lines. The size and model name sh
 
 If everything is as expected, make note of the device node name: `/dev/sda` This should be /dev/sda, because there are no other USB storage devices plugged into the Pi (the microSD appears as /dev/mmcblk0). If /dev/sda is not shown, or there are multiple devices (like /dev/sdb, /dev/sdc, etc.), stop and figure out what's wrong before going any further.
 
-# Destroying the Existing FAT Partition
+## Destroying the Existing FAT Partition
 Disks and SSDs may come pre-formatted with a DOS/Windows style FAT32 or NTFS partition scheme and filesystem. A FAT32 filesystem has no concept of file permissions and NTFS is not native to Linux, so it's not suitable for use as /opt/docker. The device needs to be re-formatted with a more Linux-friendly setup. 
 
 If everything checked out with identifying the drive in the previous step, you can now use `fdisk` interactively to destroy the DOS/Windows partition. If the word 'destroy' didn't tip you off, this is an irreversible operation. All existing data on the drive will be lost. Be sure you have the correct device inserted.
@@ -57,7 +59,7 @@ Partition 1 has been deleted.
 
 You can verify it's gone by using the `p` command again.
 
-# Creating Linux Partitions
+## Creating Linux Partitions
 Rather than can allocating the entire disk to a single partition, we'll create three of them. One will hold the filesystem for `/opt/docker` and this will be used for Docker container config files. The second partition will be for `/var/lib/docker`. The third partition will be for the `/srv` filesystem and will hold the bulk of the data being stored by various network services.
 
 Here's an example of the fdisk commands used:
@@ -128,7 +130,7 @@ Syncing disks.
 
 Now that the disk partitions are set up, it's time to create the filesystems.
  
-# Creating an ext4 Filesystem
+## Creating an ext4 Filesystem
 After planning and creating the proper partition scheme, creating the filesystems is simple. I'm using the ext4 filesystem. You may have noticed it is the same one used by the Raspberry Pi OS root partition.
 
 The command is simply `sudo mkfs.ext4 /dev/sda1` to create it. Depending on the size of the drive it can take a little while to finish.
@@ -137,7 +139,7 @@ When it's done, run a filesystem check on it with the command `sudo fsck /dev/sd
 
 Repeat the process for all of the partitions you've created.
 
-# Editing /etc/fstab
+## Editing /etc/fstab
 To ensure the new filesystems get mounted on their directories every time the system starts up, they needs to be put into /etc/fstab. Looking at /etc/fstab on the Raspberry Pi, you'll notice there is no mention of devices /dev/sda or /dev/mccblk0. Instead everything is referred to by PARTUUID, or partition universally unique identifier. This is necessary, because USB devices are hot-plugable and could conceivably show up in any order.
 
 Finding the PARTUUID for a device is as easy as running the command `lsblk -dno PARTUUID /dev/sda1`
@@ -156,7 +158,7 @@ PARTUUID=1234abcd-02 /var/lib/docker  ext4    defaults,noatime  0       2
 PARTUUID=1234abcd-01 /srv             ext4    defaults,noatime  0       2
 ```
 
-# Mounting the new Filesystems
+## Mounting the new Filesystems
 The hard part is over. Now, all that remains is to create the filesystems on their respective directories. Some of these directories do not exist yet, so you may have to create them first. Here's and example using the three partition scheme from the previous examples:
 
 ```
@@ -179,5 +181,10 @@ Filesystem      Size  Used Avail Use% Mounted on
 /dev/sda3       117G   24K  111G   1% /srv
 ```
 
-# Next Steps
+## Next Steps
 Now that there's plenty of available space for Docker persistent data of any future containers you might want to run, you can move on to the section to [install Docker and Portainer](install-docker-portainer.md).
+
+___
+
+_Life is too short to have anything but delusional notions about yourself._ &mdash;Gene Simmons
+
