@@ -57,7 +57,7 @@ Once you have IP address, log in via SSH. The default user is 'pi' and the passw
 >Setting up a serial console can also be helpful when running a headless server, but it's really only for used troubleshooting and not for day to day operation. If you have the required cable, Adafruit has a good article on [how to set it up](https://learn.adafruit.com/adafruits-raspberry-pi-lesson-5-using-a-console-cable/enabling-serial-console). They'd be happy to sell you the cable as well.
 
 ## Next Steps
-Once the Pi is up and running, you're ready to [Install Ansible and system updates](Install-Ansible-and-System-Updates).
+Once the Pi is up and running, you're ready to [install Ansible and system updates](install-ansible-and-system-updates.md).
 
 ___
 _If it ain't broke, it doesn't have enough features yet. &mdash;Scott Adams_
