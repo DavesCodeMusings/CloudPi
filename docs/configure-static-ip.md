@@ -17,6 +17,9 @@ Before you run the Ansible playbook, you need to do a little bit of planning. Yo
 There are a very few domain names that are reserved for private use. The ones I'm aware of are .home and .local. The .local domain is used for auto-configured DNS, so you should avoid really avoid it. That leaves .home. Because of this, .home is the domain name used by default in the Ansible playbook. You can override it.
 
 ## Overriding Defaults in the Ansible Playbook
+
+**Important step. Not not skip over this.**
+
 Because there's no way to guess what hostname you might want, the Ansible playbook will default to the one already assigned to the system. (Not very useful, but it keeps you from doing any damage.) You'll need to override the value to actually change the hostname. This can be done in one of two ways:
 
 1. You can edit the `configure-hostname.yml` playbook and provide a new value for the `host` variable.
