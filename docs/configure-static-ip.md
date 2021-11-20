@@ -84,7 +84,7 @@ ansible-playbook configure-static-ip.yml --extra-vars "ip=192.168.1.100 mask=255
 
 The ip variable sets the IP address, mask sets the network mask, and gateway sets the router address. There are other variables you can override as well. Refer to the playbook for a list.
 
-Defaults for any variables you don't override are taken from the existing configuration. This is handy when you convert from DHCP to static, becuase all you have to specify is the IP address. All other parameters are defaulted to the existing network configuration. If this was provided by your DHCP server, all those defaults should be appropriate for your network.
+Defaults for any variables you don't override are taken from the existing configuration. This is handy when you convert from DHCP to static, because all you have to specify is the IP address. All other parameters are defaulted to the existing network configuration. If this was provided by your DHCP server, all those defaults should be appropriate for your network.
 
 Most of the time, this is all you need:
 
