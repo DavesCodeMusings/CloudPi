@@ -26,7 +26,7 @@ To sum it up, Cloud Pi to me is:
 
 But enough about me, let's get building! Start with [installing the hadware and OS on your Raspberry Pi](install-hardware-os.md).
 
-#
+___
 
 _The journey of a thousand miles begins with one step. &mdash;Lao Tzu_
 
