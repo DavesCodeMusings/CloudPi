@@ -25,6 +25,6 @@ Planned enhancements:
 * Documentation in GitHub Pages rather than wiki.
 * Redeploy wiki as specific tasks supplemental to documentation.
 
-The beginnings of the [new project documents can be previewed](https://github.com/DavesCodeMusings/CloudPi/blob/main/docs/motivation.md)
+The beginnings of the [new project documents can be previewed](motivation.md)
 
 In the meantime, the original documentation for Raspberry Pi OS Buster is here: [https://github.com/DavesCodeMusings/CloudPi/wiki](https://github.com/DavesCodeMusings/CloudPi/wiki)
