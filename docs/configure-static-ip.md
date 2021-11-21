@@ -14,7 +14,7 @@ You don't have to configure a static IP address either. You could set a reservat
 ## Deciding on a Domain Name
 Before you run the Ansible playbook, you need to do a little bit of planning. You can choose just about any hostname you like, but unless you already have a registered domain name, you need to come up with a fictitious one that won't cause you problems down the line.
 
-There are a very few top-level domain names that are reserved for private use. The ones I'm aware of are _.home_ and _.local_. The _.local_ domain is used for auto-configured DNS, so you should avoid using it. That leaves _.home_. Because of this, the .home domain name used is by default in the Ansible playbook. You can override it if you want to use a domain that you've registered. But, unless you're very familiar with setting up DNS, _.home_ is probably the best option.
+There are a very few top-level domain names that are reserved for private use. The ones I'm aware of are _.home_ and _.local_. The _.local_ domain is used for auto-configured DNS, so you should avoid using it. That leaves _.home_. Because of this, the _.home_ domain name used is by default in the Ansible playbook. You can override it if you want to use a domain that you've registered. But, unless you're very familiar with setting up DNS, _.home_ is probably the best option.
 
 ## Overriding Defaults in the Ansible Playbook
 
