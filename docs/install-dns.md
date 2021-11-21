@@ -48,3 +48,6 @@ To make the Pi use its own DNS server, the familiar /etc/dhcpcd.conf file needs 
 ## Next Steps
 DNS makes it easier to find hosts by centralizing the name to IP address mapping. There's also a service called LDAP that helps to centralize user accounts. [LDAP is covered in the next step](install-ldap.md).
 
+___
+
+_This space for rent._
