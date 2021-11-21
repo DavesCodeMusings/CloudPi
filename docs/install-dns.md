@@ -46,4 +46,5 @@ The first two will check for mistakes that can cause your DNS server to refuse t
 To make the Pi use its own DNS server, the familiar /etc/dhcpcd.conf file needs to be edited again to update the line defining with 'static domain_name_servers'. A restart will make the changes take effect.
 
 ## Next Steps
-TODO
+DNS makes it easier to find hosts by centralizing the name to IP address mapping. There's also a service called LDAP that helps to centralize user accounts. [LDAP is covered in the next step](install-ldap.md).
+
