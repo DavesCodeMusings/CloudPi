@@ -74,7 +74,7 @@ ansible-playbook ansible-playbook configure-hostname.yml --extra-vars "host=mypi
 
 Notice how there are quotes around the value passed to `--extra-vars` now. This is the way to override multiple variables using Ansible.
 
-## Verifying Host an Domain Changes
+## Verifying Host and Domain Changes
 The bash command prompt will still show the old hostname until you log out and log in again. You can double-check that everything is set up as you intended, by using the `hostname` command and by displaying the contents of the `/etc/hosts` file. The example below shows how.
 
 ```
@@ -88,25 +88,23 @@ pi@raspberrypi:~ $ cat /etc/hosts
 ```
 
 ## Configuring a Static IP Address
-Now that you've customized your host and domain names, you can move on to the IP address. The IP address, network mask and gateway are changed using an Ansible playbook called [configure-static-ip.yml](https://github.com/DavesCodeMusings/CloudPi/blob/main/configure-static-ip.yml). You'll need to dowload it locally and override values, just like you did to change the hostname.
+Now that you've customized your host and domain names, you can move on to the IP address. The IP address, network mask and gateway are changed using an Ansible playbook called [configure-static-ip.yml](https://github.com/DavesCodeMusings/CloudPi/blob/main/configure-static-ip.yml). You'll need to download it locally and override variable values, just like you did to change the hostname.
 
 Here's an example:
-```
-ansible-playbook configure-static-ip.yml --extra-vars "ip=192.168.1.100 mask=255.255.255.0 gateway=192.168.1.1"
-```
-
-The ip variable sets the IP address, mask sets the network mask, and gateway sets the router address. There are other variables you can override as well. Refer to the playbook for a list.
-
-Defaults for any variables you don't override are taken from the existing configuration. This is handy when you convert from DHCP to static, because all you have to specify is the IP address. All other parameters are defaulted to the existing network configuration. If this was provided by your DHCP server, all those defaults should be appropriate for your network.
-
-Most of the time, this is all you need:
-
 ```
 ansible-playbook configure-static-ip.yml --extra-vars ip=192.168.1.100
 ```
 
+The _ip_ variable sets the IP address. There are other variables you can override for more control. Have a look in the playbook's _vars:_ section for that. But, as it's configured, the playbook will use the existing values for any variables you don't specifically override. This is handy when you convert from DHCP to static, because those defaults (parameters provided by your DHCP server) should all be appropriate for your network.
+
+>If you need to specify multiple variable overrides, be sure to use quotes around what you pass to --extra-vars, like this:
+>
+>```
+>ansible-playbook configure-static-ip.yml --extra-vars "ip=192.168.1.100 mask=255.255.255.0 gateway=192.168.1.1"
+>```
+
 ## Verifying Network Parameters
-Static network setting are configured in the `/etc/network/interfaces.d/eth0` file. Display the contents of the file to verify everything looks like you expect it to.
+Static network settings are configured in the `/etc/network/interfaces.d/eth0` file. Display the contents of the file to verify everything looks like you expect it to.
 
 ```
 $ cat /etc/network/interfaces.d/eth0
