@@ -140,3 +140,7 @@ pi@mypi:~ $ service dhcpcd status
 
 ## Next Steps
 Now that the Pi is running with a new IP address and hostname, it time to make this hosname to IP address relationship known to the other devices on our network. We can do this by [installing DNS](install-dns.md).
+
+___
+
+_This space for rent._
