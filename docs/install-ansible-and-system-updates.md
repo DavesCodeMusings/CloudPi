@@ -33,4 +33,4 @@ With updates done, it's time to [configure a static IP address](configure-static
 
 ___
 
-_This space for rent._
+_This is the way. &mdash;Pedro Pascal, The Mandalorean_ (I'm sure he was referring to Ansible when he said it.)
