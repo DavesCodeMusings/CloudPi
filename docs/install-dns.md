@@ -78,7 +78,7 @@ dns-nameservers 192.168.1.100 192.168.1.1
 ```
 
 ## Next Steps
-DNS makes it easier to find hosts by centralizing the name to IP address mapping. There's also a service called LDAP that helps to centralize user accounts. [LDAP is covered in the next step](install-ldap.md).
+At this point in the project, you've taken the Raspberry Pi from a basic out of the box install to a host that's customized for your home network. Now it's time to add more storage to the system so you can start hosting applications and storing data. That's covered in the next step, [provisioning storage](provision-storage.md)
 
 ___
 
