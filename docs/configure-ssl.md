@@ -63,7 +63,27 @@ After customizing the configuration file and running the shell script, your cert
 5. Select the certifcate and key files from your PC.
 6. Verify it works by using the HTTPS URL. (Example: https://portainer.mypi.home:9443)
 
+You will get an _untrusted certificate_ warning from your browser, because the certificate is self-signed. The next step takes care of that.
+
 >The procedure for using SSL changed significantly starting with Portainer version 2.9. If you need to troubleshoot the configuration, be wary of anything that tells you to use command-line options for the container. This is the old way of doing things. It works, but it's more difficult and error prone.
 
+## Trusting the Certificate
+With any self-signed certificate, your browser will complain about the issuer not being trusted. With Firefox, you can add an exception pretty easily. With some browsers it's just a click or two, with others it's a little harder.
+
+Below is what I've found that works.
+
+### Windows
+You'll need to start a powershell or cmd prompt on windows, then run this command:
+
+```
+certutil -addstore Root \path\to\mypi.home.crt
+```
+
+Adjust the _\path\to\mypi.home.crt_ to the actual location where you saved the certificate on your PC.
+
+This covers anything that uses the Windows trust store. Firefox uses it's own trust store, but it can be configured to use the Windows trust store as well. It involves setting the _security.enterprise_roots.enabled_ parameter to true. There's a [Mozilla support article](https://support.mozilla.org/en-US/kb/setting-certificate-authorities-firefox) that gives more detail.
+
+>You can also install your self-signed certificate using the the certificates snap-in in the Microsoft Management Console (mmc.exe), though that is beyond the scope of this document. Search the web for instructions.
+
 ## Next Steps
-Portainer also has a feature to let you authenticate using LDAP users. Other applications can use LDAP, too, so it's worth looking at if you want a centralized username and password for your applications. LDAP is covered in [install-ldap](install-ldap.md)
+Portainer also has a feature to let you authenticate using LDAP users. Other applications can use LDAP, too, so it's worth looking at if you want a centralized username and password for your applications. LDAP is covered in [install-ldap](install-ldap.md).
