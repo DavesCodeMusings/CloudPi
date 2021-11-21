@@ -38,7 +38,7 @@ I'm not going to tell you how to flash an SD card and stick it your Pi. I assume
 
 I will tell you that you'll need to use the advanced option of the [Raspberry Pi Imager](https://www.raspberrypi.org/software/) to enable SSH logins from the beginning. Otherwise, you won't be able to log into your Pi over the network. If you forget this step, you can always [place an empty text file called `ssh` in the boot partition](https://www.raspberrypi.com/documentation/computers/configuration.html#setting-up-a-headless-raspberry-pi) of the SD card before you stick it in the Pi and boot for the first time.
 
-## Hardware Install
+## Installing Hardware 
 Other than the lack of keyboard and monitor, the installation of the Raspberry Pi components is just like any other system. Because of that, I won't go into a lot of detail on the installation of Raspberry Pi OS. If you need help, see the [instructions on the raspberrypi.org website](https://www.raspberrypi.org/documentation/installation/installing-images/) or simply use your favorite search engine to find one of many step-by-step instructional videos.
 
 That's it. Just plug in the network connection and power supply. Watch the flashing green storage activity light near the SD card and the network link lights on the RJ-45 jack to gauge the progress. Once the network link light is on and the storage activity indicator calms, you can try making a connection via SSH.
