@@ -12,7 +12,7 @@ On a home network, where you trust your users, there's no urgent need for encryp
 ## Why SSL and HTTPS?
 Securing web traffic is one more step in a multi-layered approach to security. You might be thinking, 'but I have a firewall.' What happens if the firewall has a bug in the code and an attacker is able to get onto your network? Configuring your servers for HTTPS means there's one more barrier standing in the way of the attacker and their target. The idea of multi-layer security is to put up enough barriers like this so an attacker will give up and find easier prey. Think of it as locking your car, even though it's in the garage. If a thief manages to get the garage open, they still have to unlock the car to drive off with it.
 
-## Planning the Subjet Alternative Names
+## Planning the Subject Alternative Names
 Modern certificates use a field called Subject Alternative Names, or SANs. This is a list of ways the server can be addressed. For example, _mypi.home_ and _portainer.mypi.home_ are two names that DNS will resolve to the IP address of your Raspberry Pi. Try the example below using your own hostname.
 
 ```
