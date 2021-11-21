@@ -1,0 +1,30 @@
+[req]
+default_bits = 2048
+prompt = no
+default_md = sha256
+x509_extensions = v3_req
+distinguished_name = dn
+
+[dn]
+C = US
+ST = Wisconsin
+L = Madison
+O = Home
+emailAddress = root@raspberrypi.home
+CN = raspberrypi.home
+
+[v3_req]
+subjectAltName = @alt_names
+
+[alt_names]
+DNS.1 = raspberrypi.home
+DNS.2 = esphome.raspberrypi.home
+DNS.3 = git.raspberrypi.home
+DNS.4 = homeassistant.raspberrypi.home
+DNS.5 = ldap.raspberrypi.home
+DNS.6 = nextcloud.raspberrypi.home
+DNS.7 = nodered.raspberrypi.home
+DNS.8 = node-red.raspberrypi.home
+DNS.9 = portainer.raspberrypi.home
+DNS.10 = test.raspberrypi.home
+DNS.11 = www.raspberrypi.home
