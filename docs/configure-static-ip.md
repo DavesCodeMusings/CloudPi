@@ -54,16 +54,16 @@ PLAY RECAP *********************************************************************
 localhost                  : ok=3    changed=2    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0
 ```
 
-You might have noticed the Check variables task was skipped. This isn't an error, it's just a sanity check, and it passed. If you had forgotten to provide the hostname with `--extra-vars`, you would have seen this instead:
-
-```
-TASK [Check variables] *********************************************************
-ok: [localhost] => {
-    "msg": "Host and domain haven't changed. (Still using: raspberrypi.home) Are you sure you don't want to customize using --extravars?"
-}
-```
-
-No changes are made without overriding variables, so this serves as a helpful reminder.
+>Notice how the _Check variables_ task was skipped. This isn't an error, it's just a sanity check, and it passed. If you had forgotten to provide the hostname with `--extra-vars`, you would have seen this instead:
+>
+>```
+>TASK [Check variables] *********************************************************
+>ok: [localhost] => {
+>    "msg": "Host and domain haven't changed. (Still using: raspberrypi.home) Are you sure you don't want to customize using --extravars?"
+>}
+>```
+>
+>No changes are made without overriding variables, so this serves as a helpful reminder.
 
 ## Changing the Domain Name
 If you have a registered domain name and you don't want to use the playbook's default of .home, you can override both host and domain names with `--extra-vars`. Here's an example:
@@ -74,8 +74,21 @@ ansible-playbook ansible-playbook configure-hostname.yml --extra-vars "host=mypi
 
 Notice how there are quotes around the value passed to `--extra-vars` now. This is the way to override multiple variables using Ansible.
 
+## Verifying Host an Domain Changes
+The bash command prompt will still show the old hostname until you log out and log in again. You can double-check that everything is set up as you intended, by using the `hostname` command and by displaying the contents of the `/etc/hosts` file. The example below shows how.
+
+```
+pi@raspberrypi:~ $ hostname
+mypi.home
+pi@raspberrypi:~ $ dnsdomainname
+home
+pi@raspberrypi:~ $ cat /etc/hosts
+127.0.0.1  localhost
+192.168.0.18  mypi.home mypi
+```
+
 ## Configuring a Static IP Address
-Now that you've customized your host and domain names, you can move on to the IP address. The IP address, network mask and gateway are changed using an Ansible playbook called [configure-static-ip.yml](https://github.com/DavesCodeMusings/CloudPi/blob/main/configure-static-ip.yml). You'll need to override values with this one, just like you did to change the hostname.
+Now that you've customized your host and domain names, you can move on to the IP address. The IP address, network mask and gateway are changed using an Ansible playbook called [configure-static-ip.yml](https://github.com/DavesCodeMusings/CloudPi/blob/main/configure-static-ip.yml). You'll need to dowload it locally and override values, just like you did to change the hostname.
 
 Here's an example:
 ```
