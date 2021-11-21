@@ -128,7 +128,7 @@ Syncing disks.
 
 Now that the disk partitions are set up, it's time to create the filesystems.
  
-## Creating an ext4 Filesystem
+## Creating the ext4 Filesystems
 After planning and creating the proper partition scheme, creating the filesystems is simple. I'm using the ext4 filesystem. You may have noticed it is the same one used by the Raspberry Pi OS root partition.
 
 The command is simply `sudo mkfs.ext4 /dev/sda1` to create it. Depending on the size of the drive it can take a little while to finish.
