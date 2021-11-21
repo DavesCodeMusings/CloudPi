@@ -71,6 +71,12 @@ nameserver 192.168.1.1
 
 >Notice how the ip address 192.168.1.1 is still there. This is a secondary DNS resolver. The 192.168.1.100 address (the Raspberry Pi DNS) is the primary and will be tried first. If it ever fails to respond, the secondary address will be used. Since the internet router won't have the DNS name of my Pi or other devices configured, it won't be useful for resolving hosts on the local network, but it will still provide name resolution for internet sites.
 
+Changes to `/etc/resolv.conf` will be lost on the next restart. Test and make sure everything is working as expected. Then, edit `/etc/network/interfaces.d/eth0` and update the _dns-nameservers_ line with the new configuration. The example below shows you what it should look like if you use the same configuration as shown above for `resolv.conf`.
+
+```
+dns-nameservers 192.168.1.100 192.168.1.1
+```
+
 ## Next Steps
 DNS makes it easier to find hosts by centralizing the name to IP address mapping. There's also a service called LDAP that helps to centralize user accounts. [LDAP is covered in the next step](install-ldap.md).
 
