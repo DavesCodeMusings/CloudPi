@@ -1,5 +1,5 @@
 # Provision Storage
-In this step, you'll prepare the external storage device. This device will used to hold data and configuration files. Particularly, files that get written to often will be placed here in an attempt to extend the life of the micro SD card.
+In this step, you'll prepare an external storage device, either a spinning disk or a solid state drive. This device will used to hold data and configuration files. Particularly, files that get written to often will be placed here in an attempt to extend the life of the micro SD card.
 
 By the end of this step you will have:
 1. Repartitioned the external device, preparing it for Linux filesystems.
