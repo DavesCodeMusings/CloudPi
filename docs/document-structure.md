@@ -22,4 +22,4 @@ For example, to set up file sharing with Nextcloud and Samba, there are a number
 Not every application will have all the files listed above, but when they do, the order is important: pre-deploy, docker-compose, post-deploy.
 
 # Next Steps
-Okay, everything is clear? You know what you can skip, what you can skim, and what you have to pay close attention to? Good. [Let's get started](motivation.md).
+Okay, everything is clear? You know what you can skip, what you can skim, and what you have to pay close attention to? Good. [Let's start with assembing the Pi](install-hardware-os.md).
