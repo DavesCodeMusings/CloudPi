@@ -40,7 +40,22 @@ Basic testing of the DNS server is included in the Ansible playbooks. If you wan
 * named-checkconf
 * nslookup 127.0.0.1 or dig @127.0.0.1
 
-The first two will check for mistakes that can cause your DNS server to refuse to start. The final two are a handy way to do lookups using the local server for DNS.
+The first two will check for mistakes that can cause your DNS server to refuse to start. The final two are a handy way to do lookups using the local server for DNS. A quick test can be done by looking up the hostname of the Pi itself. This command returns a lot of extra information, but in there you should find the name and IP address for your Raspberry Pi. 
+
+```
+pi@mypi:~ $dig @127.0.0.1 my.home
+
+...
+;; ANSWER SECTION:
+mypi.home.            259200  IN      A       192.168.0.100
+...
+```
+
+> You can get straight to the IP address using the +short option, like this:
+> ```
+> pi@mypi:~ $dig @127.0.0.1 my.home +short
+> 192.168.0.100
+> ```
 
 ## Config Changes
 To make the Pi use its own DNS server, the familiar /etc/dhcpcd.conf file needs to be edited again to update the line defining with 'static domain_name_servers'. A restart will make the changes take effect.
