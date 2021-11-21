@@ -3,4 +3,4 @@
 TODO
 
 ## Next Steps
-[install-ldap](install-ldap)
+[install-ldap](install-ldap.md)
