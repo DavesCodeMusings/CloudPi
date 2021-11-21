@@ -25,3 +25,5 @@ Hardware and OS requirements:
 Sound interesting yet? Take a look at
 [the wiki](https://github.com/DavesCodeMusings/CloudPi/wiki) to get started
 installing.
+
+There's a new version of this tutorial in the works. A preview can be found at: [https://davescodemusings.github.io/CloudPi/](https://davescodemusings.github.io/CloudPi/)
