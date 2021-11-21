@@ -53,7 +53,17 @@ The second is a shell script that will run `openssl` with all the necessary comm
 
 >Yeah, I know, it's not Ansible, but I haven't quite mastered certs with Ansible yet. Just be happy you don't have to type the options manually.
 
+After customizing the configuration file and running the shell script, your certificate and key will be in `/etc/ssl/certs` and `/etc/ssl/private`, respectively. Copy the contents of these files to your PC. You'll need the files for uploading to Portainer.
 
+## Configuring Portainer for HTTPS
+1. Open a bowser and go to the Portainer URL. (Example: http://portainer.mypi.home:9000)
+2. Log into Portainer.
+3. Select the _Settings_ menu.
+4. Scroll down to the _SSL certificate_ section of the page.
+5. Select the certifcate and key files from your PC.
+6. Verify it works by using the HTTPS URL. (Example: https://portainer.mypi.home:9443)
+
+>The procedure for using SSL changed significantly starting with Portainer version 2.9. If you need to troubleshoot the configuration, be wary of anything that tells you to use command-line options for the container. This is the old way of doing things. It works, but it's more difficult and error prone.
 
 ## Next Steps
-[install-ldap](install-ldap.md)
+Portainer also has a feature to let you authenticate using LDAP users. Other applications can use LDAP, too, so it's worth looking at if you want a centralized username and password for your applications. LDAP is covered in [install-ldap](install-ldap.md)
