@@ -11,7 +11,7 @@ If you haven't assigned your Pi a domain name and a static IP yet, see the step 
 ## Can I skip it?
 If you don't mind using IP addresses when connecting to the devices on your home network, then you can skip this step. Alternatively, you could use `hosts` files to take care of name resolution. This works best when you only have a small number of devices on your network.
 
-## About BIND 9 Installation
+## Why BIND 9?
 ISC's BIND is one of the most widely used DNS servers, so there's plenty of documentation and tutorials surrounding it's administration if needed. The configuration is all text based, and there are a few files involved. The Ansible playbook [install-dns.yml](https://github.com/DavesCodeMusings/CloudPi/blob/main/install-dns.yml) will take care of installing the package from apt and configuring DNS forwarding to the addresses currently in your resolv.conf file.
 
 >There are some containerized versions of BIND9, but nothing on [Docker Hub](https://hub.docker.com) is listed as 'official' from ISC. Given this and the fact that DNS is more of a basic network service than most containerized apps, BIND9 from the apt repository is used instead.
