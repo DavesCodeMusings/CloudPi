@@ -68,7 +68,7 @@ You will get an _untrusted certificate_ warning from your browser, because the c
 >The procedure for using SSL changed significantly starting with Portainer version 2.9. If you need to troubleshoot the configuration, be wary of anything that tells you to use command-line options for the container. This is the old way of doing things. It works, but it's more difficult and error prone.
 
 ## Trusting the Certificate
-With any self-signed certificate, your browser will complain about the issuer not being trusted. With Firefox, you can add an exception pretty easily. With some browsers it's just a click or two, with others it's a little harder.
+With any self-signed certificate, your browser will complain about the issuer not being trusted. With Firefox, you can add an exception pretty easily. With Firefox it's just a click or two, with Edge and others it's a little harder.
 
 Below is what I've found that works.
 
@@ -84,6 +84,11 @@ Adjust the _\path\to\mypi.home.crt_ to the actual location where you saved the c
 This covers anything that uses the Windows trust store. Firefox uses it's own trust store, but it can be configured to use the Windows trust store as well. It involves setting the _security.enterprise_roots.enabled_ parameter to true. There's a [Mozilla support article](https://support.mozilla.org/en-US/kb/setting-certificate-authorities-firefox) that gives more detail.
 
 >You can also install your self-signed certificate using the the certificates snap-in in the Microsoft Management Console (mmc.exe), though that is beyond the scope of this document. Search the web for instructions.
+
+### Linux
+The trust store on Raspberry Pi OS is defined by the certificates listed in `/etc/ssl/certs/ca-certificates.crt`. This is a plain text file and you can easily add your self-signed certificate by appending the contents of the `mypi.home.crt` file. (Substitute the correct name in place of mypi.home.)
+
+>You may be tempted to skip this step, thinking 'I'll never use a web browser on my Pi,' but that could hinder you in the future. Tools like `wget` and `curl` will look to ca-certificates.crt, as will Portainer if you configure integration with self-hosted git using webhooks.
 
 ## Next Steps
 Portainer also has a feature to let you authenticate using LDAP users. Other applications can use LDAP, too, so it's worth looking at if you want a centralized username and password for your applications. LDAP is covered in [install-ldap](install-ldap.md).
