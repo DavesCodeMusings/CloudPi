@@ -24,7 +24,7 @@ To sum it up, Cloud Pi to me is:
 * Containers and Ansible automation to ease installation and maintenance
 * Self-hosting my apps and data to save money and stick it to The Man
 
-But enough about me, let's get building! Start with [installing the hadware and OS on your Raspberry Pi](install-hardware-os.md).
+Still interested? Then let's get building! We'll start with a brief introduction on [how the steps in this project are laid out](document-structure.md).
 
 ___
 
