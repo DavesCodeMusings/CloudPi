@@ -107,7 +107,7 @@ dns-nameservers 192.168.1.1
 dns-search home
 ```
 
-## Reboot
+## Rebooting
 To ensure everything takes effect, you'll need to reboot the system.
 
 ## Next Steps
