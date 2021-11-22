@@ -1,5 +1,14 @@
 # Lightweight Directory Access Protocol (LDAP) Server
-TODO
+When you install an application, there are generally user accounts that need to be created to grant access to the application. With one or two users and a small number of applications, you can manage user accounts independently in each app. As the number of users and apps grows, having a centralized username and password database can be a good way to simplfy management.
+
+LDAP is a very common protocol used for this purpose. Most applications that require user accounts have some ability to use LDAP as an authentication mechanism. Each app will have its own way of configuring the integration, but the basic premise is the same. You need an LDAP server running that has users and passwords defined in it. The application passes the authentication request to the LDAP server.
+
+By the end of this step you will have:
+* Installed OpenLDAP on the Raspberry Pi.
+* Optionally installed LDAP Admin, a Windows-based administration tool.
+* Created a basic set of users and groups using a text-based LDIF import.
+* Secured OpenLDAP with the SSL certificate created in the previous step.
+* Configured Portainer to use LDAP authentication.
 
 ## Can I Skip It?
 LDAP is not necessary. The only reason to install it is to centralize your users' passwords in one place. The alternative is to use each application's local authentication with either separate passwords or manually synchronized passwords.
@@ -7,9 +16,17 @@ LDAP is not necessary. The only reason to install it is to centralize your users
 ## Why OpenLDAP?
 There are other options for LDAP directory services, like Apache DS and 389 Directory Server. OpenLDAP has been around for a long time and is widely used. That makes things easier when searching for answers on the web. If you have experience with another LDAP server, feel free to use it. There should be very little difference when it comes to configuring applications for LDAP authentication.
 
-## Installing LDAP Server and Utilities
+## Overriding the Default Admin Password
+When installing OpenLDAP with apt-get, you're asked to enter and confirm the admin password. With a non-interactive installation, the password is provided by the Ansible variable _password_. You can override the Ansible `password` variable using the `--extra-vars` command-line argument as was done in previous steps. For example:
 
-[install-ldap.yml](https://github.com/DavesCodeMusings/CloudPi/blob/main/install-ldap.yml)
+```
+ansible-playbook install-ldap.yml --extra-vars password=SuperSecretPassword
+```
+
+> If you don't override the variable, the default is to set it to the word, 'password'. This is a terrible password and I strongly recommend you change it.
+
+## Installing LDAP Server and Utilities
+The installation of OpenLDAP is done using the Ansible playbook [install-ldap.yml](https://github.com/DavesCodeMusings/CloudPi/blob/main/install-ldap.yml). You'll need to copy this file locally and run it with the command `ansible-playbook install-ldap.yml`.
 
 ## Installing LDAP Administration Tool for Windows
 [LDAP Admin](http://www.ldapadmin.org/) is a Free GNU GPL-licensed tool for administering LDAP from Windows. There's no installation wizard. You just get the latest ZIP archive from their [download page](http://www.ldapadmin.org/download/ldapadmin.html) and extract it somewhere convenient.
@@ -98,7 +115,10 @@ gidNumber: 10001
 homeDirectory: /home/bullwinkle
 ```
 
-What you end up with is a couple organizational units (OUs): _People_ and _Groups_. There are some fictitious users created (or real users if you edited the file.) There are also some groups.
+What you end up with is two organizational units (OUs): _People_ and _Groups_. There are some fictitious users created (or real users if you edited the file.) There are also a couple groups. _Portainer Admins_ will be used to integrate with Portainer. The _Everyone_ group is for NextCloud.
+
+## Enabling Secure LDAP with a Certificate
+TODO. 
 
 ## Next Steps
 [on-site git server](run-git-server.md)
