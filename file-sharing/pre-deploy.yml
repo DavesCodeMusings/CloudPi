@@ -1,0 +1,44 @@
+---
+- name: Run NextCloud pre-deployment tasks
+  hosts: localhost
+  connection: local
+  become: true
+
+  tasks:
+  # NextCloud uses a SQLite database (among other options.)
+  - name: Install SQLite client
+    apt:
+      name: sqlite3
+      state: latest
+
+  # The html directory is where NextCloud stores pretty much everything.
+  - name: Create Nextcloud configuration data directory
+    file:
+      path: /opt/docker/nextcloud/html
+      state: directory
+      mode: '0755'
+
+  # Samba shares are located under /srv.
+  - name: Create directory for Samba media share
+    file:
+      path: /srv/media
+      state: directory
+      mode: '0755'
+      owner: pi
+      group: pi
+
+  - name: Create directory for Samba public share
+    file:
+      path: /srv/public
+      state: directory
+      mode: '0755'
+      owner: pi
+      group: pi
+
+  - name: Create directory for samba shared share
+    file:
+      path: /srv/shared
+      state: directory
+      mode: '0777'
+      owner: pi
+      group: pi
