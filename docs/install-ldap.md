@@ -118,7 +118,10 @@ homeDirectory: /home/bullwinkle
 What you end up with is two organizational units (OUs): _People_ and _Groups_. There are some fictitious users created (or real users if you edited the file.) There are also a couple groups. _Portainer Admins_ will be used to integrate with Portainer. The _Everyone_ group is for NextCloud.
 
 ## Enabling Secure LDAP with a Certificate
-TODO. 
+Theoretically, the [configure-ldap-secure.yml](https://github.com/DavesCodeMusings/CloudPi/blob/main/configure-ldap-secure.yml) should take care of adding the certificate and key to OpenLDAP so it can run on LDAPS port 636 and also use STARTTLS on port 389. But, so far the command to make the changes is failing. I have tried many suggested fixes with no luck. If you can make it work, please let me know how you did it.
+
+## Configuring Portainer for LDAP
+TODO
 
 ## Next Steps
 [on-site git server](run-git-server.md)
