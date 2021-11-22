@@ -1,0 +1,20 @@
+services:
+    gitea:
+        image: kunde21/gitea-arm:latest
+        container_name: gitea
+        hostname: gitea
+        environment:
+            - 'USER_UID=1001'
+            - 'USER_GID=1001'
+        ports:
+            - '3000:3000'
+        restart: unless-stopped
+        volumes:
+            - /etc/timezone:/etc/timezone:ro
+            - /etc/localtime:/etc/localtime:ro
+            - /etc/ssl/certs/ca-certificates.crt:/etc/ssl/certs/ca-certificates.crt:ro
+            - data:/data
+            - /srv/git:/srv/git
+
+volumes:
+    data:
