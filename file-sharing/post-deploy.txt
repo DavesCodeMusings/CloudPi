@@ -1,0 +1,12 @@
+Configuration URL: http://mypi.home:8910/
+
+Username: (choose an admin username)
+Password: *****
+Install recommended apps: remove checkbox
+
+Finish setup.
+
+See LDAP Guide, Clients and Client Manual
+  https://docs.nextcloud.com/server/latest/admin_manual/configuration_user/user_auth_ldap.html
+  https://nextcloud.com/clients/
+  https://docs.nextcloud.com/desktop
