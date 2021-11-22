@@ -1,0 +1,7 @@
+# Hints for Enabling LDAP in Applications
+
+## Gitea
+TODO
+
+## Portainer
+TODO
