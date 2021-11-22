@@ -120,8 +120,34 @@ What you end up with is two organizational units (OUs): _People_ and _Groups_. T
 ## Enabling Secure LDAP with a Certificate
 Theoretically, the [configure-ldap-secure.yml](https://github.com/DavesCodeMusings/CloudPi/blob/main/configure-ldap-secure.yml) should take care of adding the certificate and key to OpenLDAP so it can run on LDAPS port 636 and also use STARTTLS on port 389. But, so far the command to make the changes is failing. I have tried many suggested fixes with no luck. If you can make it work, please let me know how you did it.
 
-## Configuring Portainer for LDAP
-TODO
+## Configuring Aplications for LDAP
+Each application has its own unique user interface for configuring LDAP, but the parameters required are generally the same. Here are the common configuration values:
+
+Connectivity
+
+```
+LDAP Server: ldap.mypi.home (or the IP address)
+LDAP Port: 389
+LDAPS Port: 636
+```
+
+User Search
+
+```
+BaseDN: ou=People,dc=home
+Username attribute: uid
+Filter: (objectClass=posixAccount)
+```
+
+Group Search
+
+```
+BaseDN: ou=Groups,dc=home
+Group Membership Attribute: memberUid
+Filter: (objectClass=posixGroup)
+```
+
+>The parameters above only work if you followed the structure laid out in the addUsers.ldif example provided above.
 
 ## Next Steps
 [on-site git server](run-git-server.md)
