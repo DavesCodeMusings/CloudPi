@@ -152,7 +152,7 @@ Filter: (objectClass=posixGroup)
 
 >The parameters above only work if you followed the structure laid out in the addUsers.ldif example provided above.
 
-Because LDAP configuration varies so much from one application to the next, there are some hints provided in [ldap-config-hints.txt](https://github.com/DavesCodeMusings/CloudPi/blob/main/ldap-config-hints.txt).
+Because LDAP configuration varies so much from one application to the next, there are some hints provided in [ldap-config-hints.md](https://github.com/DavesCodeMusings/CloudPi/blob/main/ldap-config-hints.md).
 
 ## Next Steps
 [on-site git server](run-git-server.md)
