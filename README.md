@@ -1,29 +1,19 @@
 # CloudPi
-Turn Raspberry Pi 3 or 4 into an on-premise cloud with a minimum of fuss.
+Turn a Raspberry Pi 4 into an on-premise cloud with a minimum of fuss.
 
 What you get:
 
 * NextCloud as an on-premise file sharing and collaboration application.
 * Docker Community Edition container environment.
 * Portainer management app for easy Docker administration.
-* Locally hosted DNS with optional DHCP and LDAP.
-* Nginx to redirect virtual DNS names like portainer.raspberrypi.home
+* Locally hosted DNS, LDAP and git repositories.
+* Ansible playbooks and docker-compose stacks for automation.
 * Headless server operation.
 
-How does it work?
+The CloudPi project is in a state of flux at the moment. With the release of Raspberry Pi OS 11 (Bullseye) everything is getting reworked. The new version is here:
 
-Starting with a fresh install of Raspberry Pi OS Lite, nearly everything is
-managed with the open-source software deployment tool, Ansible. Each Ansible
-playbook performs a specifc installation and configuration task in the overall
-system. Tweak a few settings, run the playbooks, and you're ready to go.
+[https://davescodemusings.github.io/CloudPi/](https://davescodemusings.github.io/CloudPi/)
 
-Hardware and OS requirements:
+There may be some rough edges, but it's mostly complete and alpha tested.
 
-* Raspberry Pi 3B+ and up.
-* Raspberry Pi OS Lite is recommended over the desktop or full install.
-
-Sound interesting yet? Take a look at
-[the wiki](https://github.com/DavesCodeMusings/CloudPi/wiki) to get started
-installing.
-
-There's a new version of this tutorial in the works. A preview can be found at: [https://davescodemusings.github.io/CloudPi/](https://davescodemusings.github.io/CloudPi/)
+If you don't have the latest and greatest OS, [the wiki](https://github.com/DavesCodeMusings/CloudPi/wiki) still has the previous version using Pi OS 10 (Buster).
