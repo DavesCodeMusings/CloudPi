@@ -1,0 +1,19 @@
+---
+- name: Prepare to run Gitea in a Docker Container
+  hosts: localhost
+  connection: local
+  become: true
+
+  tasks:
+  - name: Create git group
+    group:
+      name: git
+      gid: 1001
+
+  - name: Create git user account
+    user:
+      name: git
+      uid: 1001
+      group: git
+      create_home: true
+      home: /srv/git
