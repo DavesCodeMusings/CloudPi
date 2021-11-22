@@ -155,4 +155,4 @@ Filter: (objectClass=posixGroup)
 Because LDAP configuration varies so much from one application to the next, there are some hints provided in [ldap-config-hints.md](https://github.com/DavesCodeMusings/CloudPi/blob/main/ldap-config-hints.md).
 
 ## Next Steps
-[on-site git server](run-git-server.md)
+After LDAP configuration, you can easily log into Portainer to deploy and manage Docker Compose stacks. Portainer can also be configured to pull stack definition YAML files from a git repository. The next step will show you how to deploy a containerized [on-site git server](deploy-git-server-stack.md)
