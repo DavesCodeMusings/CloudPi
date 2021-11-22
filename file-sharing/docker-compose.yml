@@ -1,0 +1,23 @@
+services:
+    nextcloud:
+        image: nextcloud
+        container_name: nextcloud
+        hostname: nextcloud
+        restart: unless-stopped
+        ports:
+            - 8910:80
+        volumes:
+            - /opt/docker/nextcloud/html:/var/www/html
+            - /srv/cloud:/var/www/html/data
+
+    samba:
+        image: davescodemusings/samba-anon
+        container_name: samba
+        hostname: samba
+        restart: unless-stopped
+        ports:
+            - '445:445'
+        volumes:
+            - /srv/public:/srv/public
+            - /srv/media:/srv/media
+            - /srv/shared:/srv/shared
