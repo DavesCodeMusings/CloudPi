@@ -1,0 +1,50 @@
+---
+
+# Currently the ldapmodify command fails with with error 80. Do not use this playbook. Provided for reference only.
+
+- name: Install OpenLDAP
+  hosts: localhost
+  connection: local
+  become: true
+
+  tasks:
+  - name: Create directory for certificate
+    file:
+      path: /etc/ldap/tls
+      state: directory
+      owner: openldap
+      group: openldap
+
+  - name: Copy certificate file
+    copy:
+      src: /etc/ssl/certs/{{ ansible_hostname }}.{{ ansible_domain }}.crt
+      dest: /etc/ldap/tls/cert.crt
+      owner: openldap
+      group: openldap
+
+  - name: Copy key file
+    copy:
+      src: /etc/ssl/certs/{{ ansible_hostname }}.{{ ansible_domain }}.crt
+      dest: /etc/ldap/tls/cert.key
+      owner: openldap
+      group: openldap
+      mode: '0600'
+
+  - name: Create LDIF file
+    copy:
+      dest: /etc/ldap/tls/import.ldif
+      content: |
+        dn: cn=config
+        changetype: modify
+        replace: olcTLSCertificateKeyFile
+        olcTLSCertificateKeyFile: /etc/ldap/tls/cert.key
+        -
+        replace: olcTLSCertificateFile
+        olcTLSCertificateFile: /etc/ldap/tls/cert.crt
+      owner: openldap
+      group: openldap
+
+  - name: Import configuration
+    shell:
+      cmd: ldapmodify -Y EXTERNAL -H ldapi:/// -f import.ldif
+      chdir: /etc/ldap/tls/
