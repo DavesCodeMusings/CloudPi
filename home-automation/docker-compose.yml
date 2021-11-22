@@ -1,0 +1,46 @@
+version: '3'
+
+services:
+  homeassistant:
+    container_name: homeassistant
+    image: "ghcr.io/home-assistant/raspberrypi4-homeassistant:stable"
+    volumes:
+      - /opt/docker/homeassistant:/config
+      - /etc/localtime:/etc/localtime:ro
+    restart: unless-stopped
+    network_mode: host
+    depends_on:
+      - mosquitto
+
+  esphome:
+    container_name: esphome
+    image: esphome/esphome-armv7:latest
+    ports:
+      - "6052:6052"
+      - "6123:6123"
+    volumes:
+      - /opt/docker/esphome:/config:rw
+    command: config/ dashboard
+
+  nodered:
+    container_name: nodered
+    image: nodered/node-red
+    ports:
+      - "1880:1880"
+    volumes:
+      - /opt/docker/node-red:/data
+    depends_on:
+      - mosquitto
+    environment:
+      TZ: "US/Chicago"
+    restart: unless-stopped
+
+  mosquitto:
+    container_name: mosquitto
+    image: eclipse-mosquitto
+    volumes:
+      - /opt/docker/mosquitto:/config
+      - /opt/docker/mosquitto:/data
+      - /opt/docker/mosquitto:/log
+    ports:
+      - "1883:1883"
