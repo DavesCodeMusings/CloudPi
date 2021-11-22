@@ -1,0 +1,44 @@
+---
+- name: Run NextCloud pre-deployment tasks
+  hosts: localhost
+  connection: local
+  become: true
+
+  tasks:
+  # Homeassistant uses a SQLite database (among other options.)
+  - name: Install SQLite client
+    apt:
+      name: sqlite3
+      state: latest
+
+  - name: Create Homeassistant configuration directory
+    file:
+      path: /opt/docker/homeassistant
+      state: directory
+      mode: '0755'
+      owner: root
+      group: pi
+
+  - name: Create ESPHome configuration directory
+    file:
+      path: /opt/docker/esphome
+      state: directory
+      mode: '0755'
+      owner: root
+      group: pi
+
+  - name: Create Node Red configuration and directory
+    file:
+      path: /opt/docker/node-red
+      state: directory
+      mode: '0755'
+      owner: root
+      group: pi
+
+  - name: Create Mosquitto configuration and data directory
+    file:
+      path: /opt/docker/mosquitto
+      state: directory
+      mode: '0755'
+      owner: root
+      group: pi
