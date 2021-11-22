@@ -36,4 +36,4 @@ If you deployed the Gitea application using Portainer's Stacks menu, you may hav
 You can even automate the process using webhooks, so that any changes made in the git repository will redeploy the stack in Portainer. Refer to the [Portainer webhooks documentation](https://docs.portainer.io/v/ce-2.9/user/docker/services/webhooks) for more information.
 
 ## Next Steps
-At this point in the project, Docker is running, Portainer is there to ease the administration of Docker, and you might have a git repository to store your Docker Compose YAML. Congratulations! It's time to start running some more applications in Docker. Start with [sharing files with NextCloud and Samba](run-nextcloud-samba.md).
+At this point in the project, Docker is running, Portainer is there to ease the administration of Docker, and you might have a git repository to store your Docker Compose YAML. Congratulations! It's time to start running some more applications in Docker. Start with [sharing files with NextCloud and Samba](deploy-file-sharing-stack.md).
