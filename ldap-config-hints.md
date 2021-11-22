@@ -42,6 +42,7 @@ LDAP Server: ldap.mypi.home (change as needed)
 Anonymous Mode: Enabled
 ```
 
-Enable LDAP Security parameters as appropriate for your LDAP/LDAPS configuration.
+Enable LDAP Security parameters as appropriate for your LDAP/LDAPS configuration. User and group search uses the standard configuration.
 
-User and group search uses the standard configuration.
+To take advantage of auto-provisioning, create a Portainer Team called _Portainer Admins_ under Users > Teams. Give the team access to the Docker environment using the Manage Access link on the Environments configuration page.
+
