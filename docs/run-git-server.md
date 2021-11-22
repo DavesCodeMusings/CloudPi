@@ -25,12 +25,12 @@ Finally, in [gitea/post-deploy.txt](https://github.com/DavesCodeMusings/CloudPi/
 If you deployed the Gitea application using Portainer's Stacks menu, you may have noticed a build method of _Git Repository_. If you create a repository to store the YAML from the various application `docker-compose.yml` files, you can link it to Portainer and deploy the applications that way. Without going into too much detail, the basic procedure goes like this:
 
 1. Create a new repository in Gitea. (For example: portainer-stacks)
-2. Create a new file containing the contents of docker-compose.yml, but make the name unique. (For example: nextcloud-compose.yml)
-3. Copy the HTTP link that's used for cloning.
+2. Create a new directory with the name of the applicaion and a file containing the contents of docker-compose.yml (For example: nextcloud/docker-compose.yml)
+3. Copy the HTTP link that's displayed for cloning.
 4. In Portainer, navigate to the Stacks page.
 5. Select git repository for the build method.
 6. Paste the HTTP link from Gitea into the field labeled _Repository URL_.
-7. Type the filename into the _Compose Path_ field. (For example: nextcloud-compose.yml)
+7. Type the directory and filename into the _Compose Path_ field. (For example: nextcloud/docker-compose.yml)
 8. Deploy the stack.
 
 You can even automate the process using webhooks, so that any changes made in the git repository will redeploy the stack in Portainer. Refer to the [Portainer webhooks documentation](https://docs.portainer.io/v/ce-2.9/user/docker/services/webhooks) for more information.
