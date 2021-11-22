@@ -1,0 +1,39 @@
+---
+- name: Install OpenLDAP
+  hosts: localhost
+  connection: local
+  become: true
+
+  vars:
+    admin_password: password
+
+  tasks:
+  - name: Pre-configure LDAP admin password
+    debconf:
+      name: slapd
+      question: slapd/root_password
+      value: "{{ admin_password }}"
+      vtype: password
+
+  - name: Confirm LDAP admin password
+    debconf:
+      name: slapd
+      question: slapd/root_password_again
+      value: "{{ admin_password }}"
+      vtype: password
+
+  - name: Install slapd
+    apt:
+      name: slapd
+      state: latest
+      update_cache: true
+
+  - name: Install lapdutils
+    apt:
+      name: ldap-utils
+      state: latest
+      update_cache: true
+
+  - name: Remember to change the password
+    debug:
+      msg: The initial password is '{{ admin_password }}'.
