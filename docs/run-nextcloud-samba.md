@@ -19,5 +19,8 @@ Running these applicaitons involves the same procedure as Gitea. First, [downloa
 
 Where you store the docker-compose.yml file and how you deploy it are up to you. You can use Portainer or `docker-compose`.
 
-## Next Steps
+## Installing the NextCloud Client
+TODO
 
+## Next Steps
+TODO
