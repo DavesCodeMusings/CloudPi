@@ -1,0 +1,15 @@
+---
+- name: Run NextCloud post-deployment tasks
+  hosts: localhost
+  connection: local
+  become: true
+
+  tasks:
+    # Nextcloud documentation has some recommendations for background jobs.
+    # https://docs.nextcloud.com/server/latest/admin_manual/configuration_server/background_jobs_configuration.html
+    # This task sets up a cron job to execute those jobs.
+    - name: Schedule Background Jobs
+      cron:
+        name: Nextcloud Jobs
+        minute: "*/5"
+        job: /usr/bin/docker exec -u www-data nextcloud php cron.php
