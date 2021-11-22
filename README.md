@@ -7,7 +7,7 @@ What you get:
 * Docker Community Edition container environment.
 * Portainer management app for easy Docker administration.
 * Locally hosted DNS, LDAP and git repositories.
-* Ansible playbooks and docker-compose stacks for automation.
+* Ansible playbooks and docker-compose stacks for automating installation.
 * Headless server operation.
 
 The CloudPi project is in a state of flux at the moment. With the release of Raspberry Pi OS 11 (Bullseye) everything is getting reworked. The new version is here:
