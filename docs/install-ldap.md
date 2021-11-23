@@ -54,6 +54,19 @@ The command to import from LDIF is: `ldapadd -x -D "cn=admin,dc=home" -w passwor
 Below is a sample addUsers.ldif to get you started. Just customize it with your own users and groups and import it with the `ldapadd` command.
 
 ```
+# Search account
+dn: uid=search,dc=home
+changetype: add
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: top
+cn: search
+sn: search
+uid: search
+uidNumber: 11000
+gidNumber: 11000
+homeDirectory: /dev/null
+
 # Create organizational units for people and groups.
 dn: ou=People,dc=home
 changetype: add
@@ -90,7 +103,7 @@ objectClass: posixAccount
 objectClass: top
 cn: Rocket J. Squirrel
 cn: Rocky Squirrel
-displayName: Rocket J. Squirrel
+displayName: Rocket Squirrel
 givenName: Rocket
 initials: J
 sn: Squirrel
@@ -98,6 +111,7 @@ uid: rocky
 uidNumber: 11001
 gidNumber: 10001
 homeDirectory: /home/rocky
+mail: squirrel@myi.home
 
 dn: uid=bullwinkle,ou=People,dc=home
 changetype: add
@@ -105,7 +119,7 @@ objectClass: inetOrgPerson
 objectClass: posixAccount
 objectClass: top
 cn: Bullwinkle J. Moose
-displayName: Bullwinkle J. Moose
+displayName: Bullwinkle Moose
 givenName: Bullwinkle
 initials: J
 sn: Moose
@@ -113,6 +127,7 @@ uid: bullwinkle
 uidNumber: 11002
 gidNumber: 10001
 homeDirectory: /home/bullwinkle
+mail: moose@mypi.home
 ```
 
 What you end up with is two organizational units (OUs): _People_ and _Groups_. There are some fictitious users created (or real users if you edited the file.) There are also a couple groups. _Portainer Admins_ will be used to integrate with Portainer. The _Everyone_ group is for NextCloud.
@@ -131,7 +146,7 @@ Connectivity
 ```
 LDAP Server: ldap.mypi.home (or the IP address)
 LDAP Port: 389
-LDAPS Port: 636
+BindDN: uid=search,dc=home (sometimes called ReaderDN or SearchDN.)
 ```
 
 User Search
