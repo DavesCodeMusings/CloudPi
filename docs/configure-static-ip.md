@@ -139,7 +139,7 @@ pi@mypi:~ $ service dhcpcd status
 > You can verify IP address and netmask with the command `ip addr` if you want, but the fact you can log in via SSH makes this redundant.
 
 ## Next Steps
-Now that the Pi is running with a new IP address and hostname, it time to make this hosname to IP address relationship known to the other devices on our network. We can do this by [installing DNS](install-dns.md).
+Now that the Pi is running with a new IP address and hostname, it time to make this hosname to IP address relationship known to the other devices on our network. We can do this with [self-hosted DNS](install-dns.md).
 
 ___
 
