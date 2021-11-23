@@ -1,0 +1,78 @@
+---
+- name: Configuring the certificate authority
+  hosts: localhost
+  connection: local
+  become: true
+
+  # Customize values or override at runtime with --extra-vars
+  vars:
+    country: US
+    state_or_province: Wisconsin
+    locality: Madison
+    organization: Home
+
+  # The high-level process for creating a self-hosted certificate authority is:
+  # 1. Create a strong private key.
+  # 2. Create a signing request using the private key.
+  # 3. Self-sign the request to create the certificate authority (CA).
+  # 4. Create an intermediate certificate signed by the CA.
+  # 5. Use the intermediate certificate to sign everything else.
+
+  tasks:
+  - name: Creating directory to store signing requests
+    file:
+      path: /etc/ssl/csrs
+      state: directory
+
+  - name: Generating the certificate authority (CA) private key
+    openssl_privatekey:
+      path: /etc/ssl/private/{{ ansible_domain }}_CA.key
+      type: RSA
+      size: 4096
+
+  - name: Generating a certificate signing request (CSR) for the root CA
+    openssl_csr:
+      path: "/etc/ssl/csrs/{{ ansible_domain }}_CA.csr"
+      privatekey_path: "/etc/ssl/private/{{ ansible_domain }}_CA.key"
+      common_name: "{{ organization }}_CA"
+      use_common_name_for_san: false
+      basic_constraints:
+      - 'CA:TRUE'
+      basic_constraints_critical: yes
+      key_usage:
+      - keyCertSign
+      key_usage_critical: true
+
+  - name: Signing the root certificate
+    openssl_certificate:
+      path: "/etc/ssl/certs/{{ ansible_domain }}_CA.crt"
+      privatekey_path: "/etc/ssl/private/{{ ansible_domain }}_CA.key"
+      csr_path: "/etc/ssl/csrs/{{ ansible_domain }}_CA.csr"
+      provider: selfsigned
+
+  - name: Generating the intermediate certificate private key
+    openssl_privatekey:
+      path: /etc/ssl/private/{{ ansible_domain }}.key
+      type: RSA
+      size: 2048
+
+  - name: Generating a CSR for the intermediate certificate
+    openssl_csr:
+      path: "/etc/ssl/csrs/{{ ansible_domain }}.csr"
+      privatekey_path: "/etc/ssl/private/{{ ansible_domain }}.key"
+      common_name: "{{ organization }}"
+      use_common_name_for_san: false
+      basic_constraints:
+      - 'CA:TRUE'
+      basic_constraints_critical: yes
+      key_usage:
+      - keyCertSign
+      key_usage_critical: true
+
+  - name: Signing the intermediate certificate
+    openssl_certificate:
+      path: "/etc/ssl/certs/{{ ansible_domain }}.crt"
+      csr_path: "/etc/ssl/csrs/{{ ansible_domain }}.csr"
+      ownca_path: /etc/ssl/certs/{{ ansible_domain }}_CA.crt
+      ownca_privatekey_path: /etc/ssl/private/{{ ansible_domain }}_CA.key
+      provider: ownca
