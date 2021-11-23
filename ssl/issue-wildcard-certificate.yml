@@ -1,0 +1,44 @@
+---
+- name: Generating a certificate for multiple DNS names
+  hosts: localhost
+  connection: local
+  become: true
+
+  tasks:
+  - name: Loading subject info
+    include_vars:
+      file: subject-info.yml
+
+  - name: Generating a private key
+    openssl_privatekey:
+      path: "/etc/ssl/private/{{ ansible_hostname }}.{{ ansible_domain }}.key"
+      type: RSA
+      size: 2048
+
+  - name: Generating a CSR
+    openssl_csr:
+      path: "/etc/ssl/csrs/{{ ansible_hostname }}.{{ ansible_domain }}.csr"
+      privatekey_path: "/etc/ssl/private/{{ ansible_hostname }}.{{ ansible_domain }}.key"
+      country_name: "{{ country }}"
+      state_or_province_name: "{{ state_or_province }}"
+      locality_name: "{{ locality }}"
+      organization_name: "{{ organization }}"
+      email_address: "root@{{ ansible_hostname }}.{{ ansible_domain }}"
+      common_name: "{{ ansible_hostname }}.{{ ansible_domain }}"
+      subject_alt_name:
+      - "DNS:{{ ansible_hostname }}.{{ ansible_domain }}"
+      - "DNS:esphome.{{ ansible_hostname }}.{{ ansible_domain }}"
+      - "DNS:git.{{ ansible_hostname }}.{{ ansible_domain }}"
+      - "DNS:homeassistant.{{ ansible_hostname }}.{{ ansible_domain }}"
+      - "DNS:nextcloud.{{ ansible_hostname }}.{{ ansible_domain }}"
+      - "DNS:nodered.{{ ansible_hostname }}.{{ ansible_domain }}"
+      - "DNS:portainer.{{ ansible_hostname }}.{{ ansible_domain }}"
+      - "DNS:www.{{ ansible_hostname }}.{{ ansible_domain }}"
+
+  - name: Signing the certificate
+    openssl_certificate:
+      path: "/etc/ssl/certs/{{ ansible_hostname }}.{{ ansible_domain }}.crt"
+      csr_path: "/etc/ssl/csrs/{{ ansible_hostname }}.{{ ansible_domain }}.csr"
+      ownca_path: "/etc/ssl/certs/{{ ansible_domain }}.crt"
+      ownca_privatekey_path: "/etc/ssl/private/{{ ansible_domain }}.key"
+      provider: ownca
