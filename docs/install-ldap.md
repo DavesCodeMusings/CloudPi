@@ -1,4 +1,4 @@
-# Lightweight Directory Access Protocol (LDAP) Server
+# Self-Hosted Lightweight Directory Access Protocol (LDAP)
 When you install an application, there are generally user accounts that need to be created to grant access to the application. With one or two users and a small number of applications, you can manage user accounts independently in each app. As the number of users and apps grows, having a centralized username and password database can be a good way to simplfy management.
 
 LDAP is a very common protocol used for this purpose. Most applications that require user accounts have some ability to use LDAP as an authentication mechanism. Each app will have its own way of configuring the integration, but the basic premise is the same. You need an LDAP server running that has users and passwords defined in it. The application passes the authentication request to the LDAP server.
@@ -111,7 +111,7 @@ uid: rocky
 uidNumber: 11001
 gidNumber: 10001
 homeDirectory: /home/rocky
-mail: squirrel@myi.home
+mail: squirrel@mypi.home
 
 dn: uid=bullwinkle,ou=People,dc=home
 changetype: add
@@ -128,6 +128,21 @@ uidNumber: 11002
 gidNumber: 10001
 homeDirectory: /home/bullwinkle
 mail: moose@mypi.home
+
+dn: uid=boris,ou=People,dc=home
+changetype: add
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: top
+cn: Boris Badenov
+displayName: Boris Badenov
+givenName: Boris
+sn: Badenov
+uid: boris
+uidNumber: 11003
+gidNumber: 10001
+homeDirectory: /home/boris
+mail: boris@mypi.home
 ```
 
 What you end up with is two organizational units (OUs): _People_ and _Groups_. There are some fictitious users created (or real users if you edited the file.) There are also a couple groups. _Portainer Admins_ will be used to integrate with Portainer. The _Everyone_ group is for NextCloud.
