@@ -66,4 +66,4 @@ Now that you have file sharing running on your Raspberry Pi, there are very few 
 
 ---
 
-_The good thing about standards is that there are so many to choose from. &mdash;Andrew Tanenbaum 
+_The good thing about standards is that there are so many to choose from. &mdash;Andrew Tanenbaum_
