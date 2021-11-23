@@ -1,0 +1,73 @@
+---
+- name: Nginx in a Docker Container
+  hosts: localhost
+  connection: local
+  become: true
+
+  tasks:
+  - name: Create configuration directory
+    file:
+      path: /opt/docker/nginx
+      state: directory
+      mode: '0755'
+
+    # Create a default.conf file, but only if none exists.
+  - name: Create basic configuration file
+    copy:
+      dest: /opt/docker/nginx/default.conf
+      force: no
+      content: |
+        # This avoids an error message 'could not build server_names_hash'.
+        server_names_hash_bucket_size 64;
+
+        # Serve static files
+        server {
+            listen       80;
+            server_name  {{ ansible_hostname }};
+            listen       443 ssl;
+            ssl_certificate  /etc/ssl/certs/{{ ansible_hostname }}.{{ ansible_domain }}.crt;
+            ssl_certificate_key  /etc/ssl/private/{{ ansible_hostname }}.{{ ansible_domain }}.key;
+            location / {
+                root /usr/share/nginx/html;
+                index index.html index.htm;
+            }
+        }
+
+        # Redirections for virtual servers in the form: {app}.{{ ansible_hostname }}.{{ ansible_domain }}
+        server {
+            server_name homeassistant.{{ ansible_hostname }}.{{ ansible_domain }};
+            return 301 http://homeassistant.{{ ansible_hostname}}.{{ ansible_domain }}:8123;
+        }
+
+        server {
+            server_name nextcloud.{{ ansible_hostname }}.{{ ansible_domain }};
+            return 301 http://nextcloud.{{ ansible_hostname}}.{{ ansible_domain }}:8910;
+        }
+
+        server {
+            server_name portainer.{{ ansible_hostname }}.{{ ansible_domain }};
+            return 301 http://portainer.{{ ansible_hostname}}.{{ ansible_domain }}:9000;
+        }
+
+  - name: Create a directory for static content
+    file:
+      path: /srv/www
+      state: directory
+      mode: '0755'
+      owner: pi
+      group: pi
+
+  - name: Create a simple index.html
+    copy:
+      dest: /srv/www/index.html
+      force: no
+      content: |
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <title>Not Dead</title>
+          </head>
+          <body>
+            <p>I'm not dead yet.</p>
+          </body>
+        </html>
