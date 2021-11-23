@@ -1,5 +1,5 @@
 ---
-- name: Prepare to run Gitea in a Docker Container
+- name: Gitea in a Docker Container
   hosts: localhost
   connection: local
   become: true
@@ -10,6 +10,7 @@
       name: git
       gid: 1001
 
+  # Creating the user account also creates /srv/git
   - name: Create git user account
     user:
       name: git
@@ -17,3 +18,10 @@
       group: git
       create_home: true
       home: /srv/git
+
+  - name:
+    file:
+      path: /opt/docker/gitea
+      state: directory
+      owner: git
+      group: pi
