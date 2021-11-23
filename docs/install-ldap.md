@@ -86,6 +86,10 @@ objectClass: top
 gidNumber:10001
 cn: Everyone
 description: Everyone
+memberUid: bullwinkle
+memberUid: rocky
+memberUid: boris
+memberUid: natasha
 
 dn: cn=Portainer Admins,ou=Groups,dc=home
 changetype: add
@@ -94,6 +98,8 @@ objectClass: top
 gidNumber:10002
 cn: Portainer Admins
 description: Managers of Docker containers
+memberUid: rocky
+memberUid: natasha
 
 # Add users.
 dn: uid=rocky,ou=People,dc=home
@@ -143,6 +149,21 @@ uidNumber: 11003
 gidNumber: 10001
 homeDirectory: /home/boris
 mail: boris@mypi.home
+
+dn: uid=natasha,ou=People,dc=home
+changetype: add
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: top
+cn: Natasha Fatale
+displayName: Natasha Fatale
+givenName: Natasha
+sn: Fatale
+uid: natasha
+uidNumber: 11004
+gidNumber: 10001
+homeDirectory: /home/natasha
+mail: natasha@mypi.home
 ```
 
 What you end up with is two organizational units (OUs): _People_ and _Groups_. There are some fictitious users created (or real users if you edited the file.) There are also a couple groups. _Portainer Admins_ will be used to integrate with Portainer. The _Everyone_ group is for NextCloud.
