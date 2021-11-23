@@ -1,4 +1,4 @@
-# Running a Self-Hosted Git Server
+# Self-Hosted Git Server
 Portainer has the ability to integrate with a git repository for storing the Docker Compose configurations used in its _stack deploy_ feature. This can be a handy way to maintain the YAML that defines the containers you're running, particularly when the number of apps starts to grow. Besides Portainer's stacks, you can use git to centrally store your own coding projects.
 
 ## Can I Skip It?
