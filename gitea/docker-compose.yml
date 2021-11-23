@@ -13,8 +13,5 @@ services:
             - /etc/timezone:/etc/timezone:ro
             - /etc/localtime:/etc/localtime:ro
             - /etc/ssl/certs/ca-certificates.crt:/etc/ssl/certs/ca-certificates.crt:ro
-            - data:/data
+            - /opt/docker/gitea:/data
             - /srv/git:/srv/git
-
-volumes:
-    data:
