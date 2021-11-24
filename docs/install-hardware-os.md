@@ -57,5 +57,3 @@ Once you have IP address, log in via SSH. The default user is 'pi' and the passw
 ## Next Steps
 Once the Pi is up and running, you're ready to [install Ansible and system updates](install-ansible-and-system-updates.md).
 
-___
-_If it ain't broke, it doesn't have enough features yet. &mdash;Scott Adams_
