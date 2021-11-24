@@ -50,7 +50,7 @@ server {
 }
 ```
 
-The first configuration block will apply whenever someone goes to _portainer.mypi.home_. It doesn't matter if it's HTTP or HTTPS, because it's listening on ports 80 (HTTP) and 443 (HTTPS). Whenever a request is made that matches this DNS name, Nginx will reply with a [301 redirect](https://en.wikipedia.org/wiki/HTTP_301), telling the browser to go to _https://mypi.home:9443_ instead.
+The first configuration block will apply whenever someone goes to _portainer.mypi.home_. It doesn't matter if it's HTTP or HTTPS, because it's listening on ports 80 (HTTP) and 443 (HTTPS). Whenever a request is made that matches this DNS name, Nginx will reply with a [301 redirect](https://en.wikipedia.org/wiki/HTTP_301), telling the browser to go to _`https://mypi.home:9443`_ instead.
 
 ## Redirection
 
