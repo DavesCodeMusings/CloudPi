@@ -184,4 +184,4 @@ Now that there's plenty of available space for Docker persistent data of any fut
 
 ___
 
-_This one sparks joy. &mdask;Marie Kondo_
+_This one sparks joy. &mdash;Marie Kondo_
