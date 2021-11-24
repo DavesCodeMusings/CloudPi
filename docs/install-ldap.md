@@ -96,3 +96,7 @@ Because LDAP configuration varies so much from one application to the next, ther
 
 ## Next Steps
 After LDAP configuration, you can easily log into Portainer to deploy and manage Docker Compose stacks. Portainer can also be configured to pull stack definition YAML files from a git repository. The next step will show you how to add another containerized application to the Pi with a [self-hosted git server](deploy-git-server-stack.md).
+
+___
+
+_Light travels faster than sound. This is why some people appear bright until they speak. &mdash;Steven Wright_
