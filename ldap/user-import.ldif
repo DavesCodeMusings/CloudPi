@@ -1,0 +1,112 @@
+# This fictional list of users and groups can serve as a template for populating your own LDAP database.
+
+# Search account
+dn: uid=search,dc=home
+changetype: add
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: top
+cn: search
+sn: search
+uid: search
+uidNumber: 11000
+gidNumber: 11000
+homeDirectory: /dev/null
+
+# Create organizational units for people and groups.
+dn: ou=People,dc=home
+changetype: add
+objectClass: organizationalUnit
+ou: People
+
+dn: ou=Groups,dc=home
+changetype: add
+objectClass: organizationalUnit
+ou: Groups
+
+# Create basic groups.
+dn: cn=Everyone,ou=Groups,dc=home
+changetype: add
+objectClass: posixGroup
+objectClass: top
+gidNumber:10001
+cn: Everyone
+description: Everyone
+memberUid: bullwinkle
+memberUid: rocky
+memberUid: boris
+memberUid: natasha
+
+dn: cn=Portainer Admins,ou=Groups,dc=home
+changetype: add
+objectClass: posixGroup
+objectClass: top
+gidNumber:10002
+cn: Portainer Admins
+description: Managers of Docker containers
+memberUid: rocky
+memberUid: natasha
+
+# Add users.
+dn: uid=rocky,ou=People,dc=home
+changetype: add
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: top
+cn: Rocket J. Squirrel
+cn: Rocky Squirrel
+displayName: Rocket Squirrel
+givenName: Rocket
+initials: J
+sn: Squirrel
+uid: rocky
+uidNumber: 11001
+gidNumber: 10001
+homeDirectory: /home/rocky
+mail: squirrel@mypi.home
+
+dn: uid=bullwinkle,ou=People,dc=home
+changetype: add
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: top
+cn: Bullwinkle J. Moose
+displayName: Bullwinkle Moose
+givenName: Bullwinkle
+initials: J
+sn: Moose
+uid: bullwinkle
+uidNumber: 11002
+gidNumber: 10001
+homeDirectory: /home/bullwinkle
+mail: moose@mypi.home
+
+dn: uid=boris,ou=People,dc=home
+changetype: add
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: top
+cn: Boris Badenov
+displayName: Boris Badenov
+givenName: Boris
+sn: Badenov
+uid: boris
+uidNumber: 11003
+gidNumber: 10001
+homeDirectory: /home/boris
+mail: boris@mypi.home
+
+dn: uid=natasha,ou=People,dc=home
+changetype: add
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: top
+cn: Natasha Fatale
+displayName: Natasha Fatale
+givenName: Natasha
+sn: Fatale
+uid: natasha
+uidNumber: 11004
+gidNumber: 10001
+homeDirectory: /home/natasha
+mail: natasha@mypi.home
