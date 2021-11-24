@@ -64,3 +64,6 @@ There's also a [`map-drives.bat`](https://github.com/DavesCodeMusings/CloudPi/bl
 ## Next Steps
 Now that you have file sharing running on your Raspberry Pi, there are very few tasks left in the project. If all you wanted was a file sharing cloud, you can stop here. If you want to take things a step further, there's another [step for deploying home automation](deploy-home-automation-stack.md).
 
+___
+
+_The good thing about standards is that there are so many to choose from. &mdash;Andrew Tanenbaum_
