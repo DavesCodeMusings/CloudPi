@@ -1,4 +1,4 @@
-# Provision Storage
+# Provision External Storage
 In this step, you'll prepare an external storage device, either a spinning disk or a solid state drive. This device will used to hold data and configuration files. Particularly, files that get written to often will be placed here in an attempt to extend the life of the micro SD card.
 
 By the end of this step you will have:
