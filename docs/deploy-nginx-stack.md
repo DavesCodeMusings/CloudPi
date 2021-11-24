@@ -66,4 +66,6 @@ TODO
 
 ___
 
-_Tearing the S from his varsity jersey, Letterman turns HTTP into HTTPS, making traffic encypted once again! &mdash;The Electric Company episode we never had._
+_Tearing the S from his varsity jersey, Letterman turns HTTP into HTTPS, making traffic encypted once again!
+
+&mdash;The Electric Company episode we never had._
