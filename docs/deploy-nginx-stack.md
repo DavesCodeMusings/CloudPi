@@ -1,5 +1,9 @@
 # Nginx for Redirects and Reverse Proxy
-It's easy to remember names, and not so easy to remember arbitrary numbers. And using a web URL like _http://nextcloud.mypi.home_ is easier than remembering and typing the port number ever time, like this: _http://mypi.home:8910_. By deploying the Nginx web server, you can configure redirection, so _http://nextcloud.mypi.home_ automatically sends the browser to _http://mypi.home:8910_. Or you can set up a reverse proxy, so _https://nextcloud.mypi.home_ relays communications from the browser to _http://mypi.home:8910_, while also supplying HTTPS encryption. You can also do both, so typing _http://nextcloud.mypi.home_ redirects to _**https**://nextcloud.mypi.home_ to provide encryption.
+It's easy to remember names, and not so easy to remember arbitrary numbers. And using a web URL like _http://nextcloud.mypi.home_ is easier than remembering and typing the port number ever time, like this: _http://mypi.home:8910_. By deploying the Nginx web server, you can configure redirection, so _http://nextcloud.mypi.home_ automatically sends the browser to _http://mypi.home:8910_.
+
+Or you can set up a reverse proxy, so _https://nextcloud.mypi.home_ relays communications from the browser to _http://mypi.home:8910_, while also supplying HTTPS encryption. You can also do both, so typing _**http**://nextcloud.mypi.home_ redirects to _**https**://nextcloud.mypi.home_ to provide encryption.
+
+You can also do both.
 
 By the end of this step, you will have:
 * Deployed an Nginx container
@@ -48,6 +52,14 @@ server {
 
 The first configuration block will apply whenever someone goes to _portainer.mypi.home_. It doesn't matter if it's HTTP or HTTPS, because it's listening on ports 80 (HTTP) and 443 (HTTPS). Whenever a request is made that matches this DNS name, Nginx will reply with a [301 redirect](https://en.wikipedia.org/wiki/HTTP_301), telling the browser to go to _https://mypi.home:9443_ instead.
 
-...
+## Redirection
+
+TODO
+
+## Reverse Proxy
+
+TODO
+
+## Next Steps
 
 TODO
