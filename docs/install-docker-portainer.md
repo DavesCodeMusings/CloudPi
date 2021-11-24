@@ -43,4 +43,4 @@ When you're comfortable with Docker and Portainer, it's time to look at enhancin
 
 ___
 
-_Light travels faster than sound. This is why some people appear bright until they speak. &mdash;Steven Wright_
+_You think you can drive accurately in confined spaces until someone puts something like a shipping container in the way... &mdash;Chris Harris_
