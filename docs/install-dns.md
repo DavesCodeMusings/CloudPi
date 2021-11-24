@@ -82,4 +82,4 @@ At this point in the project, you've taken the Raspberry Pi from a basic out-of-
 
 ___
 
-_This space for rent._
+_The Naming of Cats is a difficult matter &mdashT.S. Elliot_
