@@ -77,3 +77,7 @@ Here's how to do it:
 
 ## Next Steps
 With Docker and Portainer, you're ready to start deploying containerized applications. But, before you do, it's worth taking a look at LDAP as a way to centralize usernames and passwords for those applications. This topic is covered in [install-ldap](install-ldap.md).
+
+___
+
+_Life is too short to have anything but delusional notions about yourself._ &mdash;Gene Simmons
