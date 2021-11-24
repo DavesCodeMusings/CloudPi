@@ -47,126 +47,15 @@ Anonymous Connection: unchecked
 Use _Test Connection_ to verify everything works.
 
 ## Creating Users and Groups
-How you create and organize your user accounts and groups is entirely up to you. You can create everything one at a time using LDAP Admin, or you can do a bulk import using an [LDIF](https://en.wikipedia.org/wiki/LDAP_Data_Interchange_Format) formatted file.
+How you create and organize your user accounts and groups is entirely up to you. You can create users and groups one at a time with point and click in LDAP Admin, or you can do a bulk import using an [LDIF](https://en.wikipedia.org/wiki/LDAP_Data_Interchange_Format) formatted file.
 
-The command to import from LDIF is: `ldapadd -x -D "cn=admin,dc=home" -w password -f addPeople.ldif`, assuming the LDIF file is named _addPeople.ldif_.
+LDIF is not the easiest syntax to master, but it's fairly straightforward when you have an example to start from. There is a [sample LDIF file for users and groups](https://github.com/DavesCodeMusings/CloudPi/blob/main/ldap/user-import.ldif) in the project repository that you can use as a template to get you going.
 
-Below is a sample addUsers.ldif to get you started. Just customize it with your own users and groups and import it with the `ldapadd` command.
+The import can be done from the Raspberry Pi command-line with this command: `ldapadd -x -D "cn=admin,dc=home" -w password -f addPeople.ldif`, assuming the LDIF file is named _addPeople.ldif_. Or you can use LDAP Admin's _Tools > Import_ feature.
 
-```
-# Search account
-dn: uid=search,dc=home
-changetype: add
-objectClass: inetOrgPerson
-objectClass: posixAccount
-objectClass: top
-cn: search
-sn: search
-uid: search
-uidNumber: 11000
-gidNumber: 11000
-homeDirectory: /dev/null
+What you end up with is two organizational units (OUs): _People_ and _Groups_, and a generic account called _search_. There are some fictitious users created (or real users if you edited the file.) There are also a couple groups. _Portainer Admins_ will be used to integrate with Portainer. The _Everyone_ group is for NextCloud.
 
-# Create organizational units for people and groups.
-dn: ou=People,dc=home
-changetype: add
-objectClass: organizationalUnit
-ou: People
-
-dn: ou=Groups,dc=home
-changetype: add
-objectClass: organizationalUnit
-ou: Groups
-
-# Create basic groups.
-dn: cn=Everyone,ou=Groups,dc=home
-changetype: add
-objectClass: posixGroup
-objectClass: top
-gidNumber:10001
-cn: Everyone
-description: Everyone
-memberUid: bullwinkle
-memberUid: rocky
-memberUid: boris
-memberUid: natasha
-
-dn: cn=Portainer Admins,ou=Groups,dc=home
-changetype: add
-objectClass: posixGroup
-objectClass: top
-gidNumber:10002
-cn: Portainer Admins
-description: Managers of Docker containers
-memberUid: rocky
-memberUid: natasha
-
-# Add users.
-dn: uid=rocky,ou=People,dc=home
-changetype: add
-objectClass: inetOrgPerson
-objectClass: posixAccount
-objectClass: top
-cn: Rocket J. Squirrel
-cn: Rocky Squirrel
-displayName: Rocket Squirrel
-givenName: Rocket
-initials: J
-sn: Squirrel
-uid: rocky
-uidNumber: 11001
-gidNumber: 10001
-homeDirectory: /home/rocky
-mail: squirrel@mypi.home
-
-dn: uid=bullwinkle,ou=People,dc=home
-changetype: add
-objectClass: inetOrgPerson
-objectClass: posixAccount
-objectClass: top
-cn: Bullwinkle J. Moose
-displayName: Bullwinkle Moose
-givenName: Bullwinkle
-initials: J
-sn: Moose
-uid: bullwinkle
-uidNumber: 11002
-gidNumber: 10001
-homeDirectory: /home/bullwinkle
-mail: moose@mypi.home
-
-dn: uid=boris,ou=People,dc=home
-changetype: add
-objectClass: inetOrgPerson
-objectClass: posixAccount
-objectClass: top
-cn: Boris Badenov
-displayName: Boris Badenov
-givenName: Boris
-sn: Badenov
-uid: boris
-uidNumber: 11003
-gidNumber: 10001
-homeDirectory: /home/boris
-mail: boris@mypi.home
-
-dn: uid=natasha,ou=People,dc=home
-changetype: add
-objectClass: inetOrgPerson
-objectClass: posixAccount
-objectClass: top
-cn: Natasha Fatale
-displayName: Natasha Fatale
-givenName: Natasha
-sn: Fatale
-uid: natasha
-uidNumber: 11004
-gidNumber: 10001
-homeDirectory: /home/natasha
-mail: natasha@mypi.home
-```
-
-What you end up with is two organizational units (OUs): _People_ and _Groups_. There are some fictitious users created (or real users if you edited the file.) There are also a couple groups. _Portainer Admins_ will be used to integrate with Portainer. The _Everyone_ group is for NextCloud.
+>The _search_ user is there for applications that need an account to do user and group lookups in the LDAP directory during authentication. Normal users will not log in with _search_.
 
 ## Enabling Secure LDAP with a Certificate
 Theoretically, the [configure-ldap-secure.yml](https://github.com/DavesCodeMusings/CloudPi/blob/main/configure-ldap-secure.yml) should take care of adding the certificate and key to OpenLDAP so it can run on LDAPS port 636 and also use STARTTLS on port 389. But, so far the command to make the changes is failing. I have tried many suggested fixes with no luck. If you can make it work, please let me know how you did it.
