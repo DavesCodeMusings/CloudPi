@@ -184,5 +184,4 @@ Now that there's plenty of available space for Docker persistent data of any fut
 
 ___
 
-_Life is too short to have anything but delusional notions about yourself._ &mdash;Gene Simmons
-
+_This one sparks joy. &mdask;Marie Kondo_
