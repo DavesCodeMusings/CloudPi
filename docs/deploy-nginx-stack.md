@@ -1,7 +1,7 @@
 # Nginx for Redirects and Reverse Proxy
-It's easy to remember names, and not so easy to remember arbitrary numbers. And using a web URL like _http://nextcloud.mypi.home_ is easier than remembering and typing the port number ever time, like this: _http://mypi.home:8910_. By deploying the Nginx web server, you can configure redirection, so _http://nextcloud.mypi.home_ automatically sends the browser to _http://mypi.home:8910_.
+It's easy to remember names, and not so easy to remember arbitrary numbers. And using a web URL like _`http://nextcloud.mypi.home`_ is easier than remembering and typing the port number ever time, like this: _`http://mypi.home:8910`_. By deploying the Nginx web server, you can configure redirection, so _`http://nextcloud.mypi.home`_ automatically sends the browser to _`http://mypi.home:8910`_.
 
-Or you can set up a reverse proxy, so _https://nextcloud.mypi.home_ relays communications from the browser to _http://mypi.home:8910_, while also supplying HTTPS encryption. You can also do both, so typing _**http**://nextcloud.mypi.home_ redirects to _**https**://nextcloud.mypi.home_ to provide encryption.
+Or you can set up a reverse proxy, so _`https://nextcloud.mypi.home`_ relays communications from the browser to _`http://mypi.home:8910`_, while also supplying HTTPS encryption. You can also do both, so typing _`http://nextcloud.mypi.home`_ redirects to _https://nextcloud.mypi.home_ to provide encryption.
 
 You can also do both.
 
@@ -63,3 +63,7 @@ TODO
 ## Next Steps
 
 TODO
+
+___
+
+_Tearing the S from his varsity jersey, Letterman turns HTTP into HTTPS, making traffic encypted once again &mdash;The Electric Company, circa 1970s
