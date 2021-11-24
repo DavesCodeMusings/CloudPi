@@ -78,8 +78,8 @@ dns-nameservers 192.168.1.100 192.168.1.1
 ```
 
 ## Next Steps
-At this point in the project, you've taken the Raspberry Pi from a basic out-of-the-box install to a host that's customized for your home network. Now it's time to add more storage to the system so you can start hosting applications and storing data. That's covered in the next step, [provisioning storage](provision-storage.md).
+At this point in the project, you've taken the Raspberry Pi from a basic out-of-the-box install to a host that's customized for your home network. Now it's time to add more storage to the system so you can start hosting applications and storing data. That's covered in the next step, [provisioning external storage](provision-storage.md).
 
 ___
 
-_The Naming of Cats is a difficult matter &mdashT.S. Elliot_
+_The Naming of Cats is a difficult matter &mdash;T.S. Elliot_
