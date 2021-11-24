@@ -11,7 +11,7 @@ By the end of this step you will have:
 * Configured Portainer to use LDAP authentication.
 
 ## Can I Skip It?
-LDAP is not necessary. The only reason to install it is to centralize your users' passwords in one place. The alternative is to use each application's local authentication with either separate passwords or manually synchronized passwords.
+LDAP is not required. The only reason to install it is to centralize your users' passwords in one place. The alternative is to use each application's local authentication with either separate passwords or manually synchronized passwords. If it's just you and your dog at home, feel free to skip LDAP and create local accounts for each application.
 
 ## Why OpenLDAP?
 There are other options for LDAP directory services, like Apache DS and 389 Directory Server. OpenLDAP has been around for a long time and is widely used. That makes things easier when searching for answers on the web. If you have experience with another LDAP server, feel free to use it. There should be very little difference when it comes to configuring applications for LDAP authentication.
