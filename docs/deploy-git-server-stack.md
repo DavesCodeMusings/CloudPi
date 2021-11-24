@@ -37,3 +37,6 @@ You can even automate the process using webhooks, so that any changes made in th
 
 ## Next Steps
 At this point in the project, Docker is running, Portainer is there to ease the administration of Docker, and you might have a git repository to store your Docker Compose YAML. Congratulations! It's time to start running some more applications in Docker. Start with [sharing files with NextCloud and Samba](deploy-file-sharing-stack.md).
+
+___
+_If it ain't broke, it doesn't have enough features yet. &mdash;Scott Adams_
