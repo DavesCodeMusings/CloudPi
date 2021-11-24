@@ -1,6 +1,6 @@
-# A Self-Hosted Cloud
+# A Self-Hosted Cloud on Tiny Hardware
 
-**_Turn a raspberry pi into a modern cloud computing solution for your home._**
+**_Turn a Raspberry Pi into a modern cloud computing solution for your home._**
 
 Sure, that sounds cool, but what does it actually mean?
 
