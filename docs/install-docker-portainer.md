@@ -1,4 +1,4 @@
-# Install Docker and Portainer
+# Docker and Portainer
 With this step, you'll install Docker to let you run containers, and Portainer for easy web-based management of those containers. You should have already completed the [Provision Storage](provision-storage.md) and [Install Ansible and System Updates](install-ansible-and-system-updates.md) steps. If not, make sure to go back and do that first.
 
 By the end of this step you will have:
