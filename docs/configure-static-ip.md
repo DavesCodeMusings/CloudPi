@@ -1,4 +1,4 @@
-# Configure Static Networking Parameters
+# Static Networking Parameters
 Because the Raspberry Pi will be acting as a server, there needs to be a reliable way of finding it. Configuring a static IP address, rather than relying on the whims of the DHCP built into your network router, is one way to acheive that. This step will disable the DHCP client on the Pi and configure it with a fixed address, mask, gateway, and dns server. This is all done with an Ansible playbook that makes some intelligent guesses about your configuration based on what's been assigned by DHCP. All you need to do is supply the IP address.
 
 By the end of this step, you will have:
