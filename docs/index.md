@@ -1,4 +1,4 @@
-# A Self-Hosted Cloud on Tiny Hardware
+# Self-Hosted Cloud on Tiny Hardware
 
 **_Turn a Raspberry Pi into a modern cloud computing solution for your home._**
 
