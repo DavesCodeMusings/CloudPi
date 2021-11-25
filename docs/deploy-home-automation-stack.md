@@ -27,7 +27,7 @@ TODO
 ## Next Steps
 If you made it this far, you are well versed in deploying and configuring containerized applications. You have created a system with plenty of services to help you install the next, shiny application that catches your eye. The only thing stopping you is the resouce constraints of the tiny computing platform called Raspberry Pi. But as we have seen over the course of this project, it's quite a capable machine.
 
-The very last step is to tie everything together using Nginx to redirect domain names to ports and serve as a [reverse proxy](deploy-nginx.md)
+The very last step is to tie everything together using Nginx to redirect domain names to ports and serve as a [reverse proxy](deploy-nginx.md).
 
 ___
 
