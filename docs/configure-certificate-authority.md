@@ -1,4 +1,4 @@
-# A Self-Hosted Certificate Authority
+# Self-Hosted Certificate Authority
 When logging into Portainer, your browser probably warned you about an untrusted connection due to the lack of an HTTPS URL. This can be solved by configuring Portainer to use a certificate.
 
 There are plenty of internet tutorials that can guide you through creating a single, self-signed certificate. This step will concentrate on the more complex, but more flexible, self-hosted certificate authority. And by now, you should know it'll be automated, so it won't be too difficult.
