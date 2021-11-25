@@ -1,4 +1,4 @@
-# Deploying a Home Automation Stack
+# Home Automation
 TODO
 
 ## Can I Skip It?
