@@ -1,4 +1,4 @@
-# File Sharing with NextCloud and Samba
+# NextCloud and Samba File Sharing
 Finally, after all the hard work of installing basic infrastructure services and supporting applications, it's time to install NextCloud and Samba. These two applications are configured together in one docker-compose.yml. And like Gitea, there are a pre-deployment and post-deployment tasks.
 
 By the end of this step, you will have:
