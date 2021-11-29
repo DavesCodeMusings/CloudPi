@@ -73,6 +73,8 @@ These two steps are enough for LDAP/STARTTLS over port 389. If you want to also 
 ## Setting User Passwords
 LDAP accounts and passwords are not the synchronized with Linux's `/etc/passwd`. They are configured separately. OpenLDAP offers command-line tools to change passwords, but it's usually easier to use a tool like LDAP Admin. You will have to set passwords for users before they can log into any applications with LDAP credentials.
 
+You will also need to set a password for the `search` user. Otherwise, LDAP authentication will not work.
+
 ## Configuring Applications for LDAP
 Each application has its own unique user interface for configuring LDAP, but the parameters required are generally the same. Here are the common configuration values:
 
