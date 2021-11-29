@@ -4,15 +4,15 @@ This is a list of some of the applications used in the Cloud Pi project and the 
 **_Don't forget to set LDAP passwords for the_ search _account and user accounts._**
 
 ## Standard Parameters
-Most applications will use the following set up. For applications that have additional parameters, those are listed separately.
+Most applications will use parameters similar to those shown below. Some parameters values, like _ldap.mypi.home_ should be changed to match your setup.
 
 Connectivity
 
 ```
-LDAP Server: ldap.mypi.home (change hostname as needed or the IP address)
+LDAP Server: ldap.mypi.home
 LDAP Port: 389
-LDAPS Port: 636
-BindDN: uid=search,dc=home (sometimes called by different names, like ReaderDN)
+StartTLS: Enabled
+Bind DN: uid=search,dc=home
 ```
 
 User Search
@@ -77,4 +77,3 @@ Filter: (objectClass=posixAccount)
 >Rather than skipping certificate verification, you may copy the contents of `/etc/ldap/tls/ca-certificates.crt` to your desktop PC and use it to upload for the _TLS CA certificate_ file.
 
 To take advantage of auto-provisioning, create a Portainer Team called _Portainer Admins_ under _Users > Teams_. Give the team access to the Docker environment using the Manage Access link on the Environments configuration page.
-
