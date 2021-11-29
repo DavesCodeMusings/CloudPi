@@ -69,5 +69,5 @@ Filter: (objectClass=posixAccount)
 
 >Rather than skipping certificate verification, you may copy the contents of `/etc/ldap/tls/ca-certificates.crt` to your desktop PC and use it to upload for the _TLS CA certificate_ file.
 
-To take advantage of auto-provisioning, create a Portainer Team called _Portainer Admins_ under Users > Teams. Give the team access to the Docker environment using the Manage Access link on the Environments configuration page.
+To take advantage of auto-provisioning, create a Portainer Team called _Portainer Admins_ under _Users > Teams_. Give the team access to the Docker environment using the Manage Access link on the Environments configuration page.
 
