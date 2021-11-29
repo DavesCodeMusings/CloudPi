@@ -1,7 +1,5 @@
 ![CloudPi96px](https://user-images.githubusercontent.com/61114342/143793486-bddc69bb-c5c9-424e-be90-b5d9c28f9b8c.png)
 
-# Cloud Pi
-
 **_Turn a Raspberry Pi into a modern cloud computing solution for your home._**
 
 Sure, that sounds cool, but what does it actually mean?
