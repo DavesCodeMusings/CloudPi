@@ -11,7 +11,7 @@ By the end of this step you will have:
 * Configured Portainer to use LDAP authentication.
 
 ## Can I Skip It?
-LDAP is not required. The only reason to install it is to centralize your users' passwords in one place. The alternative is to use each application's local authentication with either separate passwords or manually synchronized passwords. If it's just you and your dog at home, feel free to skip LDAP and create local accounts for each application.
+LDAP is not required. It's also not the easiest thing to install and maintain. The only reason to use LDAP is to centralize your users' passwords in one place. The alternative is to use each application's local authentication with either separate passwords or manually synchronized passwords. If it's just you and your dog at home, feel free to skip LDAP and create local accounts for each application.
 
 ## Why OpenLDAP?
 There are other options for LDAP directory services, like Apache DS and 389 Directory Server. OpenLDAP has been around for a long time and is widely used. That makes things easier when searching for answers on the web. If you have experience with another LDAP server, feel free to use it. There should be very little difference when it comes to configuring applications for LDAP authentication.
@@ -58,7 +58,15 @@ What you end up with is two organizational units (OUs): _People_ and _Groups_, a
 >The _search_ user is there for applications that need an account to do user and group lookups in the LDAP directory during authentication. Normal users will not log in with _search_.
 
 ## Enabling Secure LDAP with a Certificate
-Theoretically, the [configure-ldap-secure.yml](https://github.com/DavesCodeMusings/CloudPi/blob/main/configure-ldap-secure.yml) should take care of adding the certificate and key to OpenLDAP so it can run on LDAPS port 636 and also use STARTTLS on port 389. But, so far the command to make the changes is failing. I have tried many suggested fixes with no luck. If you can make it work, please let me know how you did it.
+**You will need a separate certificate issued just for OpenLDAP. You cannot use a certificate with multiple SANs for OpenLDAP. It will fail with a mysterious error code 80.**
+
+There are a couple of steps to enabling encrypted communication with the OpenLDAP server. There are two Ansible playbooks to help you.
+
+The first playbook, [issue-ldap-certificate.yml](https://github.com/DavesCodeMusings/CloudPi/blob/main/ssl/issue-ldap-certificate.yml) will create the certificate and place it in the `/etc/ldap/tls` directory, along with the `.key` file, and the intermediate and root certificates generated when you built your [self-hosted certificate authority](https://github.com/DavesCodeMusings/CloudPi/blob/main/ssl/configure-certificate-authority.yml).
+
+The second playbook, [configure-ldap-secure.yml](https://github.com/DavesCodeMusings/CloudPi/blob/main/configure-ldap-secure.yml), takes care of adding the certificate and key to OpenLDAP's configuration.
+
+These two steps are enough for LDAP/STARTTLS over port 389. If you want to also enable secure LDAP on port 636, refer to the [Debian OpenLDAP Setup Topic](https://wiki.debian.org/LDAP/OpenLDAPSetup#Enabling_LDAPS_on_port_636) 
 
 ## Setting User Passwords
 LDAP accounts and passwords are not the synchronized with Linux's `/etc/passwd`. They are configured separately. OpenLDAP offers command-line tools to change passwords, but it's usually easier to use a tool like LDAP Admin. You will have to set passwords for users before they can log into any applications with LDAP credentials.
