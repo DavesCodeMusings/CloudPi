@@ -12,7 +12,7 @@ Ansible is used to automate mundane tasks. If you enjoy countless hours of error
 With the exception of installing Ansible itself, we'll be using Ansible to install and configure nearly every component the system.
 * Using automated installs provides a repeatable, consistent way to configure the system.
 * Ansible playbooks are easy to read and don't require much more effor than writing a shell script.
-* You came here to build a Raspberry Pi cloud server, not learn how to type `apt install` and `mkdir`.
+* You came here to build a Raspberry Pi cloud server, not learn how to type `apt install`, `mkdir`, and other commands.
 
 ## Installing Ansible
 Ansible is available as an apt package. But, the latest version is going to be found using Python Pip. Python will be needed for other tools later on, so it beneficial to have it installed from the start. Download and run the [install-ansible.sh](https://github.com/DavesCodeMusings/CloudPi/blob/main/install-ansible.sh) shell script to complete this task.
