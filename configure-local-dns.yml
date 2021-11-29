@@ -71,7 +71,7 @@
       dest: /etc/bind/db.{{ reverse_address }}
       force: no
       content: |
-        $ORIGIN {{ reverse_address }}.in-addr.arpa.
+        $ORIGIN {{ domain }}.
         $TTL 3D                                   ; default expiration time
         @             SOA     {{ domain }}. root.{{ domain }}. (
                               20160325            ; serial number
