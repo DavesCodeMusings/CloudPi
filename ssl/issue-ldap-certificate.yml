@@ -14,11 +14,20 @@
       path: /etc/ldap/tls
       state: directory
 
+  - name: Copying intermediate and root
+    shell:
+      cmd: cat /etc/ssl/certs/{{ ansible_domain }}.crt /etc/ssl/certs/{{ ansible_domain }}_CA.crt >ca-certificates.crt
+      chdir: /etc/ldap/tls
+      owner: openldap
+      group: openldap
+
   - name: Generating a private key
     openssl_privatekey:
       path: "/etc/ldap/tls/ldap.{{ ansible_hostname }}.{{ ansible_domain }}.key"
       type: RSA
       size: 2048
+      owner: openldap
+      group: openldap
 
   - name: Generating a CSR
     openssl_csr:
@@ -31,6 +40,8 @@
       email_address: "root@{{ ansible_hostname }}.{{ ansible_domain }}"
       common_name: "ldap.{{ ansible_hostname }}.{{ ansible_domain }}"
       # A subject alternative name is automatically added using common_name
+      owner: openldap
+      group: openldap
 
   - name: Signing the certificate
     openssl_certificate:
@@ -39,3 +50,5 @@
       ownca_path: "/etc/ssl/certs/{{ ansible_domain }}.crt"
       ownca_privatekey_path: "/etc/ssl/private/{{ ansible_domain }}.key"
       provider: ownca
+      owner: openldap
+      group: openldap
