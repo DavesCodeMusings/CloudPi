@@ -10,6 +10,7 @@ There are several options for git hosting, some public and some self-hosted. Of 
 ## Preparing to Run Gitea
 The Gitea container is configured to run with a particular user ID and group ID. Ideally, these are set to the _git_ user with a UID of 1001 and GID of 1001. None of this is set up on the Raspberry Pi OS. But, there is an Ansible playbook that takes care of it. You can find it under [gitea/pre-deploy.yml](https://github.com/DavesCodeMusings/CloudPi/blob/main/gitea/pre-deploy.yml). Run this with `ansible-playbook pre-deploy.yml` and the user account will be created along with a `/srv/git` directory to store any repositories you create.
 
+## Deploying the Gitea Stack
 After the pre-deploy tasks are done, you can deploy the Gitea application with the file [gitea/docker-compose.yml](https://github.com/DavesCodeMusings/CloudPi/blob/main/gitea/docker-compose.yml) You can do this from the command-line using `docker-compose` or you can log into Portainer and use the _Stacks_ menu selection to paste the contents of the docker-compose.yml file and deploy the stack that way.
 
 Finally, in [gitea/post-deploy.txt](https://github.com/DavesCodeMusings/CloudPi/blob/main/gitea/post-deploy.txt) you'll find a few basic hints for configuring the Gitea application. These are intentionally brief and serve only as hints. You should use the official [Gitea documentation](https://docs.gitea.io) as your guide.
