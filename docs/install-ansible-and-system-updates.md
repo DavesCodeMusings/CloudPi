@@ -1,5 +1,5 @@
 # Ansible and System Updates
-In this step of the project, we'll prepare the system for upcoming tasks by installing Ansible automation and updating the system with the latest packages. If you haven't [gotten your Raspberry Pi OS installed and the Pi booted up in headless server mode](installing-hardware-and-os.md) yet, be sure to do that first.
+In this step of the project, you'll prepare the system for upcoming tasks by installing Ansible automation and updating the system with the latest packages. If you haven't [gotten your Raspberry Pi OS installed and the Pi booted up in headless server mode](installing-hardware-and-os.md) yet, be sure to do that first.
 
 By the end of this step, you will have:
 1. Installed an up-to-date version of Ansible from Python Pip using the [install-ansible.sh](https://github.com/DavesCodeMusings/CloudPi/blob/main/install-ansible.sh) shell script.
