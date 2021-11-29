@@ -33,4 +33,4 @@ With Ansible installed and updates done, it's time to [configure a static IP add
 
 ___
 
-_This is the way. &mdash;Pedro Pascal, The Mandalorean_ (I'm sure he was referring to Ansible when he said it.)
+_This is the way. &mdash;The Mandalorean_ (I'm sure he was referring to Ansible when he said it.)
