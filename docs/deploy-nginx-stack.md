@@ -41,10 +41,10 @@ Second, there are reverse proxy rules. Those look like this:
 
 ```
 server {
-    server_name nextcloud.anubis.home;
+    server_name nextcloud.mypi.home;
     listen 443 ssl;
     location / {
-        proxy_pass http://nextcloud.anubis.home:8910;
+        proxy_pass http://nextcloud.mypi.home:8910;
         proxy_set_header X-Forwarded-For $remote_addr;
     }
 }
