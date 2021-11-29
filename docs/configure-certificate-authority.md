@@ -16,8 +16,8 @@ Setting up a certificate authority can be tedious. But, for this project there's
 
 Here's the procedure:
 1. Download [`configure-certificate-authority.yml`](https://github.com/DavesCodeMusings/CloudPi/blob/main/ssl/configure-certificate-authority.yml) and [`subject-info.yml`](https://github.com/DavesCodeMusings/CloudPi/blob/main/ssl/subject-info.yml) to your Pi.
-2. Edit `subject-info.yml`, customizing to your needs.
-3. Run it with the command `ansible-playbook configure-certificate-authority.yml`
+2. Edit `subject-info.yml`, customizing it to your needs.
+3. Run the playbook with the command `ansible-playbook configure-certificate-authority.yml`
 
 When it's done, you'll have a root certificate called `home_CA.crt` and an intermediate certificate called `home.crt`. Both are in the `/etc/ssl/certs/` directory.
 
