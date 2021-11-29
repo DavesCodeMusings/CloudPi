@@ -1,6 +1,8 @@
 # Hints for Enabling LDAP in Applications
 This is a list of some of the applications used in the Cloud Pi project and the parameters needed to use LDAP authentication.
 
+**_Don't forget to set LDAP passwords for search account and user accounts._**
+
 ## Standard Parameters
 Most applications will use the following set up. For applications that have additional parameters, those are listed separately.
 
