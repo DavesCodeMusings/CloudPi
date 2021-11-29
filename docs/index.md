@@ -1,4 +1,4 @@
-![CloudPi96px](https://user-images.githubusercontent.com/61114342/143793486-bddc69bb-c5c9-424e-be90-b5d9c28f9b8c.png)
+![CloudPi96px](https://user-images.githubusercontent.com/61114342/143794062-17bc25c9-b9d1-4450-a6e4-f67148be7a46.png)
 
 **_Turn a Raspberry Pi into a modern cloud computing solution for your home._**
 
