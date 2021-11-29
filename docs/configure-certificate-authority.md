@@ -9,7 +9,7 @@ By the end of this step you will have:
 * Generated the certificate and key files to use with Portainer and other web-based applications.
 
 ## Can I Skip It?
-On a home network, where you trust your users, there's no urgent need for encrypting web traffic with HTTPS. You can continue to use HTTP URLs for accessing everything. Or you can generate a single, self-signed certificate with `openssl` in one command.
+On a home network, where you trust your users, there's no urgent need for encrypting web traffic with HTTPS. You can continue to use HTTP URLs for accessing everything. Or you can generate a single, self-signed certificate with `openssl` in one command. But, creating a root CA and an intermediate certificate is a typical industry practice, so if nothing else, it provides a good learning opportunity.
 
 ## Configuring the Root and Intermediate Certificates
 Setting up a certificate authority can be tedious. But, for this project there's an Ansible playbook that will let you do this quickly and easily.
