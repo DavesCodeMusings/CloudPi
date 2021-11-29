@@ -1,4 +1,6 @@
-# Self-Hosted Cloud on Tiny Hardware
+![CloudPi96px](https://user-images.githubusercontent.com/61114342/143793486-bddc69bb-c5c9-424e-be90-b5d9c28f9b8c.png)
+
+# Cloud Pi
 
 **_Turn a Raspberry Pi into a modern cloud computing solution for your home._**
 
@@ -30,3 +32,9 @@ Planned enhancements:
 The beginnings of the [new project documents can be previewed](motivation.md)
 
 In the meantime, the original documentation for Raspberry Pi OS Buster is here: [https://github.com/DavesCodeMusings/CloudPi/wiki](https://github.com/DavesCodeMusings/CloudPi/wiki)
+
+___
+
+_Raspberry Pi and the Raspberry Pi logo are trademarks of Raspberry Pi Trading_
+
+_The cloud image is part of the Material Design icon set and is used under the terms of the Apache Open License, version 2.0.
