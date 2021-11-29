@@ -1,7 +1,7 @@
 # Hints for Enabling LDAP in Applications
 This is a list of some of the applications used in the Cloud Pi project and the parameters needed to use LDAP authentication.
 
-**_Don't forget to set LDAP passwords for search account and user accounts._**
+**_Don't forget to set LDAP passwords for the_ search _account and user accounts._**
 
 ## Standard Parameters
 Most applications will use the following set up. For applications that have additional parameters, those are listed separately.
@@ -31,11 +31,10 @@ Group Membership Attribute: memberUid
 Filter: (objectClass=posixGroup)
 ```
 
+If you used the LDIF template when populating your LDAP directory, and you configured certificates for LDAP TLS, the following settings should work. If you made customizations to your directory or skiped TLS, you'll need to adjust accordingly.
 
 ## Gitea
 Official documentation: https://docs.gitea.io/en-us/authentication/
-
-If you used the LDIF template when populating your LDAP directory, the following settings should work. If you made customizations, you'll need to adjust accordingly.
 
 ```
 Authentication Type: LDAP (via BindDN)
@@ -55,11 +54,20 @@ If authentication is not working as expected, edit `/opt/docker/gitea/gitea/conf
 Authentication Method: LDAP
 Automatic User Provisioning: Enabled
 Server Type: Custom
-LDAP Server: ldap.mypi.home (change as needed)
-Anonymous Mode: Enabled
+
+LDAP Server: ldap.mypi.home
+Anonymous Mode: Disabled
+ReaderDN: uid=search,dc=home
+
+StartTLS: Enabled
+Skip verification of server certificate: Enabled*
+
+Base DN: ou=People,dc=home
+Username attribute: uid
+Filter: (objectClass=posixAccount)
 ```
 
-Enable LDAP Security parameters as appropriate for your LDAP/LDAPS configuration. User and group search uses the standard configuration.
+>Rather than skipping certificate verification, you may copy the contents of `/etc/ldap/tls/ca-certificates.crt` to your desktop PC and use it to upload for the _TLS CA certificate_ file.
 
 To take advantage of auto-provisioning, create a Portainer Team called _Portainer Admins_ under Users > Teams. Give the team access to the Docker environment using the Manage Access link on the Environments configuration page.
 
