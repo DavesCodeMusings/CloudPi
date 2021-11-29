@@ -50,7 +50,7 @@ Surname Attribute: sn
 Email Attribute: mail
 ```
 
-Test by navigating to _Site Administration > Dashboard_ and running the _Synchronize external user data_ job. Check the _User Accounts_ tab to verify all users in your LDAP have been imported into Gitea.
+Test by navigating to _Site Administration > Dashboard_ and running the _Synchronize external user data_ job. Check the _User Accounts_ tab to verify all users in your LDAP have been imported into Gitea. The _search_ user should not appear in the list of Gitea user accounts.
 
 If authentication is not working as expected, edit `/opt/docker/gitea/gitea/conf/app.ini`. Look for the `[log]` section. Change `LEVEL=info` to `LEVEL=debug` to get details about possible causes.
 
