@@ -27,8 +27,10 @@ ansible-playbook pre-deploy.yml
 docker-compose.yml (in Portainer)
 ```
 
-## Finding Configuration Help
-TODO
+## Configuring Components
+Most of the Home Assistant configuration can be done using the web-based interface, though sometimes you will see references to `configuration.yaml`. When you deploy the home automation stack using the Ansible playbooks, you'll find `configuration.yaml` in the `/opt/docker/homeassistant` directory. Configuration help can be found in the official documentation at: https://www.home-assistant.io/docs/configuration/
+
+TODO: Mosquitto, NodeRED, ESPHome
 
 ## Next Steps
 If you made it this far, you are well versed in deploying and configuring containerized applications. You have created a system with plenty of services to help you install the next, shiny application that catches your eye. The only thing stopping you is the resouce constraints of the tiny computing platform called Raspberry Pi. But as we have seen over the course of this project, it's quite a capable machine.
