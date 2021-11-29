@@ -1,0 +1,53 @@
+---
+- name: Configure Cockpit with Local CA Certificate
+  hosts: localhost
+  connection: local
+  become: true
+
+  vars:
+    host_cert_path: /etc/ssl/certs/{{ ansible_hostname }}.{{ ansible_domain }}.crt
+    host_key_path: /etc/ssl/private/{{ ansible_hostname }}.{{ ansible_domain }}.key
+    intermediate_cert_path: /etc/ssl/certs/{{ ansible_domain }}.crt
+
+  tasks:
+  - name: Checking for host certificate
+    stat:
+      path: "{{ host_cert_path }}"
+    register: host_cert
+    failed_when: not host_cert.stat.exists
+
+  - name: Checking for intermediate certificate
+    stat:
+      path: "{{ intermediate_cert_path }}"
+    register: intermediate_cert
+    failed_when: not intermediate_cert.stat.exists
+
+  - name: Checking for host key
+    stat:
+      path: "{{ host_key_path }}"
+    register: host_key
+    failed_when: not host_key.stat.exists
+
+  # The order of the certificates and key is important.
+  # It must be: host cert, intermediate cert, intermediate key
+  - name: Bundling certificates and key
+    shell:
+      cmd: cat {{ host_cert_path }} {{ intermediate_cert_path }} {{ host_key_path }} >bundle.cert
+      chdir: /etc/cockpit/ws-certs.d
+
+  - name: Setting ownership and permissions
+    file:
+      path: /etc/cockpit/ws-certs.d/bundle.cert
+      mode: '0640'
+      owner: root
+      group: cockpit-ws
+
+  - name: Removing original localhost-signed certificate
+    file:
+      path: /etc/cockpit/ws-certs.d/0-self-signed.cert
+      state: absent
+
+  - name: Restarting Cockpit
+    service:
+      name: cockpit
+      state: restarted
