@@ -1,8 +1,15 @@
 # Home Automation
-TODO
+At this point in the project, you've got a Raspberry Pi that can run just about anything that comes as a Docker container. Running home automation will expand upon this by deploying several applications in a stack.
+
+By the end of this step, you will have:
+* Home Assistant to provide a user interface.
+* Mosquitto to enable MQTT integrations with devices.
+* NodeRED to let you build complex custom workflows.
+* ESPHome to manage devices running on an ESP microcontroller-based gateway.
+* 
 
 ## Can I Skip It?
-You don't have to install the home automation stack. It's completely optional. If you choose to deploy it, you don't have to invest in a bunch of "smart" devices. You can start small with some passive home monitoring and go from there.
+You don't have to install the home automation stack. It's completely optional. If you choose to deploy it, you don't have to deploy all the applications, nor do you need to invest in a bunch of "smart" devices. You can start small with some passive home monitoring and go from there.
 
 ## Understanding the Components
 The main application in the home automation stack is Home Assistant. This is central hub, providing connectivity to various devices and organizing the data into a dashboard view. Home assistant can be integrated with a surprising number of devices just over wifi. Without a lot of effort, you can probably connect to your television, internet router, video game console, thermostat, mobile phones, etc.
