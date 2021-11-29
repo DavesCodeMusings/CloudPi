@@ -33,6 +33,6 @@ In the meantime, the original documentation for Raspberry Pi OS Buster is here: 
 
 ___
 
-_Raspberry Pi and the Raspberry Pi logo are trademarks of Raspberry Pi Trading_
+_Raspberry Pi and the Raspberry Pi logo are trademarks of Raspberry Pi Trading._
 
-_The cloud image is part of the Material Design icon set and is used under the terms of the Apache Open License, version 2.0.
+_The cloud image is part of the Material Design icon set and is used under the terms of the Apache Open License, version 2.0._
