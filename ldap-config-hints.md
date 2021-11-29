@@ -31,7 +31,21 @@ Filter: (objectClass=posixGroup)
 
 
 ## Gitea
-TODO
+Official documentation: https://docs.gitea.io/en-us/authentication/
+
+If you used the LDIF template when populating your LDAP directory, the following settings should work. If you made customizations, you'll need to adjust accordingly.
+
+```
+Authentication Type: LDAP (via BindDN)
+Security Protocol: StartTLS
+Port: 389
+Bind DN: uid=search,dc=home
+User Search Base: ou=People,dc=home
+User Filter: (&(objectClass=posixAccount)(uid=%s))
+Email Attribute: mail
+```
+
+If authentication is not working as expected, edit `/opt/docker/gitea/gitea/conf/app.ini`. Look for the `[log]` section. Change `LEVEL=info` to `LEVEL=debug`.
 
 ## Portainer
 
