@@ -6,7 +6,6 @@ By the end of this step, you will have:
 * Mosquitto to enable MQTT integrations with devices.
 * NodeRED to let you build complex custom workflows.
 * ESPHome to manage devices running on an ESP microcontroller-based gateway.
-* 
 
 ## Can I Skip It?
 You don't have to install the home automation stack. It's completely optional. If you choose to deploy it, you don't have to deploy all the applications, nor do you need to invest in a bunch of "smart" devices. You can start small with some passive home monitoring and go from there.
