@@ -71,7 +71,7 @@
       dest: /etc/bind/db.{{ reverse_address }}
       force: no
       content: |
-        $ORIGIN {{ domain }}.
+        $ORIGIN {{ reverse_address }}.in-addr.arpa.
         $TTL 3D                                   ; default expiration time
         @             SOA     {{ domain }}. root.{{ domain }}. (
                               20160325            ; serial number
@@ -81,8 +81,8 @@
                               1D )                ; minimum TTL
                       NS      localhost.
         ;
-        1             PTR     router
-        {{ ansible_eth0.ipv4.address.split('.')[3] }}            PTR     {{ ansible_hostname }}
+        1             PTR     router.{{ domain }}.
+        {{ ansible_eth0.ipv4.address.split('.')[3] }}            PTR     {{ ansible_hostname }}.{{ domain }}.
 
   - name: Verify reverse lookup zonefile.
     shell:
