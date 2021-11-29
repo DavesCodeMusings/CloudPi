@@ -10,6 +10,7 @@ Connectivity
 LDAP Server: ldap.mypi.home (change hostname as needed or the IP address)
 LDAP Port: 389
 LDAPS Port: 636
+BindDN: uid=search,dc=home (sometimes called by different names, like ReaderDN)
 ```
 
 User Search
