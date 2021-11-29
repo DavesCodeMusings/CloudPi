@@ -54,6 +54,10 @@ Test by navigating to _Site Administration > Dashboard_ and running the _Synchro
 
 If authentication is not working as expected, edit `/opt/docker/gitea/gitea/conf/app.ini`. Look for the `[log]` section. Change `LEVEL=info` to `LEVEL=debug` to get details about possible causes.
 
+## Nextcloud
+Official documentation: https://docs.nextcloud.com/server/stable/admin_manual/configuration_user/user_auth_ldap.html
+
+
 ## Portainer
 Official documentation: https://docs.portainer.io/v/ce-2.9/admin/settings/authentication/ldap
 
