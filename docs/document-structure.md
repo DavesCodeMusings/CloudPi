@@ -25,4 +25,4 @@ Not every application will have all the files listed above, but when they do, th
 Okay, everything is clear? You know what you can skip, what you can skim, and what you have to pay close attention to? Good. [Let's start with assembing the Pi](install-hardware-os.md).
 
 ___
-_Avengers assemble! &mdash;Captain America et al._
+_Avengers assemble! &mdash;Captain America, et al._
