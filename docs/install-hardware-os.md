@@ -23,7 +23,7 @@ Here's my rational behind the configuration, if you care. If not, skip ahead to 
 
 >My first Cloud Pi install was a Pi 3. It was okay, but the 4 is much faster. The 4G Pi 4 gives the maximum memory without requiring a 64-bit OS, something the Raspbian distribution lacks at the moment.
 >
->I make sure all my Pi purchases from [Adafruit](https://www.adafruit.com/) (either directly or through DigiKey.) Adafruit does a lot for the open hardware movement and for that, I will always support them.
+>I purchase my Pi boards from [Adafruit](https://www.adafruit.com/) (either directly or through DigiKey.) Adafruit does a lot for the open hardware movement and for that, I will always support them.
 >
 >I chose the CanaKit power supply, because the official Pi supply was out of stock when I ordered. I've used CanaKit stuff before and been very happy with it. Plus, Canadians are so nice!
 >
