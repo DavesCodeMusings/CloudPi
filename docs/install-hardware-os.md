@@ -38,10 +38,10 @@ I'm not going to tell you how to flash an SD card and stick it your Pi. I assume
 
 I will tell you that you'll need to use the advanced option of the [Raspberry Pi Imager](https://www.raspberrypi.org/software/) to enable SSH logins from the beginning. Otherwise, you won't be able to log into your Pi over the network. If you forget this step, you can always [place an empty text file called `ssh` in the boot partition](https://www.raspberrypi.com/documentation/computers/configuration.html#setting-up-a-headless-raspberry-pi) of the SD card before you stick it in the Pi and boot for the first time.
 
-## Installing Hardware 
-Other than the lack of keyboard and monitor, the installation of the Raspberry Pi components is just like any other system. Because of that, I won't go into a lot of detail on the installation of Raspberry Pi OS. If you need help, see the [instructions on the raspberrypi.org website](https://www.raspberrypi.org/documentation/installation/installing-images/) or simply use your favorite search engine to find one of many step-by-step instructional videos.
+Other than the lack of keyboard and monitor, the installation of the Raspberry Pi components is just like any other system.
 
-That's it. Just plug in the network connection and power supply. Watch the flashing green storage activity light near the SD card and the network link lights on the RJ-45 jack to gauge the progress. Once the network link light is on and the storage activity indicator calms, you can try making a connection via SSH.
+## Powering Up
+Plug the Pi in a wired network connection first, then plug in the power supply. Watch the flashing green storage activity light near the SD card and the network link lights on the RJ-45 jack to gauge the progress. Once the network link light is on and the storage activity indicator calms, you can try making a connection via SSH.
 
 ## Dealing with a Headless Server
 With no monitor and keyboard attached to the Pi, you'll have to log in with a secure shell connection. You can use a classic like [Putty](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html) or something like [Windows Terminal](https://www.microsoft.com/en-us/p/windows-terminal). Whatever makes you happy. But first, you need to know what the IP address is.
