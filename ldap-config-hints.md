@@ -39,16 +39,23 @@ Official documentation: https://docs.gitea.io/en-us/authentication/
 ```
 Authentication Type: LDAP (via BindDN)
 Security Protocol: StartTLS
+Host: ldap.mypi.home
 Port: 389
 Bind DN: uid=search,dc=home
 User Search Base: ou=People,dc=home
 User Filter: (&(objectClass=posixAccount)(uid=%s))
+Username Attribute: uid
+First Name Attribute: givenName
+Surname Attribute: sn
 Email Attribute: mail
 ```
 
-If authentication is not working as expected, edit `/opt/docker/gitea/gitea/conf/app.ini`. Look for the `[log]` section. Change `LEVEL=info` to `LEVEL=debug`.
+Test by navigating to _Site Administration > Dashboard_ and running the _Synchronize external user data_ job. Check the _User Accounts_ tab to verify all users in your LDAP have been imported into Gitea.
+
+If authentication is not working as expected, edit `/opt/docker/gitea/gitea/conf/app.ini`. Look for the `[log]` section. Change `LEVEL=info` to `LEVEL=debug` to get details about possible causes.
 
 ## Portainer
+Official documentation: https://docs.portainer.io/v/ce-2.9/admin/settings/authentication/ldap
 
 ```
 Authentication Method: LDAP
@@ -60,7 +67,7 @@ Anonymous Mode: Disabled
 ReaderDN: uid=search,dc=home
 
 StartTLS: Enabled
-Skip verification of server certificate: Enabled*
+Skip verification of server certificate: Enabled
 
 Base DN: ou=People,dc=home
 Username attribute: uid
