@@ -1,0 +1,12 @@
+---
+- name: Install Cockpit web-based admin tool
+  hosts: localhost
+  connection: local
+  become: true
+
+  tasks:
+  - name: Installing Cockpit
+    apt:
+      name: cockpit
+      state: latest
+      update_cache: true
