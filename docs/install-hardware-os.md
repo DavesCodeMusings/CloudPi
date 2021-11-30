@@ -6,7 +6,7 @@ By the end of this step you will have:
 2. Created an empty ssh file in the boot partition for headless operation.
 3. Started the Pi, found its IP address, and made an SSH connection.
 
-## Parts List
+## Reviewing the Parts List
 You'll need a Raspberry Pi 4, a micro-SD card, and a power supply. For connection to your network, you'll need a cable and a port on your internet router you can plug into. You will also want an external storage device and a USB adapter to connect it.
 
 This tutorial refernces the following configuration:
