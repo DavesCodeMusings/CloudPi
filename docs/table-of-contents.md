@@ -20,7 +20,7 @@
 ## Optional Network Services
 1. [Domain Name System](install-dns.md)
 2. [Certificate Authority](configure-certificate-authority.md)
-3. Cockpit
+3. [Cockpit](install-cockpit.md)
 4. [LDAP](install-ldap.md)
 5. [Git](deploy-git-server-stack.md)
 
