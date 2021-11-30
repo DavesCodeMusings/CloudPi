@@ -20,8 +20,8 @@
 ## Optional Network Services
 1. [Domain Name System](install-dns.md)
 2. [Certificate Authority](configure-certificate-authority.md)
-3. [Cockpit](install-cockpit.md)
-4. [LDAP](install-ldap.md)
+3. [LDAP](install-ldap.md)
+4. [Cockpit](install-cockpit.md)
 
 ## Application Stacks
 1. Configure Portainer to Use Optional Network Services
