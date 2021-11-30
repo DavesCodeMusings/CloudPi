@@ -139,7 +139,7 @@ pi@mypi:~ $ service dhcpcd status
 > You can verify IP address and netmask with the command `ip addr` if you want, but the fact you can log in via SSH makes this redundant.
 
 ## Next Steps
-Now that the Pi is running with a new IP address and hostname, it time to make this hosname to IP address relationship known to the other devices on our network. We can do this with [self-hosted DNS](install-dns.md).
+At this point in the project, you've taken the Raspberry Pi from a basic out-of-the-box install to a host that's customized for your home network. Now it's time to add more storage to the system so you can start hosting applications and storing data. That's covered in the next step, [provisioning external storage](provision-storage.md).
 
 ___
 
