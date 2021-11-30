@@ -78,7 +78,7 @@ dns-nameservers 192.168.1.100 192.168.1.1
 ```
 
 ## Next Steps
-At this point in the project, you've taken the Raspberry Pi from a basic out-of-the-box install to a host that's customized for your home network. Now it's time to add more storage to the system so you can start hosting applications and storing data. That's covered in the next step, [provisioning external storage](provision-storage.md).
+Now that you can refer to your hosts by name instead of IP address, it's time to look at some more features. The first of these is to enable HTTPS connections by configuring a self-hosted [certificate authority](configure-certificate-authority.md).
 
 ___
 
