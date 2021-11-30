@@ -39,7 +39,7 @@ If all goes well, wait a bit and open a web browser for the IP address of your R
 Explore Portainer on your own or check out [the docs on their web site](https://documentation.portainer.io/).
 
 ## Next Steps
-When you're comfortable with Docker and Portainer, it's time to look at enhancing to take advantage of some of its features. The first of these is to enable HTTPS connections by [configuring certificates](configure-certificate-authority.md).
+So far, you've been typing URLs with IP addresses and ports. This works, but it's not very user-friendly and most people would find it easier to type names insto their web browser. To start using names instead of addresses you'll need to [install self-hosted DNS](install-dns.md).
 
 ___
 
