@@ -2,7 +2,7 @@
 In this step, you'll prepare an external storage device, either a spinning disk or a solid state drive. This device will used to hold user data, application data, and application configuration files.
 
 By the end of this step you will have:
-1. Repartitioned the external device, preparing it for Linux filesystems.
+1. Repartitioned the external device, preparing it for Linux logical volumes.
 2. Installed Logical Volume Manager (LVM) tools.
 3. Created one or more logical volumes with ext4 filesystems.
 5. Mounted the new filesystems to make the extra space available to the system.
