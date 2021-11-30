@@ -22,10 +22,10 @@
 2. [Certificate Authority](configure-certificate-authority.md)
 3. [Cockpit](install-cockpit.md)
 4. [LDAP](install-ldap.md)
-5. [Git](deploy-git-server-stack.md)
 
 ## Application Stacks
 1. Configure Portainer to Use Optional Network Services
-2. [Deploy File Sharing](deploy-file-sharing-stack.md) &ndash; Nextcloud and Samba
-3. [Deploy Home Automation](deploy-home-automation-stack.md) &ndash; Home Assistant, Mosquitto, NodeRED, ESPHome
-4. [Deploy Web Services](deploy-nginx-stack.md) &ndash; Static Content and Reverse Proxy with Nginx
+2. [Deploy Git Server](deploy-git-server-stack.md) &ndash; Code Storage and Versioning with Gitea
+3. [Deploy File Sharing](deploy-file-sharing-stack.md) &ndash; Nextcloud and Samba
+4. [Deploy Home Automation](deploy-home-automation-stack.md) &ndash; Home Assistant, Mosquitto, NodeRED, ESPHome
+5. [Deploy Web Services](deploy-nginx-stack.md) &ndash; Static Content and Reverse Proxy with Nginx
