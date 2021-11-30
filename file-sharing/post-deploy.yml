@@ -4,12 +4,50 @@
   connection: local
   become: true
 
+  vars:
+    nginx_confd_path: /opt/docker/nginx/conf.d
+
   tasks:
     # Nextcloud documentation has some recommendations for background jobs.
     # https://docs.nextcloud.com/server/latest/admin_manual/configuration_server/background_jobs_configuration.html
-    # This task sets up a cron job to execute those jobs.
-    - name: Schedule Background Jobs
-      cron:
-        name: Nextcloud Jobs
-        minute: "*/5"
-        job: /usr/bin/docker exec -u www-data nextcloud php cron.php
+  - name: Scheduling background jobs
+    cron:
+      name: Nextcloud Jobs
+      minute: '*/5'
+      job: /usr/bin/docker exec -u www-data nextcloud php cron.php
+
+  - name: Checking for Nginx installation
+    stat:
+      path: "{{ nginx_confd_path }}"
+    register: nginx_confd
+
+  # The following task only runs if the Nginx conf.d directory exists.
+  - name: Creating Nextcloud reverse proxy config
+    copy:
+      dest: /opt/docker/nginx/conf.d/nextcloud.conf
+      force: no
+      content: |
+        # Nextcloud redirection and SSL off-loading using reverse proxy.
+        server {
+            server_name nextcloud.{{ ansible_hostname }}.{{ ansible_domain }};
+            listen 80;
+            return 301 https://nextcloud.{{ ansible_hostname }}.{{ ansible_domain }};
+        }
+
+        server {
+            server_name nextcloud.{{ ansible_hostname }}.{{ ansible_domain }};
+            listen 443 ssl;
+            location / {
+                proxy_pass http://nextcloud.{{ ansible_hostname }}.{{ ansible_domain }}:8910;
+                proxy_set_header X-Forwarded-For $remote_addr;
+            }
+
+            location = /.well-known/carddav {
+              return 301 $scheme://$host/remote.php/dav;
+            }
+
+            location = /.well-known/caldav {
+              return 301 $scheme://$host/remote.php/dav;
+            }
+        }
+    when: nginx_confd.stat.exists
