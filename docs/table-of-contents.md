@@ -14,8 +14,7 @@
 
 ## Container Services
 1. [Install Docker and Portainer](install-docker-portainer.md)
-2. Using Docker-Compose
-3. Using Portainer
+2. Deploying a Simple Container (Nginx)
 
 ## Optional Network Services
 1. [Domain Name System](install-dns.md)
