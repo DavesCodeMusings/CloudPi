@@ -1,5 +1,5 @@
 ---
-- name: Nginx in a Docker Container
+- name: Nginx Static HTML and Reverse Proxy
   hosts: localhost
   connection: local
   become: true
@@ -33,17 +33,53 @@
             }
         }
 
-        # Redirections for virtual servers in the form: {app}.{{ ansible_hostname }}.{{ ansible_domain }}
+        # Redirection and SSL off-loading for ESPHome
+        server {
+            server_name esphome.{{ ansible_hostname }}.{{ ansible_domain }};
+            listen 80;
+            return 301 https://esphome.{{ ansible_hostname }}.{{ ansible_domain }};
+        }
+
+        server {
+            server_name esphome.{{ ansible_hostname }}.{{ ansible_domain }};
+            listen 443 ssl;
+            location / {
+                proxy_pass http://esphome.{{ ansible_hostname }}.{{ ansible_domain }}:6052;
+                proxy_set_header X-Forwarded-For $remote_addr;
+            }
+        }
+
+        # Redirection for Home Assistant
         server {
             server_name homeassistant.{{ ansible_hostname }}.{{ ansible_domain }};
             return 301 http://homeassistant.{{ ansible_hostname}}.{{ ansible_domain }}:8123;
         }
 
+        # Redirection and SSL off-loading for Nextcloud
         server {
             server_name nextcloud.{{ ansible_hostname }}.{{ ansible_domain }};
+            listen 80;
             return 301 http://nextcloud.{{ ansible_hostname}}.{{ ansible_domain }}:8910;
         }
 
+        server {
+            server_name nextcloud.{{ ansible_hostname }}.{{ ansible_domain }};
+            listen 443 ssl;
+            location / {
+                proxy_pass http://nextcloud.{{ ansible_hostname }}.{{ ansible_domain }}:8910;
+                proxy_set_header X-Forwarded-For $remote_addr;
+            }
+
+            location = /.well-known/carddav {
+                return 301 $scheme://$host/remote.php/dav;
+            }
+
+            location = /.well-known/caldav {
+                return 301 $scheme://$host/remote.php/dav;
+            }
+        }        
+
+        # Redirection for Portainer
         server {
             server_name portainer.{{ ansible_hostname }}.{{ ansible_domain }};
             return 301 http://portainer.{{ ansible_hostname}}.{{ ansible_domain }}:9000;
