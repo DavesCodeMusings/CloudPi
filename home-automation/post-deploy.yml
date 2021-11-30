@@ -1,0 +1,120 @@
+---
+- name: Home automation post-deployment configration
+  hosts: localhost
+  connection: local
+  become: true
+
+  vars:
+    nginx_confd_path: /opt/docker/nginx/conf.d
+
+  tasks:
+  - name: Checking for Nginx installation
+    stat:
+      path: "{{ nginx_confd_path }}"
+    register: nginx_confd
+
+  # This following tasks only run if the Nginx conf.d directory exists.
+  - name: Creating ESPHome reverse proxy config
+    copy:
+      dest: /opt/docker/nginx/conf.d/esphome.conf
+      force: no
+      content: |
+        # ESPHome redirection and SSL off-loading.
+        server {
+            server_name esphome.anubis.home;
+            listen 80;
+            return 301 https://esphome.anubis.home;
+        }
+
+        server {
+            server_name esphome.anubis.home;
+            listen 443 ssl;
+            location / {
+                proxy_pass http://esphome.anubis.home:6052;
+                proxy_set_header X-Forwarded-For $remote_addr;
+            }
+        }
+    when: nginx_confd.stat.exists
+
+  - name: Creating Home Assistant reverse proxy config
+    copy:
+      dest: /opt/docker/nginx/conf.d/homeassistant.conf
+      force: no
+      content: |
+        # Home Assistant redirection and SSL off-loading.
+        server {
+            server_name homeassistant.anubis.home;
+            return 301 http://homeassistant.anubis.home:8123;
+        }
+
+        # Do not use "proxy_set_header X-Forwarded-For $remote_addr;" or Home Assistant
+        # will block the request.
+        server {
+            server_name homeassistant.anubis.home;
+            listen 443 ssl;
+            location / {
+                proxy_pass http://homeassistant.anubis.home:8123;
+            }
+            location /api/websocket {
+                proxy_pass http://homeassistant.anubis.home:8123;
+                proxy_http_version 1.1;
+                proxy_set_header Upgrade $http_upgrade;
+                proxy_set_header Connection "upgrade";
+            }
+        }
+    when: nginx_confd.stat.exists
+
+  - name: Creating Nextcloud reverse proxy config
+    copy:
+      dest: /opt/docker/nginx/conf.d/nextcloud.conf
+      force: no
+      content: |
+        # Nextcloud redirection and SSL off-loading using reverse proxy.
+        server {
+            server_name nextcloud.anubis.home;
+            listen 80;
+            return 301 https://nextcloud.anubis.home;
+        }
+
+        server {
+            server_name nextcloud.anubis.home;
+            listen 443 ssl;
+            location / {
+                proxy_pass http://nextcloud.anubis.home:8910;
+                proxy_set_header X-Forwarded-For $remote_addr;
+            }
+
+            location = /.well-known/carddav {
+              return 301 $scheme://$host/remote.php/dav;
+            }
+
+            location = /.well-known/caldav {
+              return 301 $scheme://$host/remote.php/dav;
+            }
+        }
+    when: nginx_confd.stat.exists
+
+  - name: Creating NodeRED reverse proxy config
+    copy:
+      dest: /opt/docker/nginx/conf.d/nodered.conf
+      force: no
+      content: |
+        # NodeRED redirection and SSL off-loading with additional config for websockets.
+        server {
+            server_name nodered.anubis.home;
+            listen 80;
+            return 301 https://nodered.anubis.home;
+        }
+
+        server {
+            server_name nodered.anubis.home;
+            listen 443 ssl;
+            location / {
+                proxy_pass http://nodered.anubis.home:1880;
+                proxy_set_header X-Forwarded-For $remote_addr;
+                proxy_http_version 1.1;
+                proxy_set_header Upgrade $http_upgrade;
+                proxy_set_header Connection "upgrade";
+            }
+        }
+    when: nginx_confd.stat.exists
