@@ -8,6 +8,7 @@
     nginx_confd_path: /opt/docker/nginx/conf.d
 
   tasks:
+  # If Nginx is installed, reverse proxy and redirects can be configured.
   - name: Checking for Nginx installation
     stat:
       path: "{{ nginx_confd_path }}"
