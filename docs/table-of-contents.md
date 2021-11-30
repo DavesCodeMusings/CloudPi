@@ -7,29 +7,25 @@
 * [How the Documentation is Structured](document-structure.md)
 
 ## Hardware, OS, and Storage
-1. [Summary of Tasks](summary-hardware-os.md)
-2. [Hardware and Operating System](install-hardware-os.md)
-3. [Ansible and System Updates](install-ansible-and-system-updates.md)
-4. [Static Networking Parameters](configure-static-ip.md)
-5. [Provision Storage](provision-storage.md)
+1. [Hardware and Operating System](install-hardware-os.md)
+2. [Ansible and System Updates](install-ansible-and-system-updates.md)
+3. [Static Networking Parameters](configure-static-ip.md)
+4. [Provision Storage](provision-storage.md)
 
 ## Container Services
-1. Summary of Tasks
-2. [Install Docker and Portainer](install-docker-portainer.md)
-3. Using Docker-Compose
-4. Using Portainer
+1. [Install Docker and Portainer](install-docker-portainer.md)
+2. Using Docker-Compose
+3. Using Portainer
 
 ## Optional Network Services
-1. Summary of Tasks
-2. [Domain Name System](install-dns.md)
-3. [Certificate Authority](configure-certificate-authority.md)
-4. Cockpit
-5. [LDAP](install-ldap.md)
-6. [Git](deploy-git-server-stack.md)
+1. [Domain Name System](install-dns.md)
+2. [Certificate Authority](configure-certificate-authority.md)
+3. Cockpit
+4. [LDAP](install-ldap.md)
+5. [Git](deploy-git-server-stack.md)
 
 ## Application Stacks
-1. Summary of Tasks
-2. Configure Portainer to Use Optional Network Services
-3. Deploy File Sharing &ndash; Nextcloud and Samba
-4. Deploy Home Automation &ndash; Home Assistant, Mosquitto, NodeRED, ESPHome
-5. Deploy Web Services &ndash; Static Content and Reverse Proxy with Nginx
+1. Configure Portainer to Use Optional Network Services
+2. Deploy File Sharing &ndash; Nextcloud and Samba
+3. Deploy Home Automation &ndash; Home Assistant, Mosquitto, NodeRED, ESPHome
+4. Deploy Web Services &ndash; Static Content and Reverse Proxy with Nginx
