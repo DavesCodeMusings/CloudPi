@@ -22,9 +22,9 @@
 
         # Serve static files
         server {
-            listen       80;
+            listen 80;
             server_name  {{ ansible_hostname }};
-            listen       443 ssl;
+            listen 443 ssl;
             ssl_certificate  /etc/ssl/certs/{{ ansible_hostname }}.{{ ansible_domain }}.crt;
             ssl_certificate_key  /etc/ssl/private/{{ ansible_hostname }}.{{ ansible_domain }}.key;
             location / {
@@ -56,6 +56,7 @@
         }
 
         # Redirection and SSL off-loading for Nextcloud
+        # See also: https://docs.nextcloud.com/server/latest/admin_manual/configuration_server/reverse_proxy_configuration.html
         server {
             server_name nextcloud.{{ ansible_hostname }}.{{ ansible_domain }};
             listen 80;
@@ -77,7 +78,26 @@
             location = /.well-known/caldav {
                 return 301 $scheme://$host/remote.php/dav;
             }
-        }        
+        }
+        
+        # NodeRED redirection and SSL off-loading with additional config for websockets.
+        server {
+            server_name nodered.{{ ansible_hostname }}.{{ ansible_domain }};
+            listen 80;
+            return 301 https://nodered.{{ ansible_hostname }}.{{ ansible_domain }};
+        }
+
+        server {
+            server_name nodered.{{ ansible_hostname }}.{{ ansible_domain }};
+            listen 443 ssl;
+            location / {
+                proxy_pass http://nodered.{{ ansible_hostname }}.{{ ansible_domain }}:1880;
+                proxy_set_header X-Forwarded-For $remote_addr;
+                proxy_http_version 1.1;
+                proxy_set_header Upgrade $http_upgrade;
+                proxy_set_header Connection "upgrade";
+            }
+        }
 
         # Redirection for Portainer
         server {
