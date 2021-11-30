@@ -7,14 +7,16 @@
   tasks:
   - name: Create configuration directory
     file:
-      path: /opt/docker/nginx
+      path: /opt/docker/nginx/conf.d
       state: directory
       mode: '0755'
+      owner: pi
+      group: docker
 
     # Create a default.conf file, but only if none exists.
   - name: Create basic configuration file
     copy:
-      dest: /opt/docker/nginx/default.conf
+      dest: /opt/docker/nginx/conf.d/default.conf
       force: no
       content: |
         # This avoids an error message 'could not build server_names_hash'.
@@ -31,78 +33,6 @@
                 root /usr/share/nginx/html;
                 index index.html index.htm;
             }
-        }
-
-        # Redirection and SSL off-loading for ESPHome
-        server {
-            server_name esphome.{{ ansible_hostname }}.{{ ansible_domain }};
-            listen 80;
-            return 301 https://esphome.{{ ansible_hostname }}.{{ ansible_domain }};
-        }
-
-        server {
-            server_name esphome.{{ ansible_hostname }}.{{ ansible_domain }};
-            listen 443 ssl;
-            location / {
-                proxy_pass http://esphome.{{ ansible_hostname }}.{{ ansible_domain }}:6052;
-                proxy_set_header X-Forwarded-For $remote_addr;
-            }
-        }
-
-        # Redirection for Home Assistant
-        server {
-            server_name homeassistant.{{ ansible_hostname }}.{{ ansible_domain }};
-            return 301 http://homeassistant.{{ ansible_hostname}}.{{ ansible_domain }}:8123;
-        }
-
-        # Redirection and SSL off-loading for Nextcloud
-        # See also: https://docs.nextcloud.com/server/latest/admin_manual/configuration_server/reverse_proxy_configuration.html
-        server {
-            server_name nextcloud.{{ ansible_hostname }}.{{ ansible_domain }};
-            listen 80;
-            return 301 http://nextcloud.{{ ansible_hostname}}.{{ ansible_domain }}:8910;
-        }
-
-        server {
-            server_name nextcloud.{{ ansible_hostname }}.{{ ansible_domain }};
-            listen 443 ssl;
-            location / {
-                proxy_pass http://nextcloud.{{ ansible_hostname }}.{{ ansible_domain }}:8910;
-                proxy_set_header X-Forwarded-For $remote_addr;
-            }
-
-            location = /.well-known/carddav {
-                return 301 $scheme://$host/remote.php/dav;
-            }
-
-            location = /.well-known/caldav {
-                return 301 $scheme://$host/remote.php/dav;
-            }
-        }
-        
-        # NodeRED redirection and SSL off-loading with additional config for websockets.
-        server {
-            server_name nodered.{{ ansible_hostname }}.{{ ansible_domain }};
-            listen 80;
-            return 301 https://nodered.{{ ansible_hostname }}.{{ ansible_domain }};
-        }
-
-        server {
-            server_name nodered.{{ ansible_hostname }}.{{ ansible_domain }};
-            listen 443 ssl;
-            location / {
-                proxy_pass http://nodered.{{ ansible_hostname }}.{{ ansible_domain }}:1880;
-                proxy_set_header X-Forwarded-For $remote_addr;
-                proxy_http_version 1.1;
-                proxy_set_header Upgrade $http_upgrade;
-                proxy_set_header Connection "upgrade";
-            }
-        }
-
-        # Redirection for Portainer
-        server {
-            server_name portainer.{{ ansible_hostname }}.{{ ansible_domain }};
-            return 301 http://portainer.{{ ansible_hostname}}.{{ ansible_domain }}:9000;
         }
 
   - name: Create a directory for static content
