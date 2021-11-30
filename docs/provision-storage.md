@@ -3,7 +3,7 @@ In this step, you'll prepare an external storage device, either a spinning disk 
 
 By the end of this step you will have:
 1. Repartitioned the external device, preparing it for Linux filesystems.
-2. Created one or ore ext4 filesystems on that device.
+2. Created one or more ext4 filesystems on that device.
 3. Mounted the new partition so the extra space is available to the system.
 
 If you haven't [installed Ansible](Installing-Ansible-and-System-Updates) yet, that's okay. These steps are all manual. When it comes to destroying disk partitions, I'm not quite brave enough to do it automatically.
