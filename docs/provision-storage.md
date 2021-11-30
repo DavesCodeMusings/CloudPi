@@ -1,26 +1,34 @@
 # Provision External Storage
-In this step, you'll prepare an external storage device, either a spinning disk or a solid state drive. This device will used to hold data and configuration files. Particularly, files that get written to often will be placed here in an attempt to extend the life of the micro SD card.
+In this step, you'll prepare an external storage device, either a spinning disk or a solid state drive. This device will used to hold user data, application data, and application configuration files.
 
 By the end of this step you will have:
 1. Repartitioned the external device, preparing it for Linux filesystems.
-2. Created one or more ext4 filesystems on that device.
-3. Mounted the new partition so the extra space is available to the system.
+2. Installed Logical Volume Manager (LVM) tools.
+3. Created one or more logical volumes with ext4 filesystems.
+5. Mounted the new filesystems to make the extra space available to the system.
 
 If you haven't [installed Ansible](Installing-Ansible-and-System-Updates) yet, that's okay. These steps are all manual. When it comes to destroying disk partitions, I'm not quite brave enough to do it automatically.
 
 ## Can I skip it?
 You can run your entire system off of the micro-SD card if you want. There's not a lot of capacity, but if your needs are light, it will work. Where you will run into problems is with the constant writing of data, logs, and everything else to an inexpensive device that was never really designed for the task. Eventually, the SD card will get corrupted. When this happens, you'll no longer be able to access your operating system or the data it holds.
 
-With an external storage device, particularly something like a Western Digital Red or Seagate IronWolf (either spinning disk or SSD), you're relying on something designed for 24/7 operation rather than a device intended to store MP3s and pictures for your phone. Do not be tempted by that USB "backup drive" or flash drive in the weekly sale advertising circular, either. These devices are designed for intermittent use and will eventually fail if pressed into constant duty.
+With an external storage device, particularly something like a Western Digital Red or Seagate IronWolf (either spinning disk or SSD), you're relying on something designed for 24/7 operation rather than a device intended to store the occasional MP3s and pictures for your phone.
 
-With separate OS and data devices, you also have the possibility of recovering your data without restoring from backup. If the SD card becomes unusable, there's a good chance you can flash a new one and mount your external drive to get your data back.
+With separate OS and data devices, you also have a better chance of recovering your data without restoring from backup. If the SD card becomes unusable, you can flash a new one and try mounting your external drive to get your data back.
 
 >Of course, none of this helps in extreme situations like fire, flood, a plague locusts, etc. Be sure to keep [backup](https://en.wikipedia.org/wiki/Backup) copies for the important files for this reason.
 
-## Attaching and Identifying the External Storage
-The first step is to plug the device into the SATA side of the USB to SATA adapter cable plug the USB side into the Raspberry Pi. Be sure to plug it into one of the blue USB3 ports. This will ensure the best performance. To make things easier, don't plug in any other storage devices at this time. Only the external storage device should be plugged in.
+## Installing Logical Volume Manager
+There are two packages that need to be installed to take advantage of logical volumes. The first is _lvm2_ which will provide you with all the command-line utilities you need to start configuring logical volumes. The second, _udisks2-lvm2_, is installed to provide a way to manage logical volumes in Cockpit. If you're not using Cockpit, you can skip it.
 
-The next step is to identify the device. For that, use the command `sudo fdisk -l`. You should see output like the following:
+```
+sudo apt-get install lvm2 udisks2-lvm2
+```
+
+## Attaching and Identifying the External Storage
+First, plug the storage device into the SATA side of the USB to SATA adapter cable plug the USB side into the Raspberry Pi. Be sure to plug it into one of the blue USB3 ports to ensure best performance. To make the disk easier to identify, don't plug in any other storage devices at this time.
+
+Next, identify the device using the command `sudo fdisk -l`. You should see output like the following:
 ```
 pi@raspberrypi:~ $ sudo fdisk -l
 Disk /dev/sda: 149.05 GiB, 160041885696 bytes, 312581808 sectors
@@ -32,11 +40,22 @@ Disklabel type: dos
 ...
 ```
 
->There will be partition information for the microSD card as well, but it has been truncated from the sample output for clarity.
+>There will be partition information for the microSD card as well (/dev/mmcblk0), but it has been truncated from the sample output for clarity.
 
 The important things to note are the first two lines. The size and model name should match what you plugged in, otherwise something is wrong. If it's not what you expect, stop and figure out what's wrong before going any further.
 
-If everything is as expected, make note of the device node name: `/dev/sda` This should be /dev/sda, because there are no other USB storage devices plugged into the Pi (the microSD appears as /dev/mmcblk0). If /dev/sda is not shown, or there are multiple devices (like /dev/sdb, /dev/sdc, etc.), stop and figure out what's wrong before going any further.
+If everything is as expected, make note of the device node name: _/dev/sda_ This should be /dev/sda, because there are no other USB storage devices plugged into the Pi. If /dev/sda is not shown, or there are multiple devices (like /dev/sdb, /dev/sdc, etc.), stop and figure out what's wrong before going any further.
+
+## Planning the Partition Scheme
+Using logical volumes gives you a lot of flexibility. You don't have to get everything sized exactly right, because you can expand volumes later, provided you haven't allocated all of the available storage space. The thing that's difficult to change later is the partition layout. For this reason, the examples will show a 32G partition on /dev/sda1 with no filesystem created on it. Partition /dev/sda4 will get the rest of the space and be dedicated to logical volumes.
+
+The reason is this: The 32G sda1 is reserved for configuring the Pi to boot from the external USB drive, if you choose to do so. The 32G size was chosen because it's the size of a typical microSD card used with the Pi. Making the LVM partition sda4 leaves sda1, sda2, and sda3 available for boot, root, and whatever else you might need to get the Pi up and running.
+
+Here's what the partition layout will look like:
+```
+/dev/sda1  32G                (no filesystem)
+/dev/sda4  (remaining space)  LVM
+```
 
 ## Destroying the Existing FAT Partition
 Disks and SSDs may come pre-formatted with a DOS/Windows style FAT32 or NTFS partition scheme and filesystem. A FAT32 filesystem has no concept of file permissions and NTFS is not native to Linux, so it's not suitable for use as /opt/docker. The device needs to be re-formatted with a more Linux-friendly setup. 
