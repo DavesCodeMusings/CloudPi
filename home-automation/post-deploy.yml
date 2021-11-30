@@ -21,16 +21,16 @@
       content: |
         # ESPHome redirection and SSL off-loading.
         server {
-            server_name esphome.anubis.home;
+            server_name esphome.{{ ansible_hostname }}.{{ ansible_domain }};
             listen 80;
-            return 301 https://esphome.anubis.home;
+            return 301 https://esphome.{{ ansible_hostname }}.{{ ansible_domain }};
         }
 
         server {
-            server_name esphome.anubis.home;
+            server_name esphome.{{ ansible_hostname }}.{{ ansible_domain }};
             listen 443 ssl;
             location / {
-                proxy_pass http://esphome.anubis.home:6052;
+                proxy_pass http://esphome.{{ ansible_hostname }}.{{ ansible_domain }}:6052;
                 proxy_set_header X-Forwarded-For $remote_addr;
             }
         }
@@ -43,20 +43,20 @@
       content: |
         # Home Assistant redirection and SSL off-loading.
         server {
-            server_name homeassistant.anubis.home;
-            return 301 http://homeassistant.anubis.home:8123;
+            server_name homeassistant.{{ ansible_hostname }}.{{ ansible_domain }};
+            return 301 http://homeassistant.{{ ansible_hostname }}.{{ ansible_domain }}:8123;
         }
 
         # Do not use "proxy_set_header X-Forwarded-For $remote_addr;" or Home Assistant
         # will block the request.
         server {
-            server_name homeassistant.anubis.home;
+            server_name homeassistant.{{ ansible_hostname }}.{{ ansible_domain }};
             listen 443 ssl;
             location / {
-                proxy_pass http://homeassistant.anubis.home:8123;
+                proxy_pass http://homeassistant.{{ ansible_hostname }}.{{ ansible_domain }}:8123;
             }
             location /api/websocket {
-                proxy_pass http://homeassistant.anubis.home:8123;
+                proxy_pass http://homeassistant.{{ ansible_hostname }}.{{ ansible_domain }}:8123;
                 proxy_http_version 1.1;
                 proxy_set_header Upgrade $http_upgrade;
                 proxy_set_header Connection "upgrade";
@@ -71,16 +71,16 @@
       content: |
         # Nextcloud redirection and SSL off-loading using reverse proxy.
         server {
-            server_name nextcloud.anubis.home;
+            server_name nextcloud.{{ ansible_hostname }}.{{ ansible_domain }};
             listen 80;
-            return 301 https://nextcloud.anubis.home;
+            return 301 https://nextcloud.{{ ansible_hostname }}.{{ ansible_domain }};
         }
 
         server {
-            server_name nextcloud.anubis.home;
+            server_name nextcloud.{{ ansible_hostname }}.{{ ansible_domain }};
             listen 443 ssl;
             location / {
-                proxy_pass http://nextcloud.anubis.home:8910;
+                proxy_pass http://nextcloud.{{ ansible_hostname }}.{{ ansible_domain }}:8910;
                 proxy_set_header X-Forwarded-For $remote_addr;
             }
 
@@ -101,16 +101,16 @@
       content: |
         # NodeRED redirection and SSL off-loading with additional config for websockets.
         server {
-            server_name nodered.anubis.home;
+            server_name nodered.{{ ansible_hostname }}.{{ ansible_domain }};
             listen 80;
-            return 301 https://nodered.anubis.home;
+            return 301 https://nodered.{{ ansible_hostname }}.{{ ansible_domain }};
         }
 
         server {
-            server_name nodered.anubis.home;
+            server_name nodered.{{ ansible_hostname }}.{{ ansible_domain }};
             listen 443 ssl;
             location / {
-                proxy_pass http://nodered.anubis.home:1880;
+                proxy_pass http://nodered.{{ ansible_hostname }}.{{ ansible_domain }}:1880;
                 proxy_set_header X-Forwarded-For $remote_addr;
                 proxy_http_version 1.1;
                 proxy_set_header Upgrade $http_upgrade;
