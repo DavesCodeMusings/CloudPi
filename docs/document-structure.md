@@ -1,4 +1,4 @@
-# How This Document is Structured
+# How the Documentation is Structured
 Life is short. Time is a precious commodity. I don't want to waste yours with a bunch of meaningless drivel. To that end, I've structured the Cloud Pi documentation in a way that gets the important bits up front and lets you know when it's okay to skip steps and what the consequences will be.
 
 # Can I Skip This?
