@@ -31,12 +31,11 @@ First, plug the storage device into the SATA side of the USB to SATA adapter cab
 Next, identify the device using the command `sudo fdisk -l`. You should see output like the following:
 ```
 pi@raspberrypi:~ $ sudo fdisk -l
-Disk /dev/sda: 149.05 GiB, 160041885696 bytes, 312581808 sectors
-Disk model: MHZ2160BH G2
+Disk /dev/sda: 931.51 GiB, 1000204886016 bytes, 1953525168 sectors
+Disk model: 100T1R0A-68A4W0
 Units: sectors of 1 * 512 = 512 bytes
 Sector size (logical/physical): 512 bytes / 4096 bytes
 I/O size (minimum/optimal): 4096 bytes / 4096 bytes
-Disklabel type: dos
 ...
 ```
 
@@ -90,7 +89,7 @@ Partition type
    e   extended (container for logical partitions)
 Select (default p): p
 Partition number (1-4, default 1):
-First sector (2048-312581807, default 2048): +32G
+First sector (2048-312581807, default 2048):
 Last sector, +/-sectors or +/-size{K,M,G,T,P} (2048-312581807, default 312581807):
 
 Created a new partition 1 of type 'Linux' and of size 108 GiB.
