@@ -36,6 +36,11 @@ If all goes well, it will do the same as if you had typed `sudo apt-get update`,
 
 >Regular upgrades ensure the system is current and secure. Keep the playbook handy and run it periodically. Running the update playbook can take a while, particularly when running it the first time. Patience is the key.
 
+```
+pi@raspberrypi:~/cloudpi $ vi upgrade-system.yml
+pi@raspberrypi:~/cloudpi $ ansible-playbook upgrade-system.yml
+```
+
 ## Next Steps
 With Ansible installed and updates done, it's time to [configure a static IP address and other network parameters](configure-static-ip.md) for the Pi.
 
