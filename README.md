@@ -1,7 +1,7 @@
 ![CloudPi96px](https://user-images.githubusercontent.com/61114342/143794062-17bc25c9-b9d1-4450-a6e4-f67148be7a46.png)
 
 # CloudPi
-Oh, you run a web server on your Raspberry Pi? That's so cute. This one runs...
+Oh, you run a web server on your Raspberry Pi? That's so cute. CloudPi runs...
 * [Nextcloud](https://nextcloud.com/)
 * [Samba](https://www.samba.org/)
 * [Home Assistant](https://www.home-assistant.io/)
