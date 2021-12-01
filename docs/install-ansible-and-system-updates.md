@@ -19,6 +19,14 @@ Ansible is available as an apt package. But, the latest version is going to be f
 
 > There are a few ways you can download the Ansible installation script and subsequent playbooks. Visit [the Cloud Pi GitHub repository](https://github.com/DavesCodeMusings/CloudPi) and open each file, copying and pasting the contents locally as you need it. You can also use the green Code button to download the entire archive in one zip file. For advanced users, you can clone the repository to your Pi. Everything is text-based, so any of these methods will work.
 
+```
+pi@raspberrypi:~ $ mkdir cloudpi
+pi@raspberrypi:~ $ cd cloudpi/
+pi@raspberrypi:~/cloudpi $ vi install-ansible.sh
+pi@raspberrypi:~/cloudpi $ chmod +x install-ansible.sh
+pi@raspberrypi:~/cloudpi $ ./install-ansible.sh
+```
+
 ## Testing Ansible with System Updates
 It's good practice to update the Raspberry Pi OS before getting started with installing anything else. The update is done with an Ansible playbook called [upgrade-system.yml](https://github.com/DavesCodeMusings/CloudPi/blob/main/upgrade-system.yml)
 
