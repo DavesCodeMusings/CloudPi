@@ -134,9 +134,9 @@ sudo lvcreate -L 10G -n vol01 vg1
 ```
 
 ## Creating the Filesystem
-With the logical volume created, writing a filesystem is not much different than when it's written to a single partition. The command `sudo mkfs.ext4 /dev/vg0/vol01` will create an ext4 filesystem on the logical volume.
+With the logical volume created, writing a filesystem is not much different than when it's written to a single partition. The command `sudo mkfs.ext4 /dev/vg1/vol01` will create an ext4 filesystem on the logical volume.
 
-When the command finishes, run a filesystem check on it with the command `sudo fsck /dev/vg0/vol01` and look for /dev/vg0/vol01: clean in the output.
+When the command finishes, run a filesystem check on it with the command `sudo fsck /dev/vg1/vol01` and look for /dev/vg1/vol01: clean in the output.
 
 ## Editing /etc/fstab
 To ensure the new filesystems get mounted on their directories every time the system starts up, they needs to be put into /etc/fstab. To use this first logical volume for storing docker persistent data, it will be mounted on `/opt/docker`. The `/etc/fstab` entry will look like the line below.
