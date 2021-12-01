@@ -116,10 +116,10 @@ Syncing disks.
 The flexibility of logical volumes comes with a little bit of added complexity when it comes to initial setup. Rather than just writing a filesystem onto a partition, there are actually three steps that need to be performed first.
 
 ### Creating the LVM Physical Volume
-The command `pvcreate /dev/sdb4` will write an LVM physical volume signature to the partition.
+The command `pvcreate /dev/sda4` will write an LVM physical volume signature to the partition.
 
 ### Creating the Volume Group
-`vgcreate vg1 /dev/sdb4` will assign the physical volume on sdb4 to a volume group called _vg1_. This will appear in the `/dev` directory as a subdirectory `/dev/vg1`.
+`vgcreate vg1 /dev/sda4` will assign the physical volume on sda4 to a volume group called _vg1_. This will appear in the `/dev` directory as a subdirectory `/dev/vg1`.
 
 ### Creating Volumes
 `lvcreate -L 16G -n vol01 vg1` will create a sixteen gigbyte logical volume as part of the _vg1_ volume group. The volume will appear as a symlink inside the volume group subdirectory: `/dev/vg1/vol01`. You can also refer to it as: `/dev/mapper/vg1-vol01`. In fact, this is the preferred way of specifying a logical volume in `/etc/fstab`.
@@ -128,8 +128,8 @@ The command `pvcreate /dev/sdb4` will write an LVM physical volume signature to 
 Here it is one more time, all together.
 
 ```
-pvcreate /dev/sdb4
-vgcreate vg1 /dev/sdb4
+pvcreate /dev/sda4
+vgcreate vg1 /dev/sda4
 lvcreate -L 10G -n vol01 vg1
 ```
 
