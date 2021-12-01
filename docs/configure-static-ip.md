@@ -107,7 +107,7 @@ First, copy the [configure-hostname.yml](https://github.com/DavesCodeMusings/Clo
 
 Here's an example:
 ```
-pi@raspberrypi:~/cloudpi $ ansible-playbook ansible-playbook configure-hostname.yml --extra-vars host=mypi
+pi@raspberrypi:~/cloudpi $ ansible-playbook configure-hostname.yml --extra-vars host=mypi
 
 PLAY [Configure Hostname] ******************************************************
 
