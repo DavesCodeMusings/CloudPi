@@ -1,5 +1,5 @@
 # Provision External Storage
-In this step, you'll prepare an external storage device, either a spinning disk or a solid state drive. This device will used to hold user data, application data, and application configuration files.
+In this step, you'll prepare an external storage device, either a spinning disk or a solid state drive. This device will used to hold configuration files for Docker containers; Docker containers, Docker images and Docker volumes; with the rest of the space allocated to user files.
 
 By the end of this step you will have:
 1. Repartitioned the external device, preparing it for Linux logical volumes.
