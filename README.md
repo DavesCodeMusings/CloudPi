@@ -15,7 +15,7 @@ Oh, you run a web server on your Raspberry Pi? That's so cute. CloudPi runs...
 * [OpenSSL Certificate Authority (CA)](https://www.openssl.org/)
 * And there's an [Nginx](https://nginx.org/en/) web server, too.
 
-Build it yourself, quickly and easily, using Ansible automation.
+Build it yourself, quickly and easily, using [Ansible](https://www.ansible.com/) automation.
 
 ---
 
