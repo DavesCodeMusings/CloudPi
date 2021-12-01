@@ -47,13 +47,15 @@ The important things to note are the first two lines. The size and model name sh
 If everything is as expected, make note of the device node name: _/dev/sda_ This should be /dev/sda, because there are no other USB storage devices plugged into the Pi. If /dev/sda is not shown, or there are multiple devices (like /dev/sdb, /dev/sdc, etc.), stop and figure out what's wrong before going any further.
 
 ## Planning the Partition Scheme
-Using logical volumes gives you a lot of flexibility. You don't have to get everything sized exactly right, because you can expand volumes later, provided you haven't allocated all of the available storage space. The thing that's difficult to change later is the partition layout. For this reason, the examples will show a 32G partition on /dev/sda1 with no filesystem created on it. Partition /dev/sda4 will get the rest of the space and be dedicated to logical volumes.
+Using logical volumes gives you a lot of flexibility. You don't have to get everything sized exactly right, because you can expand volumes later, provided you haven't allocated all of the available storage space. The one thing that's difficult to change later is the partition layout, the layer below the logical volumes. For this reason, the examples will show a 32G of empty space and the logical volume (LVM) partition configured as /dev/sda4, using the remaining space.
 
-The reason is this: The 32G sda1 is reserved for configuring the Pi to boot from the external USB drive, if you choose to do so. The 32G size was chosen because it's the size of a typical microSD card used with the Pi. Making the LVM partition sda4 leaves sda1, sda2, and sda3 available for boot, root, and whatever else you might need to get the Pi up and running.
+The reason is this: The 32G is reserved for configuring the Pi to boot from the external USB drive, if you choose to do so. The 32G size was chosen because it's the size of a typical microSD card used with the Pi. Making the LVM partition sda4 leaves sda1, sda2, and sda3 available for boot, root, and whatever else you might need to get the Pi up and running.
+
+You don't have to lay it out like this. You can allocate all of the space to a single partition used for LVM. But if you're using a high-capacity SSD, 32G is not much to give up for keeping your options open.
 
 Here's what the partition layout will look like:
 ```
-/dev/sda1  32G                (no filesystem)
+           32G                (free space)
 /dev/sda4  (remaining space)  LVM
 ```
 
@@ -76,10 +78,8 @@ Partition 1 has been deleted.
 
 You can verify it's gone by using the `p` command again.
 
-## Creating Linux Partitions
-Rather than can allocating the entire disk to a single partition, we'll create three of them. One will hold the filesystem for `/opt/docker` and this will be used for Docker container config files. The second partition will be for `/var/lib/docker`. The third partition will be for the `/srv` filesystem and will hold the bulk of the data being stored by various network services.
-
-Here's an example of the fdisk commands used:
+## Creating Linux LVM Partition
+Here's an example of the fdisk command used:
 
 ```
 Command (m for help): n
@@ -88,53 +88,19 @@ Partition type
    e   extended (container for logical partitions)
 Select (default p): p
 Partition number (1-4, default 1):
-First sector (2048-312581807, default 2048):
-Last sector, +/-sectors or +/-size{K,M,G,T,P} (2048-312581807, default 312581807): +10G
+First sector (2048-312581807, default 2048): +32G
+Last sector, +/-sectors or +/-size{K,M,G,T,P} (2048-312581807, default 312581807):
 
-Created a new partition 1 of type 'Linux' and of size 10 GiB.
+Created a new partition 1 of type 'Linux' and of size 108 GiB.
 
-Command (m for help): n
-Partition type
-   p   primary (1 primary, 0 extended, 3 free)
-   e   extended (container for logical partitions)
-Select (default p): p
-Partition number (2-4, default 2):
-First sector (20973568-312581807, default 20973568):
-Last sector, +/-sectors or +/-size{K,M,G,T,P} (20973568-312581807, default 312581807): +20G
+Command (m for help): t
+Partition number (1,4, default 4): 4
+Hex code or alias (type L to list all): lvm
 
-Created a new partition 2 of type 'Linux' and of size 20 GiB.
-
-Command (m for help): n
-Partition type
-   p   primary (2 primary, 0 extended, 2 free)
-   e   extended (container for logical partitions)
-Select (default p): p
-Partition number (3,4, default 3):
-First sector (62916608-312581807, default 62916608):
-Last sector, +/-sectors or +/-size{K,M,G,T,P} (62916608-312581807, default 312581807):
-
-Created a new partition 3 of type 'Linux' and of size 119 GiB.
+Changed type of partition 'Linux' to 'Linux LVM'.
 ```
 
->The example above shows three partitions on my 160G drive. My plan is to use the first, 10G partition for `/opt/docker` to store configuration files and other persistent data for Docker containers using [bind mounts](https://docs.docker.com/storage/bind-mounts/). The second, 20G partition is where I plan to mount the `/var/lib/docker` filesystem. This is the area where Docker stores container images, running containers, and volumes. The third partition, with the rest of the space, will get mounted on /srv. This is where I will create sub-directories to store miscellaneous documents, media files, and everything else I want to make available over my home network.
-
-As it is now, the partition table is in memory only and has not been written to the disk. You can still quit fdisk without losing your original partition scheme. Before making the changes permanent, give the partition table one final check using the `p` command to print it. Below is what my three partition scheme looks like. Yours will look different depending on the disk size and how you chose to divide the space.
-
-```
-Command (m for help): p
-Disk /dev/sda: 149.05 GiB, 160041885696 bytes, 312581808 sectors
-Disk model: MHZ2160BH G2
-Units: sectors of 1 * 512 = 512 bytes
-Sector size (logical/physical): 512 bytes / 4096 bytes
-I/O size (minimum/optimal): 4096 bytes / 4096 bytes
-Disklabel type: dos
-Disk identifier: 0x7d881d1a
-
-Device     Boot    Start       End   Sectors  Size Id Type
-/dev/sda1           2048  20973567  20971520   10G 83 Linux
-/dev/sda2       20973568  62916607  41943040   20G 83 Linux
-/dev/sda3       62916608 312581807 249665200  119G 83 Linux
-```
+As it is now, the partition table is in memory only and has not been written to the disk. You can still quit fdisk without losing your original partition scheme. Before making the changes permanent, give the partition table one final check using the `p` command to print it.
 
 If everything looks good, use the `w` command to commit the changes to disk.
 
@@ -145,14 +111,21 @@ Calling ioctl() to re-read partition table.
 Syncing disks.
 ```
 
-Now that the disk partitions are set up, it's time to create the filesystems.
+## Creating the LVM Physical Volume
+TODO
+
+## Creating the Volume Group
+TODO
+
+## Creating Volumes
+TODO
  
 ## Creating the ext4 Filesystems
-After planning and creating the proper partition scheme, creating the filesystems is simple. In the examples, I'm using the ext4 filesystem. You can use something else if you want, but ext4 is a good, reliable choice. (You may have noticed ext4 is the same one used by the Raspberry Pi OS root partition.)
+In the examples, I'm using the ext4 filesystem. You can use something else if you want, but ext4 is a good, reliable choice. (You may have noticed ext4 is the same one used by the Raspberry Pi OS root partition.)
 
-The command is simply `sudo mkfs.ext4 /dev/sda1` to create it. Depending on the size of the drive it can take a little while to finish.
+The command is simply `sudo mkfs.ext4 /dev/vg0/vol01` to create it. Depending on the size of the drive it can take a little while to finish.
 
-When it's done, run a filesystem check on it with the command `sudo fsck /dev/sda1` and look for /dev/sda1: clean in the output.
+When it's done, run a filesystem check on it with the command `sudo fsck /dev/vg0/vol01` and look for /dev/vg0/vol01: clean in the output.
 
 Repeat the process for all of the partitions you've created.
 
