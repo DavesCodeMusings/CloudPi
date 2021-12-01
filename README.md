@@ -2,18 +2,18 @@
 
 # CloudPi
 Oh, you run a web server on your Raspberry Pi? That's so cute. This one runs...
-* Nextcloud
-* Samba
-* Home Assistant
-* NodeRED
-* Mosquitto MQTT
-* Gitea
-* Portainer
-* OpenLDAP
-* BIND9 DNS
-* TLS Certificate Authority (CA)
+* [Nextcloud](https://nextcloud.com/)
+* [Samba](https://www.samba.org/)
+* [Home Assistant](https://www.home-assistant.io/)
+* [NodeRED](https://nodered.org/)
+* [Mosquitto MQTT](https://mosquitto.org/)
+* [Gitea](https://gitea.com/)
+* [Portainer](https://www.portainer.io/)
+* [OpenLDAP](https://www.openldap.org/)
+* [BIND9 DNS](https://www.isc.org/bind/)
+* [OpenSSL Certificate Authority (CA)](https://www.openssl.org/)
 
-Oh yeah, and there's an Nginx web server too.
+Oh yeah, and there's an [Nginx](https://nginx.org/en/) web server too.
 
 ---
 
