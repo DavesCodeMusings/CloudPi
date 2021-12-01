@@ -1,16 +1,21 @@
 ![CloudPi96px](https://user-images.githubusercontent.com/61114342/143794062-17bc25c9-b9d1-4450-a6e4-f67148be7a46.png)
 
 # CloudPi
-Turn a Raspberry Pi 4 into an on-premise cloud with a minimum of fuss.
+Oh, you run a web server on your Raspberry Pi? That's so cute. This one runs...
+* Nextcloud
+* Samba
+* Home Assistant
+* NodeRED
+* Mosquitto MQTT
+* Gitea
+* Portainer
+* OpenLDAP
+* BIND9 DNS
+* TLS Certificate Authority (CA)
 
-What you get:
+Oh yeah, and there's an Nginx web server too.
 
-* NextCloud as an on-premise file sharing and collaboration application.
-* Docker Community Edition container environment.
-* Portainer management app for easy Docker administration.
-* Locally hosted DNS, LDAP and git repositories.
-* Ansible playbooks and docker-compose stacks for automating installation.
-* Headless server operation.
+---
 
 The CloudPi project is in a state of flux at the moment. With the release of Raspberry Pi OS 11 (Bullseye) everything is getting reworked. The new version is here:
 
