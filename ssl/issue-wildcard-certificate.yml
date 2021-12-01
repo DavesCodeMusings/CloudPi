@@ -28,7 +28,7 @@
       subject_alt_name:
       - "DNS:{{ ansible_hostname }}.{{ ansible_domain }}"
       - "DNS:esphome.{{ ansible_hostname }}.{{ ansible_domain }}"
-      - "DNS:git.{{ ansible_hostname }}.{{ ansible_domain }}"
+      - "DNS:gitea.{{ ansible_hostname }}.{{ ansible_domain }}"
       - "DNS:homeassistant.{{ ansible_hostname }}.{{ ansible_domain }}"
       - "DNS:nextcloud.{{ ansible_hostname }}.{{ ansible_domain }}"
       - "DNS:nodered.{{ ansible_hostname }}.{{ ansible_domain }}"
