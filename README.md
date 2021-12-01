@@ -1,3 +1,5 @@
+![CloudPi96px](https://user-images.githubusercontent.com/61114342/143794062-17bc25c9-b9d1-4450-a6e4-f67148be7a46.png)
+
 # CloudPi
 Turn a Raspberry Pi 4 into an on-premise cloud with a minimum of fuss.
 
