@@ -26,7 +26,6 @@
   - name: Set the hostname
     ansible.builtin.hostname:
       name: "{{ host }}.{{ domain }}"
-      use: debian
 
   - name: Create /etc/hosts
     ansible.builtin.copy:
