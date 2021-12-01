@@ -16,7 +16,7 @@ Now that you've customized your host and domain names, you can move on to the IP
 
 Here's an example:
 ```
-ansible-playbook configure-static-ip.yml --extra-vars ip=192.168.1.100
+pi@raspberrypi:~/cloudpi $ ansible-playbook configure-static-ip.yml --extra-vars ip=192.168.1.100
 
 PLAY [Configure Static IP] *****************************************************
 
@@ -107,7 +107,7 @@ First, copy the [configure-hostname.yml](https://github.com/DavesCodeMusings/Clo
 
 Here's an example:
 ```
-ansible-playbook ansible-playbook configure-hostname.yml --extra-vars host=mypi
+pi@raspberrypi:~/cloudpi $ ansible-playbook ansible-playbook configure-hostname.yml --extra-vars host=mypi
 
 PLAY [Configure Hostname] ******************************************************
 
