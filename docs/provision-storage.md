@@ -49,14 +49,16 @@ If everything is as expected, make note of the device node name: _/dev/sda_ This
 ## Planning the Partition Scheme
 Using logical volumes gives you a lot of flexibility. You don't have to get everything sized exactly right, because you can expand volumes later, provided you haven't allocated all of the available storage space. The one thing that's difficult to change later is the partition layout, the layer below the logical volumes. For this reason, the examples will show a 32G of empty space and the logical volume (LVM) partition configured as /dev/sda4, using the remaining space.
 
-The reason is this: The 32G is reserved for configuring the Pi to boot from the external USB drive, if you choose to do so. The 32G size was chosen because it's the size of a typical microSD card used with the Pi. Making the LVM partition sda4 leaves sda1, sda2, and sda3 available for boot, root, and whatever else you might need to get the Pi up and running.
+>The 32G size was chosen because it's the same size as a typical microSD card used with the Pi. It's reserved for configuring the Pi to boot from the external USB drive, if you choose to do so. Making the LVM partition sda4 leaves sda1, sda2, and sda3 available for boot, root, and whatever else you might need to get the Pi up and running.
 
-You don't have to lay it out like this. You can allocate all of the space to a single partition used for LVM. But if you're using a high-capacity SSD, 32G is not much to give up for keeping your options open.
+You don't have to lay it out this way. You can allocate all of the space to a single partition used for LVM. But if you're using a high-capacity SSD, 32G is not much to trade for keeping your options open.
 
-Here's what the partition layout will look like:
+Here's what the partition layout will look like when everything is done:
 ```
-           32G                (free space)
-/dev/sda4  (remaining space)  LVM
+sudo parted /dev/sdb print
+...
+Number  Start   End      Size     Type     File system  Flags
+ 4      34.4GB  161.9GB  127.5GB  primary               lvm
 ```
 
 ## Destroying the Existing FAT Partition
@@ -111,41 +113,47 @@ Calling ioctl() to re-read partition table.
 Syncing disks.
 ```
 
-## Creating the LVM Physical Volume
-TODO
+## Using the Partition with LVM
+The flexibility of logical volumes comes with a little bit of added complexity when it comes to initial setup. Rather than just writing a filesystem onto a partition, there are actually three steps that need to be performed first.
 
-## Creating the Volume Group
-TODO
+### Creating the LVM Physical Volume
+The command `pvcreate /dev/sdb4` will write an LVM physical volume signature to the partition.
 
-## Creating Volumes
-TODO
- 
-## Creating the ext4 Filesystems
-In the examples, I'm using the ext4 filesystem. You can use something else if you want, but ext4 is a good, reliable choice. (You may have noticed ext4 is the same one used by the Raspberry Pi OS root partition.)
+### Creating the Volume Group
+`vgcreate vg1 /dev/sdb4` will assign the physical volume on sdb4 to a volume group called _vg1_. This will appear in the `/dev` directory as a subdirectory `/dev/vg1`.
 
-The command is simply `sudo mkfs.ext4 /dev/vg0/vol01` to create it. Depending on the size of the drive it can take a little while to finish.
+### Creating Volumes
+`lvcreate -L 16G -n vol01 vg1` will create a sixteen gigbyte logical volume as part of the _vg1_ volume group. The volume will appear as a symlink inside the volume group subdirectory: `/dev/vg1/vol01`. You can also refer to it as: `/dev/mapper/vg1-vol01`. In fact, this is the preferred way of specifying a logical volume in `/etc/fstab`.
 
-When it's done, run a filesystem check on it with the command `sudo fsck /dev/vg0/vol01` and look for /dev/vg0/vol01: clean in the output.
+### Summary of Commands
+Here it is one more time, all together.
 
-Repeat the process for all of the partitions you've created.
+```
+pvcreate /dev/sdb4
+vgcreate vg1 /dev/sdb4
+lvcreate -L 10G -n vol01 vg1
+```
+
+## Creating the Filesystem
+With the logical volume created, writing a filesystem is not much different than when it's written to a single partition. The command `sudo mkfs.ext4 /dev/vg0/vol01` will create an ext4 filesystem on the logical volume.
+
+When the command finishes, run a filesystem check on it with the command `sudo fsck /dev/vg0/vol01` and look for /dev/vg0/vol01: clean in the output.
 
 ## Editing /etc/fstab
-To ensure the new filesystems get mounted on their directories every time the system starts up, they needs to be put into /etc/fstab. Looking at /etc/fstab on the Raspberry Pi, you'll notice there is no mention of devices /dev/sda or /dev/mccblk0. Instead everything is referred to by PARTUUID, or partition universally unique identifier. This is necessary, because USB devices are hot-plugable and could conceivably show up in any order.
-
-Finding the PARTUUID for a device is as easy as running the command `lsblk -dno PARTUUID /dev/sda1`
-> Yes, there is a fair amount of sarcasm in that statement. I had to search high and low to find that command, eventually discovering it on an ArchLinux discussion forum. So kudos to that project for sharing the knowledge.
-
-Once the PARTUUID is known, creating a new entry is a matter of using the existing entries as a guide and adjusting a few parameters. In the end, the new line in /etc/fstab should look like the one below. Obviously, you'll need to adjust the UUID to match the output given by the `lsblk` command.
-```
-PARTUUID=1234abcd-01 /opt/docker      ext4    defaults,noatime  0       2
-```
-
-Again, you'll want to repeat for all of the partitions you've created. Following the example with three partitions, it'll look more like this:
+To ensure the new filesystems get mounted on their directories every time the system starts up, they needs to be put into /etc/fstab. To use this first logical volume for storing docker persistent data, it will be mounted on `/opt/docker`. The `/etc/fstab` entry will look like the line below.
 
 ```
-PARTUUID=1234abcd-01 /opt/docker      ext4    defaults,noatime  0       2
-PARTUUID=1234abcd-02 /var/lib/docker  ext4    defaults,noatime  0       2
-PARTUUID=1234abcd-01 /srv             ext4    defaults,noatime  0       2
+/dev/mapper/vg1-vol01  /opt/docker      ext4    defaults,noatime  0       2
+```
+
+You'll need to repeat the `lvcreate` and `mkfs.ext4` commands for a volume to hold the Docker containers and Docker volumes. 20G is a good starting point, if you have a large storage device. A portion of the remaining space can be used for any files you want to share on your network.
+
+When you're done, the `/etc/fstab entries will look like this:
+
+```
+/dev/mapper/vg1-vol01  /opt/docker      ext4    defaults,noatime  0       2
+/dev/mapper/vg1-vol03  /var/lib/docker  ext4    defaults,noatime  0       2
+/dev/mapper/vg1-vol02  /srv             ext4    defaults,noatime  0       2
 ```
 
 ## Mounting the new Filesystems
@@ -164,11 +172,11 @@ sudo mount /srv
 Check to make sure everything went as planned by first issuing the command `df -t ext4`. You should see optput similar to the one below. The sizes will vary depending on the capacity of your device.
 
 ```
-Filesystem      Size  Used Avail Use% Mounted on
-/dev/root        29G  2.0G   26G   8% /
-/dev/sda1       9.8G   24K  9.3G   1% /opt/docker
-/dev/sda2        20G   24K   19G   1% /var/lib/docker
-/dev/sda3       117G   24K  111G   1% /srv
+Filesystem             Size  Used Avail Use% Mounted on
+/dev/root               29G  2.0G   26G   8% /
+/dev/mapper/vg1-vol01  9.8G   24K  9.3G   1% /opt/docker
+/dev/mapper/vg1-vol02   20G   24K   19G   1% /var/lib/docker
+/dev/mapper/vg1-vol03  117G   24K  111G   1% /srv
 ```
 
 ## Next Steps
