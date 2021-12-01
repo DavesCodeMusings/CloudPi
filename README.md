@@ -13,8 +13,9 @@ Oh, you run a web server on your Raspberry Pi? That's so cute. CloudPi runs...
 * [OpenLDAP](https://www.openldap.org/)
 * [BIND9 DNS](https://www.isc.org/bind/)
 * [OpenSSL Certificate Authority (CA)](https://www.openssl.org/)
+* And there's an [Nginx](https://nginx.org/en/) web server, too.
 
-And there's an [Nginx](https://nginx.org/en/) web server, too.
+Build it yourself, quickly and easily, using Ansible automation.
 
 ---
 
