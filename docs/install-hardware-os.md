@@ -40,6 +40,8 @@ I will tell you that you'll need to use the advanced option of the [Raspberry Pi
 
 Other than the lack of keyboard and monitor, the installation of the Raspberry Pi components is just like any other system.
 
+If you need a refresher on Raspberry Pi Imager, see this [slideshow of screenshots](raspberry-pi-imager.md)
+
 ## Powering Up
 Plug the Pi in a wired network connection first, then plug in the power supply. Watch the flashing green storage activity light near the SD card and the network link lights on the RJ-45 jack to gauge the progress. Once the network link light is on and the storage activity indicator calms, you can try making a connection via SSH.
 
