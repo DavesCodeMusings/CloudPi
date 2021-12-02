@@ -5,40 +5,30 @@
   become: true
 
   tasks:
-  - name: Install apt key for official repository
+  - name: Installing apt key for official repository
     apt_key:
       url: https://download.docker.com/linux/raspbian/gpg
       state: present
   - name: Add official repository
     apt_repository:
-      repo: deb [arch=armhf] https://download.docker.com/linux/raspbian buster stable
+      repo: deb [arch=armhf] https://download.docker.com/linux/raspbian bullseye stable
   - name: Install Docker
     apt:
       name: docker-ce
       state: latest
       update_cache: true
-    notify:
-    - Install community.docker from Ansible Galaxy
 
-  - name: Add pi user to docker group
+  - name: Installing Docker Compose
+    shell:
+      cmd: pip3 install docker-compose
+
+  - name: Adding pi user to docker group
     user:
       name: pi
       groups: docker
 
-  - name: Start Docker
+  - name: Starting Docker
     systemd:
       name: docker
       enabled: yes
       state: started
-
-  - name: Install Docker Python module
-    pip:
-      name: docker
-      state: present
-
-  handlers:
-  # As far as I know, there is no Ansible module to install Galaxy collections.
-  # So for now, this is a shell command that happens after Docker is installed.
-  - name: Install community.docker from Ansible Galaxy
-    shell:
-      cmd: ansible-galaxy collection install community.docker
