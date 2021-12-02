@@ -13,7 +13,7 @@
 
   # RFC6762 reserves .local for Multicast DNS. See Appendix G to find
   # acceptable names for a local area network top-level domain.
-  - name: Verify zero-configuration .local domain is not being used.
+  - name: Verifying zero-configuration .local domain is not being used.
     debug:
       msg: Configuring for {{ ansible_domain }}
     failed_when: ansible_domain == "local" or ansible_domain == ""
@@ -22,13 +22,13 @@
   # This playbook is only equiped to deal with a Class C subnet.
   # While this should sufice for 99% of home network installations,
   # this step will fail when it's not Class C as expected.
-  - name: Create Numeric Part of Reverse Lookup Zone Name
+  - name: Creating Numeric Part of Reverse Lookup Zone Name
     set_fact:
       reverse_address: "{{ ansible_default_ipv4.network.split('.')[2] }}.{{ ansible_default_ipv4.network.split('.')[1] }}.{{ ansible_default_ipv4.network.split('.')[0] }}"
     failed_when: ansible_default_ipv4.netmask != '255.255.255.0'
 
   # A good configuration should return no errors in the output.
-  - name: Verify good starting configuration.
+  - name: Verifying good starting configuration.
     shell:
       cmd: named-checkconf
     register: named_checkconf
@@ -38,7 +38,7 @@
   # This playbook will not overwrite the file if it already exists.
   # Some manual adjustment of spacing will be required for columns to
   # line up properly.
-  - name: Configure forward lookup zonefile.
+  - name: Configuring forward lookup zonefile.
     copy:
       dest: /etc/bind/db.{{ domain }}
       force: no
@@ -84,7 +84,7 @@
         1             PTR     router.{{ domain }}.
         {{ ansible_eth0.ipv4.address.split('.')[3] }}            PTR     {{ ansible_hostname }}.{{ domain }}.
 
-  - name: Verify reverse lookup zonefile.
+  - name: Verifying reverse lookup zonefile.
     shell:
       cmd: named-checkzone {{ reverse_address }}.in-addr.arpa /etc/bind/db.{{ reverse_address }}
     register: named_checkzone
@@ -93,19 +93,19 @@
   # After the zones are added to named.conf.local, it is advisable to not
   # hand-edit the entries. Doing so can confuse Ansible's lineinfile and
   # result in an unstable configuration if this playbook is run again.
-  - name: Add forward lookup to local configuration.
+  - name: Adding forward lookup to local configuration.
     lineinfile:
       path: /etc/bind/named.conf.local
       regexp: '^zone "{{ domain }}" { type master; file "/etc/bind/db.{{ domain }}"; };$'
       line: "zone \"{{ domain }}\" { type master; file \"/etc/bind/db.{{ domain }}\"; };\n"
 
-  - name: Add reverse lookup to local configuration.
+  - name: Adding reverse lookup to local configuration.
     lineinfile:
       path: /etc/bind/named.conf.local
       regexp: '^zone "{{ reverse_address }}.in-addr.arpa" { type master; file "/etc/bind/db.{{ reverse_address }}"; };$'
       line: "zone \"{{ reverse_address }}.in-addr.arpa\" { type master; file \"/etc/bind/db.{{ reverse_address }}\"; };\n"
 
-  - name: Verify good final configuration.
+  - name: Verifying good final configuration.
     shell:
       cmd: named-checkconf
     register: named_checkconf
