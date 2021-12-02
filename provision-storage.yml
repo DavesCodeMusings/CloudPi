@@ -1,0 +1,85 @@
+---
+- name: Provision external storage device for logical volumes (LVM)
+  hosts: localhost
+  connection: local
+  become: true
+
+  vars:
+    device: /dev/sda
+    confirm_device: /dev/sdXX
+    partition: 1
+    volume_group: vg1
+    logical_volumes:
+    - name: vol01
+      mount_point: /opt/docker
+      size: 10G
+    - name: vol02
+      mount_point: /var/lib/docker
+      size: 20G
+    - name: vol03
+      mount_point: /srv
+      size: 100G
+
+  tasks:
+  # Verify device against confirm_device variable as a sort of failsafe.
+  - name: Verifying device
+    community.general.parted:
+      device: "{{ device }}"
+      unit: MiB
+    register: device_info
+    failed_when: not device_info.disk.dev == confirm_device
+
+  - name: Installing LVM2
+    apt:
+      name: lvm2
+      state: latest
+      update_cache: yes
+
+  # Use the whole device as a single LVM partition in a GUID partition table.
+  - name: Repartitioning device
+    community.general.parted:
+      device: "{{ device }}"
+      label: gpt
+      number: "{{ partition }}"
+      flags: [ lvm ]
+      state: present
+
+  - name: Creating volume group
+    community.general.lvg:
+      vg: "{{ volume_group }}"
+      pvs: "{{ device }}{{ partition }}"
+
+  - name: Creating volumes for Docker persistent data
+    community.general.lvol:
+      vg: "{{ volume_group }}"
+      lv: "{{ item.name }}"
+      size: "{{ item.size }}"
+    with_items:
+    - "{{ logical_volumes }}"
+
+  - name: Creating filesystem for Docker persistent data
+    filesystem:
+      fstype: ext4
+      dev: "/dev/{{ volume_group }}/{{ item.name }}"
+    with_items:
+    - "{{ logical_volumes }}"
+
+  - name: Creating directory for Docker persistent config
+    file:
+      path: "{{ item.mount_point }}"
+      state: directory
+    with_items:
+    - "{{ logical_volumes }}"
+
+  # The mount module also adds filesystems to /etc/fstab.
+  - name: Mounting filesystem for Docker persistent config
+    mount:
+      path: "{{ item.mount_point }}"
+      src: "/dev/{{ volume_group }}/{{ item.name }}"
+      fstype: ext4
+      opts: defaults,noatime
+      state: mounted
+    with_items:
+    - "{{ logical_volumes }}"
+
+# Reference: https://www.redhat.com/sysadmin/automating-logical-volume-manager
