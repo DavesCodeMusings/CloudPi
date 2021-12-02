@@ -11,8 +11,8 @@
       content: |
         dn: cn=config
         changetype: modify
-        replace: olcTLSCertificateKeyFile
-        olcTLSCACertificateKeyFile: /etc/ldap/tls/ca-certificates.crt
+        replace: olcTLSCACertificateFile
+        olcTLSCACertificateFile: /etc/ldap/tls/ca-certificates.crt
         -
         replace: olcTLSCertificateKeyFile
         olcTLSCertificateKeyFile: /etc/ldap/tls/ldap.{{ ansible_hostname }}.{{ ansible_domain }}.key
