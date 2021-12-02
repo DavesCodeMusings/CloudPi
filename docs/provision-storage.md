@@ -2,7 +2,7 @@
 In this step, you'll prepare an external storage device, either a spinning disk or a solid state drive. This device will used to hold configuration files for Docker containers; Docker containers, Docker images and Docker volumes; with additional space allocated to user files.
 
 By the end of this step you will have:
-1. Installed and identified the external storage device.
+1. Attached and manually identified the external storage device.
 2. Configured the device for Logical Volume Manager (LVM).
 3. Created and mounted logical volumes to hold Docker persistent data and user files.
 
@@ -11,6 +11,10 @@ If you haven't [installed Ansible](Installing-Ansible-and-System-Updates) yet, d
 ## Can I skip it?
 You can run your entire system off of the micro-SD card if you want. You can also partition the storage device manually using command-line tools.
 
+## Summary of Commands
+1. `sudo parted /dev/sda print`
+2. `ansible-playbook provision-storage.yml`
+3. `df -h; cat /etc/fstab; sudo lvs`
 
 ## Attaching and Identifying the External Storage
 First, plug the storage device into the SATA side of the USB to SATA adapter cable plug the USB side into the Raspberry Pi. Be sure to plug it into one of the blue USB3 ports to get the best performance. To make the disk easier to identify, don't plug in any other storage devices at this time.
