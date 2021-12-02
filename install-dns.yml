@@ -14,23 +14,23 @@
       secondary: "{{ ansible_dns.nameservers[1] }}"
 
   tasks:
-    - name: Install bind9
+    - name: Installing BIND9
       apt:
         name: bind9
         state: latest
         
-    - name: Install dnsutils
+    - name: Installing dnsutils
       apt:
         name: dnsutils
         state: latest
         
-    - name: Verify valid starting configuration
+    - name: Verifying valid starting configuration
       shell:
         cmd: named-checkconf
       register: named_checkconf
       failed_when: named_checkconf.stdout_lines | length > 0
 
-    - name: Configure forwarders
+    - name: Configuring forwarders
       lineinfile:
         path: /etc/bind/named.conf.options
         insertafter: "\t// };"
@@ -50,30 +50,30 @@
     # will start showing up if dnssec-validation is left set to auto. You can
     # troubleshoot them or accept that for a home network, DNS security can
     # probably be a little lax.
-    - name: Disable DNSSEC
+    - name: Disabling DNSSEC
       replace:
         path: /etc/bind/named.conf.options
         regexp: "dnssec-validation auto;"
         replace: "dnssec-validation no;"
 
-    - name: Verify final configuration
+    - name: Verifying final configuration
       shell:
         cmd: named-checkconf
       register: named_checkconf
       failed_when: named_checkconf.stdout_lines | length > 0
         
-    - name: Reload BIND9 config
+    - name: Reloading BIND9 config
       systemd:
         name: bind9
         enabled: yes
         state: reloaded
         
-    - name: Test DNS lookup for raspberrypi.org
+    - name: Testing DNS lookup for raspberrypi.org
       shell:
         cmd: nslookup raspberrypi.org 127.0.0.1
       register: nslookup
       failed_when: nslookup.stdout is not search("raspberrypi.org")
 
-    - name: Report new DNS server addresses
+    - name: Reporting new DNS server addresses
       debug:
         msg: You may now use {{ ansible_default_ipv4.address }} as a DNS server.
