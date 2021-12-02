@@ -110,3 +110,8 @@
       cmd: named-checkconf
     register: named_checkconf
     failed_when: named_checkconf.stdout_lines | length > 0
+
+  - name: Reloading configuration
+    service:
+      name: named
+      state: reloaded
