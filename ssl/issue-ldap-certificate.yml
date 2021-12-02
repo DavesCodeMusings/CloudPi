@@ -1,5 +1,5 @@
 ---
-- name: Generating a certificate for secure LDAP
+- name: Issue a certificate for secure LDAP
   hosts: localhost
   connection: local
   become: true
