@@ -1,5 +1,5 @@
 ---
-- name: Upgrade System to Latest Packages
+- name: Update System to Latest Packages
   hosts: localhost
   connection: local
   become: true
