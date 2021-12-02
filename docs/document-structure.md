@@ -29,7 +29,7 @@ The stack itself is deployed using the configuration specified in `docker-compos
 
 Any remaining system tasks are taken care of by the `post-deploy.yml` Ansible playbook.
 
-And finally, post-deploy.txt gives a very brief explanation of how to log into the application for the first time and do some basic setup.
+And finally, `post-deploy.txt` gives a very brief explanation of how to log into the application for the first time and do some basic setup.
 
 Not every application will have all the files listed above, but when they do, the order is important: pre-deploy, docker-compose, post-deploy.
 
