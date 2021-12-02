@@ -37,7 +37,7 @@ Creating partitions and filesystems is a destructive process. Any information al
 
 **Do not override _confirm_device_ by editing the playbook.**
 
-Use Ansible's `--extra-vars` command-line option instead, like this:
+Use Ansible's _--extra-vars_ command-line option instead, like this:
 
 ```ansible-playbook provision-storage.yml --extra-vars confirm_device=/dev/sda```
 
