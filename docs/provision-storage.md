@@ -41,7 +41,7 @@ Use Ansible's _--extra-vars_ command-line option instead, like this:
 
 ```ansible-playbook provision-storage.yml --extra-vars confirm_device=/dev/sda```
 
-If you don't provide _confirm_device_ or you provide the wrong value, you will see a fatal error whe the playbook gets to the task of _Verifying device_.
+If you don't provide _confirm_device_ or you provide the wrong value, you will see a fatal error whe the playbook gets to the task of Verifying device.
 
 ## Running the Ansible Playbook
 Copy the contents of [`provision-storage.yml`](https://github.com/DavesCodeMusings/CloudPi/blob/main/provision-storage.yml) to your Pi. The playbook will take care of the following tasks.
