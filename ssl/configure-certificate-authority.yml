@@ -1,5 +1,5 @@
 ---
-- name: Configuring the certificate authority
+- name: Configure the certificate authority
   hosts: localhost
   connection: local
   become: true
