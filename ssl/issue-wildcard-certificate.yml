@@ -1,5 +1,5 @@
 ---
-- name: Generating a certificate for multiple DNS names
+- name: Generate a certificate for multiple DNS names
   hosts: localhost
   connection: local
   become: true
