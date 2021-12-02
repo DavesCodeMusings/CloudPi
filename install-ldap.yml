@@ -8,32 +8,32 @@
     admin_password: password
 
   tasks:
-  - name: Pre-configure LDAP admin password
+  - name: Pre-configuring LDAP admin password
     debconf:
       name: slapd
       question: slapd/root_password
       value: "{{ admin_password }}"
       vtype: password
 
-  - name: Confirm LDAP admin password
+  - name: Confirming LDAP admin password
     debconf:
       name: slapd
       question: slapd/root_password_again
       value: "{{ admin_password }}"
       vtype: password
 
-  - name: Install slapd
+  - name: Installing slapd
     apt:
       name: slapd
       state: latest
       update_cache: true
 
-  - name: Install lapdutils
+  - name: Installing lapdutils
     apt:
       name: ldap-utils
       state: latest
       update_cache: true
 
-  - name: Remember to change the password
+  - name: Reminding to change the password
     debug:
       msg: The initial password is '{{ admin_password }}'.
