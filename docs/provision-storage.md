@@ -37,12 +37,11 @@ Creating partitions and filesystems is a destructive process. Any information al
 
 **Do not override _confirm_device_ by editing the playbook.**
 
-Use Ansible's `--extra-vars` command-line option instead, like this: `ansible-playbook provision-storage.yml --extra-vars confirm_device=/dev/sda`
+Use Ansible's `--extra-vars` command-line option instead, like this:
 
-If you don't provide _confirm_device_ or you provide the wrong value, you will see a fatal error for the task of _Verifying device_.
+```ansible-playbook provision-storage.yml --extra-vars confirm_device=/dev/sda```
 
->### Volume Sizes
->The logical volume sizes are hard-coded as 5G for `/opt/docker`, 10G for `/var/lib/docker`, and 100G for `/srv`. They are intentionally conservative to fit the constraints of smaller storage devices. But, if you have a lot of space, you can change the sizes using the Ansible variable called _logical_volumes_. Alternatively, you can resize them as the your storage needs grow. The `lvresize` and `resize2fs` command-line tools will enable you to do this.
+If you don't provide _confirm_device_ or you provide the wrong value, you will see a fatal error whe the playbook gets to the task of _Verifying device_.
 
 ## Running the Ansible Playbook
 The `provision-storage.yml` playbook will take care of the following tasks.
@@ -55,7 +54,10 @@ The `provision-storage.yml` playbook will take care of the following tasks.
 6. Create directories where needed for `/opt/docker`, `/var/lib/docker`, and `/srv`.
 7. Mount `/dev/vg1/vol01`, `/dev/vg1/vol02`, and `/dev/vg1/vol03` on `/opt/docker`, `/var/lib/docker`, and `/srv`, respectively.
 
-If all goes well, the output should look like this:
+>### Volume Sizes
+>The logical volume sizes are hard-coded as 5G for `/opt/docker`, 10G for `/var/lib/docker`, and 100G for `/srv`. They are intentionally conservative to fit the constraints of smaller storage devices. But, if you have a device with a lot of space, you can change the sizes using the Ansible variable called _logical_volumes_. Alternatively, you can resize them as the your storage needs grow. The `lvresize` and `resize2fs` command-line tools will enable you to do this.
+
+If all goes well, the output from the playbook should look like this:
 
 ```
 $ ansible-playbook provision-storage.yml --extra-vars confir
@@ -104,7 +106,6 @@ changed: [localhost] => (item={'name': 'vol03', 'mount_point': '/srv', 'size': '
 PLAY RECAP *********************************************************************
 localhost                  : ok=9    changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 ```
-
 
 ## Next Steps
 Now that there's plenty of available space for Docker persistent data of any future containers you might want to run, you can move on to [install Docker and Portainer](install-docker-portainer.md).
