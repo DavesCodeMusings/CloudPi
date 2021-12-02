@@ -95,19 +95,7 @@ PLAY RECAP *********************************************************************
 localhost                  : ok=5    changed=3    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 ```
 
-## Issuing an LDAP certificate
-
-TODO: OpenLDAP needs to be installed first so openldap user exists for file ownership.
-
-Later in the project, you'll have the option to install LDAP to centralize user accounts and passwords for your applications. OpenLDAP will not work with a certificate that has multiple names associated with it, like the one created in the previous steps. Trying to configure a certificate like that results in a very mysterious "implentation specific error (80)" message.
-
-To avoid this, you can generate a separate certificate specifically for OpenLDAP. This is done with the Ansible playbook `https://github.com/DavesCodeMusings/CloudPi/blob/main/ssl/issue-ldap-certificate.yml`.
-
-After running the playbook, the certificate and key will be placed in `/etc/ldap/tls`, ready for configuring in OpenLDAP.
-
-```
-
-```
+>LDAP is not included in this certificate. It is configured separately in a later step.
 
 ## Trusting the Certificate
 With any self-signed certificate, your browser will complain about the certificate issuer not being trusted. That's because the browser only has a couple dozen root certificates from the big name issuers that are in the trust store. With Firefox, you can add a certificate trust exception pretty easily.With Edge and others it's a little harder, but not too bad
