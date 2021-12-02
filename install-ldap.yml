@@ -11,14 +11,14 @@
   - name: Pre-configuring LDAP admin password
     debconf:
       name: slapd
-      question: slapd/root_password
+      question: slapd/password1
       value: "{{ admin_password }}"
       vtype: password
 
   - name: Confirming LDAP admin password
     debconf:
       name: slapd
-      question: slapd/root_password_again
+      question: slapd/password2
       value: "{{ admin_password }}"
       vtype: password
 
