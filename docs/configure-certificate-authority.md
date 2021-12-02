@@ -71,7 +71,7 @@ The first method works fine if you plan to use URLs like _https://mypi.home:9443
 
 >The Ansible playbook will generate a certificate that will work with all the DNS names used in this project.
 
-To generate a certificate like this, use the Ansible playbook [`issue-wildcard-certificate.yml`](https://github.com/DavesCodeMusings/CloudPi/blob/main/ssl/issue-wildcard-certificate.yml). It will produce a certificate that can be applied to the host DNS name as well as several other subdomains of the host.
+To generate a certificate like this, use the Ansible playbook [`issue-host-certificate.yml`](https://github.com/DavesCodeMusings/CloudPi/blob/main/ssl/issue-host-certificate.yml). It will produce a certificate that can be applied to the host DNS name as well as several other subdomains of the host.
 
 ```
 PLAY [Generate a certificate for multiple DNS names] *************************
