@@ -28,6 +28,33 @@ ansible-playbook install-ldap.yml --extra-vars password=SuperSecretPassword
 ## Installing LDAP Server and Utilities
 The installation of OpenLDAP is done using the Ansible playbook [install-ldap.yml](https://github.com/DavesCodeMusings/CloudPi/blob/main/install-ldap.yml). You'll need to copy this file locally and run it with the command `ansible-playbook install-ldap.yml`.
 
+```
+PLAY [Install OpenLDAP] ********************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [localhost]
+
+TASK [Pre-configuring LDAP admin password] ***************************************
+changed: [localhost]
+
+TASK [Confirming LDAP admin password] *********************************************
+changed: [localhost]
+
+TASK [Installing slapd] ***********************************************************
+changed: [localhost]
+
+TASK [Installing lapdutils] *******************************************************
+ok: [localhost]
+
+TASK [Reminding to change the password] *****************************************
+ok: [localhost] => {
+    "msg": "The initial password is 'SuperSecretPassword'."
+}
+
+PLAY RECAP *********************************************************************
+localhost                  : ok=6    changed=3    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+```
+
 ## Installing LDAP Administration Tool for Windows
 [LDAP Admin](http://www.ldapadmin.org/) is a Free GNU GPL-licensed tool for administering LDAP from Windows. There's no installation wizard. You just get the latest ZIP archive from their [download page](http://www.ldapadmin.org/download/ldapadmin.html) and extract it somewhere convenient.
 
