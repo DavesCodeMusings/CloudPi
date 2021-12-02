@@ -11,7 +11,7 @@ Short answer: no.
 
 ## Summary of Commands.
 1. Using the Raspberry Pi Imager is show in this [slideshow of screenshots](raspberry-pi-imager.md).
-2. Scanning for the IP address
+2. Finding the Pi's IP address using [Angry IP Scanner](https://angryip.org/download/)
 3. Making the SSH connection: `ssh pi@raspberrypi`
 
 ## Reviewing the Parts List
@@ -25,7 +25,7 @@ This tutorial refernces the following configuration:
 * Hitachi 160G 2.5" SATA drive
 * Tripp-Lite USB to SATA
 
-As with everything in this project, there's plenty of room for you to customize. You can have a look at [a couple of setups I've used](https://github.com/DavesCodeMusings/CloudPi/blob/main/my-setup.md) if you're interested.
+As with everything in this project, there's plenty of room for you to customize. You can have a look at [a couple of setups I've used](my-setup.md) if you're interested.
 
 ## Assembling the Pi
 I'm not going to tell you how to flash an SD card and stick it your Pi. I assume you can read the [instructions on the raspberrypi.org website](https://www.raspberrypi.org/documentation/installation/installing-images/) or simply use your favorite search engine to find one of many step-by-step instructional videos.
