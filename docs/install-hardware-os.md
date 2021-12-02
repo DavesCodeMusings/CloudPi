@@ -6,6 +6,14 @@ By the end of this step you will have:
 2. Started the Pi and found its IP address.
 3. Made an SSH connection.
 
+## Can I Skip This?
+Short answer: no.
+
+## Summary of Commands.
+1. Using the Raspberry Pi Imager is show in this [slideshow of screenshots](raspberry-pi-imager.md).
+2. Scanning for the IP address
+3. Making the SSH connection: `ssh pi@raspberrypi`
+
 ## Reviewing the Parts List
 You'll need a Raspberry Pi 4, a micro-SD card, and a power supply. For connection to your network, you'll need a cable and a port on your internet router you can plug into. You will also want an external storage device and a USB adapter to connect it.
 
@@ -25,8 +33,6 @@ I'm not going to tell you how to flash an SD card and stick it your Pi. I assume
 I will tell you that you'll need to use the advanced option of the [Raspberry Pi Imager](https://www.raspberrypi.org/software/) to enable SSH logins from the beginning. Otherwise, you won't be able to log into your Pi over the network. If you forget this step, you can always [place an empty text file called `ssh` in the boot partition](https://www.raspberrypi.com/documentation/computers/configuration.html#setting-up-a-headless-raspberry-pi) of the SD card before you stick it in the Pi and boot for the first time.
 
 Other than the lack of keyboard and monitor, the installation of the Raspberry Pi components is just like any other system.
-
-If you need a refresher on Raspberry Pi Imager, see this [slideshow of screenshots](raspberry-pi-imager.md).
 
 ## Powering Up
 Plug the Pi in a wired network connection first, then plug in the power supply. Watch the flashing green storage activity light near the SD card and the network link lights on the RJ-45 jack to gauge the progress. Once the network link light is on and the storage activity indicator calms, you can try making a connection via SSH.
