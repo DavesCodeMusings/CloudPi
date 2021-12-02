@@ -6,7 +6,7 @@ Ansible playbooks are provided for nearly every step used in building the system
 I've also structured the Cloud Pi documentation in a way that gets the important bits up front and lets you know when it's okay to skip steps and what the consequences will be. The following is a sample of what it looks like:
 
 ## Can I Skip This?
-Each step will start with a short summary, like what you just read above, and then a _Can I Skip This?_ heading. Not all steps in the project are strictly necessary to build a working product. The _Can I Skip This?_ section lets you know how critical the step is and what alternatives you have if you decide to skip it. If you do skip it, scroll to the end of the page where you'll reach _Next Steps_. 
+Each step will start with a short summary, like what you just read above, and then a _Can I Skip This?_ heading. Not all steps in the project are strictly necessary to build a working product. The _Can I Skip This?_ section lets you know how critical the step is and what alternatives you have if you decide you don't want to do it. If you do decide to skip a step, scroll to the end of the page where you'll reach _Next Steps_. 
 
 ## Why? Steps
 Very often, the first thing after _Can I Skip It?_ will be a heading like _Why Technology X?_ These are short explainations giving more detail into the selection of a particular application or service installation. For example, _Why Ansible?_ lays out some of the reasoning behind using Ansible automation to build the system. You can skim these to pick out bits that you find interesting. The critical information is in the hands-on steps.
