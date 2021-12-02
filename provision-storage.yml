@@ -12,16 +12,16 @@
     logical_volumes:
     - name: vol01
       mount_point: /opt/docker
-      size: 10G
+      size: 5G
     - name: vol02
       mount_point: /var/lib/docker
-      size: 20G
+      size: 10G
     - name: vol03
       mount_point: /srv
       size: 100G
 
   tasks:
-  # Verify device against confirm_device variable as a sort of failsafe.
+  # Verify device against device_confirm variable as a sort of failsafe.
   - name: Verifying device
     community.general.parted:
       device: "{{ device }}"
@@ -49,7 +49,7 @@
       vg: "{{ volume_group }}"
       pvs: "{{ device }}{{ partition }}"
 
-  - name: Creating volumes for Docker persistent data
+  - name: Creating volumes
     community.general.lvol:
       vg: "{{ volume_group }}"
       lv: "{{ item.name }}"
@@ -57,14 +57,14 @@
     with_items:
     - "{{ logical_volumes }}"
 
-  - name: Creating filesystem for Docker persistent data
+  - name: Creating filesystem
     filesystem:
       fstype: ext4
       dev: "/dev/{{ volume_group }}/{{ item.name }}"
     with_items:
     - "{{ logical_volumes }}"
 
-  - name: Creating directory for Docker persistent config
+  - name: Creating mount-point directories
     file:
       path: "{{ item.mount_point }}"
       state: directory
@@ -72,7 +72,7 @@
     - "{{ logical_volumes }}"
 
   # The mount module also adds filesystems to /etc/fstab.
-  - name: Mounting filesystem for Docker persistent config
+  - name: Mounting filesystems
     mount:
       path: "{{ item.mount_point }}"
       src: "/dev/{{ volume_group }}/{{ item.name }}"
