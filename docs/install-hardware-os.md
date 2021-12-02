@@ -23,7 +23,7 @@ This tutorial refernces the following configuration:
 * 32G SanDisk high-endurance micro-SD
 * GeeekPi heatsink kit
 * Hitachi 160G 2.5" SATA drive
-* Tripp-Lite USB to SATA
+* Tripp-Lite USB-to-SATA adapter
 
 As with everything in this project, there's plenty of room for you to customize. You can have a look at [a couple of setups I've used](my-setup.md) if you're interested.
 
