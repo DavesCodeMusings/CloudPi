@@ -107,8 +107,33 @@ PLAY RECAP *********************************************************************
 localhost                  : ok=9    changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 ```
 
+## Verifying Configuration
+The following example shows some of the commands you can use to check the storage configuration and some typical results.
+
+```
+$ df -h
+...
+/dev/mapper/vg1-vol01  4.9G   24K  4.6G   1% /opt/docker
+/dev/mapper/vg1-vol02  9.8G   24K  9.3G   1% /var/lib/docker
+/dev/mapper/vg1-vol03   98G   24K   93G   1% /srv
+
+cat /etc/fstab
+...
+/dev/vg1/vol01 /opt/docker ext4 defaults,noatime 0 0
+/dev/vg1/vol02 /var/lib/docker ext4 defaults,noatime 0 0
+/dev/vg1/vol03 /srv ext4 defaults,noatime 0 0
+
+$ sudo lvs
+LV    VG  Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
+vol01 vg1 -wi-ao----   5.00g
+vol02 vg1 -wi-ao----  10.00g
+vol03 vg1 -wi-ao---- 100.00g
+```
+
+>Extraneous information has been replaced withh ellipses (...) to aid clarity. 
+
 ## Next Steps
-Now that there's plenty of available space for Docker persistent data of any future containers you might want to run, you can move on to [install Docker and Portainer](install-docker-portainer.md).
+Now that there's space allocated for Docker persistent data, you can move on to [install Docker and Portainer](install-docker-portainer.md).
 
 ___
 
