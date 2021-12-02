@@ -3,7 +3,7 @@ In this step of the project, you'll prepare the system for upcoming tasks by ins
 
 By the end of this step, you will have:
 1. Installed an up-to-date version of Ansible from Python Pip using the [install-ansible.sh](https://github.com/DavesCodeMusings/CloudPi/blob/main/install-ansible.sh) shell script.
-1. Upgraded the operating system software to the latest available patch levels with the [upgrade-system.yml](https://github.com/DavesCodeMusings/CloudPi/blob/main/upgrade-system.yml) Ansible playbook.
+1. Updated the operating system software to the latest available patch levels with the [update-system.yml](https://github.com/DavesCodeMusings/CloudPi/blob/main/update-system.yml) Ansible playbook.
 
 ## Can you skip it?
 Ansible is used to automate mundane tasks. If you enjoy countless hours of error-prone typing while staring at a terminal screen, you can certainly skip this and do everything manually. I wouldn't recommend it, and it really runs counter to the whole reason for this project. But, there's always that one person who likes to _do it all from command-line_. If this sounds like something you'd enjoy, stop reading and head on over to [Arch Linux](https://archlinux.org/) or [Linux From Scratch](https://www.linuxfromscratch.org/) and geek out.
@@ -28,17 +28,17 @@ pi@raspberrypi:~/cloudpi $ ./install-ansible.sh
 ```
 
 ## Testing Ansible with System Updates
-It's good practice to update the Raspberry Pi OS before getting started with installing anything else. The update is done with an Ansible playbook called [upgrade-system.yml](https://github.com/DavesCodeMusings/CloudPi/blob/main/upgrade-system.yml)
+It's good practice to update the Raspberry Pi OS before getting started with installing anything else. The update is done with an Ansible playbook called [update-system.yml](https://github.com/DavesCodeMusings/CloudPi/blob/main/update-system.yml)
 
-Download the file and run it with the command `ansible-playbook upgrade-system.yml`
+Download the file and run it with the command `ansible-playbook update-system.yml`
 
-If all goes well, it will do the same as if you had typed `sudo apt-get update`, followed by `sudo apt-get upgrade`. It's a simple example, but it proves Ansible is properly installed and working.
+If all goes well, it will do the same as if you had typed `sudo apt-get update`, followed by `sudo apt-get upgade`. It's a simple example, but it proves Ansible is properly installed and working.
 
->Regular upgrades ensure the system is current and secure. Keep the playbook handy and run it periodically. Running the update playbook can take a while, particularly when running it the first time. Patience is the key.
+>Regular updates ensure the system is current and secure. Keep the playbook handy and run it periodically. Running the update playbook can take a while, particularly when running it the first time. Patience is the key.
 
 ```
-pi@raspberrypi:~/cloudpi $ vi upgrade-system.yml
-pi@raspberrypi:~/cloudpi $ ansible-playbook upgrade-system.yml
+pi@raspberrypi:~/cloudpi $ vi update-system.yml
+pi@raspberrypi:~/cloudpi $ ansible-playbook update-system.yml
 ```
 
 ## Next Steps
