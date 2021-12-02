@@ -21,7 +21,7 @@
   tasks:
   - name: Check variables
     debug:
-      msg: "The IP address hasn't changed. (Still using: {{ ip }}) Are you sure you don't want to customize using --extravars?"
+      msg: "The IP address hasn't changed. (Still using: {{ ip }}) Are you sure you don't want to customize using --extra-vars?"
     when: ip == ansible_default_ipv4.address
 
   - name: Configure network interface parameters
@@ -37,11 +37,11 @@
         dns-nameservers {{ primary_dns }}
         dns-search {{ ansible_domain }}
 
-#  - name: Disable DHCP
-#    service:
-#      name: dhcpcd
-#      state: stopped
-#      enabled: no
+  - name: Disable DHCP
+    service:
+      name: dhcpcd
+      state: stopped
+      enabled: no
 
   - name: Reboot to active changes
     debug:
