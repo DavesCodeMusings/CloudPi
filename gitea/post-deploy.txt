@@ -1,6 +1,6 @@
-Configuration URL: http://git.mypi.home:3000
+Configuration URL: http://gitea.mypi.home:3000
 
 Repository Root Path: /srv/git
 Git LFS Root Path: (delete path to disable)
 SSH Server Port: (delete port number to disable)
-Gitea Base URL: http://git.mypi.home:3000/
+Gitea Base URL: http://gitea.mypi.home:3000/
