@@ -19,7 +19,47 @@ Here's the procedure:
 2. Edit `subject-info.yml`, customizing it to your needs.
 3. Run the playbook with the command `ansible-playbook configure-certificate-authority.yml`
 
-When it's done, you'll have a root certificate called `home_CA.crt` and an intermediate certificate called `home.crt`. Both are in the `/etc/ssl/certs/` directory.
+```
+PLAY [Configure the certificate authority] ***********************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [localhost]
+
+TASK [Creating directory to store signing requests] ****************************
+changed: [localhost]
+
+TASK [Generating the certificate authority (CA) private key] *******************
+changed: [localhost]
+
+TASK [Generating a certificate signing request (CSR) for the root CA] **********
+changed: [localhost]
+
+TASK [Signing the root certificate] ********************************************
+changed: [localhost]
+
+TASK [Generating the intermediate certificate private key] *********************
+changed: [localhost]
+
+TASK [Generating a CSR for the intermediate certificate] ***********************
+changed: [localhost]
+
+TASK [Signing the intermediate certificate] ************************************
+changed: [localhost]
+
+PLAY RECAP *********************************************************************
+localhost                  : ok=8    changed=7    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+```
+
+## Verifying the Certificates
+When the playbook is done, you'll have a root certificate called `home_CA.crt` and an intermediate certificate called `home.crt`. Both are in the `/etc/ssl/certs/` directory. There will also be
+
+```
+$ ls /etc/ssl/certs/home*
+/etc/ssl/certs/home_CA.crt  /etc/ssl/certs/home.crt
+
+$ sudo ls /etc/ssl/private
+home_CA.key  home.key
+```
 
 ## Issuing Certificates for Applications
 After setting up the certificate authority, you're ready to start issuing certificates. You have a couple choices.
@@ -33,12 +73,41 @@ The first method works fine if you plan to use URLs like _https://mypi.home:9443
 
 To generate a certificate like this, use the Ansible playbook [`issue-wildcard-certificate.yml`](https://github.com/DavesCodeMusings/CloudPi/blob/main/ssl/issue-wildcard-certificate.yml). It will produce a certificate that can be applied to the host DNS name as well as several other subdomains of the host.
 
+```
+PLAY [Generate a certificate for multiple DNS names] *************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [localhost]
+
+TASK [Loading subject info] ****************************************************
+ok: [localhost]
+
+TASK [Generating a private key] ************************************************
+changed: [localhost]
+
+TASK [Generating a CSR] ********************************************************
+changed: [localhost]
+
+TASK [Signing the certificate] *************************************************
+changed: [localhost]
+
+PLAY RECAP *********************************************************************
+localhost                  : ok=5    changed=3    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+```
+
 ## Issuing an LDAP certificate
+
+TODO: OpenLDAP needs to be installed first so openldap user exists for file ownership.
+
 Later in the project, you'll have the option to install LDAP to centralize user accounts and passwords for your applications. OpenLDAP will not work with a certificate that has multiple names associated with it, like the one created in the previous steps. Trying to configure a certificate like that results in a very mysterious "implentation specific error (80)" message.
 
 To avoid this, you can generate a separate certificate specifically for OpenLDAP. This is done with the Ansible playbook `https://github.com/DavesCodeMusings/CloudPi/blob/main/ssl/issue-ldap-certificate.yml`.
 
 After running the playbook, the certificate and key will be placed in `/etc/ldap/tls`, ready for configuring in OpenLDAP.
+
+```
+
+```
 
 ## Trusting the Certificate
 With any self-signed certificate, your browser will complain about the certificate issuer not being trusted. That's because the browser only has a couple dozen root certificates from the big name issuers that are in the trust store. With Firefox, you can add a certificate trust exception pretty easily.With Edge and others it's a little harder, but not too bad
