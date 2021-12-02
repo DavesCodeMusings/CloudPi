@@ -44,7 +44,7 @@ Use Ansible's `--extra-vars` command-line option instead, like this:
 If you don't provide _confirm_device_ or you provide the wrong value, you will see a fatal error whe the playbook gets to the task of _Verifying device_.
 
 ## Running the Ansible Playbook
-The `provision-storage.yml` playbook will take care of the following tasks.
+Copy the contents of [`provision-storage.yml`](https://github.com/DavesCodeMusings/CloudPi/blob/main/provision-storage.yml) to your Pi. The playbook will take care of the following tasks.
 
 1. Install LVM tools package.
 2. Create a new GUID partition on /dev/sda that spans the entire device.
