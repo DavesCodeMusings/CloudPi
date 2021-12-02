@@ -18,6 +18,10 @@
     shell:
       cmd: cat /etc/ssl/certs/{{ ansible_domain }}.crt /etc/ssl/certs/{{ ansible_domain }}_CA.crt >ca-certificates.crt
       chdir: /etc/ldap/tls
+
+  - name: Setting ownership on intermediate / root bundle
+    file:
+      path: /etc/ssl/certs/ca-certificates.crt
       owner: openldap
       group: openldap
 
