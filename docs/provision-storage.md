@@ -48,14 +48,14 @@ The `provision-storage.yml` playbook will take care of the following tasks.
 
 1. Install LVM tools package.
 2. Create a new GUID partition on /dev/sda that spans the entire device.
-3. Create an LVM volume group called _vg1_, using /dev/sda1 as its physical volume. 
-4. Create three logical volumes: vol01, vol02, and vol03.
+3. Create an LVM volume group called _vg1_, using _/dev/sda1_ as its physical volume. 
+4. Create three logical volumes: _vol01_, _vol02_, and _vol03_.
 5. Create ext4 filesystems on the three volumes.
-6. Create directories where needed for `/opt/docker`, `/var/lib/docker`, and `/srv`.
-7. Mount `/dev/vg1/vol01`, `/dev/vg1/vol02`, and `/dev/vg1/vol03` on `/opt/docker`, `/var/lib/docker`, and `/srv`, respectively.
+6. Create directories where needed for _/opt/docker_, _/var/lib/docker_, and _/srv_.
+7. Mount _/dev/vg1/vol01_, _/dev/vg1/vol02_, and _/dev/vg1/vol03_ on _/opt/docker_, _/var/lib/docker_, and _/srv_, respectively.
 
 >### Volume Sizes
->The logical volume sizes are hard-coded as 5G for `/opt/docker`, 10G for `/var/lib/docker`, and 100G for `/srv`. They are intentionally conservative to fit the constraints of smaller storage devices. But, if you have a device with a lot of space, you can change the sizes using the Ansible variable called _logical_volumes_. Alternatively, you can resize them as the your storage needs grow. The `lvresize` and `resize2fs` command-line tools will enable you to do this.
+>The logical volume sizes are hard-coded as 5G for _/opt/docker_, 10G for _/var/lib/docker_, and 100G for _/srv_. They are intentionally conservative to fit the constraints of smaller storage devices. But, if you have a device with a lot of space, you can change the sizes using the Ansible variable called _logical_volumes_. Alternatively, you can resize them as the your storage needs grow. The `lvresize` and `resize2fs` command-line tools will enable you to do this.
 
 If all goes well, the output from the playbook should look like this:
 
@@ -130,7 +130,7 @@ vol02 vg1 -wi-ao----  10.00g
 vol03 vg1 -wi-ao---- 100.00g
 ```
 
->Extraneous information has been replaced withh ellipses (...) to aid clarity. 
+>Extraneous information has been replaced with ellipses (...) to aid clarity. 
 
 ## Next Steps
 Now that there's space allocated for Docker persistent data, you can move on to [install Docker and Portainer](install-docker-portainer.md).
