@@ -8,6 +8,9 @@ I've also structured the Cloud Pi documentation in a way that gets the important
 ## Can I Skip This?
 Each step will start with a short summary, like what you just read above, and then a _Can I Skip This?_ heading. Not all steps in the project are strictly necessary to build a working product. The _Can I Skip This?_ section lets you know how critical the step is and what alternatives you have if you decide you don't want to do it. If you do decide to skip a step, scroll to the end of the page where you'll reach _Next Steps_. 
 
+## Summary of Commands
+This section will list the commands used to accomplish the tasks for the step. It is intended as a preview (or a reminder, if this is not your first build.) It does not take into account things like copying the contents of playbooks and docker-compose files, so you won't be able to just type the commands and have it work. However, if you're building your fourth or fifth iteration of the project, it may be enough to get you on the right track without forcing you to wade through a bunch of text.
+
 ## Why? Steps
 Very often, the first thing after _Can I Skip It?_ will be a heading like _Why Technology X?_ These are short explainations giving more detail into the selection of a particular application or service installation. For example, _Why Ansible?_ lays out some of the reasoning behind using Ansible automation to build the system. You can skim these to pick out bits that you find interesting. The critical information is in the hands-on steps.
 
