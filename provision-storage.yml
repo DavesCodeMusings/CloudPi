@@ -57,7 +57,7 @@
     with_items:
     - "{{ logical_volumes }}"
 
-  - name: Creating filesystem
+  - name: Creating filesystems
     filesystem:
       fstype: ext4
       dev: "/dev/{{ volume_group }}/{{ item.name }}"
