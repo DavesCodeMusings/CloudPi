@@ -11,6 +11,11 @@ By the end of this step you will have:
 ## Can I Skip It?
 On a home network, where you trust your users, there's no urgent need for encrypting web traffic with HTTPS. You can continue to use HTTP URLs for accessing everything. Or you can generate a single, self-signed certificate with `openssl` in one command. But, creating a root CA and an intermediate certificate is a typical industry practice, so if nothing else, it provides a good learning opportunity.
 
+## Summary of Commands
+1. [`vi subject-info.yml`](https://github.com/DavesCodeMusings/CloudPi/blob/main/ssl/subject-info.yml)
+2. [`ansible-playbook configure-certificate-authority.yml`](https://github.com/DavesCodeMusings/CloudPi/blob/main/ssl/configure-certificate-authority.yml)
+3. [`ansible-playbook issue-host-certificate.yml`](https://github.com/DavesCodeMusings/CloudPi/blob/main/ssl/issue-host-certificate.yml)
+
 ## Configuring the Root and Intermediate Certificates
 Setting up a certificate authority can be tedious. But, for this project there's an Ansible playbook that will let you do this quickly and easily.
 
