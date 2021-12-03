@@ -10,7 +10,7 @@ By the end of this step, you will have:
 ## Can I skip it?
 Configuring the hostname is not strictly necessary, unless you have multiple Raspberry Pis on your network. (They can't all use the same default hostname.) But it can be fun to customize the host and domain name and give your network some personal flair.
 
-You don't have to configure a static IP address either. You could set a reservation in your internet router's DHCP server instead, if that's a feature. Some people prefer this option, because it keeps a record of the IP assignemnt (in the router's configuration.) You can use as a way to centrally manage the IP addresses on your nextwork. Reservations also prevent you from accidentally assigning the same IP address twice.
+You don't have to configure a static IP address either. You could set a reservation in your internet router's DHCP server instead, if that's a feature. Some people prefer this option, because it keeps a record of the IP assignment (in the router's configuration.) You can use as a way to centrally manage the IP addresses on your nextwork. Reservations also prevent you from accidentally assigning the same IP address twice.
 
 ## Command Summary
 1. [`ansible-playbook configure-static-network-params.yml`](https://github.com/DavesCodeMusings/CloudPi/blob/main/configure-static-network-params.yml)
