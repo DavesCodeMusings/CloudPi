@@ -23,12 +23,43 @@ Having an IP address that doesn't change is important when running the DNS servi
 
 >Changing the domain name should only be done if you have a registered domain name. Otherwise, leave it alone to use the default value of _home_.
 
-The IP address, hostname, and other network parameters are changed using an Ansible playbook called [configure-static-ip.yml](https://github.com/DavesCodeMusings/CloudPi/blob/main/configure-static-ip.yml). You'll need to download it locally and override variable values, just like you did to change the hostname.
+The IP address, hostname, and other network parameters are changed using an Ansible playbook called [configure-static-network-params.yml](https://github.com/DavesCodeMusings/CloudPi/blob/main/configure-static-network-params.yml). You'll need to download it locally and override variable values to customize the changes.
 
 Here's an example:
 
 ```
 ansible-playbook configure-static-network-params.yml --extra-vars "hostname=mypi ip=192.168.1.100"
+
+PLAY [Configure Static IP] *****************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [localhost]
+
+TASK [Checking IP address] *****************************************************
+skipping: [localhost]
+
+TASK [Checking Hostname] *******************************************************
+skipping: [localhost]
+
+TASK [Configuring network interface parameters] ********************************
+changed: [localhost]
+
+TASK [Disabling DHCP] **********************************************************
+changed: [localhost]
+
+TASK [Setting the hostname] ****************************************************
+changed: [localhost]
+
+TASK [Creating /etc/hosts] *****************************************************
+changed: [localhost]
+
+TASK [Reboot to active changes] ************************************************
+ok: [localhost] => {
+    "msg": "You must reboot for changes to take effect."
+}
+
+PLAY RECAP *********************************************************************
+localhost                  : ok=6    changed=4    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0
 ```
 
 The _hostname_ variable sets the new hostname and _ip_ sets the new IP address. The domain will default to _home_, while gateway, mask, and DNS comes from the existing configuration. If you want to override other variables, have a look in the playbook's _vars:_ section to find out what the names are.
