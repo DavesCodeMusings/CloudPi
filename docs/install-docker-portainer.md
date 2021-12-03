@@ -21,6 +21,38 @@ The best part about Docker containers is that there are thousands of pre-built o
 ## Docker Community Edition
 Installation of Docker is done by running the Ansible playbook called [install-docker.yml](https://github.com/DavesCodeMusings/CloudPi/blob/main/install-docker.yml) Just download the file to the Pi or copy the contents from the web into a text file. Then run the playbook with the command, `ansible-playbook install-docker.yml`. The playbook will install Docker and also Docker Compose.
 
+Installation looks like this:
+
+```
+pi@mypi:~/cloudpi $ ansible-playbook install-docker.yml
+
+PLAY [Install Docker Community Edition] *****************************************
+
+TASK [Gathering Facts] **********************************************************
+ok: [localhost]
+
+TASK [Installing apt key for official repository] *******************************
+changed: [localhost]
+
+TASK [Adding official repository] ***********************************************
+changed: [localhost]
+
+TASK [Installing Docker] ********************************************************
+changed: [localhost]
+
+TASK [Installing Docker Compose] ************************************************
+changed: [localhost]
+
+TASK [Adding pi user to docker group] *******************************************
+changed: [localhost]
+
+TASK [Starting Docker] **********************************************************
+ok: [localhost]
+
+PLAY RECAP **********************************************************************
+localhost                  : ok=7    changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+```
+
 > ## A note about the docker group
 > Any users running docker commands from command prompt will need to use sudo unless they are in the docker group. The Ansible playbook takes care of adding the pi user to the docker group, though you will need to log out and back in for the changes to take effect. Any other users will need to be added to the group manually or preface all docker commands with sudo.
 
