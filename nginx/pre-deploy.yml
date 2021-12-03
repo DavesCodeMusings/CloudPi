@@ -25,8 +25,8 @@
         # Serve static files
         server {
             listen 80;
-            server_name  {{ ansible_hostname }}.{{ ansible_domain }};
             listen 443 ssl;
+            server_name  {{ ansible_hostname }}.{{ ansible_domain }};
             ssl_certificate  /etc/ssl/certs/{{ ansible_hostname }}.{{ ansible_domain }}.crt;
             ssl_certificate_key  /etc/ssl/private/{{ ansible_hostname }}.{{ ansible_domain }}.key;
             location / {
