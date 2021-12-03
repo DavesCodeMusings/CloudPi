@@ -105,3 +105,6 @@ Any files you put in /srv/www will be available using a web browser when Nginx i
 
 ## Next Steps
 TODO: Gitea
+
+___
+
