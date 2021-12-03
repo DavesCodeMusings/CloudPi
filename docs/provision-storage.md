@@ -13,7 +13,7 @@ You can run your entire system off of the micro-SD card if you want. You can als
 
 ## Summary of Commands
 1. `sudo parted /dev/sda print`
-2. `ansible-playbook provision-storage.yml`
+2. [`ansible-playbook provision-storage.yml`](https://github.com/DavesCodeMusings/CloudPi/blob/main/provision-storage.yml)
 3. `df -h; cat /etc/fstab; sudo lvs`
 
 ## Attaching and Identifying the External Storage
