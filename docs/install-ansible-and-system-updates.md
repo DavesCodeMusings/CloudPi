@@ -8,7 +8,7 @@ By the end of this step, you will have:
 ## Can you skip it?
 Ansible is used to automate mundane tasks. If you enjoy countless hours of error-prone typing while staring at a terminal screen, you can certainly skip this and do everything manually. I wouldn't recommend it, and it really runs counter to the whole reason for this project. But, there's always that one person who likes to _do it all from command-line_. If this sounds like something you'd enjoy, stop reading and head on over to [Arch Linux](https://archlinux.org/) or [Linux From Scratch](https://www.linuxfromscratch.org/) and geek out.
 
-## Command Summary
+## Summary of Commands
 1. [`install-ansible.sh`](https://github.com/DavesCodeMusings/CloudPi/blob/main/install-ansible.sh)
 2. [`ansible-playbook update-system.yml`](https://github.com/DavesCodeMusings/CloudPi/blob/main/update-system.yml)
 
