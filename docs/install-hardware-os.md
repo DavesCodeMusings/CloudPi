@@ -15,7 +15,7 @@ Short answer: no.
 3. Making the SSH connection: `ssh pi@raspberrypi`
 
 ## Reviewing the Parts List
-You'll need a Raspberry Pi 4, a micro-SD card, and a power supply. For connection to your network, you'll need a cable and a port on your internet router you can plug into. You will also want an external storage device and a SATA-tUSB adapter to connect it.
+You'll need a Raspberry Pi 4, a micro-SD card, and a power supply. For connection to your network, you'll need a cable and a port on your internet router you can plug into. You will also want an external storage device and a SATA-to-USB adapter to connect it.
 
 This tutorial refernces the following configuration:
 * 4G Raspberry Pi 4
