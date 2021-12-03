@@ -5,8 +5,14 @@
   become: true
 
   tasks:
+  - name: Installing LVM2 support for udisks2
+    apt:
+      name: udisks2-lvm2
+      state: latest
+      update_cache: true
+  
   - name: Installing Cockpit
     apt:
       name: cockpit
       state: latest
-      update_cache: true
+
