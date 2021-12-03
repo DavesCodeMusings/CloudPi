@@ -47,11 +47,9 @@ localhost                  : ok=5    changed=4    unreachable=0    failed=0    s
 You can inspect the configuration file with the command: `cat /opt/docker/nginx/conf.d/default.conf`. You should see the DNS name for your host along with references to the certificate and key files that were installed when you [configured the certificate authority](configure-certificate-authority.md).
 
 ## Deploying Nginx
-The Nginx is Docker container is deployed using docker-compose (or Portainer's Stacks page) and the [docker-compose.yml](https://github.com/DavesCodeMusings/CloudPi/blob/main/nginx/docker-compose.yml) file. Copy this file into the same _nginx_ subdirectory where you put _predeploy.yml_ and use the command `docker-compose up -d` to deploy it.
+The Nginx is Docker container is deployed using docker-compose (or Portainer's Stacks page) and the [docker-compose.yml](https://github.com/DavesCodeMusings/CloudPi/blob/main/nginx/docker-compose.yml) file. Copy this file into the same _nginx_ subdirectory where you put _pre-deploy.yml_ and use the command `docker-compose up -d` to deploy it.
 
-Here's a screenshot showing Nginx successfully deployed using the docker-compose.yml file in Portainer:
-
-[Nginx Stack in Portainer](https://user-images.githubusercontent.com/61114342/144612583-aea16193-ecb5-4b57-b14e-9e02dd1f9730.png)
+You can also deploy the stack using the docker-compose.yml file in Portainer. This [screenshot of Portainer](https://user-images.githubusercontent.com/61114342/144612583-aea16193-ecb5-4b57-b14e-9e02dd1f9730.png) shows what it looks like when deployed that way.
 
 ## Testing HTTPS
 Once you have Nginx deployed, you can test the installation by visiting the Pi DNS name in a web browser. (For example, https://mypi.home) You should get a response with the contents of the file _/srv/www/index.html_. The default is the message shown below.
