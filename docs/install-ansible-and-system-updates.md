@@ -2,11 +2,15 @@
 In this step of the project, you'll prepare the system for upcoming tasks by installing Ansible automation and updating the system with the latest packages. If you haven't [gotten your Raspberry Pi OS installed and the Pi booted up in headless server mode](install-hardware-and-os.md) yet, be sure to do that first.
 
 By the end of this step, you will have:
-1. Installed an up-to-date version of Ansible from Python Pip using the [install-ansible.sh](https://github.com/DavesCodeMusings/CloudPi/blob/main/install-ansible.sh) shell script.
-1. Updated the operating system software to the latest available patch levels with the [update-system.yml](https://github.com/DavesCodeMusings/CloudPi/blob/main/update-system.yml) Ansible playbook.
+1. Installed an up-to-date version of Ansible with Python Pip.
+2. Updated the operating system software to the latest available patch levels with an Ansible playbook.
 
 ## Can you skip it?
 Ansible is used to automate mundane tasks. If you enjoy countless hours of error-prone typing while staring at a terminal screen, you can certainly skip this and do everything manually. I wouldn't recommend it, and it really runs counter to the whole reason for this project. But, there's always that one person who likes to _do it all from command-line_. If this sounds like something you'd enjoy, stop reading and head on over to [Arch Linux](https://archlinux.org/) or [Linux From Scratch](https://www.linuxfromscratch.org/) and geek out.
+
+## Command Summary
+1. [`install-ansible.sh`](https://github.com/DavesCodeMusings/CloudPi/blob/main/install-ansible.sh)
+2. [`ansible-playbook update-system.yml`](https://github.com/DavesCodeMusings/CloudPi/blob/main/update-system.yml)
 
 ## Why Ansible?
 With the exception of installing Ansible itself, we'll be using Ansible to install and configure nearly every component the system.
