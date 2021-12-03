@@ -22,7 +22,7 @@ Running these applicaitons involves the same procedure as Gitea. First, [downloa
 3. Run `ansible-playbook post-deploy.yml`
 4. Read the steps in `post-deploy.txt` for configuration tips.
 
-Where you store the docker-compose.yml file and how you deploy it are up to you. You can use Portainer or `docker-compose`.
+Where you store the Ansible and Docker Compose files is up to you, but it's easiest to group them together in a single subdirectory. You can use Portainer or `docker-compose` to deploy the application stack.
 
 ## Configuring Nextcloud for LDAP
 The Nextcloud documentation has a [guide for configuring LDAP](https://docs.nextcloud.com/server/latest/admin_manual/configuration_user/user_auth_ldap.html). The configuration tool has plenty of ways to test the connection and settings along the way.
