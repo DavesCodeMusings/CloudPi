@@ -21,7 +21,7 @@ You don't have to configure a static IP address either. You could set a reservat
 ## Configuring Static Network Parameters
 Having an IP address that doesn't change is important when running the DNS service for your network. Having a hostname besides the default _raspberrypi_ is necessary when you have multiple Pi devices on your network.
 
->Changing the domain name should only be done if you have a registered domain name. Otherwise, leave it alone to use the default value of `home`.
+>Changing the domain name should only be done if you have a registered domain name. Otherwise, leave it alone to use the default value of _home_.
 
 The IP address, hostname, and other network parameters are changed using an Ansible playbook called [configure-static-ip.yml](https://github.com/DavesCodeMusings/CloudPi/blob/main/configure-static-ip.yml). You'll need to download it locally and override variable values, just like you did to change the hostname.
 
