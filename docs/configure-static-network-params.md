@@ -80,7 +80,17 @@ dns-search home
 ```
 
 ## Rebooting
-To apply changes, you'll need to reboot the system. When the system comes back, make an SSH connection using the new IP address.
+To apply changes, you'll need to reboot the system.
+
+```
+pi@raspberrypi:~/cloudpi $ sudo shutdown -r now
+```
+
+When the system comes back, make an SSH connection using the new IP address.
+
+```
+PS C:\> ssh pi@192.168.1.100
+```
 
 ## Verifying the Final Configuration
 Check the IP address and DNS configuration. Verify the DHCP client is off.
