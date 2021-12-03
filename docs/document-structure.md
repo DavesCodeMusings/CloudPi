@@ -37,7 +37,7 @@ And finally, `post-deploy.txt` gives a very brief explanation of how to log into
 Not every application will have all the files listed above, but when they do, the order is important: pre-deploy, docker-compose, post-deploy.
 
 ## Next Steps
-Unlike many documents you may have read over your lifetime, there is no _Conclusion_ section here. Most conclusions are poorly written bits of "now you know how to do X, Y and Z. Isn't that great?" I will never waste your time with a conclusion.
+Unlike many documents you may have read over your lifetime, there is no _Conclusion_ section here. Most conclusions are meaningless bits of "now you know how to do X, Y and Z. Isn't that great?" so what's the point? I will never waste your time with a conclusion.
 
 Furthermore, conclusion implies you're done. You're not done. When it comes to learning, you're never done. I will only point you to what you might want to undertake next.
 
