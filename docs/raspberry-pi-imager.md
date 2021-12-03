@@ -11,3 +11,5 @@ CTRL+SHIFT+X opens Advanced Options
 ![ChooseOS](https://user-images.githubusercontent.com/61114342/144362571-a011a086-dfcf-4728-a60c-05baaacdd4f7.png)
 
 ![ChooseStorage](https://user-images.githubusercontent.com/61114342/144362586-73427b78-a52a-4d9c-8908-9b4643761189.png)
+
+[<< Back to Install Hardware and OS](install-hardware-os.md)
