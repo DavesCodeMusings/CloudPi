@@ -81,6 +81,8 @@ The first method works fine if you plan to use URLs like _https://mypi.home:9443
 To generate a certificate like this, use the Ansible playbook [`issue-host-certificate.yml`](https://github.com/DavesCodeMusings/CloudPi/blob/main/ssl/issue-host-certificate.yml). It will produce a certificate that can be applied to the host DNS name as well as several other subdomains of the host.
 
 ```
+pi@mypi:~/cloudpi/ssl $ ansible-playbook issue-host-certificate.yml
+
 PLAY [Generate a certificate for multiple DNS names] *************************
 
 TASK [Gathering Facts] *********************************************************
