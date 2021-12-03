@@ -16,7 +16,7 @@ You don't have to configure a static IP address either. You could set a reservat
 1. [`ansible-playbook configure-static-network-params.yml`](https://github.com/DavesCodeMusings/CloudPi/blob/main/configure-static-network-params.yml)
 2. `cat /etc/network/interfaces.d/eth0`
 3. `shutdown -r now`
-4. `ifconfig eth0` ; `cat /etc/resolv.conf`
+4. `ifconfig eth0 ; cat /etc/resolv.conf`
 
 ## Configuring Static Network Parameters
 Having an IP address that doesn't change is important when running the DNS service for your network. Having a hostname besides the default _raspberrypi_ is necessary when you have multiple Pi devices on your network.
