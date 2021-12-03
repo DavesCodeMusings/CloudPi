@@ -46,7 +46,7 @@ pi@raspberrypi:~/cloudpi $ ansible-playbook update-system.yml
 ```
 
 ## Next Steps
-With Ansible installed and updates done, it's time to [configure a static IP address and other network parameters](configure-static-ip.md) for the Pi.
+With Ansible installed and updates done, it's time to [configure a static IP address and other network parameters](configure-static-network-params.md) for the Pi.
 
 ___
 
