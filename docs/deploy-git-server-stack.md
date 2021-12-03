@@ -83,13 +83,6 @@ localhost                  : ok=2    changed=0    unreachable=0    failed=0    s
 
 Finally, in [gitea/post-deploy.txt](https://github.com/DavesCodeMusings/CloudPi/blob/main/gitea/post-deploy.txt) you'll find a few basic hints for configuring the Gitea application. These are intentionally brief and serve only as hints. You should use the official [Gitea documentation](https://docs.gitea.io) as your guide.
 
->Most of the containerized applicaitons will be deployed in the same way as Gitea. Though sometimes there will also be a `post-deploy.yml` Ansible playbook that also needs to be run. But, no matter the application, the order is the same.
->
-> 1. `ansible-playbook pre-deploy.yml`
-> 2. `docker-compose up -d` (or copy the contents of docker-compose.yml to Portainer Stacks)
-> 3. `ansible-playbook post-deploy.yml`
-> 4. Read the steps laid out in post-deploy.txt
-
 ## Configuring Portainer for Git
 If you deployed the Gitea application using Portainer's Stacks menu, you may have noticed a build method of _Git Repository_. If you create a repository to store the YAML from the various application `docker-compose.yml` files, you can link it to Portainer and deploy the applications that way. Without going into too much detail, the basic procedure goes like this:
 
