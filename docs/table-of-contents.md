@@ -23,8 +23,9 @@
 4. [Cockpit](install-cockpit.md)
 
 ## Application Stacks
-1. Configure Portainer to Use Optional Network Services
+1. [Deploy Web Services](deploy-nginx-stack.md) &ndash; Static Content and Reverse Proxy with Nginx
 2. [Deploy Git Server](deploy-git-server-stack.md) &ndash; Code Storage and Versioning with Gitea
-3. [Deploy File Sharing](deploy-file-sharing-stack.md) &ndash; Nextcloud and Samba
-4. [Deploy Home Automation](deploy-home-automation-stack.md) &ndash; Home Assistant, Mosquitto, NodeRED, ESPHome
-5. [Deploy Web Services](deploy-nginx-stack.md) &ndash; Static Content and Reverse Proxy with Nginx
+3. Revisiting Portainer Configuration
+4. [Deploy File Sharing](deploy-file-sharing-stack.md) &ndash; Nextcloud and Samba
+5. [Deploy Home Automation](deploy-home-automation-stack.md) &ndash; Home Assistant, Mosquitto, NodeRED, ESPHome
+
