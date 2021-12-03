@@ -10,6 +10,11 @@ By the end of this step, you will have:
 ## Can I Skip It?
 You don't have to install the home automation stack. It's completely optional. If you choose to deploy it, you don't have to deploy all the applications, nor do you need to invest in a bunch of "smart" devices. You can start small with some passive home monitoring and go from there.
 
+## Summary of Commands
+1. [`ansible-playbook pre-deploy.yml`](https://github.com/DavesCodeMusings/CloudPi/tree/main/home-automation/pre-deploy.yml)
+2. [`docker-compose up -d`](https://github.com/DavesCodeMusings/CloudPi/blob/main/home-automation/docker-compose.yml)
+3. [`ansible-playbook post-deploy.yml`](https://github.com/DavesCodeMusings/CloudPi/blob/main/home-automation/post-deploy.yml)
+
 ## Understanding the Components
 The main application in the home automation stack is Home Assistant. This is central hub, providing connectivity to various devices and organizing the data into a dashboard view. Home assistant can be integrated with a surprising number of devices just over wifi. Without a lot of effort, you can probably connect to your television, internet router, video game console, thermostat, mobile phones, etc.
 
