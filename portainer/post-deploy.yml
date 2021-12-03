@@ -1,0 +1,28 @@
+---
+- name: Portainer post-deployment tasks
+  hosts: localhost
+  connection: local
+  become: true
+
+  vars:
+    nginx_confd_path: /opt/docker/nginx/conf.d
+
+  tasks:
+  - name: Checking for Nginx installation
+    stat:
+      path: "{{ nginx_confd_path }}"
+    register: nginx_confd
+
+  # The following task only runs if the Nginx conf.d directory exists.
+  - name: Creating redirection config
+    copy:
+      dest: /opt/docker/nginx/conf.d/portainer.conf
+      force: no
+      content: |
+        # Portainer redirection.
+        server {
+            server_name portainer.{{ ansible_hostname }}.{{ ansible_domain }};
+            listen 80;
+            return 301 https://portainer.{{ ansible_hostname }}.{{ ansible_domain }}:9443;
+        }
+    when: nginx_confd.stat.exists
