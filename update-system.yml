@@ -5,15 +5,15 @@
   become: true
 
   tasks:
-  - name: Update Apt cache
+  - name: Updating Apt cache
     apt:
       update_cache: yes
 
-  - name: Upgrade all packages
+  - name: Updating all packages
     apt:
       upgrade: full
 
-  - name: Determine if reboot is required
+  - name: Determining if reboot is required
     stat:
       path: /var/run/reboot-required
     notify:
