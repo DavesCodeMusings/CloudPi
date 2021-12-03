@@ -7,8 +7,8 @@ After completing this step, you will have:
 3. Configured the system's timezone
 
 ## Summary of Commands
-1. [`ansible-playbook install-cockpit.yml](https://github.com/DavesCodeMusings/CloudPi/blob/main/install-cockpit.yml)
-2. [`ansible-playbook configure-cockpit-secure.yml](https://github.com/DavesCodeMusings/CloudPi/blob/main/configure-cockpit-secure.yml)
+1. [`ansible-playbook install-cockpit.yml`](https://github.com/DavesCodeMusings/CloudPi/blob/main/install-cockpit.yml)
+2. [`ansible-playbook configure-cockpit-secure.yml`](https://github.com/DavesCodeMusings/CloudPi/blob/main/configure-cockpit-secure.yml)
 
 ## Can I Skip It?
 If you choose not to install Cockpit, all you're missing out on is the ability to speed up some administration tasks. There's nothing Cockpit does that can't be done from the command-line instead.
