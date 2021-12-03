@@ -1,0 +1,63 @@
+---
+- name: Configure Static IP
+  hosts: localhost
+  connection: local
+  become: true
+
+  # To customize variable values, use --extra-vars when running to override.
+  # For example:
+  #   ansible-playbook --extra-vars "ip=192.168.1.100 hostname=mypi"
+  vars:
+    ip: "{{ ansible_default_ipv4.address }}"
+    mask: "{{ ansible_default_ipv4.netmask }}"
+    gateway: "{{ ansible_default_ipv4.gateway }}"
+    primary_dns: "{{ ansible_dns.nameservers[0] }}"
+    secondary_dns: 1.1.1.1
+    hostname: "{{ ansible_hostname }}"
+    domain: home
+
+  tasks:
+  - name: Checking IP address
+    debug:
+      msg: "The IP address hasn't changed. (Still using: {{ ip }}) Are you sure you don't want to customize using --extra-vars?"
+    when: ip == ansible_default_ipv4.address
+
+  - name: Checking Hostname
+    debug:
+      msg: "The hostname hasn't changed. (Still using: {{ hostname }}) Are you sure you don't want to customize using --extra-vars?"
+    when: hostname == ansible_hostname
+
+  - name: Configuring network interface parameters
+    ansible.builtin.copy:
+      dest: /etc/network/interfaces.d/eth0
+      content: |
+        auto eth0
+        allow-hotplug eth0
+        iface eth0 inet static
+        address {{ ip }}
+        netmask {{ mask }}
+        gateway {{ gateway }}
+        dns-nameservers {{ primary_dns }} {{ secondary_dns }}
+        dns-search {{ domain }}
+
+  - name: Disable DHCP
+    ansible.builtin.service:
+      name: dhcpcd
+      state: stopped
+      enabled: no
+
+  - name: Set the hostname
+    ansible.builtin.hostname:
+      name: "{{ hostname }}.{{ domain }}"
+
+  - name: Create /etc/hosts
+    ansible.builtin.copy:
+      dest: /etc/hosts
+      backup: yes
+      content: |
+        127.0.0.1  localhost
+        {{ ip }}  {{ hostname }}.{{ domain }} {{ hostname }}
+
+  - name: Reboot to active changes
+    debug:
+      msg: You must reboot for changes to take effect.
