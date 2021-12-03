@@ -11,6 +11,11 @@ If you haven't assigned your Pi a domain name and a static IP yet, see the step 
 ## Can I skip it?
 If you don't mind using IP addresses when connecting to the devices on your home network, then you can skip this step. Alternatively, you could use `hosts` files to take care of name resolution. This works best when you only have a small number of devices on your network.
 
+## Summary of Commands
+1. [`ansible-playbook install-dns.yml`](https://github.com/DavesCodeMusings/CloudPi/blob/main/install-dns.yml)
+2. [`ansible-playbook configure-local-dns.yml`](https://github.com/DavesCodeMusings/CloudPi/blob/main/configure-local-dns.yml)
+3. named-checkzone ; named-checkconf ; dig @127.0.0.1
+
 ## Why BIND 9?
 ISC's BIND is one of the most widely used DNS servers, so there's plenty of documentation and tutorials surrounding it's administration if needed. The configuration is all text based, and there are a few files involved. The Ansible playbook [install-dns.yml](https://github.com/DavesCodeMusings/CloudPi/blob/main/install-dns.yml) will take care of installing the package from apt and configuring DNS forwarding to the addresses currently in your resolv.conf file.
 
@@ -53,7 +58,7 @@ mypi.home.            259200  IN      A       192.168.0.100
 
 > You can get straight to the IP address using the +short option, like this:
 > ```
-> pi@mypi:~ $dig @127.0.0.1 my.home +short
+> pi@mypi:~ $dig @127.0.0.1 mypi.home +short
 > 192.168.0.100
 > ```
 
