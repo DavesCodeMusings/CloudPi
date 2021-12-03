@@ -50,9 +50,9 @@ If you don't provide _confirm_device_ or you provide the wrong value, you will s
 ## Running the Ansible Playbook
 Copy the contents of [`provision-storage.yml`](https://github.com/DavesCodeMusings/CloudPi/blob/main/provision-storage.yml) to your Pi and run it. The playbook will take care of the following tasks.
 
-1. Install LVM tools package.
+1. Install the LVM tools package.
 2. Create a new GUID partition on /dev/sda that spans the entire device.
-3. Create an LVM volume group called _vg1_, using _/dev/sda1_ as its physical volume. 
+3. Create a volume group called _vg1_, using _/dev/sda1_ as its physical volume. 
 4. Create three logical volumes: _vol01_, _vol02_, and _vol03_.
 5. Create ext4 filesystems on the three volumes.
 6. Create directories where needed for _/opt/docker_, _/var/lib/docker_, and _/srv_.
