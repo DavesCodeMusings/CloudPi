@@ -40,13 +40,21 @@ Plug the Pi in a wired network connection first, then plug in the power supply. 
 ## Dealing with a Headless Server
 With no monitor and keyboard attached to the Pi, you'll have to log in with a secure shell connection. You can use a classic like [Putty](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html) or something like [Windows Terminal](https://www.microsoft.com/en-us/p/windows-terminal). Whatever makes you happy. But first, you need to know what the IP address is.
 
-With no keyboard an monitor, `ifconfig` and `ip addr` are not an option. The Pi is configured as a DHCP client, so you can your internet router's management interface to determine the address assigned. If your router lacks that capability, [Angry IP Scanner](https://angryip.org/download/) is a good tool for scanning network devices.
+The Pi is configured as a DHCP client, so you can your internet router's management interface to determine the address assigned. If your router lacks that capability, [Angry IP Scanner](https://angryip.org/download/) is a good tool for scanning network devices. However you choose to search, the hostname will most likely appear as 'raspberrypi.local'.
 
-However you choose to search, the hostname will most likely appear as 'raspberrypi.local'. Angry IP Scanner can be configured to diplay the MAC address vendor for devices it discovers, though it is not the default. (User Tools > Fetchers to add it.) The Pi MAC vendor will show up as 'Raspberry Pi Trading' or 'Raspberry Pi Foundation'.
+>Angry IP Scanner can be configured to diplay the MAC address vendor for devices it discovers, though it is not the default. (User Tools > Fetchers to add it.) The Pi MAC vendor will show up as 'Raspberry Pi Trading' or 'Raspberry Pi Foundation'.
 
-Once you have IP address, log in via SSH. The default user is 'pi' and the password is 'raspberry'.
+Once you have IP address, log in via SSH. The default user is 'pi' and the password is 'raspberry'. The following is an example from Windows Terminal:
 
->Setting up a serial console can also be helpful when running a headless server, but it's really only for used troubleshooting and not for day to day operation. If you have the required cable, Adafruit has a good article on [how to set it up](https://learn.adafruit.com/adafruits-raspberry-pi-lesson-5-using-a-console-cable/enabling-serial-console). They'd be happy to sell you the cable as well.
+```
+PS C:\> ssh pi@192.168.0.28
+The authenticity of host '192.168.0.28 (192.168.0.28)' can't be established.
+ECDSA key fingerprint is SHA256:qpUJOFqGwlpRoQsd/tXYgkXy+OsIGT/wfdHMG16Q9o.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+```
+
+>### Serial Console
+>Setting up a serial connection can also be helpful for troubleshooting. If you have the required cable, Adafruit has a good article on [how to set it up](https://learn.adafruit.com/adafruits-raspberry-pi-lesson-5-using-a-console-cable/enabling-serial-console). They'd be happy to sell you the cable as well.
 
 ## Next Steps
 Once the Pi is up and running, you're ready to [install Ansible and system updates](install-ansible-and-system-updates.md).
