@@ -186,4 +186,4 @@ After LDAP configuration, you can easily log into Portainer to deploy and manage
 
 ___
 
-_Light travels faster than sound. This is why some people appear bright until they speak. &mdash;Steven Wright_
+_Light travels faster than sound. This is why some people appear bright until they speak. &mdash;Alan Dundes_
