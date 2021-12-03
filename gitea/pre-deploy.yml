@@ -5,13 +5,13 @@
   become: true
 
   tasks:
-  - name: Create git group
+  - name: Creating git group
     group:
       name: git
       gid: 1001
 
   # Creating the user account also creates /srv/git
-  - name: Create git user account
+  - name: Creating git user account
     user:
       name: git
       uid: 1001
@@ -19,7 +19,7 @@
       create_home: true
       home: /srv/git
 
-  - name:
+  - name: Creating configuration directory
     file:
       path: /opt/docker/gitea
       state: directory
