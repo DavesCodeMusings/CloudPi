@@ -58,7 +58,7 @@ localhost                  : ok=8    changed=7    unreachable=0    failed=0    s
 ```
 
 ## Verifying the Certificates
-When the playbook is done, you'll have a root certificate called `home_CA.crt` and an intermediate certificate called `home.crt`. Both are plain text file in the `/etc/ssl/certs/` directory. You can verify the certificates and keys by using `openssl` commands like the ones shown below.
+When the playbook is done, you'll have a root certificate called _home_CA.crt_ and an intermediate certificate called _home.crt_. Both are plain text file in the `/etc/ssl/certs/` directory, but they are encoded and won't make much sense. You can verify the certificates and keys by using `openssl` commands like the ones shown below.
 
 ```
 $ openssl x509 -in /etc/ssl/certs/home_CA.crt -text -noout
@@ -71,8 +71,8 @@ $ sudo openssl rsa -in /etc/ssl/private/home.key -check
 ## Issuing Certificates for Applications
 After setting up the certificate authority, you're ready to start issuing certificates. You have a couple choices.
 
-1. You can issue one cert for mypi.home and apply it to all your applications under one DNS name (like _mypi.home_).
-2. You can issue a cert that can be used with multiple domain names, applying to _www.mypi.home_, _portainer.mypi.home_, _nextcloud.mypi.home_, etc.
+1. You can issue one cert and apply it to all your applications under one DNS name (like _mypi.home_).
+2. You can issue a cert that can be used with multiple domain names, applying to _mypi.home_, _portainer.mypi.home_, _nextcloud.mypi.home_, _www.mypi.home_, etc.
 
 The first method works fine if you plan to use URLs like _https://mypi.home:9443_ or _https://mypi.home:8910_ to access your applications. If you want to use friendlier names, like _https://portainer.mypi.home_ or _https://nextcloud.mypi.home_ and skip the port number, you'll want to use the second method. 
 
