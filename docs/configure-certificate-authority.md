@@ -118,7 +118,7 @@ Follow these instructions to get your Windows desktop to trust your self-hosted 
 
 This covers any application that uses the Windows trust store. Firefox uses it's own trust store, but it can be configured to use the Windows trust store as well. It involves setting the _security.enterprise_roots.enabled_ parameter to true. There's a [Mozilla support article](https://support.mozilla.org/en-US/kb/setting-certificate-authorities-firefox) that gives more detail.
 
-**You must restart Firefox to apply the configuration change.** Otherwise you will see SEC_ERROR_BAD_SIGNATURE.
+**You must restart Firefox to apply the configuration change.** Otherwise you will see This Connection is Untrusted or SEC_ERROR_BAD_SIGNATURE.
 
 >You can also manage your self-signed certificate using the the certificates snap-in in the Microsoft Management Console (mmc.exe). Refer to [Microsoft's Documentation](https://docs.microsoft.com/en-us/dotnet/framework/wcf/feature-details/how-to-view-certificates-with-the-mmc-snap-in) for more information.
 
