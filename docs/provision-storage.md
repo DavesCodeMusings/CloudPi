@@ -133,7 +133,9 @@ vol03 vg1 -wi-ao---- 100.00g
 >Extraneous information has been replaced with ellipses (...) to aid clarity. 
 
 ## Next Steps
-Now that there's plenty of disk space allocated for Docker persistent data, you're Pi is ready to start serving files. You can skip ahead and rush right into [installing Docker and Portainer](install-docker-portainer.md) and start deploying applications. Or you can take a look at some of the optional components like DNS to let you refer to devices by name rather than IP address, a certificate authority (CA) to enable secure HTTPS connections to servers, and LDAP directory services to let you users maintain a single user name and password across multiple applications. All these will help make the system more robust and user friendly, even though they're not strictly necessary.
+Now that there's plenty of disk space, your Pi is ready to start serving files. You can jump ahead and rush right into [installing Docker and Portainer](install-docker-portainer.md) to start deploying applications.
+
+Or you can take a look at some of the optional components like DNS to let you refer to devices by name rather than IP address, a certificate authority (CA) to enable secure HTTPS connections to servers, and LDAP directory services to let you users maintain a single user name and password across multiple applications. All these will help make the system more robust and user friendly, even though they're not strictly necessary.
 
 If you decide to pursue these optional services, start with [installing DNS](https://github.com/DavesCodeMusings/CloudPi/blob/main/docs/install-dns.md).
 
