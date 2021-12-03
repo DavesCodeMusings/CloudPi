@@ -54,7 +54,7 @@ Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
 ```
 
 >### Serial Console
->Setting up a serial connection can also be helpful for troubleshooting. If you have the required cable, Adafruit has a good article on [how to set it up](https://learn.adafruit.com/adafruits-raspberry-pi-lesson-5-using-a-console-cable/enabling-serial-console). They'd be happy to sell you the cable as well.
+>A serial connection as an alternatate way to log in can be helpful for troubleshooting. If you have the required cable, Adafruit has a good article on [how to set it up](https://learn.adafruit.com/adafruits-raspberry-pi-lesson-5-using-a-console-cable/enabling-serial-console). They'd be happy to sell you the cable as well.
 
 ## Next Steps
 Once the Pi is up and running, you're ready to [install Ansible and system updates](install-ansible-and-system-updates.md).
