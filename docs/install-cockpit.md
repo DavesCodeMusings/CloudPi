@@ -36,7 +36,7 @@ PLAY RECAP *********************************************************************
 localhost                  : ok=3    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 ```
 
-## Configuring HTTPS with Local Certificate Authority
+## Configuring HTTPS with the Local Certificate Authority
 By default, Cockpit uses a self-signed certificate to enable HTTPS. This means you'll need to add an exception in your browser to avoid the Untrusted Certificate error. But, you can remove this certificate and instead use the host certificate generated when the self-hosted certificate authority was configured. The playbook that takes care of the details is called [configure-cockpit-secure.yml](https://github.com/DavesCodeMusings/CloudPi/blob/main/configure-cockpit-secure.yml).
 
 The example below shows how to run it and what the output looks like.
