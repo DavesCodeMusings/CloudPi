@@ -10,8 +10,8 @@ By the end of this step you will have:
 You can't skip Docker installation. It forms the foundation nearly all of the applications use to run. Technically, you could skip Portainer and use the docker-compose command-line tool instead.
 
 ## Summary of Commands
-1. `ansible-playbook install-docker.yml`
-2. `sudo docker-compose up -d`
+1. [`ansible-playbook install-docker.yml`](https://github.com/DavesCodeMusings/CloudPi/blob/main/install-docker.yml)
+2. [`sudo docker-compose up -d`](https://github.com/DavesCodeMusings/CloudPi/blob/main/portainer/docker-compose.yml)
 
 ## Why Docker?
 A Docker container is a bit like a virtual machine, but it's a virtual machine without its own kernel. It shares the kernel with the underlying operating system. In the case of the Raspberry Pi OS, it's Linux running on ARM-based hardware.
