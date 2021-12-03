@@ -14,7 +14,7 @@ You can run your entire system off of the micro-SD card if you want. You can als
 ## Summary of Commands
 1. `sudo parted /dev/sda print`
 2. [`ansible-playbook provision-storage.yml`](https://github.com/DavesCodeMusings/CloudPi/blob/main/provision-storage.yml)
-3. `df -h; cat /etc/fstab; sudo lvs`
+3. `df -h ; cat /etc/fstab ; sudo lvs`
 
 ## Attaching and Identifying the External Storage
 First, plug the storage device into the SATA side of the USB to SATA adapter cable plug the USB side into the Raspberry Pi. Be sure to plug it into one of the blue USB3 ports to get the best performance. To make the disk easier to identify, don't plug in any other storage devices at this time.
