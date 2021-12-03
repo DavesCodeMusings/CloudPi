@@ -59,13 +59,12 @@ Copy the contents of [`provision-storage.yml`](https://github.com/DavesCodeMusin
 7. Mount _/dev/vg1/vol01_, _/dev/vg1/vol02_, and _/dev/vg1/vol03_ on _/opt/docker_, _/var/lib/docker_, and _/srv_, respectively.
 
 >### Volume Sizes
->The logical volume sizes are hard-coded as 5G for _/opt/docker_, 10G for _/var/lib/docker_, and 100G for _/srv_. They are intentionally conservative to fit the constraints of smaller storage devices. But, if you have a device with a lot of space, you can change the sizes using the Ansible variable called _logical_volumes_. Alternatively, you can resize them as the your storage needs grow. The `lvresize` and `resize2fs` command-line tools will enable you to do this.
+>The logical volume sizes are hard-coded as 5G for _/opt/docker_, 10G for _/var/lib/docker_, and 100G for _/srv_. They are intentionally conservative to fit the constraints of smaller storage devices. But, if you have a device with a lot of space, you can override the default sizes using the Ansible variable called _logical_volumes_. Alternatively, you can resize them as the your storage needs grow. The `lvresize` and `resize2fs` command-line tools will enable you to do this.
 
 If all goes well, the output from the playbook should look like this:
 
 ```
-$ ansible-playbook provision-storage.yml --extra-vars confir
-m_device=/dev/sda
+$ ansible-playbook provision-storage.yml --extra-vars confirm_device=/dev/sda
 [WARNING]: No inventory was parsed, only implicit localhost is available
 [WARNING]: provided hosts list is empty, only localhost is available. Note that
 the implicit localhost does not match 'all'
