@@ -6,37 +6,91 @@ By the end of this step you will have:
 * Configured zone files to answer DNS requests for your network's domain.
 * Learned a few of the commands that can be used to verify proper DNS setup.
 
-If you haven't assigned your Pi a domain name and a static IP yet, see the step for [Static IP and Custom Hostname](Static-IP-and-Custom-Hostname) before proceeding.
+All of the information the Ansible playbook needs to do its job is taken from the existing network setup of the Raspberry Pi. Before setting up the local zone files, make sure the Pi is configured with a hostname and a domain name and that these names will not change. If you haven't assigned your Pi a domain name and a static IP yet, see the step for [configuring static network parameters](configure-static-network-params.yml) before proceeding.
 
 ## Can I skip it?
 If you don't mind using IP addresses when connecting to the devices on your home network, then you can skip this step. Alternatively, you could use `hosts` files to take care of name resolution. This works best when you only have a small number of devices on your network.
 
 ## Summary of Commands
 1. [`ansible-playbook install-dns.yml`](https://github.com/DavesCodeMusings/CloudPi/blob/main/install-dns.yml)
-2. [`ansible-playbook configure-local-dns.yml`](https://github.com/DavesCodeMusings/CloudPi/blob/main/configure-local-dns.yml)
-3. named-checkzone ; named-checkconf ; dig @127.0.0.1
+2. `dig @127.0.0.1 raspberrypi.org +short`
+3. [`ansible-playbook configure-local-dns.yml`](https://github.com/DavesCodeMusings/CloudPi/blob/main/configure-local-dns.yml)
+4. named-checkzone ; named-checkconf ; dig @127.0.0.1
 
-## Why BIND 9?
+## Why BIND9?
 ISC's BIND is one of the most widely used DNS servers, so there's plenty of documentation and tutorials surrounding it's administration if needed. The configuration is all text based, and there are a few files involved. The Ansible playbook [install-dns.yml](https://github.com/DavesCodeMusings/CloudPi/blob/main/install-dns.yml) will take care of installing the package from apt and configuring DNS forwarding to the addresses currently in your resolv.conf file.
 
 >There are some containerized versions of BIND9, but nothing on [Docker Hub](https://hub.docker.com) is listed as 'official' from ISC. Given this and the fact that DNS is more of a basic network service than most containerized apps, BIND9 from the apt repository is used instead.
 
-For best results, make sure your resolv.conf points to your ISP's name servers or a [public DNS service](https://duckduckgo.com/?q=public+dns&t=ffab&ia=answer&iax=answer).
+## Installing BIND9
+For best results, make sure your resolv.conf points to your ISP's name servers or a [public DNS service](https://duckduckgo.com/?q=public+dns&t=ffab&ia=answer&iax=answer). Check this by displaying the contents of /etc/resolv.conf.
 
 Download the [Ansible playbook](https://github.com/DavesCodeMusings/CloudPi/blob/main/install-dns.yml) to your Pi and run it with `ansible-playbook install-dns.yml`.
 
+A successful install should look like this:
+
+```
+pi@anubis:~/cloudpi $ ansible-playbook install-dns.yml
+
+PLAY [Install BIND9 and configure DNS forwarding] *******************************
+
+TASK [Gathering Facts] **********************************************************
+ok: [localhost]
+
+TASK [Installing BIND9] *********************************************************
+changed: [localhost]
+
+TASK [Installing dnsutils] ******************************************************
+changed: [localhost]
+
+TASK [Verifying valid starting configuration] ***********************************
+changed: [localhost]
+
+TASK [Configuring forwarders] ***************************************************
+changed: [localhost]
+
+TASK [Allowing queries from hosts other than just localhost] ********************
+changed: [localhost]
+
+TASK [Disabling DNSSEC] *********************************************************
+changed: [localhost]
+
+TASK [Verifying final configuration] ********************************************
+changed: [localhost]
+
+TASK [Reloading BIND9 config] ***************************************************
+changed: [localhost]
+
+TASK [Testing DNS lookup for raspberrypi.org] ***********************************
+changed: [localhost]
+
+TASK [Reporting new DNS server addresses] ***************************************
+ok: [localhost] => {
+    "msg": "You may now use 192.168.0.100 as a DNS server."
+}
+
+PLAY RECAP **********************************************************************
+localhost                  : ok=11   changed=9    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+```
+
+## Verifying Internet Name Resolution
+Once the DNS service is running, you can test things with the dig command. It should be able to find internet domain names and return the IP address(es) associated with the name.
+
+```
+pi@anubis:~/cloudpi $ dig @127.0.0.1 raspberrypi.org +short
+104.22.1.43
+172.67.36.98
+104.22.0.43
+```
+
 ## Configuring Local Zone Files
-A zone file is what DNS uses to get information about a domain. In this case, the domain is the one assigned to your home network when you configured the Pi for a static IP address. 
+With DNS working, you can start configuring it to reply with IP addresses for hostnames on your network, like _mypi.home_.
 
-The [configure-local-dns.yml](https://github.com/DavesCodeMusings/CloudPi/blob/main/configure-local-dns.yml) playbook will set up a zone file for forward look-ups (name to IP address) and and a zone file for reverse look-ups (IP address to name.) It will insert a record for the Raspberry Pi host and a wildcard CNAME for subdomains of the Raspberry Pi host's name.
+A zone file is what DNS uses to find this name to IP address mapping. In the case of the _home_ domain, the zone file will be `/etc/bin/db.home`. The [configure-local-dns.yml](https://github.com/DavesCodeMusings/CloudPi/blob/main/configure-local-dns.yml) playbook will set up /etc/bin/db.home and also a zone file for reverse look-ups (IP address to name.) The playbook will insert a record for the Raspberry Pi host and a wildcard CNAME for subdomains of the Raspberry Pi host's name (like *.mypi.home).
 
->The wildcard CNAME lets you lookup names like, www.raspberrypi.home or portainer.raspberrypi.home. Setting it up now makes configuration easier in later steps.
+>The wildcard CNAME lets you lookup names like, nextcloud.mypi.home or portainer.mypi.home. This feature will be used in later steps when configuring Nginx as a reverse proxy.
 
-All of the information the Ansible playbook needs to do its job is taken from the existing network setup of the Raspberry Pi. Before setting up the local zone files, make sure the Pi is configured with a hostname and a domain name and that these names will not change. The Pi should also have a static IP Address or a DNS reservation to ensure the IP address will not change.
- 
-If everything is ready to go, run the Ansible playbook witht he command `ansible-playbook configure-local-dns.yml`.
-
-Entries for your router, the Raspberry Pi host, and wildcard DNS name pointing to the Raspberry Pi host are provided automatically. Additional host records can be added to DNS manually. See the [BIND9 manual](https://bind9.readthedocs.io/en/latest/) and existing zone files or look to the Ansible playbook for cues on how to do it.
+Run the Ansible playbook with the command `ansible-playbook configure-local-dns.yml`.
 
 ## Testing
 Basic testing of the DNS server is included in the Ansible playbooks. If you want to add more DNS records for devices on your network, some of the useful utilities are:
@@ -81,6 +135,9 @@ Changes to `/etc/resolv.conf` will be lost on the next restart. Test and make su
 ```
 dns-nameservers 192.168.1.100 192.168.1.1
 ```
+
+## Adding Host Records
+The advantage of running your own DNS is that you can add names for all your devices. You can do this be editing /etc/bin/db.home. See the [BIND9 manual](https://bind9.readthedocs.io/en/latest/) and existing zone files or look to the Ansible playbook for cues on how to do it.
 
 ## Next Steps
 Now that you can refer to your hosts by name instead of IP address, it's time to look at some more features. The first of these is to enable HTTPS connections by configuring a self-hosted [certificate authority](configure-certificate-authority.md).
