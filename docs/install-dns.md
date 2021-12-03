@@ -92,6 +92,53 @@ A zone file is what DNS uses to find this name to IP address mapping. In the cas
 
 Run the Ansible playbook with the command `ansible-playbook configure-local-dns.yml`.
 
+A successful run looks like this:
+
+```
+PLAY [Create DNS zone files for intranet domain.] *******************************
+
+TASK [Gathering Facts] **********************************************************
+ok: [localhost]
+
+TASK [Verifying zero-configuration .local domain is not being used.] ************
+ok: [localhost] => {
+    "msg": "Configuring for home"
+}
+
+TASK [Creating Numeric Part of Reverse Lookup Zone Name] ************************
+ok: [localhost]
+
+TASK [Verifying good starting configuration.] ***********************************
+changed: [localhost]
+
+TASK [Configuring forward lookup zonefile.] *************************************
+changed: [localhost]
+
+TASK [Verify forward lookup zonefile.] ******************************************
+changed: [localhost]
+
+TASK [Configure reverse lookup zonefile.] ***************************************
+changed: [localhost]
+
+TASK [Verifying reverse lookup zonefile.] ***************************************
+changed: [localhost]
+
+TASK [Adding forward lookup to local configuration.] ****************************
+changed: [localhost]
+
+TASK [Adding reverse lookup to local configuration.] ****************************
+changed: [localhost]
+
+TASK [Verifying good final configuration.] **************************************
+changed: [localhost]
+
+TASK [Reloading configuration] **************************************************
+changed: [localhost]
+
+PLAY RECAP **********************************************************************
+localhost                  : ok=12   changed=9    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+```
+
 ## Testing
 Basic testing of the DNS server is included in the Ansible playbooks. If you want to add more DNS records for devices on your network, some of the useful utilities are:
 
