@@ -34,7 +34,7 @@ Disk /dev/sda: 160GB
 
 >Partition information has been truncated for clarity.
 
-**If you don't see /dev/sda with the manufacturer and capacity you expect, stop and figure out what's wrong before you proceed!**
+**_If you don't see /dev/sda with the manufacturer and capacity you expect, stop and figure out what's wrong before you proceed!_**
 
 ## Understanding the Ansible Playbook
 Creating partitions and filesystems is a destructive process. Any information already on the storage device will be lost. Therefore, you should proceed with caution. To this end, the playbook has been designed to fail unless you provide it with a _confirm_device_ variable with the device name of the storage device.
