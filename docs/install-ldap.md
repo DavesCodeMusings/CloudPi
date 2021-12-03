@@ -13,6 +13,11 @@ By the end of this step you will have:
 ## Can I Skip It?
 LDAP is not required. It's also not the easiest thing to install and maintain. The only reason to use LDAP is to centralize your users' passwords in one place. The alternative is to use each application's local authentication with either separate passwords or manually synchronized passwords. If it's just you and your dog at home, feel free to skip LDAP and create local accounts for each application.
 
+## Summary of Commands
+1. [`ansible-playbook install-ldap.yml`](https://github.com/DavesCodeMusings/CloudPi/blob/main/install-ldap.yml)
+2. [`sudo ldapadd -n -Y EXTERNAL -H ldapi:/// -f userAccounts.ldif`](https://github.com/DavesCodeMusings/CloudPi/blob/main/ldap/userAccounts.ldif)
+3. [`ansible-playbook configure-ldap-secure.yml`](https://github.com/DavesCodeMusings/CloudPi/blob/main/configure-ldap-secure.yml)
+
 ## Why OpenLDAP?
 There are other options for LDAP directory services, like Apache DS and 389 Directory Server. OpenLDAP has been around for a long time and is widely used. That makes things easier when searching for answers on the web. If you have experience with another LDAP server, feel free to use it. There should be very little difference when it comes to configuring applications for LDAP authentication.
 
@@ -76,7 +81,7 @@ Use _Test Connection_ to verify everything works.
 ## Creating Users and Groups
 How you create and organize your user accounts and groups is entirely up to you. You can create users and groups one at a time with point and click in LDAP Admin, or you can do a bulk import using an [LDIF](https://en.wikipedia.org/wiki/LDAP_Data_Interchange_Format) formatted file.
 
-LDIF is not the easiest syntax to master, but it's fairly straightforward when you have an example to start from. There is a [sample LDIF file for users and groups](https://github.com/DavesCodeMusings/CloudPi/blob/main/ldap/user-import.ldif) in the project repository that you can use as a template to get you going.
+LDIF is not the easiest syntax to master, but it's fairly straightforward when you have an example to start from. There is a [sample LDIF file for users and groups](https://github.com/DavesCodeMusings/CloudPi/blob/main/ldap/userAccounts.ldif) in the project repository that you can use as a template to get you going.
 
 The import can be done from the Raspberry Pi command-line with this command: `ldapadd -x -D "cn=admin,dc=home" -w password -f addPeople.ldif`, assuming the LDIF file is named _addPeople.ldif_. Or you can use LDAP Admin's _Tools > Import_ feature.
 
@@ -85,17 +90,60 @@ What you end up with is two organizational units (OUs): _People_ and _Groups_, a
 >The _search_ user is there for applications that need an account to do user and group lookups in the LDAP directory during authentication. Normal users will not log in with _search_.
 
 ## Enabling Secure LDAP with a Certificate
-**_You will need a separate certificate issued just for OpenLDAP. You cannot use a certificate with multiple SANs for OpenLDAP. It will fail with a mysterious error code 80._**
+The playbook, [configure-ldap-certificate.yml](https://github.com/DavesCodeMusings/CloudPi/blob/main/configure-ldap-certificate.yml) does a couple of things.
+1. It creates the certificate and place it in the `/etc/ldap/tls` directory, along with the `.key` file, and the intermediate and root certificates generated when you built your [self-hosted certificate authority](https://github.com/DavesCodeMusings/CloudPi/blob/main/ssl/configure-certificate-authority.yml).
+2. It creates an LDIF file with the TLS configuration and import it into your LDAP configuration.
 
-There are a couple of steps to enabling encrypted communication with the OpenLDAP server and there are two Ansible playbooks to help you.
+The playbook reads certificate information from the [`subject-info.yml`](https://github.com/DavesCodeMusings/CloudPi/blob/main/ssl/subject-info.yml) file used in the [Certificate Authority step](configure-certificate-authority.md). This file needs to be in the same directory as the configure-secure-ldap.yml playbook. Otherwise, the playbook will fail.
 
-The first playbook, [issue-ldap-certificate.yml](https://github.com/DavesCodeMusings/CloudPi/blob/main/ssl/issue-ldap-certificate.yml) will create the certificate and place it in the `/etc/ldap/tls` directory, along with the `.key` file, and the intermediate and root certificates generated when you built your [self-hosted certificate authority](https://github.com/DavesCodeMusings/CloudPi/blob/main/ssl/configure-certificate-authority.yml).
+>Interestingly, [OpenLDAP cannot use a certificate with multiple subject alternative names](https://serverfault.com/questions/1062064/debian-10-openldap-letsencrypt-error-80-trying-to-add), so the host certificate generated in the [Certificate Authority step](configure-certificate-authority.md) will not work. It has to be a separately issued certificate.
 
-The second playbook, [configure-ldap-secure.yml](https://github.com/DavesCodeMusings/CloudPi/blob/main/configure-ldap-secure.yml), takes care of adding the certificate and key to OpenLDAP's configuration.
+When successful, the playbook output looks like this:
+```
+$ ansible-playbook configure-ldap-secure.yml
+[WARNING]: No inventory was parsed, only implicit localhost is available
+[WARNING]: provided hosts list is empty, only localhost is available. Note that
+the implicit localhost does not match 'all'
 
-These two steps are enough for LDAP/STARTTLS over port 389. If you want to also enable secure LDAP on port 636, refer to the [Debian OpenLDAP Setup Topic](https://wiki.debian.org/LDAP/OpenLDAPSetup#Enabling_LDAPS_on_port_636)
+PLAY [Configure OpenLDAP with local CA certificate] *****************************
 
->If you are using LDAP Admin, be sure to check the _TLS_ box in the properties of the connection to enable secure communication. 
+TASK [Gathering Facts] **********************************************************
+ok: [localhost]
+
+TASK [Loading subject info] *****************************************************
+ok: [localhost]
+
+TASK [Creating directory] *******************************************************
+changed: [localhost]
+
+TASK [Copying intermediate and root certificates] *******************************
+changed: [localhost]
+
+TASK [Setting ownership on intermediate / root bundle] **************************
+changed: [localhost]
+
+TASK [Generating a private key] *************************************************
+changed: [localhost]
+
+TASK [Generating a CSR] *********************************************************
+changed: [localhost]
+
+TASK [Signing the certificate] **************************************************
+changed: [localhost]
+
+TASK [Creating LDIF file] *******************************************************
+changed: [localhost]
+
+TASK [Importing TLS configuration] **********************************************
+changed: [localhost]
+
+PLAY RECAP **********************************************************************
+localhost                  : ok=10   changed=8    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+```
+
+The tasks executed by this playbook are enough to enable LDAP/STARTTLS over port 389. If you want to also enable secure LDAP on port 636, refer to the [Debian OpenLDAP Setup Topic](https://wiki.debian.org/LDAP/OpenLDAPSetup#Enabling_LDAPS_on_port_636)
+
+>Many applications support STARTTLS, but it is not the default. For example, LDAP Admin requires you to check a box in the connection settings.
 
 ## Setting User Passwords
 LDAP accounts and passwords are not the synchronized with Linux's `/etc/passwd`. They are configured separately. OpenLDAP offers command-line tools to change passwords, but it's usually easier to use a tool like LDAP Admin. You will have to set passwords for users before they can log into any applications with LDAP credentials.
