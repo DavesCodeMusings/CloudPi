@@ -39,7 +39,7 @@
 
     # Allowing queried from anywhere simplifies things and on a home network,
     # the Raspberry Pi DNS server should not be accessible from the internet.
-    - name: Allow queries from hosts other than just localhost
+    - name: Allowing queries from hosts other than just localhost
       lineinfile:
         path: /etc/bind/named.conf.options
         insertbefore: "};"
