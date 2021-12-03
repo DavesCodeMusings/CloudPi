@@ -12,7 +12,7 @@ Configuring the hostname is not strictly necessary, unless you have multiple Ras
 
 You don't have to configure a static IP address either. You could set a reservation in your internet router's DHCP server instead, if that's a feature. Some people prefer this option, because it keeps a record of the IP assignment (in the router's configuration.) You can use as a way to centrally manage the IP addresses on your nextwork. Reservations also prevent you from accidentally assigning the same IP address twice.
 
-## Command Summary
+## Summary of Commands
 1. [`ansible-playbook configure-static-network-params.yml`](https://github.com/DavesCodeMusings/CloudPi/blob/main/configure-static-network-params.yml)
 2. `cat /etc/network/interfaces.d/eth0`
 3. `sudo shutdown -r now`
