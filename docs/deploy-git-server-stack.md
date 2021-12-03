@@ -15,8 +15,71 @@ There are several options for git hosting, some public and some self-hosted. Of 
 ## Preparing to Run Gitea
 The Gitea container is configured to run with a particular user ID and group ID. Ideally, these are set to the _git_ user with a UID of 1001 and GID of 1001. None of this is set up on the Raspberry Pi OS. But, there is an Ansible playbook that takes care of it. You can find it under [gitea/pre-deploy.yml](https://github.com/DavesCodeMusings/CloudPi/blob/main/gitea/pre-deploy.yml). Run this with `ansible-playbook pre-deploy.yml` and the user account will be created along with a `/srv/git` directory to store any repositories you create.
 
+Here's what the output of the playbook looks like when it's successful:
+
+```
+pi@mypi:~/cloudpi/gitea $ ansible-playbook pre-deploy.yml
+
+PLAY [Gitea in a Docker Container] **********************************************
+
+TASK [Gathering Facts] **********************************************************
+ok: [localhost]
+
+TASK [Creating git group] *******************************************************
+changed: [localhost]
+
+TASK [Creating git user account] ************************************************
+changed: [localhost]
+
+TASK [Creating configuration directory] *****************************************
+changed: [localhost]
+
+PLAY RECAP **********************************************************************
+localhost                  : ok=4    changed=3    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+```
+
 ## Deploying the Gitea Stack
 After the pre-deploy tasks are done, you can deploy the Gitea application with the file [gitea/docker-compose.yml](https://github.com/DavesCodeMusings/CloudPi/blob/main/gitea/docker-compose.yml) You can do this from the command-line using `docker-compose` or you can log into Portainer and use the _Stacks_ menu selection to paste the contents of the docker-compose.yml file and deploy the stack that way.
+
+If you deploy with Docker Compose, it looks like this:
+
+```
+pi@anubis:~/cloudpi/gitea $ docker-compose up -d
+Creating network "gitea_default" with the default driver
+Pulling gitea (kunde21/gitea-arm:latest)...
+latest: Pulling from kunde21/gitea-arm
+...
+Digest: sha256:6ea533577b1ac996a28a0cba5d66625bc3f7dfb8bc882a2e0b5a932a83603c8e
+Status: Downloaded newer image for kunde21/gitea-arm:latest
+Creating gitea ... done
+```
+
+> Some lines have been removed to aid clarity.
+
+When deploying from Portainer, simply copy the contents of docker-compose.yml and paste it into the web editor on the _Stacks_ page.
+
+## Finishing Installation
+There one task left, and that is contained in the post-deploy.yml file. Here's what it looks like when you run it:
+
+```
+pi@mypi:~/cloudpi/gitea $ ansible-playbook post-deploy.yml
+
+PLAY [Run Gitea post-deployment tasks] ******************************************
+
+TASK [Gathering Facts] **********************************************************
+ok: [localhost]
+
+TASK [Checking for Nginx installation] ******************************************
+ok: [localhost]
+
+TASK [Creating Gitea reverse proxy config] **************************************
+skipping: [localhost]
+
+PLAY RECAP **********************************************************************
+localhost                  : ok=2    changed=0    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0
+```
+
+
 
 Finally, in [gitea/post-deploy.txt](https://github.com/DavesCodeMusings/CloudPi/blob/main/gitea/post-deploy.txt) you'll find a few basic hints for configuring the Gitea application. These are intentionally brief and serve only as hints. You should use the official [Gitea documentation](https://docs.gitea.io) as your guide.
 
