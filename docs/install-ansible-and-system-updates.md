@@ -43,6 +43,24 @@ If all goes well, it will do the same as if you had typed `sudo apt-get update`,
 ```
 pi@raspberrypi:~/cloudpi $ vi update-system.yml
 pi@raspberrypi:~/cloudpi $ ansible-playbook update-system.yml
+pi@raspberrypi:~/cloudpi $ ansible-playbook update-system.yml
+
+PLAY [Update System to Latest Packages] ****************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [localhost]
+
+TASK [Updating Apt cache] ******************************************************
+ok: [localhost]
+
+TASK [Updating all packages] ***************************************************
+changed: [localhost]
+
+TASK [Determining if reboot is required] ***************************************
+ok: [localhost]
+
+PLAY RECAP *********************************************************************
+localhost                  : ok=4    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 ```
 
 ## Next Steps
