@@ -20,8 +20,8 @@ On a home network, where you trust your users, there's no urgent need for encryp
 Setting up a certificate authority can be tedious. But, for this project there's an Ansible playbook that will let you do this quickly and easily.
 
 Here's the procedure:
-1. Download [`configure-certificate-authority.yml`](https://github.com/DavesCodeMusings/CloudPi/blob/main/ssl/configure-certificate-authority.yml) and [`subject-info.yml`](https://github.com/DavesCodeMusings/CloudPi/blob/main/ssl/subject-info.yml) to your Pi.
-2. Edit `subject-info.yml`, customizing it to your needs.
+1. Download [configure-certificate-authority.yml](https://github.com/DavesCodeMusings/CloudPi/blob/main/ssl/configure-certificate-authority.yml) and [subject-info.yml](https://github.com/DavesCodeMusings/CloudPi/blob/main/ssl/subject-info.yml) to your Pi.
+2. Edit subject-info.yml, customizing it to your needs.
 3. Run the playbook with the command `ansible-playbook configure-certificate-authority.yml`
 
 ```
