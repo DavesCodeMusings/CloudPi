@@ -7,7 +7,12 @@ By the end of this step, you will have:
 * Samba running to provide a few pre-defined CIFS shares.
 
 ## Can I Skip This?
-You don't have to run Nextcloud or Samba. If you're only interested in the other applications, fell free to skip it.
+You don't have to run Nextcloud or Samba. If you're only interested in home automation or one of the other applications, fell free to skip it.
+
+## Summary of Commands
+1. [`ansible-playbook pre-deploy.yml`](https://github.com/DavesCodeMusings/CloudPi/blob/main/file-sharing/pre-deploy.yml)
+2. [`docker-compose up -d`](https://github.com/DavesCodeMusings/CloudPi/blob/main/file-sharing/docker-compose.yml)
+3. [`ansible-playbook post-deploy.yml](https://github.com/DavesCodeMusings/CloudPi/blob/main/file-sharing/post-deploy.yml)
 
 ## Running the Stack
 Running these applicaitons involves the same procedure as Gitea. First, [download the files](https://github.com/DavesCodeMusings/CloudPi/blob/main/file-sharing/) locally, and then follow these steps.
