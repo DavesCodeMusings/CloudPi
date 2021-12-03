@@ -4,6 +4,11 @@ Portainer has the ability to integrate with a git repository for storing the Doc
 ## Can I Skip It?
 You don't have to run a git server on your home network. You can integrate Portainer with a public git server, like GitHub. You can also store your YAML files as plain text and use Portainer's built-in web editor for deployment. Not running your own git server doesn't really have any downsides. It just one of those things you do... because you can.
 
+## Summary of Commands
+1. [`ansible-playbook pre-deploy.yml`](https://github.com/DavesCodeMusings/CloudPi/blob/main/gitea/pre-deploy.yml)
+2. [`docker-compose up -d`](https://github.com/DavesCodeMusings/CloudPi/blob/main/gitea/docker-compose.yml)
+3. [`ansible-playbook post-deploy.yml`](https://github.com/DavesCodeMusings/CloudPi/blob/main/gitea/post-deploy.yml)
+
 ## Why Gitea?
 There are several options for git hosting, some public and some self-hosted. Of the self-hosted options, Gitea seems to require the least amount of server resources to run, making it ideal for a small server like the Raspberry Pi.
 
