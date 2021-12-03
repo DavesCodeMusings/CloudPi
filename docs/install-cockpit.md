@@ -82,22 +82,22 @@ Once you log in with the _pi_ username and password, take some time to browse ar
 
 Below are a few simple tasks to get you started.
 
-### Timezone
+### Configuring Timezone
 The stock image for Raspberry Pi OS is configured to use the _Europe/London_ timezone. This makes sense, because that's where the Raspberry Pi project is based. But, unless you live in or around London, your clock will be showing the wrong time. Here's how you can fix it with Cockpit:
 
 1. On the _Overview_ page, look for the heading of _Configuration_.
 2. Look for _System Time_ and click on the hyperlink displaying the current date and time.
 3. Choose your timezone from the dropdown menu and confirm by clicking _Change_.
 
-### Logical Volumes
+### Expanding Logical Volumes
 The logical volumes configured during the initial install were intentionally sized small, because LVM makes it easy to add capacity as needed. Cockpit makes it even easier.
 
 1. Click on the _Storage_ menu link.
-2. Click on one of the logical volumes listed under the _Filesystems_ heading. (For example, /dev/vg1/vol03)
-3. Expand the details of the volume by clicking the chevron shown on the _Logical Volumes_ page.
+2. Click on one of the logical volumes listed under the _Filesystems_ heading. (For example, /dev/vg1/vol03, mounted on /srv)
+3. Open the details of the volume by clicking the chevron next to /dev/vg1/vol03 on the _Logical Volumes_ page.
 4. Click _Grow_ and adjust the size.
 
-The logical volume and its filesystem are expanded to the new size.
+The logical volume and its filesystem are expanded to the new size. You can verify with the command `df -h /srv`.
 
 # Next Steps
 Now that you've had an easy time with Cockpit, take a deep breath and prepare yourself for [installing LDAP](install-ldap.md).
