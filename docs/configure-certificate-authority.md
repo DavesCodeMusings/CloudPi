@@ -25,6 +25,8 @@ Here's the procedure:
 3. Run the playbook with the command `ansible-playbook configure-certificate-authority.yml`
 
 ```
+pi@mypi:~/cloudpi/ssl $ ansible-playbook configure-certificate-authority.yml
+
 PLAY [Configure the certificate authority] ***********************************
 
 TASK [Gathering Facts] *********************************************************
@@ -56,14 +58,14 @@ localhost                  : ok=8    changed=7    unreachable=0    failed=0    s
 ```
 
 ## Verifying the Certificates
-When the playbook is done, you'll have a root certificate called `home_CA.crt` and an intermediate certificate called `home.crt`. Both are in the `/etc/ssl/certs/` directory. There will also be
+When the playbook is done, you'll have a root certificate called `home_CA.crt` and an intermediate certificate called `home.crt`. Both are plain text file in the `/etc/ssl/certs/` directory. You can verify the certificates and keys by using `openssl` commands like the ones shown below.
 
 ```
-$ ls /etc/ssl/certs/home*
-/etc/ssl/certs/home_CA.crt  /etc/ssl/certs/home.crt
+$ openssl x509 -in /etc/ssl/certs/home_CA.crt -text -noout
+$ sudo openssl rsa -in /etc/ssl/private/home_CA.key -check
 
-$ sudo ls /etc/ssl/private
-home_CA.key  home.key
+$ openssl x509 -in /etc/ssl/certs/home.crt -text -noout
+$ sudo openssl rsa -in /etc/ssl/private/home.key -check
 ```
 
 ## Issuing Certificates for Applications
@@ -100,7 +102,7 @@ PLAY RECAP *********************************************************************
 localhost                  : ok=5    changed=3    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 ```
 
->LDAP is not included in this certificate. It is configured separately in a later step.
+>LDAP is not included in this multi-name certificate. It is configured separately in a later step.
 
 ## Trusting the Certificate
 With any self-signed certificate, your browser will complain about the certificate issuer not being trusted. That's because the browser only has a couple dozen root certificates from the big name issuers that are in the trust store. With Firefox, you can add a certificate trust exception pretty easily.With Edge and others it's a little harder, but not too bad
