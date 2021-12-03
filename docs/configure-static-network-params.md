@@ -98,7 +98,7 @@ Check the IP address and DNS configuration. Verify the DHCP client is off.
 ```
 pi@mypi.home:~ $ ifconfig eth0
 eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
-      inet 192.168.0.18  netmask 255.255.255.0  broadcast 192.168.0.255
+      inet 192.168.1.100  netmask 255.255.255.0  broadcast 192.168.1.255
 ...
 
 pi@mypi:~ $ cat /etc/resolv.conf
