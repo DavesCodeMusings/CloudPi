@@ -40,17 +40,17 @@
         dns-nameservers {{ primary_dns }} {{ secondary_dns }}
         dns-search {{ domain }}
 
-  - name: Disable DHCP
+  - name: Disabling DHCP
     ansible.builtin.service:
       name: dhcpcd
       state: stopped
       enabled: no
 
-  - name: Set the hostname
+  - name: Setting the hostname
     ansible.builtin.hostname:
       name: "{{ hostname }}.{{ domain }}"
 
-  - name: Create /etc/hosts
+  - name: Creating /etc/hosts
     ansible.builtin.copy:
       dest: /etc/hosts
       backup: yes
