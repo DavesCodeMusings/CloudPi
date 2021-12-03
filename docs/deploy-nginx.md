@@ -61,6 +61,9 @@ I'm not dead yet.
 >Refer to Monty Python's The Holy Grail for the source of the phrase.
 
 ## Revisting Portainer for HTTPS Redirection
+To see how Nginx can be used for redirection, take a look at the [post-deploy.yml file for Portainer](https://github.com/DavesCodeMusings/CloudPi/blob/main/portainer/post-deploy.yml). Running the playbook before Nginx was installed results in tasks being skipped. Running the playbook after Nginx is installed results in a file being added to Nginx's configuration directory.
+
+Here's what it looks like:
 
 ```
 pi@mypi:~/cloudpi/portainer $ ansible-playbook post-deploy.yml
@@ -95,7 +98,10 @@ root@nginx:/#
 
 >Alternatively, you can stop and start the Nginx stack.
 
+Once the new configuration is active, anytime you type http://portainer.mypi.home into a browser, you'll be sent to https://portainer.mypi.home:9443 automatically.
+
 ## Serving HTML
 Any files you put in /srv/www will be available using a web browser when Nginx is running. You can customize index.html and add files and subdirectories if you want. The only thing lacking is PHP or other server-side scripting languages. This requires additional configuration that is outside the scope of this document.
 
 ## Next Steps
+TODO: Gitea
