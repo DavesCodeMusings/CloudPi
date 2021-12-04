@@ -17,12 +17,8 @@ Oh, you run a web server on your Raspberry Pi? That's so cute. CloudPi runs...
 
 Build it yourself, quickly and easily, using [Ansible](https://www.ansible.com/) automation for sytem configuration and [Docker Compose](https://docs.docker.com/compose/) for application deployment.
 
----
+The project documentation is here: [https://davescodemusings.github.io/CloudPi/](https://davescodemusings.github.io/CloudPi/)
 
-The CloudPi project is in a state of flux at the moment. With the release of Raspberry Pi OS 11 (Bullseye) everything is getting reworked. The new version is here:
+___
 
-[https://davescodemusings.github.io/CloudPi/](https://davescodemusings.github.io/CloudPi/)
-
-There may be some rough edges, but it's mostly complete and alpha tested.
-
-If you don't have the latest and greatest OS, [the wiki](https://github.com/DavesCodeMusings/CloudPi/wiki) still has the previous version using Pi OS 10 (Buster).
+If you don't have the latest and greatest OS, [the wiki](https://github.com/DavesCodeMusings/CloudPi/wiki) still has the previous version using Pi OS 10 (Buster). This is no longer maintained nor does it have all the features of the latest version.
