@@ -132,4 +132,4 @@ This scenarios above offer only a few possibilities of things that can go wrong.
 
 If you have a second Pi of equal specs, run through the exercise of building the system again and recovering the data. Try make the second Pi able a close copy of the original and see if all your data is there.
 
-Try to take into account situations not only involving loss of hardware, but also ransomeware infecting one or more of your client devices.
+Try to take into account situations not only involving loss of hardware, but also ransomeware infecting one or more of your client devices. How would you recover from these situations? Plan for it now so you won't be surprised later.
