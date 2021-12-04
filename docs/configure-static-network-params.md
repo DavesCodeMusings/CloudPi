@@ -123,4 +123,4 @@ At this point in the project, you've taken the Raspberry Pi from a basic out-of-
 
 ___
 
-_They Call the Wind Mariah &mdash;Paint Your Wagon, lyrics by Alan J. Lerner_
+_The only constant in life is change. &mdash;Heraclitus
