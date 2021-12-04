@@ -127,5 +127,7 @@ The worst situation of all is the total lose of the Pi hardware, microSD card an
 * If you're using the Nextcloud "virtual files" feature, you won't have a complete copy of your Nextcloud files.
 * If you're only relying on Nextcloud sync, you still won't have LDAP, DNS, and CA files.
 
-### Plan for Your Situation
+### Plan and Practice
 This scenarios above offer only a few possibilities of things that can go wrong. Be sure to plan for your own potential disasters while taking into account the importance of the data your storing and how difficult it is to replace.
+
+If you have a second Pi of equal specs, run through the exercise of building the system again and recovering the data. Try make the second Pi able a close copy of the original and see if all your data is there.
