@@ -25,4 +25,11 @@
             listen 80;
             return 301 https://portainer.{{ ansible_hostname }}.{{ ansible_domain }}:9443;
         }
+    notify: Reloading Nginx config
     when: nginx_confd.stat.exists
+
+  handlers:
+  - name: Reloading Nginx config
+    community.docker.docker_container_exec:
+      container: nginx
+      command: service nginx reload
