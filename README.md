@@ -15,7 +15,7 @@ CloudPi runs...
 * [OpenLDAP](https://www.openldap.org/)
 * [BIND9 DNS](https://www.isc.org/bind/)
 * [OpenSSL Certificate Authority (CA)](https://www.openssl.org/)
-* And there's an [Nginx](https://nginx.org/en/) web server, too.
+* And there's an [Nginx](https://nginx.org/en/) web server in there, too.
 
 Build it yourself, quickly and easily, using [Ansible](https://www.ansible.com/) automation for sytem configuration and [Docker Compose](https://docs.docker.com/compose/) for application deployment.
 
