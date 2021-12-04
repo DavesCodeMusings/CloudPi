@@ -188,7 +188,7 @@ dns-nameservers 192.168.1.100 192.168.1.1
 ## Testing on Client Machines
 How you change the DNS server entries on a Windows PC is covered in this [Microsoft support article](https://support.microsoft.com/en-us/windows/change-tcp-ip-settings-bd0a07af-15f5-cd6a-363f-ca2b6f391ace).
 
-Once you've made the changes, you should be able to access your Pi by name rather than its IP address. Try _http://mypi.home_ in a web browser. You should see the Nginx welcome page if you've started the [Nginx test Docker container](https://github.com/DavesCodeMusings/CloudPi/blob/main/docs/deploy-nginx-basic.md).
+Once you've made the changes, you should be able to access your Pi by name rather than its IP address. Try _http://mypi.home_ in a web browser. You should see the Nginx welcome page if you've started the [Nginx test Docker container](https://github.com/DavesCodeMusings/CloudPi/blob/main/docs/deploy-nginx-test.md).
 
 ## Adding Host Records
 The advantage of running your own DNS is that you can add names for all your devices. You can do this be editing /etc/bin/db.home. See the [BIND9 manual](https://bind9.readthedocs.io/en/latest/) for more information. You can also look in the existing entries in /etc/bind/db/home and simply copy, paste and modify to suit.
