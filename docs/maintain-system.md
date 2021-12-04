@@ -134,6 +134,22 @@ If you have a second Pi of equal specs, run through the exercise of building the
 
 Try to take into account situations not only involving loss of hardware, but also ransomeware infecting one or more of your client devices. How would you recover from these situations? Plan for it now so you won't be surprised later.
 
+## Exporting LDAP, DNS and Certificate Data
+Depending on your backupp strategy, you may not have copies of the LDAP database and DNS zones stored on the operating system's microSD card. However, you can make an initial export of the data and keep a copy somewhere safe.
+
+>These methods do nothing to back up the configuration for LDAP and DNS servers, only the data.
+
+### LDAP
+The command `sudo slapcat -n1` will dump the contents of the LDAP user database. This is where all the user accounts, groups, and associated password hashes are stored. Store the output in a file somewhere safe and you'll be able to reimport later if needed.
+
+### DNS Zones
+The command `sudo rndc dumpdb -zones` will dump the contents of all configured DNS zones to a file. On Raspberry Pi OS 11 (Bullseye) that file path is _/var/cache/bind/named_dump.db_ It's a plain text file and can be read with any text editor. It also contains a lot of comment lines.
+
+### Certificate Authority
+The important file in the CA are already in plain text. You just need to keep them somewhere safe. Be sure to get all the files: the root certificate and key, the intermediate certificate and key, as well as any host certificates and keys you have issued.
+
+If you've configured your client devices to trust your CA, the intermediate and root certificates will already be in your client's certificate store. You will not have the private keys, however. Be sure to keep copies of these in a safe place.
+
 ___
 
 _Every bad situation is a blues song waiting to happen. &mdash;Amy Winehouse_
