@@ -47,9 +47,13 @@ The bad part is: The copy is in the same phsical location as the original so the
 ### Maintaining a Copy on Another Machine
 This option is a lot like the previous one in that it involves periodic copies with rsync, but the sync is to a storage device on another Pi. If you have an older Raspberry Pi model 2 or 3 lying around collecting dust, this can be a good option for an inexpensive backup host.
 
-The good part is: rsync to a remote machine is not much more difficult to configure than rsync to another device on the same host. You can have the backup Pi in a different location as the main Pi (one upstairs, one in the basement) to offer some protection against the fire / flood situation. You could even locate your backup Pi at a neighbor's house who is in wifi range to satisfy the "1 copy off-site" rule.
+The good part is:
+* rsync to a remote machine is not much more difficult to configure than rsync to another device on the same host.
+* You can have the backup Pi in a different location as the main Pi (one upstairs, one in the basement) to offer some protection against the fire / flood situation.
+* DNS and LDAP are designed for replication and the backup host can serve as a secondary.
+* You could locate your backup Pi at a neighbor's house who is in wifi range to satisfy the "1 copy off-site" rule.
 
-The bad part is: You have more hardware to maintain. You have to really trust your neighbor to take care of your backup Pi. And you can still lose LDAP, DNS, and CA files.
+The bad part is: You have more hardware to maintain. You have to really trust your neighbor to take care of your backup Pi. And you can still lose the CA files.
 
 ### Using the Public Cloud
 There are plenty of companies that offer internet-based backup solutions. It seems like every year another list comes out with the top ten best plans, so they're not hard to find.
