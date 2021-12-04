@@ -11,8 +11,7 @@
       state: present
   - name: Add official repository
     apt_repository:
-      repo: deb [arch=armhf] https://download.docker.com/linux/raspbian bullseye
-stable
+      repo: deb [arch=armhf] https://download.docker.com/linux/raspbian bullseye stable
   - name: Installing Docker Community Edition
     apt:
       name: docker-ce
