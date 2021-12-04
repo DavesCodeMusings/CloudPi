@@ -143,7 +143,7 @@ Or you can take a look at some of the optional components like:
  
 All these will help make the system more robust and user friendly, even though they're not strictly necessary.
 
-If you decide to pursue these optional services, start with [installing a simple web server](https://github.com/DavesCodeMusings/CloudPi/blob/main/docs/install-nginx-test.md) to have something to test against.
+If you decide to pursue these optional services, start with [deploying a simple web server](https://github.com/DavesCodeMusings/CloudPi/blob/main/docs/deploy-nginx-test.md) to have something to test against.
 
 ___
 
