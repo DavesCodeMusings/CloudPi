@@ -13,3 +13,5 @@
       state: started
       restart: yes
       restart_policy: unless-stopped
+      ports:
+      - 80:80
