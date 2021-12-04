@@ -37,7 +37,9 @@ Most of the Home Assistant configuration can be done using the web-based interfa
 
 Mosquitto doesn't require much in the way of configuration, it just sort of runs. The only thing you might want to do is set up a username and password for any devices that don't have an option for anonymous connection. See the [Mosquitto documentation for the user/password utility](https://mosquitto.org/man/mosquitto_passwd-1.html) and the [Portainer documentation for accessing the container console](https://docs.portainer.io/v/ce-2.9/user/docker/containers/console).
 
-TODO: NodeRED, ESPHome
+NodeRED doesn't require much in the way of configuration either, though having an incorrect timezone seems to be a common theme on internet discussions.
+
+ESPHome should not need any configuration other than the reverse proxy to enable an HTTPS connection. If this isn't working, over the air updates will be unavailable due to browser security features.
 
 ## Next Steps
 If you made it this far, you are well versed in deploying and configuring containerized applications. You have created a system with plenty of services to help you install the next, shiny application that catches your eye. The only thing stopping you is the resouce constraints of the tiny computing platform called Raspberry Pi. But as we have seen over the course of this project, it's quite a capable machine.
