@@ -66,4 +66,4 @@ Once you have Nginx running, you can proceed with [installing DNS](https://githu
 
 ___
 
-_This space for rent._
+_The World Wide Web is the only thing I know of whose shortened form takes three times longer to say than what it's short for. &mdash;Douglas Adams_
