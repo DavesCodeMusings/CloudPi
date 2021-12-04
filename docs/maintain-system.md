@@ -92,19 +92,40 @@ Having backups is one thing. Knowing what to do when the system is down is anoth
 The one problem I've experienced most is a corrupted microSD card. They're really not designed for the strain of a high number of write operations and failure is more a question of when than a question of if. Having separate OS and data storage devices helps with this situation.
 
 #### Recovery
-Replace the microSD card with a new one, flashed to the same version of Raspberry Pi OS. Run through the build steps again to rebuild the system software. Data is still on the external storage device, which is hopefully unaffected.
+* Replace the microSD card with a new one, flashed to the same version of Raspberry Pi OS.
+* Run through the build steps again to rebuild the system software.
+* Docker persistent data and user files are still on the external storage device, which is hopefully unaffected.
 
 #### Caveats
 * The LDAP user and group database is on the microSD card. You'll need to reimport the LDIF.
-* DNS zone information is on the microSD card. You'll need to recreate any records for hosts that you added.
+* DNS zone information is on the microSD card. You'll need to recreate any customization you made.
 * The_pi_ user's home directory is on the microSD card. Any of the Ansible scripts you stored locally need to be copied again.
 
 ### Failed External Storage
-Back in the early implementations of the project, when I was using an USB flash drive for storage, I had a couple of them fail. I'm hoping with a NAS-rated device, this won't happen. But, it's good to be prepared.
+Back in the early implementations of the project, when I was using an USB flash drive for storage, I had a couple of them fail. Like the failed microSD cards, it's because of pushing a device beyond what it was designed for. I'm hoping with a NAS-rated device, this external storage failure won't happen again. But, it's good to be prepared.
 
 #### Recovery
-* Replace the device. Recreate the logical volumes. The Ansible playbook for provisioning storage can be used as a astarting point, but chances are good that you've expanded at least one of the logical volumes.
-* Restore the data from your backup device or from the Nextcloud directories on client machines.
+* Replace the device. Recreate the logical volumes.
+* Use the Ansible playbook for provisioning storage as a starting point.
+* Resize any of the logical volumes to match your pre-disaster configuration.
+* Restore the data from your backup source: either Nextcloud directories on client machines or a second external storage device.
 
 #### Caveats
 If you're not using a backup device, the Docker persistent data in logical volumes _vol01_ and _vol02_ will be unrecoverable.
+
+### Fire, Flood, Locusts
+The worst situation of all is the total lose of the Pi hardware, microSD card and external storage device. In this situation all you have is your backup.
+
+#### Recovery
+* Replace hardware and rebuild the system using the project documentation.
+* If you have a secondary Pi that survived the disaster, use the data on its external storage device and any replicated LDAP and DNS data.
+* If you don't have a secondry Pi, but you're using a public cloud backup solution, recover your system's data from there.
+* If you don't have a secondry Pi, but your client devices were unaffected, recover user files from the Nextcloud directory from the individual client devices.
+
+#### Caveats
+* If you weren't using a secondary Pi, or it was destroyed in the disaster, you obviously can't rely on it as a recovery source.
+* If you're using the Nextcloud "virtual files" feature, you won't have a complete copy of your Nextcloud files.
+* If you're only relying on Nextcloud sync, you still won't have LDAP, DNS, and CA files.
+
+### Plan for Your Situation
+This scenarios above offer only a few possibilities of things that can go wrong. Be sure to plan for your own potential disasters while taking into account the importance of the data your storing and how difficult it is to replace.
