@@ -19,17 +19,7 @@ Spend your time using the system, not maintaining it.
 
 Sound like your kind of thing? Get yourself a 4Gig Raspberry Pi 4 and let's go!
 
-# Coming Soon
-New and improved documentation tailored for Raspberry Pi OS Bullseye
-
-Planned enhancements:
-* Switching container deployment from Ansible's Community Docker to Portainer Stacks.
-* Documentation in GitHub Pages rather than wiki.
-* Redeploy wiki as specific tasks supplemental to documentation.
-
-The beginnings of the [new project documents can be previewed](table-of-contents.md).
-
-In the meantime, the original documentation for Raspberry Pi OS Buster is here: [https://github.com/DavesCodeMusings/CloudPi/wiki](https://github.com/DavesCodeMusings/CloudPi/wiki)
+[Table of Contents](table-of-contents.md).
 
 ___
 
