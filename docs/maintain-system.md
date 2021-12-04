@@ -1,5 +1,5 @@
 # Day Two Operation
-Like the title? "Day Two" one of those fancy, industry buzzwords for ongoing maintenance after the system is up and running. (Apparently you get three days: day zero to plan it, day one to implement it, and day two to support it. Day to can stretch into weeks, months or even years.)
+Like the title? "Day Two" one of those fancy, industry buzzwords for ongoing maintenance after the system is up and running. (Apparently you get three days: day zero to plan it, day one to implement it, and day two to support it. Day two can stretch into weeks, months or even years.)
 
 This document touches upon some of the things you'll need to do to keep the system up and available on "day two".
 
