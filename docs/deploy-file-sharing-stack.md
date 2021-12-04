@@ -14,7 +14,7 @@ You don't have to run Nextcloud or Samba. If you're only interested in home auto
 2. [`docker-compose up -d`](https://github.com/DavesCodeMusings/CloudPi/blob/main/file-sharing/docker-compose.yml)
 3. [`ansible-playbook post-deploy.yml`](https://github.com/DavesCodeMusings/CloudPi/blob/main/file-sharing/post-deploy.yml)
 
-## Running the Stack
+## Deploying the Stack
 Running these applicaitons involves the same procedure as Gitea. First, [download the files](https://github.com/DavesCodeMusings/CloudPi/blob/main/file-sharing/) locally, and then follow these steps.
 
 1. Run `ansible-playbook pre-deploy.yml`
@@ -23,6 +23,63 @@ Running these applicaitons involves the same procedure as Gitea. First, [downloa
 4. Read the steps in `post-deploy.txt` for configuration tips.
 
 Where you store the Ansible and Docker Compose files is up to you, but it's easiest to group them together in a single subdirectory. You can use Portainer or `docker-compose` to deploy the application stack.
+
+The output from the _pre-deploy.yml_ playbook is shown below.
+
+```
+pi@mypi:~/cloudpi/file-sharing $ ansible-playbook pre-deploy.yml
+
+PLAY [Run NextCloud pre-deployment tasks] ***************************************
+
+TASK [Gathering Facts] **********************************************************
+ok: [localhost]
+
+TASK [Install SQLite client] ****************************************************
+changed: [localhost]
+
+TASK [Create Nextcloud configuration data directory] ****************************
+changed: [localhost]
+
+TASK [Create directory for Samba media share] ***********************************
+changed: [localhost]
+
+TASK [Create directory for Samba public share] **********************************
+changed: [localhost]
+
+TASK [Create directory for samba shared share] **********************************
+changed: [localhost]
+
+PLAY RECAP **********************************************************************
+localhost                  : ok=6    changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+```
+
+The `docker-compose.yml` file was deployed with Portainer and is not shown.
+
+The `post-deploy.yml` playbook output looks like this:
+
+```
+pi@anubis:~/cloudpi/file-sharing $ ansible-playbook post-deploy.yml
+
+PLAY [Run NextCloud post-deployment tasks] **************************************
+
+TASK [Gathering Facts] **********************************************************
+ok: [localhost]
+
+TASK [Scheduling background jobs] ***********************************************
+changed: [localhost]
+
+TASK [Checking for Nginx installation] ******************************************
+ok: [localhost]
+
+TASK [Creating Nextcloud reverse proxy config] **********************************
+changed: [localhost]
+
+RUNNING HANDLER [Reloading Nginx config] ****************************************
+changed: [localhost]
+
+PLAY RECAP **********************************************************************
+localhost                  : ok=5    changed=3    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+```
 
 ## Configuring Nextcloud for LDAP
 The Nextcloud documentation has a [guide for configuring LDAP](https://docs.nextcloud.com/server/latest/admin_manual/configuration_user/user_auth_ldap.html). The configuration tool has plenty of ways to test the connection and settings along the way.
