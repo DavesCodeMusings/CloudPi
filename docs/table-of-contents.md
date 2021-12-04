@@ -13,7 +13,7 @@
 4. [Storage Provisioning ](provision-storage.md)
 
 ## Optional Network Services
-1. [A Simple Web Server](deploy-nginx-basic.md)
+1. [A Simple Web Server](deploy-nginx-test.md)
 2. [Domain Name System](install-dns.md)
 3. [Certificate Authority](configure-certificate-authority.md)
 4. [LDAP](install-ldap.md)
