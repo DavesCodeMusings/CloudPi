@@ -127,7 +127,7 @@ The trusted root certificate store on Raspberry Pi OS is defined by the certific
 
 It may be tempting to skip this, thinking you'll never use a web bowser on the Pi, so why bother? But, when two applications use a secure channel to communicate, they may expect a trusted root certificate.
 
-## Testing with the Nginx Test Instance
+## Verifying the Certificate Using the Nginx Test Instance
 If you started the [Nginx Docker container for testing](https://github.com/DavesCodeMusings/CloudPi/blob/main/docs/deploy-nginx-test.md), you can run the [playbook](https://github.com/DavesCodeMusings/CloudPi/blob/main/deploy-nginx-test.yml) again now that the certificates have been generated. This time it won't skip over the SSL tasks and you'll have a web server that listens on HTTPS as well as HTTP.
 
 Run `ansible-playbook deploy-nginx-test.yml` again and then go to https://mypi.home in a web browser. You should see the Nginx Welcome page.
