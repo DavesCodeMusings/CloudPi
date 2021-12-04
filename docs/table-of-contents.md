@@ -13,10 +13,11 @@
 4. [Storage Provisioning ](provision-storage.md)
 
 ## Optional Network Services
-1. [Domain Name System](install-dns.md)
-2. [Certificate Authority](configure-certificate-authority.md)
-3. [LDAP](install-ldap.md)
-4. [Cockpit](install-cockpit.md)
+1. [A Simple Web Server](deploy-nginx-basic.md)
+2. [Domain Name System](install-dns.md)
+3. [Certificate Authority](configure-certificate-authority.md)
+4. [LDAP](install-ldap.md)
+5. [Cockpit](install-cockpit.md)
 
 ## Application Stacks
 1. [Install Docker and Portainer](install-docker-portainer.md)
