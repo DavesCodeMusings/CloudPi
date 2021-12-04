@@ -141,7 +141,7 @@ PLAY RECAP *********************************************************************
 localhost                  : ok=12   changed=9    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 ```
 
-## Testing
+## Testing from the Pi
 Basic testing of the DNS server is included in the Ansible playbooks. If you want to add more DNS records for devices on your network, some of the useful utilities are:
 
 * named-checkzone
@@ -167,7 +167,7 @@ mypi.home.            259200  IN      A       192.168.0.100
 
 As a final test, try some well-known internet DNS names, like _github.com_ or _kernel.org_, just to make sure forwarding is working too.
 
-## Using Your Own DNS
+## Using Your Own DNS on the Pi
 Now that you've verified DNS is working, you can start using your own DNS server to resolve names. Start by editing `/etc/resolv.conf`. Add a _nameserver_ line with your Raspberry Pi's IP address. It should look something like this:
 
 ```
@@ -185,8 +185,13 @@ Changes to `/etc/resolv.conf` will be lost on the next restart. Test and make su
 dns-nameservers 192.168.1.100 192.168.1.1
 ```
 
+## Testing on Client Machines
+How you change the DNS server entries on a Windows PC is covered in this [Microsoft support article](https://support.microsoft.com/en-us/windows/change-tcp-ip-settings-bd0a07af-15f5-cd6a-363f-ca2b6f391ace).
+
+Once you've made the changes, you should be able to access your Pi by name rather than its IP address. Try _http://mypi.home_ in a web browser. You should see the Nginx welcome page if you've started the [Nginx test Docker container](https://github.com/DavesCodeMusings/CloudPi/blob/main/docs/deploy-nginx-basic.md).
+
 ## Adding Host Records
-The advantage of running your own DNS is that you can add names for all your devices. You can do this be editing /etc/bin/db.home. See the [BIND9 manual](https://bind9.readthedocs.io/en/latest/) and existing zone files or look to the Ansible playbook for cues on how to do it.
+The advantage of running your own DNS is that you can add names for all your devices. You can do this be editing /etc/bin/db.home. See the [BIND9 manual](https://bind9.readthedocs.io/en/latest/) for more information. You can also look in the existing entries in /etc/bind/db/home and simply copy, paste and modify to suit.
 
 ## Next Steps
 Now that you can use a name like _mypi.home_ to access your Pi, the next enhancement is enable secure HTTPS connections. This is done by configuring a self-hosted [certificate authority](configure-certificate-authority.md).
