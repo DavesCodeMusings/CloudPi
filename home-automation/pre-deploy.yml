@@ -32,7 +32,7 @@
       path: /opt/docker/node-red
       state: directory
       mode: '0755'
-      owner: root
+      owner: pi
       group: pi
 
   - name: Create Mosquitto configuration and data directory
