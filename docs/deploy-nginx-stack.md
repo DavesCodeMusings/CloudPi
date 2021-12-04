@@ -15,13 +15,13 @@ With some applications, like Portainer, it's easy to install the SSL certificate
 
 Of course, you may have already chosen to just do HTTP and not even worry about encryption. If that's the case, you may still be interested in using Nginx for redirection or you might choose to forego all of it.
 
-# Why Nginx?
+## Why Nginx?
 Apache HTTPD is another web server that can do reverse proxy and redirection. There are also containers like HA Proxy and Traefik that might make the work easier. Nginx has the advantage of being a lightweight system that can do the job and also serve up a few static HTML pages if you're so inclined. It's also widely used, so it's easy to find configuration examples.
 
-# Deploying Nginx
+## Deploying Nginx
 The usual procedure applies here. There is a [`pre-deploy.yml`](https://github.com/DavesCodeMusings/CloudPi/blob/main/nginx/pre-deploy.yml) Ansible playbook to create directories and a couple basic files. And there's the [`docker-compose.yml`](https://github.com/DavesCodeMusings/CloudPi/blob/main/nginx/docker-compose.yml) that you can use to deploy the container, using either Portainer or docker-compose. That's all there is to it.
 
-# Configuring Nginx
+## Configuring Nginx
 If you look in `/opt/docker/nginx`, you'll see a single file named `default.conf`. This is where a subset the Nginx configuration is stored.
 
 >The rest of the configuration is inside the container under `/etc/nginx`. Only `/etc/nginx/conf.d/default.conf` is bind mounted to the host.
