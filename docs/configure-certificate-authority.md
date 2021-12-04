@@ -142,7 +142,7 @@ Here's how to do it:
 7. Verify there are no untrusted certificate errors.
 
 ## Next Steps
-With Docker and Portainer running, and a certificate authority ready to provide HTTPS connections, you're ready to start deploying more containerized applications. But, before you do, it's worth taking a look at LDAP as a way to centralize usernames and passwords for those applications. This topic is covered in [install-ldap](install-ldap.md).
+With DNS and a certificate authority, your users can easily and securely access your applications using a familiar URL like https://mypi.home:port. The next step in the list of improvements lets them log in with a single, consistent username and password. This is feature is enabled by [installing OpenLDAP](install-ldap.md).
 
 ___
 
