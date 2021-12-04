@@ -9,9 +9,11 @@
     apt_key:
       url: https://download.docker.com/linux/raspbian/gpg
       state: present
-  - name: Add official repository
+
+  - name: Adding official repository
     apt_repository:
       repo: deb [arch=armhf] https://download.docker.com/linux/raspbian bullseye stable
+
   - name: Installing Docker Community Edition
     apt:
       name: docker-ce
