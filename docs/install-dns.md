@@ -191,7 +191,7 @@ How you change the DNS server entries on a Windows PC is covered in this [Micros
 Once you've made the changes, you should be able to access your Pi by name rather than its IP address. Try _http://mypi.home_ in a web browser. You should see the Nginx welcome page if you've started the [Nginx test Docker container](https://github.com/DavesCodeMusings/CloudPi/blob/main/docs/deploy-nginx-test.md).
 
 ## Adding Host Records
-The advantage of running your own DNS is that you can add names for all your devices. You can do this be editing /etc/bin/db.home. See the [BIND9 manual](https://bind9.readthedocs.io/en/latest/) for more information. You can also look in the existing entries in /etc/bind/db/home and simply copy, paste and modify to suit.
+The advantage of running your own DNS is that you can add names for all your devices. You can do this be editing _/etc/bin/db.home_. See the [BIND9 manual](https://bind9.readthedocs.io/en/latest/) for more information. You can also look in the existing entries in _/etc/bind/db.home_ and simply copy, paste and modify to suit.
 
 ## Next Steps
 Now that you can use a name like _mypi.home_ to access your Pi, the next enhancement is enable secure HTTPS connections. This is done by configuring a self-hosted [certificate authority](configure-certificate-authority.md).
