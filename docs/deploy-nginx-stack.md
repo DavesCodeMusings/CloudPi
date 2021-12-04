@@ -24,7 +24,13 @@ You can also do both, so typing _`http://nextcloud.mypi.home`_ redirects to _`ht
 Apache HTTPD is another web server that can do reverse proxy and redirection. There are also containers like HA Proxy and Traefik that might make the work easier. Nginx has the advantage of being a lightweight system that can do the job and also serve up a few static HTML pages if you're so inclined. It's also widely used, so it's easy to find configuration examples.
 
 ## Deploying Nginx
-The usual procedure applies here. There is a [`pre-deploy.yml`](https://github.com/DavesCodeMusings/CloudPi/blob/main/nginx/pre-deploy.yml) Ansible playbook to create directories and a couple basic files. And there's the [`docker-compose.yml`](https://github.com/DavesCodeMusings/CloudPi/blob/main/nginx/docker-compose.yml) that you can use to deploy the container, using either Portainer or docker-compose. That's all there is to it.
+There are two Ansible playbooks that you will use to get Nginx up and running.
+
+The first is [`pre-deploy.yml`](https://github.com/DavesCodeMusings/CloudPi/blob/main/nginx/pre-deploy.yml) and it takes care of creating directories and a couple basic files.
+
+Second is [`docker-compose.yml`](https://github.com/DavesCodeMusings/CloudPi/blob/main/nginx/docker-compose.yml) that you can use to deploy the container, using either Portainer or docker-compose.
+
+Because all of the remaining applications follow this same process, you will end up with a lot of files with the same names. So for Nginx deployment, move the two files into a subdirectory named _nginx_. When you install Gitea in the next step, create a _gitea_ subdirectory to hold the files.
 
 ## Understanding Nginx Configuration
 If you look in _/opt/docker/nginx/conf.d_, you'll see a single file named _default.conf_. This directory is where the Nginx configuration for HTTP(S) is stored. Looking at the contents of _default.conf_, you'll see configuration for SSL certificates and for static files served from _/srv/www_ and that's all. You can edit this file and add _server { }_ blocks to extend the configuration, but it's generally considered better to use individual files.
