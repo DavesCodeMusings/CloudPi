@@ -10,7 +10,7 @@ By the end of this step you will have:
 Short answer: no.
 
 ## Summary of Commands
-1. Using the Raspberry Pi Imager is show in this [slideshow of screenshots](raspberry-pi-imager.md).
+1. Using the Raspberry Pi Imager is shown in this [slideshow of screenshots](raspberry-pi-imager.md).
 2. Finding the Pi's IP address using [Angry IP Scanner](https://angryip.org/download/).
 3. Making the SSH connection: `ssh pi@raspberrypi`
 
