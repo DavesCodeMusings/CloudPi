@@ -143,7 +143,7 @@ Depending on your backupp strategy, you may not have copies of the LDAP database
 The command `sudo slapcat -n1` will dump the contents of the LDAP user database. This is where all the user accounts, groups, and associated password hashes are stored. Store the output in a file somewhere safe and you'll be able to reimport later if needed.
 
 ### DNS Zones
-The command `sudo rndc dumpdb -zones` will dump the contents of all configured DNS zones to a file. On Raspberry Pi OS 11 (Bullseye) that file path is _/var/cache/bind/named_dump.db_ It's a plain text file and can be read with any text editor. It also contains a lot of comment lines.
+The command `sudo rndc dumpdb -zones` will dump the contents of all configured DNS zones to a file. On Raspberry Pi OS 11 (Bullseye) that file's path is _/var/cache/bind/named_dump.db_ It's a plain text file and can be read with any text editor. It also contains a lot of comment lines.
 
 ### Certificate Authority
 The important file in the CA are already in plain text. You just need to keep them somewhere safe. Be sure to get all the files: the root certificate and key, the intermediate certificate and key, as well as any host certificates and keys you have issued.
