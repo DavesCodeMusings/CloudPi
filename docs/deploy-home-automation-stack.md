@@ -37,7 +37,7 @@ Most of the Home Assistant configuration can be done using the web-based interfa
 
 Mosquitto doesn't require much in the way of configuration, it just sort of runs. The only thing you might want to do is set up a username and password for any devices that don't have an option for anonymous connection. See the [Mosquitto documentation for the user/password utility](https://mosquitto.org/man/mosquitto_passwd-1.html) and the [Portainer documentation for accessing the container console](https://docs.portainer.io/v/ce-2.9/user/docker/containers/console).
 
-NodeRED doesn't require much in the way of configuration either, though having an incorrect timezone seems to be a common theme on internet discussions.
+NodeRED doesn't require much in the way of configuration either, though having an incorrect timezone seems to be a common theme on internet discussions. Make a connection to the NodeRED container console and run the `date` command. Run the `date` command on your Pi. They should be the same. If the time is wrong on the Pi, it should be equally wrong in NodeRED. Fix the time on the host and restart the NodeRED container.
 
 ESPHome should not need any configuration other than the reverse proxy to enable an HTTPS connection. If this isn't working, over the air updates will be unavailable due to browser security features.
 
