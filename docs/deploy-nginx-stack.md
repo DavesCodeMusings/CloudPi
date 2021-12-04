@@ -32,6 +32,34 @@ Second is [`docker-compose.yml`](https://github.com/DavesCodeMusings/CloudPi/blo
 
 Because all of the remaining applications follow this same process, you will end up with a lot of files with the same names. So for Nginx deployment, move the two files into a subdirectory named _nginx_. When you install Gitea in the next step, create a _gitea_ subdirectory to hold the files.
 
+Running the _pre-deploy.yml_ playbook will look like this:
+
+```
+pi@mypi:~/cloudpi/nginx $ ansible-playbook pre-deploy.yml
+
+PLAY [Nginx Static HTML and Reverse Proxy] **************************************
+
+TASK [Gathering Facts] **********************************************************
+ok: [localhost]
+
+TASK [Creating configuration directory] *****************************************
+changed: [localhost]
+
+TASK [Creating basic configuration file] ****************************************
+changed: [localhost]
+
+TASK [Creating a directory for static content] **********************************
+changed: [localhost]
+
+TASK [Creating a simple index.html] *********************************************
+changed: [localhost]
+
+PLAY RECAP **********************************************************************
+localhost                  : ok=5    changed=4    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+```
+
+You have some choice with _docker-compose.yml_. You can use the command-line `docker-compose up -d` or you can copy the contents of _docker-compose.yml_ into the web editor on Portainer's Stacks page and deploy that way.
+
 ## Understanding Nginx Configuration
 If you look in _/opt/docker/nginx/conf.d_, you'll see a single file named _default.conf_. This directory is where the Nginx configuration for HTTP(S) is stored. Looking at the contents of _default.conf_, you'll see configuration for SSL certificates and for static files served from _/srv/www_ and that's all. You can edit this file and add _server { }_ blocks to extend the configuration, but it's generally considered better to use individual files.
 
