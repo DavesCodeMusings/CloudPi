@@ -63,3 +63,7 @@ If all goes well, you will see a page with the title **Welcome to nginx!**
 
 ## Next Steps
 Once you have Nginx running, you can proceed with [installing DNS](https://github.com/DavesCodeMusings/CloudPi/blob/main/docs/install-dns.md).
+
+___
+
+Every bad situation is a blues song waiting to happen. &mdash;Amy Winehouse
