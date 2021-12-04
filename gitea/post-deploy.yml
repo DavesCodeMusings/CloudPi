@@ -34,4 +34,11 @@
                 proxy_set_header X-Forwarded-For $remote_addr;
             }
         }
+    notify: Reloading Nginx config
     when: nginx_confd.stat.exists
+
+  handlers:
+  - name: Reloading Nginx config
+    community.docker.docker_container_exec:
+      container: nginx
+      command: service nginx reload
