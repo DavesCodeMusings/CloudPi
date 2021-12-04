@@ -26,7 +26,7 @@ ok: [localhost]
 TASK [Installing apt key for Docker repository] *********************************
 changed: [localhost]
 
-TASK [Add official repository] **************************************************
+TASK [Adding official repository] **************************************************
 changed: [localhost]
 
 TASK [Installing Docker Community Edition] **************************************
