@@ -1,7 +1,7 @@
 # How the Documentation is Structured
 Life is short. Time is a precious commodity. I don't want to waste yours with a bunch of extraneous information. To that end, the process of going from bare metal Raspberry Pi hardware to a fully funtional system relies heavily on automation.
 
-Ansible playbooks are provided for nearly every step used in building the system. This lets you type a single command to perform several tasks. User applications are run using Docker Compose files.
+Ansible playbooks are provided for nearly every step used in building the system. This lets you type a single command to perform several tasks. User applications are run using Docker Compose files. One command (or a click of the _Deploy Stack_ button in Portainer) can bring up an entire suite of related applications.
 
 I've also structured the Cloud Pi documentation in a way that gets the important bits up front and lets you know when it's okay to skip steps and what the consequences will be. The following is a sample of what it looks like:
 
