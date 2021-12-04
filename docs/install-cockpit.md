@@ -100,7 +100,7 @@ The logical volumes configured during the initial install were intentionally siz
 The logical volume and its filesystem are expanded to the new size. You can verify with the command `df -h /srv`.
 
 # Next Steps
-Cockpit is the last of the enhancements. From here on out it's all about running applications. The first step in the process is to install the tools needed to deploy the apps. This is covered in the next step, [install Docker and Portainer](install-docker-portainer.md).
+Cockpit is the last of the enhancements. From here on out it's all about running applications. The first step in the process is to install the tools needed to deploy the apps. This is covered in the step for [installing Docker and Portainer](install-docker-portainer.md).
 
 ___
 
