@@ -62,7 +62,7 @@ TODO
 
 ## Next Steps
 
-[Gitea as a locally-hosted git server](deploy-git-server-stack.md)
+[Gitea for locally-hosted git repositories](deploy-git-server-stack.md)
 
 ___
 
