@@ -8,7 +8,7 @@ CloudPi runs...
 * [Samba](https://www.samba.org/)
 * [Home Assistant](https://www.home-assistant.io/)
 * [NodeRED](https://nodered.org/)
-* [Mosquitto MQTT](https://mosquitto.org/)
+* [Eclipse Mosquitto](https://mosquitto.org/)
 * [Gitea](https://gitea.com/)
 * [Docker](https://github.com/docker/docker-ce)
 * [Portainer](https://www.portainer.io/)
