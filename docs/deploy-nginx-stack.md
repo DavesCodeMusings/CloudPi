@@ -100,8 +100,7 @@ For each of the applications deployed in this document, there is an Ansible play
 After running _post-deploy.yml_ in the upcoming steps, you should make a connection to the application using its HTTP URL in a web browser. URLs like http://esphome.mypi.home should result in you being sent to an encrypted (HTTPS) connection to https://esphome.mypi.home. The browser should show the connection as secure and there should be no certificate errors.
 
 ## Next Steps
-
-[Gitea for locally-hosted git repositories](deploy-git-server-stack.md)
+If you used the Portainer Stack method of deploying, you may have noticed an option for _git repository_ on the same page as the web editor. This feature gives you the option of storing the contents of all your _docker-compose.yml_ files in a git repository. You can pull from a public server like GitHub or GitLab, or you can keep it local. This can be done with the next application to be deployed; Gitea for [self-hosted git repositories](deploy-git-server-stack.md).
 
 ___
 
