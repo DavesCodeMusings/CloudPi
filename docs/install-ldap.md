@@ -184,7 +184,7 @@ Because LDAP configuration varies so much from one application to the next, ther
 ## Next Steps
 After DNS, certificates, and LDAP configuration, your users should be able to interact with your home network devices in much the same way they use the internet. _https://mypi.home_ will get them to your server. From there it's just point and click.
 
-But what about the person administering the server? Why should they be stuck typing commands into a terminal emmulator? The next enhancement is to give the admin a web-based front end for many common system tasks by [installing Cockpit](https://github.com/DavesCodeMusings/CloudPi/blob/main/docs/install-cockpit.md).
+But what about the person administering the server? Why should they be stuck typing commands into a terminal emmulator? The final enhancement is to give the admin a web-based front end for many common system tasks by [installing Cockpit](https://github.com/DavesCodeMusings/CloudPi/blob/main/docs/install-cockpit.md).
 
 ___
 
