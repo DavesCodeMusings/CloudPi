@@ -5,6 +5,20 @@
   become: true
 
   tasks:
+  - name: Installing apt key for Docker repository
+    apt_key:
+      url: https://download.docker.com/linux/raspbian/gpg
+      state: present
+  - name: Add official repository
+    apt_repository:
+      repo: deb [arch=armhf] https://download.docker.com/linux/raspbian bullseye
+stable
+  - name: Installing Docker Community Edition
+    apt:
+      name: docker-ce
+      state: latest
+      update_cache: true
+
   - name: Deploying Nginx container
     community.docker.docker_container:
       image: nginx
