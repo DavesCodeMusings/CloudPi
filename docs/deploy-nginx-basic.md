@@ -13,6 +13,23 @@ Running Nginx is used as a quick visual test for DNS resolution and certificates
 ## Deploying Nginx
 The Ansible playbook [`ansible-playbook deploy-nginx-test.yml`](https://github.com/DavesCodeMusings/CloudPi/blob/main/deploy-nginx-test.yml) takes care of running Nginx as a Docker container.
 
+When running the playbook, you can expect the output to look like this:
+
+```
+pi@mypi:~/cloudpi $ ansible-playbook deploy-nginx-test.yml
+
+PLAY [Deploy Nginx as a test instance] ******************************************
+
+TASK [Gathering Facts] **********************************************************
+ok: [localhost]
+
+TASK [Deploying Nginx container] ************************************************
+changed: [localhost]
+
+PLAY RECAP **********************************************************************
+localhost                  : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+```
+
 ## Testing the Deployment
 Before installing DNS or a certificate authority, you should be able to access the Nginx welcome page by navigating to the IP address of your Pi in a web browser. (For example, http://192.168.1.100)
 
