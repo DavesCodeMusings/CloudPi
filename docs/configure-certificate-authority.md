@@ -142,6 +142,15 @@ PLAY [Deploy Nginx as a test instance] *****************************************
 TASK [Gathering Facts] **********************************************************
 ok: [localhost]
 
+TASK [Installing apt key for Docker repository] *********************************
+ok: [localhost]
+
+TASK [Adding official repository] **************************************************
+ok: [localhost]
+
+TASK [Installing Docker Community Edition] **************************************
+ok: [localhost]
+
 TASK [Deploying Nginx container] ************************************************
 changed: [localhost]
 
@@ -161,7 +170,7 @@ TASK [Reloading nginx configuration] *******************************************
 changed: [localhost]
 
 PLAY RECAP **********************************************************************
-localhost                  : ok=7    changed=3    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+localhost                  : ok=10   changed=3    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 ```
 
 ## Next Steps
