@@ -1,5 +1,5 @@
 # Self-Hosted Lightweight Directory Access Protocol (LDAP)
-When you install an application, there are generally user accounts that need to be created to grant access to the application. With one or two users and a small number of applications, you can manage user accounts independently in each app. As the number of users and apps grows, having a centralized username and password database can be a good way to simplfy management.
+When you install an application, there are generally user accounts that need to be created to grant access to it. With one or two users and a small number of applications, you can probably get by with managing user accounts independently in each app. As the number of users and apps grows, having a centralized username and password database can be a good way to simplfy management.
 
 LDAP is a very common protocol used for this purpose. Most applications that require user accounts have some ability to use LDAP as an authentication mechanism. Each app will have its own way of configuring the integration, but the basic premise is the same. You need an LDAP server running that has users and passwords defined in it. The application passes the authentication request to the LDAP server.
 
@@ -182,7 +182,9 @@ Filter: (objectClass=posixGroup)
 Because LDAP configuration varies so much from one application to the next, there are some hints provided in [ldap-config-hints.md](https://github.com/DavesCodeMusings/CloudPi/blob/main/ldap-config-hints.md).
 
 ## Next Steps
-After LDAP configuration, 
+After DNS, certificates, and LDAP configuration, your users should be able to interact with your home network devices in much the same way they use the internet. _https://mypi.home_ will get them to your server. From there it's just point and click.
+
+But what about the person administering the server? Why should they be stuck typing commands into a terminal emmulator? [Installing Cockpit](https://github.com/DavesCodeMusings/CloudPi/blob/main/docs/install-cockpit.md) will give the admin a web-based front end for many of these tasks.
 
 ___
 
