@@ -62,7 +62,7 @@ TODO
 
 ## Next Steps
 
-TODO
+[Gitea as a locally-hosted git server](deploy-git-server-stack.md)
 
 ___
 
