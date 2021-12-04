@@ -29,41 +29,61 @@ You may be familiar with the 3-2-1 backup up rule. If not, this is it in summary
 Below are a few ways you can approach 3-2-1 with limited hardware and budget.
 
 ### Relying on Nextcloud Replication
-This is the least expensive, and also the least robust.
+This is the least expensive, and also the least robust. Chances are good you will lose at least some data.
 
-The good part is the Nextcloud client on your laptop will synchronize the files on the Pi with the files on your laptop drive whenever changes are made. You don't have to do anything and you have two copies of the data.
+The good part is:
+* The Nextcloud client on your laptop will synchronize the files on the Pi with the files on your laptop drive whenever changes are made.
+* You don't have to do anything and you have two copies of the data.
 
-The bad part is: Nextcloud can't sync if the laptop is off. Nextcloud has a feature called 'virtual files' that intentionally does not sync to save system resources. If this is enabled, you no longer have two copies. If you delete a file on your laptop, the sync feature will delete it from the Pi as well, so not protection against user error.
+The bad part is:
+* Nextcloud can't sync if the laptop is powered off.
+* Nextcloud has a feature called 'virtual files' that intentionally does not sync to save system resources. If this is enabled, you no longer have two copies.
+* If you delete a file on your laptop, the sync feature will delete it from the Pi as well, so there's no protection against user error.
 
 >If you're going to be only relying on Nextcloud sync, make sure you keep copies of your LDAP user accounts LDIF file, any DNS zone customizations you've made, the local certificate authority certs and anything you have stored in the _pi_ user's home directory. The configuration files in _/opt/docker_ should periodically be copied somewhere safe, as well as the contents of _/var/lib/docker_.
 
 ### Maintaining a Copy on Second Storage Device
-This option involves attaching another external storage, but not making it available to users. Instead, it's used as a place to store copies of important data.
+This option involves attaching another external storage device, but making it available only the root user. Important data is copied to the secondary device on a schedule.
 
-The good part is, you can configure rsync in a cron job to make periodic copies of data that has changed. As long as your rsync command-line options are configured for archiving and not mirroring, the copies will never get deleted and you can protect against the "oop, I deleted a file" situation. The logical volumes with Docker persistent data can be included in the copy.
+The good part is:
+* You can configure rsync in a cron job to make periodic copies of only the data that has changed.
+* As long as your rsync command-line options are configured for archiving and not mirroring, the copies will never get deleted and you can protect against the "oop, I deleted a file" situation.
+* You can copy all of the files on the entire system.
 
-The bad part is: The copy is in the same phsical location as the original so there's no protection from fire, flood, electrical surge, etc. Copies are not realtime, so there is a window in which a file can be deleted and no backup copy exists. The cron job can fail and go unnoticed resulting in no copies being made. You still risk losing LDAP, DNS, and CA files unless you take specific measures to include them in the backup job.
+The bad part is:
+* The copy is in the same phsical location as the original so there's no protection from fire, flood, electrical surge, etc.
+* Copies are not made in realtime, so there is a window in which a file can be deleted and no backup copy exists.
+* The cron job can fail and go unnoticed resulting in no copies being made.
+* You still risk losing LDAP, DNS, and CA files unless you take specific measures to include them in the backup job.
 
 ### Maintaining a Copy on Another Machine
-This option is a lot like the previous one in that it involves periodic copies with rsync, but the sync is to a storage device on another Pi. If you have an older Raspberry Pi model 2 or 3 lying around collecting dust, this can be a good option for an inexpensive backup host.
+This option is a lot like the previous one in that it involves periodic copies with rsync, but the sync is to a storage device on another Pi. If you have an older Raspberry Pi model 2 or 3 lying around collecting dust, this can be a good option for service as an inexpensive backup host.
 
 The good part is:
 * rsync to a remote machine is not much more difficult to configure than rsync to another device on the same host.
 * You can have the backup Pi in a different location as the main Pi (one upstairs, one in the basement) to offer some protection against the fire / flood situation.
-* DNS and LDAP are designed for replication and the backup host can serve as a secondary.
-* You could locate your backup Pi at a neighbor's house who is in wifi range to satisfy the "1 copy off-site" rule.
+* DNS and LDAP are designed for replication and the backup host can serve as a secondary copy with proper configuration.
+* You could potentially locate your backup Pi at a neighbor's house who is in wifi range to satisfy the "1 copy off-site" rule.
 
-The bad part is: You have more hardware to maintain. You have to really trust your neighbor to take care of your backup Pi. And you can still lose the CA files.
+The bad part is:
+* You have more hardware to maintain.
+* You're trusting someone else to take care of your backup Pi.
+* You can still lose data if your cron job fails or your rsync command-line options are set up wrong.
 
 ### Using the Public Cloud
 There are plenty of companies that offer internet-based backup solutions. It seems like every year another list comes out with the top ten best plans, so they're not hard to find.
 
-The good part is: Your data is truly off-site, satisfying the final part of the 3-2-1 backup rule.
+The good part is:
+* Your data is truly off-site, satisfying the final part of the 3-2-1 backup rule.
 
-The bad part is: Your data is under someone else's control. You're probably paying a fee for the service. You still need to make sure those LDAP, DNS, and CA files are included.
+The bad part is:
+* Your data is under someone else's control.
+* You're probably paying a fee for the service and possibly an "egress fee" to get the data back.
+* It doesn't work without a reliable internet connection.
+* You still run the risk of misconfiguring the backup and lose data.
 
 ### A Combination Approach
-You can choose any one or any combination of the options listed above. At the very least, make sure the Nextcloud "virtual files" feature is disabled on your desktop clients to satisfy the "multiple copies" part of the 3-2-1 rule. If you have the means, set up second external storage device and a cron job for periodic, incremental copy with rsync to offer protection against accidental deletions and satisfy the "multiple storage media" part of 3-2-1. Locating that second storage device off-site is up to you and your budget.
+You can choose any one or any combination of the options listed above. At the very least, make sure the Nextcloud "virtual files" feature is disabled on your desktop clients to satisfy the "multiple copies" part of the 3-2-1 rule. If you have the means, set up second external storage device and a cron job for periodic, incremental copy with rsync to offer protection against accidental deletions and satisfy the "multiple storage media" part of 3-2-1. Locating that second storage device on another Pi or off-site is up to you and your budget.
 
 ## Disaster Recovery
 Having backups is one thing. Knowing what to do when the system is down is another.
