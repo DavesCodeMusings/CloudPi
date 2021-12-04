@@ -21,4 +21,4 @@ The project documentation is here: [https://davescodemusings.github.io/CloudPi/]
 
 ___
 
-If you don't have the latest and greatest OS, [the wiki](https://github.com/DavesCodeMusings/CloudPi/wiki) still has the previous version using Pi OS 10 (Buster). This is no longer maintained nor does it have all the features of the latest version.
+If you don't have the latest and greatest OS, [the wiki](https://github.com/DavesCodeMusings/CloudPi/wiki) still has the previous version using Pi OS 10 (Buster). This older version of the CloudPi project is no longer maintained nor does it have all the features of the latest version.
