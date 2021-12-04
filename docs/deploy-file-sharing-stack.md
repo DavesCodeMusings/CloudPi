@@ -67,7 +67,7 @@ net use m: \\mypi\media /persistent:yes
 There's also a [`map-drives.bat`](https://github.com/DavesCodeMusings/CloudPi/blob/main/file-sharing/map-drives.bat) batch file you can download and customize.
 
 ## Next Steps
-Now that you have file sharing running on your Raspberry Pi, there are very few tasks left in the project. If all you wanted was a file sharing cloud, you can stop here. If you want to take things a step further, there's another [step for deploying home automation](deploy-home-automation-stack.md).
+Now that you have file sharing running on your Raspberry Pi, there are very few tasks left in the project. If all you wanted was a file sharing cloud, you can stop here. If you want to take things a step further, there's another step for [deploying home automation](deploy-home-automation-stack.md).
 
 ___
 
