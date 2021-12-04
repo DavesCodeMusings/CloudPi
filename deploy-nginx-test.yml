@@ -15,3 +15,5 @@
       restart_policy: unless-stopped
       ports:
       - 80:80
+      volumes:
+      - /etc/ssl:/etc/ssl
