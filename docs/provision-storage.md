@@ -16,6 +16,9 @@ You can run your entire system off of the micro-SD card if you want. You can als
 2. [`ansible-playbook provision-storage.yml`](https://github.com/DavesCodeMusings/CloudPi/blob/main/provision-storage.yml)
 3. `df -h ; cat /etc/fstab ; sudo lvs`
 
+## Why an External Disk or SSD?
+With microSD cards available in capacities of 256G, 512G, or even 1TB, you might be wondering why this project uses an external storage device. The simple reason is that separating the operating system from the data helps make recovery easier when things go wrong. Another reason is price. When comparing 1TB microSD and a 1TB 2.5" NAS-rated SSD, both from the same manufacturer, the list prices are the same. Theoretically, the NAS-rated SSD shouldbe a better fit for a device that runs 24/7.
+
 ## Attaching and Identifying the External Storage
 First, plug the storage device into the SATA side of the USB to SATA adapter cable plug the USB side into the Raspberry Pi. Be sure to plug it into one of the blue USB3 ports to get the best performance. To make the disk easier to identify, don't plug in any other storage devices at this time.
 
