@@ -84,28 +84,7 @@ localhost                  : ok=5    changed=3    unreachable=0    failed=0    s
 ## Configuring Nextcloud for LDAP
 The Nextcloud documentation has a [guide for configuring LDAP](https://docs.nextcloud.com/server/latest/admin_manual/configuration_user/user_auth_ldap.html). The configuration tool has plenty of ways to test the connection and settings along the way.
 
-If you've set up your LDAP database like the examples so far, here are the settings you'll need for the various configuration pages.
-
-### Server
-```
-User DN: cn=admin,dc=home
-Base DN: dc=home
-```
-
-### Users
-```
-Only these object classes: posixAccount
-```
-
-### Login Attributes
-```
-LDAP/AD Username: checked
-```
-
-### Groups
-```
-Only these object classes: posixGroup
-```
+There is also an [LDAP Hints](https://github.com/DavesCodeMusings/CloudPi/blob/main/ldap-config-hints.md) file that gives guidance on the parameters for applications used in this projects.
 
 ## Installing the Nextcloud Client
 You'll find clients for desktop and mobile on the [NextCloud Client](https://nextcloud.com/clients/) web page. Installation is straight-forward and Nextcloud provides a very comprehensive [Client Manual](https://docs.nextcloud.com/desktop).
