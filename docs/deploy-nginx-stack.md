@@ -11,6 +11,10 @@ With some applications, like Portainer, it's easy to install the SSL certificate
 
 Of course, you may have already chosen to just do HTTP and not even worry about encryption. If that's the case, you may still be interested in using Nginx for redirection or you might choose to forego all of it.
 
+## Summary of Commands
+1. [`ansible-playbook pre-deploy.yml`](https://github.com/DavesCodeMusings/CloudPi/blob/main/nginx/pre-deploy.yml)
+2. [`docker-compose up -d`](https://github.com/DavesCodeMusings/CloudPi/blob/main/nginx/docker-compose.yml)
+
 ## Why Redirection and Reverse Proxy?
 It's easy to remember names, and not so easy to remember arbitrary numbers. And using a web URL like _`http://nextcloud.mypi.home`_ is easier than remembering and typing the port number ever time, like this: _`http://mypi.home:8910`_. By deploying the Nginx web server, you can configure redirection, so _`http://nextcloud.mypi.home`_ automatically sends the browser to _`http://mypi.home:8910`_. Or you can set up a reverse proxy, so _`https://nextcloud.mypi.home`_ relays communications from the browser to _`http://mypi.home:8910`_, while also supplying HTTPS encryption.
 
@@ -57,6 +61,9 @@ server {
 The examples shown in the previous section are both very simple and will not apply well in all situations. Sometimes additional parameters are needed to handle the quirks of individual appications. For example, applications like Home Assistant and NodeRED use websockets and require extra parameters to be used with reverse proxy.
 
 For each of the applications deployed in this document, there is an Ansible playbook called _post-deploy.yml_. Inside this file is a task for creating the redirection and reverse proxy configuration file that goes in _/opt/docker/nginx/conf.d_ and a task for reloading the Nginx configuration to make it take effect.
+
+## Testing as You Go
+After running _post-deploy.yml_ in the upcoming steps, you should make a connection to the application using its HTTP URL in a web browser. URLs like http://esphome.mypi.home should result in you being sent to an encrypted (HTTPS) connection to https://esphome.mypi.home. The browser should show the connection as secure and there should be no certificate errors.
 
 ## Next Steps
 
