@@ -26,11 +26,10 @@ services:
     ports:
       - "1880:1880"
     volumes:
+      - /etc/localtime:/etc/localtime:ro
       - /opt/docker/node-red:/data
     depends_on:
       - mosquitto
-    environment:
-      TZ: "US/Chicago"
     restart: unless-stopped
 
   mosquitto:
