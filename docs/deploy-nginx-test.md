@@ -1,4 +1,4 @@
-# A Simple Nginx Web Server
+# A Simple Web Server for Testing
 Most of the enhancements will be better understood if you have something to use as a test case. For example, after installing DNS and a self-hosted certificate authority, it would be nice to test things by going to a URL like https://mypi.home and seeing a web page, even if all it says is "Congratulations it's working." To enable this, we'll take a slight detour and deploy an Nginx container that can serve as a way to test things.
 
 ## Can I Skip It?
