@@ -17,10 +17,10 @@ You don't have to run Nextcloud or Samba. If you're only interested in home auto
 ## Deploying the Stack
 Running these applicaitons involves the same procedure as Gitea. First, [download the files](https://github.com/DavesCodeMusings/CloudPi/blob/main/file-sharing/) locally, and then follow these steps.
 
-1. Run `ansible-playbook pre-deploy.yml`
-2. Deploy the stack using the contents of `docker-compose.yml`
-3. Run `ansible-playbook post-deploy.yml`
-4. Read the steps in `post-deploy.txt` for configuration tips.
+1. Run _ansible-playbook pre-deploy.yml_
+2. Deploy the stack using the contents of _docker-compose.yml_
+3. Run _ansible-playbook post-deploy.yml_
+4. Read the steps in _post-deploy.txt_ for configuration tips.
 
 Where you store the Ansible and Docker Compose files is up to you, but it's easiest to group them together in a single subdirectory. You can use Portainer or `docker-compose` to deploy the application stack.
 
@@ -53,9 +53,9 @@ PLAY RECAP *********************************************************************
 localhost                  : ok=6    changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 ```
 
-The `docker-compose.yml` file was deployed with Portainer and is not shown.
+The _docker-compose.yml_ file was deployed with Portainer and is not shown.
 
-The `post-deploy.yml` playbook output looks like this:
+The _post-deploy.yml_ playbook output looks like this:
 
 ```
 pi@anubis:~/cloudpi/file-sharing $ ansible-playbook post-deploy.yml
