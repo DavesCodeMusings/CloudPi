@@ -26,9 +26,26 @@ ok: [localhost]
 TASK [Deploying Nginx container] ************************************************
 changed: [localhost]
 
+TASK [Checking for host certificate] ********************************************
+ok: [localhost]
+
+TASK [Checking for host key] ****************************************************
+ok: [localhost]
+
+TASK [Creating an alternate default.conf with SSL enabled] **********************
+skipping: [localhost]
+
+TASK [Copying alternate default.conf to Nginx container] ************************
+skipping: [localhost]
+
+TASK [Reloading nginx configuration] ********************************************
+skipping: [localhost]
+
 PLAY RECAP **********************************************************************
-localhost                  : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+localhost                  : ok=4    changed=1    unreachable=0    failed=0    skipped=3    rescued=0    ignored=0
 ```
+
+>You'll notice three tasks were skipped when running this playbook, but it was still successful. All of the skipped tasks involve SSL configuration and they've been skipped because there's no host certificate and private key on the system yet. The certificate and key will be installed in a later step, at which time you can run this playbook again to enable SSL in Nginx.
 
 ## Testing the Deployment
 Before installing DNS or a certificate authority, you should be able to access the Nginx welcome page by navigating to the IP address of your Pi in a web browser. (For example, http://192.168.1.100)
