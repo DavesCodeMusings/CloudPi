@@ -11,7 +11,7 @@ You can certainly skip this step. You'll have a chance to test everything when y
 Running Nginx is used as a quick visual test for DNS resolution and certificates issued by the self hosted certificate store. If you can go to http://mypi.home and see the Nginx welcome page, it proves DNS is working. If you can go to https://mypi.home and not get any certificate errors, it proves the certificate authority is working and trusted by the client computer.
 
 ## Deploying Nginx
-The Ansible playbook [`ansible-playbook deploy-nginx-test.yml`](https://github.com/DavesCodeMusings/CloudPi/blob/main/deploy-nginx-test.yml) takes care of running Nginx as a Docker container.
+The Ansible playbook [`ansible-playbook deploy-nginx-test.yml`](https://github.com/DavesCodeMusings/CloudPi/blob/main/deploy-nginx-test.yml) takes care of installing Docker Community Edition and running Nginx as a Docker container.
 
 When running the playbook, you can expect the output to look like this:
 
@@ -22,6 +22,15 @@ PLAY [Deploy Nginx as a test instance] *****************************************
 
 TASK [Gathering Facts] **********************************************************
 ok: [localhost]
+
+TASK [Installing apt key for Docker repository] *********************************
+changed: [localhost]
+
+TASK [Add official repository] **************************************************
+changed: [localhost]
+
+TASK [Installing Docker Community Edition] **************************************
+changed: [localhost]
 
 TASK [Deploying Nginx container] ************************************************
 changed: [localhost]
@@ -42,7 +51,7 @@ TASK [Reloading nginx configuration] *******************************************
 skipping: [localhost]
 
 PLAY RECAP **********************************************************************
-localhost                  : ok=4    changed=1    unreachable=0    failed=0    skipped=3    rescued=0    ignored=0
+localhost                  : ok=7    changed=4    unreachable=0    failed=0    skipped=3    rescued=0    ignored=0
 ```
 
 >You may notice three tasks were skipped when running this playbook, but it was still successful. All of the skipped tasks involve SSL configuration and they've been skipped because there's no host certificate and private key on the system yet. The certificate and key will be installed in a later step, at which time you can run this playbook again to enable SSL in Nginx.
