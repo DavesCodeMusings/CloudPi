@@ -127,19 +127,42 @@ The trusted root certificate store on Raspberry Pi OS is defined by the certific
 
 It may be tempting to skip this, thinking you'll never use a web bowser on the Pi, so why bother? But, when two applications use a secure channel to communicate, they may expect a trusted root certificate.
 
-## Configuring Portainer for HTTPS
-With certificates issued and the chain of trust established, we can get back to enabling SSL in our applications. We'll start with Portainer.
+## Testing with the Nginx Test Instance
+If you started the [Nginx Docker container for testing](https://github.com/DavesCodeMusings/CloudPi/blob/main/docs/deploy-nginx-test.md), you can run the [playbook](https://github.com/DavesCodeMusings/CloudPi/blob/main/deploy-nginx-test.yml) again now that the certificates have been generated. This time it won't skip over the SSL tasks and you'll have a web server that listens on HTTPS as well as HTTP.
 
-The procedure for using SSL changed significantly starting with Portainer version 2.9. If you need to troubleshoot the configuration, be wary of anything that tells you to use command-line options for the container. This is the old way of doing things. It works, but it's more difficult and error prone. The new way uses a web interface.
+Run `ansible-playbook deploy-nginx-test.yml` again and then go to https://mypi.home in a web browser. You should see the Nginx Welcome page.
 
-Here's how to do it:
-1. Open a bowser and go to the Portainer URL. (Example: http://portainer.mypi.home:9000)
-2. Log into Portainer.
-3. Select the _Settings_ menu.
-4. Scroll down to the _SSL certificate_ section of the page.
-5. Select the certifcate and key files from your PC.
-6. Verify you can connect using the HTTPS URL. (Example: https://portainer.mypi.home:9443)
-7. Verify there are no untrusted certificate errors.
+The ansible playbook out should look like this:
+
+```
+pi@mypi:~/cloudpi $ ansible-playbook deploy-nginx-test.yml
+
+PLAY [Deploy Nginx as a test instance] ******************************************
+
+TASK [Gathering Facts] **********************************************************
+ok: [localhost]
+
+TASK [Deploying Nginx container] ************************************************
+changed: [localhost]
+
+TASK [Checking for host certificate] ********************************************
+ok: [localhost]
+
+TASK [Checking for host key] ****************************************************
+ok: [localhost]
+
+TASK [Creating an alternate default.conf with SSL enabled] **********************
+ok: [localhost]
+
+TASK [Copying alternate default.conf to Nginx container] ************************
+changed: [localhost]
+
+TASK [Reloading nginx configuration] ********************************************
+changed: [localhost]
+
+PLAY RECAP **********************************************************************
+localhost                  : ok=7    changed=3    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+```
 
 ## Next Steps
 With DNS and a certificate authority, your users can easily and securely access your applications using a familiar URL like https://mypi.home:port. The next step in the list of improvements lets them log in with a single, consistent username and password. This is feature is enabled by [installing OpenLDAP](install-ldap.md).
