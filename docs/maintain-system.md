@@ -86,10 +86,10 @@ The bad part is:
 You can choose any one or any combination of the options listed above. At the very least, make sure the Nextcloud "virtual files" feature is disabled on your desktop clients to satisfy the "multiple copies" part of the 3-2-1 rule. If you have the means, set up second external storage device and a cron job for periodic, incremental copy with rsync to offer protection against accidental deletions and satisfy the "multiple storage media" part of 3-2-1. Locating that second storage device on another Pi or off-site is up to you and your budget.
 
 ## Disaster Recovery
-Having backups is one thing. Knowing what to do when the system is down is another.
+Having backups is one thing. Knowing what to do when the system is down is another. Think about these things now so you're not panicking later. Below are a few possible scenarios based on my past experience with running a Raspberry Pi 24/7.
 
 ### Operating System Problems
-The one problem I've experienced most with a Raspberry Pi running 24/7 is a corrupted microSD card. Having separate OS and data storage devices helps with this situation.
+The one problem I've experienced most is a corrupted microSD card. They're really not designed for the strain of a high number of write operations and failure is more a question of when than a question of if. Having separate OS and data storage devices helps with this situation.
 
 #### Recovery
 Replace the microSD card with a new one, flashed to the same version of Raspberry Pi OS. Run through the build steps again to rebuild the system software. Data is still on the external storage device, which is hopefully unaffected.
