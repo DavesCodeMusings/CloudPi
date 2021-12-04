@@ -188,4 +188,4 @@ But what about the person administering the server? Why should they be stuck typ
 
 ___
 
-_Light travels faster than sound. This is why some people appear bright until they speak. &mdash;Alan Dundes_
+_They Call the Wind Mariah &mdash;Paint Your Wagon, lyrics by Alan J. Lerner_
