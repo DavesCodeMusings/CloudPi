@@ -7,7 +7,7 @@ This document touches upon some of the things you'll need to do to keep the syst
 If you're an experienced admin who already knows about logical volume management, regular software updates, backups and disaster recovery planning, and all that, feel free to skip this.
 
 ## Expanding Logical Drives
-When storage was provisioned, the space allocated to logical drives was intentionally small. If you have a large external device, you'll probably want to expand it. The easiest way to do this is using Cockpit.
+When storage was provisioned, the space allocated to logical drives was intentionally small. If you have a large external device, you'll probably want to expand your logical volumes, particularly the one that holds shared files. The easiest way to do this is using Cockpit.
 
 1. Log into Cockpit using a web browser and port 9090.
 2. Click on the _Storage_ menu.
