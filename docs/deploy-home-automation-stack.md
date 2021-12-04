@@ -42,7 +42,7 @@ If you made it this far, you are well versed in deploying and configuring contai
 
 From here, you can explore [Docker Hub](https://hub.docker.com/) to find new and exciting applications to run on your Pi. You can visit [Composerize](https://www.composerize.com/) to help you turn `docker run` commands into docker-compose.yml files and run them as stacks. You can even read up on the syntax of the [Dockerfile](https://docs.docker.com/engine/reference/builder/) and build your own containers.
 
-It's your Pi, run whatever you want.
+You may also want to consider what it will take to [maintain the system](maintain-system.md).
 
 ___
 
