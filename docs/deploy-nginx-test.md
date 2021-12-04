@@ -66,4 +66,4 @@ Once you have Nginx running, you can proceed with [installing DNS](https://githu
 
 ___
 
-Every bad situation is a blues song waiting to happen. &mdash;Amy Winehouse
+_This space for rent._
