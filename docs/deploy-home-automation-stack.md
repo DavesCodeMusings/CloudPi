@@ -35,7 +35,9 @@ docker-compose.yml (in Portainer)
 ## Configuring Components
 Most of the Home Assistant configuration can be done using the web-based interface, though sometimes you will see references to `configuration.yaml`. When you deploy the home automation stack using the Ansible playbooks, you'll find `configuration.yaml` in the `/opt/docker/homeassistant` directory. Configuration help can be found in the official documentation at: https://www.home-assistant.io/docs/configuration/
 
-TODO: Mosquitto, NodeRED, ESPHome
+Mosquitto doesn't require much in the way of configuration, it just sort of runs. The only thing you might want to do is set up a username and password for any devices that don't have an option for anonymous connection. See the [Mosquitto documentation for the user/password utility](https://mosquitto.org/man/mosquitto_passwd-1.html) and the [Portainer documentation for accessing the container console](https://docs.portainer.io/v/ce-2.9/user/docker/containers/console).
+
+TODO: NodeRED, ESPHome
 
 ## Next Steps
 If you made it this far, you are well versed in deploying and configuring containerized applications. You have created a system with plenty of services to help you install the next, shiny application that catches your eye. The only thing stopping you is the resouce constraints of the tiny computing platform called Raspberry Pi. But as we have seen over the course of this project, it's quite a capable machine.
