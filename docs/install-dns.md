@@ -189,7 +189,7 @@ dns-nameservers 192.168.1.100 192.168.1.1
 The advantage of running your own DNS is that you can add names for all your devices. You can do this be editing /etc/bin/db.home. See the [BIND9 manual](https://bind9.readthedocs.io/en/latest/) and existing zone files or look to the Ansible playbook for cues on how to do it.
 
 ## Next Steps
-Now that you can use a name like _mypi.home_ to access your Pi, the next step is enable secure HTTPS connections. This is done by configuring a self-hosted [certificate authority](configure-certificate-authority.md).
+Now that you can use a name like _mypi.home_ to access your Pi, the next enhancement is enable secure HTTPS connections. This is done by configuring a self-hosted [certificate authority](configure-certificate-authority.md).
 
 ___
 
