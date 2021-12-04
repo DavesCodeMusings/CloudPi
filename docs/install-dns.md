@@ -1,4 +1,6 @@
 # Self-Hosted Domain Name System (DNS)
+Referring to all your network devices by IP address is less than optimal. Humans are generally better at remembering names than numbers.
+
 In this step, you'll install a BIND9 DNS server and configure lookup zones for the Pi's domain. You can also add other device on your network. This will allow you to interact with hosts by their names, rather than hainvg to remember their IP addresses. The installation is split into two steps: the first for installing the DNS server and configuring it to forward lookups to your ISP's DNS servers, and the second for configuring lookup zones for the devices on your home network.
 
 By the end of this step you will have:
