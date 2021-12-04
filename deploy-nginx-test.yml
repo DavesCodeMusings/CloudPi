@@ -1,0 +1,15 @@
+---
+- name: Deploy Nginx as a test instance
+  hosts: localhost
+  connection: local
+  become: true
+
+  tasks:
+  - name: Deploying Nginx container
+    docker_container:
+      image: nginx
+      name: nginx
+      hostname: nginx
+      state: started
+      restart: yes
+      restart_policy: unless-stopped
