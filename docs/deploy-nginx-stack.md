@@ -1,9 +1,5 @@
 # Nginx for Redirects and Reverse Proxy
-It's easy to remember names, and not so easy to remember arbitrary numbers. And using a web URL like _`http://nextcloud.mypi.home`_ is easier than remembering and typing the port number ever time, like this: _`http://mypi.home:8910`_. By deploying the Nginx web server, you can configure redirection, so _`http://nextcloud.mypi.home`_ automatically sends the browser to _`http://mypi.home:8910`_. Or you can set up a reverse proxy, so _`https://nextcloud.mypi.home`_ relays communications from the browser to _`http://mypi.home:8910`_, while also supplying HTTPS encryption.
-
-You can also do both, so typing _`http://nextcloud.mypi.home`_ redirects to _`https://nextcloud.mypi.home`_ to provide encryption.
-
-You can also do both.
+To make life easier for your end users, this step will configure the Nginx web server to take care of sending HTTP requests to HTTPS instead. Nginx will also take care of SSL offloading for any applications that do not support it or are tedious to configure. 
 
 By the end of this step, you will have:
 * Deployed an Nginx container
@@ -15,19 +11,27 @@ With some applications, like Portainer, it's easy to install the SSL certificate
 
 Of course, you may have already chosen to just do HTTP and not even worry about encryption. If that's the case, you may still be interested in using Nginx for redirection or you might choose to forego all of it.
 
+## Why Redirection and Reverse Proxy?
+It's easy to remember names, and not so easy to remember arbitrary numbers. And using a web URL like _`http://nextcloud.mypi.home`_ is easier than remembering and typing the port number ever time, like this: _`http://mypi.home:8910`_. By deploying the Nginx web server, you can configure redirection, so _`http://nextcloud.mypi.home`_ automatically sends the browser to _`http://mypi.home:8910`_. Or you can set up a reverse proxy, so _`https://nextcloud.mypi.home`_ relays communications from the browser to _`http://mypi.home:8910`_, while also supplying HTTPS encryption.
+
+You can also do both, so typing _`http://nextcloud.mypi.home`_ redirects to _`https://nextcloud.mypi.home`_ to provide encryption.
+
 ## Why Nginx?
 Apache HTTPD is another web server that can do reverse proxy and redirection. There are also containers like HA Proxy and Traefik that might make the work easier. Nginx has the advantage of being a lightweight system that can do the job and also serve up a few static HTML pages if you're so inclined. It's also widely used, so it's easy to find configuration examples.
 
 ## Deploying Nginx
 The usual procedure applies here. There is a [`pre-deploy.yml`](https://github.com/DavesCodeMusings/CloudPi/blob/main/nginx/pre-deploy.yml) Ansible playbook to create directories and a couple basic files. And there's the [`docker-compose.yml`](https://github.com/DavesCodeMusings/CloudPi/blob/main/nginx/docker-compose.yml) that you can use to deploy the container, using either Portainer or docker-compose. That's all there is to it.
 
-## Configuring Nginx
-If you look in `/opt/docker/nginx`, you'll see a single file named `default.conf`. This is where a subset the Nginx configuration is stored.
+## Understanding Nginx Configuration
+If you look in _/opt/docker/nginx/conf.d_, you'll see a single file named _default.conf_. This directory is where the Nginx configuration for HTTP(S) is stored. Looking at the contents of _default.conf_, you'll see configuration for SSL certificates and for static files served from _/srv/www_ and that's all. You can edit this file and add _server { }_ blocks to extend the configuration, but it's generally considered better to use individual files.
 
->The rest of the configuration is inside the container under `/etc/nginx`. Only `/etc/nginx/conf.d/default.conf` is bind mounted to the host.
+Each file in the _/opt/docker/nginx/conf.d_ will be considered part of the overall configuration.
 
-There are a couple repeating themes you'll notice when you edit the file. First, there are redirection rules. They look like this:
+>There is additional configuration is inside the container under `/etc/nginx`, but only `/etc/nginx/conf.d` is bind mounted to the host. This directory is enough to configure redirection and reverse proxy.
 
+Below are a couple of sample configurations. The first is a redirection for Portainer. It sends any requests on HTTP port 80 or HTTPS port 443 to port 9443 where Portainer listens for HTTPS requests. The second is a reverse proxy configuration to offload SSL connections to Nextcloud. The client web browser will connect to Nginx over HTTPS port 443 and Nginx will relay the request to Nextcloud's unencrypted port 8910. The traffic between the client and the Pi is encrypted without configuring Nextcloud for SSL.
+
+### Redirection
 ```
 server {
     server_name portainer.mypi.home;
@@ -37,8 +41,7 @@ server {
 }
 ```
 
-Second, there are reverse proxy rules. Those look like this:
-
+### Reverse Proxy
 ```
 server {
     server_name nextcloud.mypi.home;
@@ -50,15 +53,10 @@ server {
 }
 ```
 
-The first configuration block will apply whenever someone goes to _portainer.mypi.home_. It doesn't matter if it's HTTP or HTTPS, because it's listening on ports 80 (HTTP) and 443 (HTTPS). Whenever a request is made that matches this DNS name, Nginx will reply with a [301 redirect](https://en.wikipedia.org/wiki/HTTP_301), telling the browser to go to _`https://mypi.home:9443`_ instead.
+## Configuring Redirection and Reverse Proxy per Application
+The examples shown in the previous section are both very simple and will not apply well in all situations. Sometimes additional parameters are needed to handle the quirks of individual appications. For example, applications like Home Assistant and NodeRED use websockets and require extra parameters to be used with reverse proxy.
 
-## Redirection
-
-TODO
-
-## Reverse Proxy
-
-TODO
+For each of the applications deployed in this document, there is an Ansible playbook called _post-deploy.yml_. Inside this file is a task for creating the redirection and reverse proxy configuration file that goes in _/opt/docker/nginx/conf.d_ and a task for reloading the Nginx configuration to make it take effect.
 
 ## Next Steps
 
