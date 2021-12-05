@@ -27,34 +27,37 @@ Here's the procedure:
 ```
 pi@mypi:~/cloudpi/ssl $ ansible-playbook configure-certificate-authority.yml
 
-PLAY [Configure the certificate authority] ***********************************
+PLAY [Configure the certificate authority] **************************************
 
-TASK [Gathering Facts] *********************************************************
+TASK [Gathering Facts] **********************************************************
 ok: [localhost]
 
-TASK [Creating directory to store signing requests] ****************************
+TASK [Loading subject info] *****************************************************
+ok: [localhost]
+
+TASK [Creating directory to store signing requests] *****************************
 changed: [localhost]
 
-TASK [Generating the certificate authority (CA) private key] *******************
+TASK [Generating the certificate authority (CA) private key] ********************
 changed: [localhost]
 
-TASK [Generating a certificate signing request (CSR) for the root CA] **********
+TASK [Generating a certificate signing request (CSR) for the root CA] ***********
 changed: [localhost]
 
-TASK [Signing the root certificate] ********************************************
+TASK [Signing the root certificate] *********************************************
 changed: [localhost]
 
-TASK [Generating the intermediate certificate private key] *********************
+TASK [Generating the intermediate certificate private key] **********************
 changed: [localhost]
 
-TASK [Generating a CSR for the intermediate certificate] ***********************
+TASK [Generating a CSR for the intermediate certificate] ************************
 changed: [localhost]
 
-TASK [Signing the intermediate certificate] ************************************
+TASK [Signing the intermediate certificate] *************************************
 changed: [localhost]
 
-PLAY RECAP *********************************************************************
-localhost                  : ok=8    changed=7    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+PLAY RECAP **********************************************************************
+localhost                  : ok=9    changed=7    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 ```
 
 ## Verifying the Certificates
