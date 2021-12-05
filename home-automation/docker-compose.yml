@@ -27,6 +27,7 @@ services:
       - "1880:1880"
     volumes:
       - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
       - /opt/docker/node-red:/data
     depends_on:
       - mosquitto
