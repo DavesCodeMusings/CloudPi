@@ -54,7 +54,8 @@ TASK [Reloading nginx configuration] *******************************************
 skipping: [localhost]
 
 PLAY RECAP **********************************************************************
-localhost                  : ok=8    changed=5    unreachable=0    failed=0    skipped=3    rescued=0    ignored=0```
+localhost                  : ok=8    changed=5    unreachable=0    failed=0    skipped=3    rescued=0    ignored=0
+```
 
 >You may notice three tasks were three skipped when running this playbook, but it was still successful. All of the skipped tasks involve SSL configuration and they've been skipped because there's no host certificate and private key on the system yet. The certificate and key will be installed in a later step, at which time you can run this playbook again to enable SSL in Nginx.
 
