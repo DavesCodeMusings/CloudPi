@@ -6,8 +6,14 @@
 
   vars:
     nginx_confd_path: /opt/docker/nginx/conf.d
+    mqtt_password: password
 
   tasks:
+  - name: Creating mqtt account and password
+    community.docker.docker_container_exec:
+      container: mosquitto
+      command: mosquitto_passwd -b -c /config/mosquitto.passwd mqtt {{ mqtt_password }}
+
   # If Nginx is installed, reverse proxy and redirects can be configured.
   - name: Checking for Nginx installation
     stat:
