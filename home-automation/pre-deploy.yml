@@ -6,12 +6,12 @@
 
   tasks:
   # Homeassistant uses a SQLite database (among other options.)
-  - name: Installing SQLite client
+  - name: Install SQLite client
     apt:
       name: sqlite3
       state: latest
 
-  - name: Creating Homeassistant configuration directory
+  - name: Create Homeassistant configuration directory
     file:
       path: /opt/docker/homeassistant
       state: directory
@@ -19,7 +19,7 @@
       owner: root
       group: pi
 
-  - name: Creating ESPHome configuration directory
+  - name: Create ESPHome configuration directory
     file:
       path: /opt/docker/esphome
       state: directory
@@ -27,7 +27,7 @@
       owner: root
       group: pi
 
-  - name: Creating Node Red configuration and directory
+  - name: Create Node Red configuration directory
     file:
       path: /opt/docker/node-red
       state: directory
@@ -35,7 +35,7 @@
       owner: pi
       group: pi
 
-  - name: Creating Mosquitto persistent data directories
+  - name: Creating Mosquitto configuration and data directories
     file:
       path: /opt/docker/mosquitto/{{ item }}
       state: directory
@@ -45,4 +45,15 @@
     with_items:
       - config
       - data
-      - log
+
+  - name: Creating Mosquitto config file
+    copy:
+      dest: /opt/docker/mosquitto/config/mosquitto.conf
+      force: no
+      content: |
+        allow_anonymous true
+        listener 1883
+        log_dest stdout
+        password_file /mosquitto/config/mosquitto.passwd
+        persistence true
+        persistence_location /mosquitto/data/
