@@ -22,7 +22,7 @@ LDAP is not required. It's also not the easiest thing to install and maintain. T
 There are other options for LDAP directory services, like Apache DS and 389 Directory Server. OpenLDAP has been around for a long time and is widely used. That makes things easier when searching for answers on the web. If you have experience with another LDAP server, feel free to use it. There should be very little difference when it comes to configuring applications for LDAP authentication.
 
 ## Overriding the Default Admin Password
-When installing OpenLDAP with apt-get, you're asked to enter and confirm the admin password. With a non-interactive installation, the password is provided by the Ansible variable _password_. You can override the Ansible `password` variable using the `--extra-vars` command-line argument as was done in previous steps. For example:
+When installing OpenLDAP with apt-get, you're asked to enter and confirm the admin password. With a non-interactive installation, the password is provided by the Ansible variable _password_. You can override the Ansible _password_ variable using the _--extra-vars_ command-line argument as was done in previous steps. For example:
 
 ```
 ansible-playbook install-ldap.yml --extra-vars password=SuperSecretPassword
@@ -34,29 +34,31 @@ ansible-playbook install-ldap.yml --extra-vars password=SuperSecretPassword
 The installation of OpenLDAP is done using the Ansible playbook [install-ldap.yml](https://github.com/DavesCodeMusings/CloudPi/blob/main/install-ldap.yml). You'll need to copy this file locally and run it with the command `ansible-playbook install-ldap.yml`.
 
 ```
-PLAY [Install OpenLDAP] ********************************************************
+pi@mypi:~/cloudpi $ ansible-playbook install-ldap.yml --extra-vars password=SuperSecretPassword
 
-TASK [Gathering Facts] *********************************************************
+PLAY [Install OpenLDAP] *********************************************************
+
+TASK [Gathering Facts] **********************************************************
 ok: [localhost]
 
-TASK [Pre-configuring LDAP admin password] ***************************************
+TASK [Pre-configuring LDAP admin password] **************************************
 changed: [localhost]
 
-TASK [Confirming LDAP admin password] *********************************************
+TASK [Confirming LDAP admin password] *******************************************
 changed: [localhost]
 
-TASK [Installing slapd] ***********************************************************
+TASK [Installing slapd] *********************************************************
 changed: [localhost]
 
-TASK [Installing lapdutils] *******************************************************
+TASK [Installing lapdutils] *****************************************************
 ok: [localhost]
 
 TASK [Reminding to change the password] *****************************************
 ok: [localhost] => {
-    "msg": "The initial password is 'SuperSecretPassword'."
+    "msg": "The initial password is 'password'."
 }
 
-PLAY RECAP *********************************************************************
+PLAY RECAP **********************************************************************
 localhost                  : ok=6    changed=3    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 ```
 
