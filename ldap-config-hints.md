@@ -76,6 +76,10 @@ Skip verification of server certificate: Enabled
 Base DN: ou=People,dc=home
 Username attribute: uid
 Filter: (objectClass=posixAccount)
+
+Group Base DN: ou=Groups,dc=home
+Group Membership Attribute: memberUid
+Group Filter: (objectClass=posixGroup)
 ```
 
 >Rather than skipping certificate verification, you may copy the contents of `/etc/ldap/tls/ca-certificates.crt` to your desktop PC and use it to upload for the _TLS CA certificate_ file.
