@@ -154,11 +154,14 @@ ok: [localhost]
 TASK [Installing apt key for Docker repository] *********************************
 ok: [localhost]
 
-TASK [Adding official repository] **************************************************
+TASK [Adding official repository] ***********************************************
 ok: [localhost]
 
 TASK [Installing Docker Community Edition] **************************************
 ok: [localhost]
+
+TASK [Installing Docker Compose] ************************************************
+changed: [localhost]
 
 TASK [Deploying Nginx container] ************************************************
 changed: [localhost]
@@ -170,7 +173,7 @@ TASK [Checking for host key] ***************************************************
 ok: [localhost]
 
 TASK [Creating an alternate default.conf with SSL enabled] **********************
-ok: [localhost]
+changed: [localhost]
 
 TASK [Copying alternate default.conf to Nginx container] ************************
 changed: [localhost]
@@ -179,7 +182,7 @@ TASK [Reloading nginx configuration] *******************************************
 changed: [localhost]
 
 PLAY RECAP **********************************************************************
-localhost                  : ok=10   changed=3    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+localhost                  : ok=11   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 ```
 
 ## Next Steps
