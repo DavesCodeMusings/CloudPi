@@ -3,8 +3,9 @@ services:
     container_name: homeassistant
     image: "ghcr.io/home-assistant/raspberrypi4-homeassistant:stable"
     volumes:
-      - /opt/docker/homeassistant:/config
       - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+      - /opt/docker/homeassistant:/config
     restart: unless-stopped
     network_mode: host
     depends_on:
@@ -26,8 +27,8 @@ services:
     ports:
       - "1880:1880"
     volumes:
-      - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
       - /opt/docker/node-red:/data
     depends_on:
       - mosquitto
@@ -37,6 +38,8 @@ services:
     container_name: mosquitto
     image: eclipse-mosquitto
     volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
       - /opt/docker/mosquitto:/mosquitto
     ports:
       - "1883:1883"
