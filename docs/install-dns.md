@@ -11,7 +11,7 @@ By the end of this step you will have:
 All of the information the Ansible playbook needs to do its job is taken from the existing network setup of the Raspberry Pi. Before setting up the local zone files, make sure the Pi is configured with a hostname and a domain name and that these names will not change. If you haven't assigned your Pi a domain name and a static IP yet, see the step for [configuring static network parameters](configure-static-network-params.yml) before proceeding.
 
 ## Can I skip it?
-If you don't mind using IP addresses when connecting to the devices on your home network, then you can skip this step. Alternatively, you could use `hosts` files to take care of name resolution. This works best when you only have a small number of devices on your network.
+If you don't mind using IP addresses when connecting to the devices on your home network, then you can skip this step. Alternatively, you could use _/etc/hosts_ files to take care of name resolution. This works best when you only have a small number of devices on your network.
 
 ## Summary of Commands
 1. [`ansible-playbook install-dns.yml`](https://github.com/DavesCodeMusings/CloudPi/blob/main/install-dns.yml)
