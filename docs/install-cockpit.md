@@ -89,6 +89,8 @@ The stock image for Raspberry Pi OS is configured to use the _Europe/London_ tim
 2. Look for _System Time_ and click on the hyperlink displaying the current date and time.
 3. Choose your timezone from the dropdown menu and confirm by clicking _Change_.
 
+>If the old time is still shown, refresh the page in the browser.
+
 ### Expanding Logical Volumes
 The logical volumes configured during the initial install were intentionally sized small, because LVM makes it easy to add capacity as needed. Cockpit makes it even easier.
 
