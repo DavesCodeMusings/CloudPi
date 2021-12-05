@@ -109,6 +109,8 @@ server {
 So far, you've accessed Portainer using the URL with a port number (9000 or 9443). With Nginx running, you can configure a redirect so _http://portainer.mypi.home_ will send the browser to the correct port. Running the [post-deploy.yml](https://github.com/DavesCodeMusings/CloudPi/blob/main/portainer/post-deploy.yml) Ansible playbook for Portainer will take care of the details.
 
 The playbook output looks like this:
+
+```
 pi@mypi:~/cloudpi/portainer $ ansible-playbook post-deploy.yml
 
 PLAY [Portainer post-deployment tasks] ******************************************
@@ -127,6 +129,7 @@ changed: [localhost]
 
 PLAY RECAP **********************************************************************
 localhost                  : ok=4    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+```
 
 ## Configuring Redirection and Reverse Proxy per Application
 The examples shown in the previous section are both very simple and will not apply well in all situations. Sometimes additional parameters are needed to handle the quirks of individual appications. For example, applications like Home Assistant and NodeRED use websockets and require extra parameters to be used with reverse proxy.
