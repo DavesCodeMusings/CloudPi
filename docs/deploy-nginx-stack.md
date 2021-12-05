@@ -65,6 +65,15 @@ localhost                  : ok=5    changed=4    unreachable=0    failed=0    s
 
 You have some choice with _docker-compose.yml_. You can use the command-line `docker-compose up -d` or you can copy the contents of _docker-compose.yml_ into the web editor on Portainer's Stacks page and deploy that way.
 
+## Testing with Static HTML
+Along with a new configuration file for Nginx, the `pre-deploy.yml` playbook also installed a simple `index.html` file in the Pi's `/srv/www` directory. Using your client's browser to navigate to http://mypi.home will now display a short message.
+
+```
+I'm not dead yet.
+```
+
+You should be able to reach this page using the Pi's DNS name or IP address. It should work for HTTP and HTTPS without generating any untrusted certificate errors.
+
 ## Understanding Nginx Configuration
 If you look in _/opt/docker/nginx/conf.d_, you'll see a single file named _default.conf_. This directory is where the Nginx configuration for HTTP(S) is stored. Looking at the contents of _default.conf_, you'll see configuration for SSL certificates and for static files served from _/srv/www_ and that's all. You can edit this file and add _server { }_ blocks to extend the configuration, but it's generally considered better to use individual files.
 
