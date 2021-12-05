@@ -8,7 +8,9 @@ My first Cloud Pi install was a Pi 3B with a 32G microSD and a low-profile USB f
 The 2G Pi4B gives a noticable improvement in speed. With this board, I used a USB powered SATA-to-USB3 adapter and a 160G spinning disk salvaged from an old laptop. I also purchased a "high-endurance" microSD. Performance was surprisingly good. I was able to run several simultaneous applications, like Nextcloud, Samba, and several apps for home automation. This setup was fine until I started adding more applcations. After a while, memory was pushed pretty close to the limit.
 
 ## High-End Hardware - 4G Pi 4B, External Power USB-to-SATA and SSD
-I recently purchased a 4G Pi and a 1TB NAS-rated SSD. The additional 2G of RAM and vast storage space provides room to add more applications and data. To my surprise, I found the NAS SSD draws considerably more power than the old spinning disk (1.6A rating on the SSD compared to a 0.6A rating on the spinning disk.) The USB power draw on the Pi tops out at 1.2A total for all USB ports, so I now have a SATA-to-USB3 with an external power supply to meet the additional demand.  
+I recently purchased a 4G Pi and a 1TB NAS-rated SSD. The additional 2G of RAM and vast storage space provides room to add more applications and data.
+
+>To my surprise, I found the NAS SSD draws considerably more power than the old spinning disk (1.6A rating on the SSD compared to a 0.6A rating on the spinning disk.) The USB power draw on the Pi tops out at 1.2A total for all USB ports, so I now have a SATA-to-USB3 with an external power supply to meet the additional demand.  
 
 ## Details on Parts
 
