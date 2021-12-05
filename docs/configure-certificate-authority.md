@@ -180,7 +180,7 @@ localhost                  : ok=11   changed=5    unreachable=0    failed=0    s
 Now go to https://mypi.home (replacing http with https) in a web browser. You should see the Nginx Welcome page and not see any complaints about untrusted certificates.
 
 ## Next Steps
-With DNS and a certificate authority, your users can easily and securely access your applications using a familiar URL like https://mypi.home:port. The next step in the list of improvements lets them log in with a single, consistent username and password. This is feature is enabled by [installing OpenLDAP](install-ldap.md).
+With DNS and a certificate authority, your users will be able to easily and securely access your applications using a familiar URL like https://mypi.home:port. The next step in the list of improvements will let them log in those applications with a single, consistent username and password. This is feature is enabled by [installing OpenLDAP](install-ldap.md).
 
 ___
 
