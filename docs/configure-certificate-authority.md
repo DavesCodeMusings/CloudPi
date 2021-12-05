@@ -27,37 +27,43 @@ Here's the procedure:
 ```
 pi@mypi:~/cloudpi/ssl $ ansible-playbook configure-certificate-authority.yml
 
-PLAY [Configure the certificate authority] **************************************
+PLAY [Deploy Nginx as a test instance] ******************************************
 
 TASK [Gathering Facts] **********************************************************
 ok: [localhost]
 
-TASK [Loading subject info] *****************************************************
+TASK [Installing apt key for Docker repository] *********************************
 ok: [localhost]
 
-TASK [Creating directory to store signing requests] *****************************
+TASK [Adding official repository] ***********************************************
+ok: [localhost]
+
+TASK [Installing Docker Community Edition] **************************************
+ok: [localhost]
+
+TASK [Installing Docker Compose] ************************************************
 changed: [localhost]
 
-TASK [Generating the certificate authority (CA) private key] ********************
+TASK [Deploying Nginx container] ************************************************
 changed: [localhost]
 
-TASK [Generating a certificate signing request (CSR) for the root CA] ***********
+TASK [Checking for host certificate] ********************************************
+ok: [localhost]
+
+TASK [Checking for host key] ****************************************************
+ok: [localhost]
+
+TASK [Creating an alternate default.conf with SSL enabled] **********************
 changed: [localhost]
 
-TASK [Signing the root certificate] *********************************************
+TASK [Copying alternate default.conf to Nginx container] ************************
 changed: [localhost]
 
-TASK [Generating the intermediate certificate private key] **********************
-changed: [localhost]
-
-TASK [Generating a CSR for the intermediate certificate] ************************
-changed: [localhost]
-
-TASK [Signing the intermediate certificate] *************************************
+TASK [Reloading nginx configuration] ********************************************
 changed: [localhost]
 
 PLAY RECAP **********************************************************************
-localhost                  : ok=9    changed=7    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+localhost                  : ok=11   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 ```
 
 ## Verifying the Certificates
