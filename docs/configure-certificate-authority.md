@@ -27,43 +27,37 @@ Here's the procedure:
 ```
 pi@mypi:~/cloudpi/ssl $ ansible-playbook configure-certificate-authority.yml
 
-PLAY [Deploy Nginx as a test instance] ******************************************
+PLAY [Configure the certificate authority] **************************************
 
 TASK [Gathering Facts] **********************************************************
 ok: [localhost]
 
-TASK [Installing apt key for Docker repository] *********************************
+TASK [Loading subject info] *****************************************************
 ok: [localhost]
 
-TASK [Adding official repository] ***********************************************
-ok: [localhost]
-
-TASK [Installing Docker Community Edition] **************************************
-ok: [localhost]
-
-TASK [Installing Docker Compose] ************************************************
+TASK [Creating directory to store signing requests] *****************************
 changed: [localhost]
 
-TASK [Deploying Nginx container] ************************************************
+TASK [Generating the certificate authority (CA) private key] ********************
 changed: [localhost]
 
-TASK [Checking for host certificate] ********************************************
-ok: [localhost]
-
-TASK [Checking for host key] ****************************************************
-ok: [localhost]
-
-TASK [Creating an alternate default.conf with SSL enabled] **********************
+TASK [Generating a certificate signing request (CSR) for the root CA] ***********
 changed: [localhost]
 
-TASK [Copying alternate default.conf to Nginx container] ************************
+TASK [Signing the root certificate] *********************************************
 changed: [localhost]
 
-TASK [Reloading nginx configuration] ********************************************
+TASK [Generating the intermediate certificate private key] **********************
+changed: [localhost]
+
+TASK [Generating a CSR for the intermediate certificate] ************************
+changed: [localhost]
+
+TASK [Signing the intermediate certificate] *************************************
 changed: [localhost]
 
 PLAY RECAP **********************************************************************
-localhost                  : ok=11   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+localhost                  : ok=9    changed=7    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 ```
 
 ## Verifying the Certificates
