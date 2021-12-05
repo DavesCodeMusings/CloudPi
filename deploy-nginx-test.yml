@@ -20,6 +20,13 @@
       state: latest
       update_cache: true
 
+  # Docker Compose is needed later and it also pulls in dependencies that are
+  # needed for community.docker modules, so it is installed now even though
+  # docker-compose is not being used to deploy the Nginx test container.
+  - name: Installing Docker Compose
+    shell:
+      cmd: pip3 install docker-compose
+
   - name: Deploying Nginx container
     community.docker.docker_container:
       image: nginx
