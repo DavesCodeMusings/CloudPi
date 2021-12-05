@@ -23,6 +23,11 @@ You can also do both, so typing _`http://nextcloud.mypi.home`_ redirects to _`ht
 ## Why Nginx?
 Apache HTTPD is another web server that can do reverse proxy and redirection. There are also containers like HA Proxy and Traefik that might make the work easier. Nginx has the advantage of being a lightweight system that can do the job and also serve up a few static HTML pages if you're so inclined. It's also widely used, so it's easy to find configuration examples.
 
+## Removing Nginx Test
+If you used the [deploy-nginx-test.yml](https://github.com/DavesCodeMusings/CloudPi/blob/main/deploy-nginx-test.yml) playbook previously to start an Nginx container for testing DNS and certificates, you'll need to stop and remove it before deploying Nginx in this step. You can use Portainer to do this by clicking the _Containers_ menu selection, or if you prefer command-line, `docker-compose down` will do the same thing when run from the `portainer` directory.
+
+**_If you don't remove the old Nginx, the new one will fail to start._**
+
 ## Deploying Nginx
 There are two Ansible playbooks that you will use to get Nginx up and running.
 
