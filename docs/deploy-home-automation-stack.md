@@ -54,6 +54,37 @@ PLAY RECAP *********************************************************************
 localhost                  : ok=6    changed=4    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 ```
 
+The stack is deployed with Portainer, using the information in [_docker-compose.yml_]
+
+Running the [_post-deploy.yml_](https://github.com/DavesCodeMusings/CloudPi/blob/main/home-automation/post-deploy.yml) playbook looks like this:
+
+```
+pi@mypi:~/cloudpi/home-automation $ ansible-playbook post-deploy.yml
+
+PLAY [Home automation post-deployment configration] *****************************
+
+TASK [Gathering Facts] **********************************************************
+ok: [localhost]
+
+TASK [Checking for Nginx installation] ******************************************
+ok: [localhost]
+
+TASK [Creating ESPHome reverse proxy config] ************************************
+changed: [localhost]
+
+TASK [Creating Home Assistant reverse proxy config] *****************************
+changed: [localhost]
+
+TASK [Creating NodeRED reverse proxy config] ************************************
+changed: [localhost]
+
+RUNNING HANDLER [Reloading Nginx config] ****************************************
+changed: [localhost]
+
+PLAY RECAP **********************************************************************
+localhost                  : ok=6    changed=4    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+```
+
 ## Configuring Components
 Most of the Home Assistant configuration can be done using the web-based interface, though sometimes you will see references to `configuration.yaml`. When you deploy the home automation stack using the Ansible playbooks, you'll find `configuration.yaml` in the `/opt/docker/homeassistant` directory. Configuration help can be found in the official documentation at: https://www.home-assistant.io/docs/configuration/
 
