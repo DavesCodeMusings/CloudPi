@@ -151,7 +151,7 @@ Basic testing of the DNS server is included in the Ansible playbooks. If you wan
 The first two will check for mistakes that can cause your DNS server to refuse to start. The final two are a handy way to do lookups using the local server for DNS. A quick test can be done by looking up the hostname of the Pi itself. This command returns a lot of extra information, but in there you should find the name and IP address for your Raspberry Pi. 
 
 ```
-pi@mypi:~ $dig @127.0.0.1 my.home
+pi@mypi:~ $ dig @127.0.0.1 my.home
 
 ...
 ;; ANSWER SECTION:
