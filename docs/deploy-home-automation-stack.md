@@ -54,7 +54,7 @@ PLAY RECAP *********************************************************************
 localhost                  : ok=6    changed=4    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 ```
 
-The stack is deployed with Portainer, using the information in [_docker-compose.yml_]
+The stack is deployed with Portainer, using the information in [_docker-compose.yml_](https://github.com/DavesCodeMusings/CloudPi/blob/main/home-automation/docker-compose.yml)
 
 Running the [_post-deploy.yml_](https://github.com/DavesCodeMusings/CloudPi/blob/main/home-automation/post-deploy.yml) playbook looks like this:
 
