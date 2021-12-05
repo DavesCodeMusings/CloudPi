@@ -79,7 +79,7 @@ If you look in _/opt/docker/nginx/conf.d_, you'll see a single file named _defau
 
 Each file in the _/opt/docker/nginx/conf.d_ will be considered part of the overall configuration.
 
->There is additional configuration is inside the container under `/etc/nginx`, but only `/etc/nginx/conf.d` is bind mounted to the host. This directory is enough to configure redirection and reverse proxy.
+>There is additional configuration is inside the container under _/etc/nginx_, but only _/etc/nginx/conf.d_ is bind mounted to the host. This directory is enough to configure redirection and reverse proxy.
 
 Below are a couple of sample configurations. The first is a redirection for Portainer. It sends any requests on HTTP port 80 or HTTPS port 443 to port 9443 where Portainer listens for HTTPS requests. The second is a reverse proxy configuration to offload SSL connections to Nextcloud. The client web browser will connect to Nginx over HTTPS port 443 and Nginx will relay the request to Nextcloud's unencrypted port 8910. The traffic between the client and the Pi is encrypted without configuring Nextcloud for SSL.
 
