@@ -63,7 +63,7 @@ Portainer provides a nice web front-end to the Docker system. You can plug any v
 Portainer itself is a containerized application. Obviously, you can't use Portainer to deploy Portainer. So for this one instance, docker-compose is used. Here's the procedure:
 * Create a directory named _portainer_.
 * Change to the _portainer_ directory.
-* Copy the [docker-compose.yml for Portainer](https://github.com/DavesCodeMusings/CloudPi/blob/main/portainer/docker-compose.yml) into a file named `docker-compost.yml` in the `portainer` directory.
+* Copy the [docker-compose.yml](https://github.com/DavesCodeMusings/CloudPi/blob/main/portainer/docker-compose.yml) file into the `portainer` directory.
 * Deploy Portainer with the command `docker-compose up -d`.
 
 It should look like this when deployed:
