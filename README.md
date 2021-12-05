@@ -20,7 +20,3 @@ CloudPi runs...
 Build it yourself, quickly and easily, using [Ansible](https://www.ansible.com/) automation for sytem configuration and [Docker Compose](https://docs.docker.com/compose/) for application deployment.
 
 The project documentation is here: [https://davescodemusings.github.io/CloudPi/](https://davescodemusings.github.io/CloudPi/)
-
-___
-
-_If you don't have the latest and greatest OS, [the wiki](https://github.com/DavesCodeMusings/CloudPi/wiki) still has the previous version using Pi OS 10 (Buster). This older version of the CloudPi project is no longer maintained nor does it have all the features of the latest version._
