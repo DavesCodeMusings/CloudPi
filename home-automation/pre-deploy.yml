@@ -35,10 +35,14 @@
       owner: pi
       group: pi
 
-  - name: Create Mosquitto configuration and data directory
+  - name: Creating Mosquitto persistent data directories
     file:
-      path: /opt/docker/mosquitto
+      path: /opt/docker/mosquitto/{{ item }}
       state: directory
       mode: '0755'
       owner: root
       group: pi
+    with_items:
+      - config
+      - data
+      - log
