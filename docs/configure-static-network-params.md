@@ -79,6 +79,8 @@ dns-nameservers 192.168.1.1 1.1.1.1
 dns-search home
 ```
 
+**_Take a good look at this file. If the _address_ or _mask_ parameters are wrong, you will not be able to make an SSH connection to your Pi._**
+
 ## Rebooting
 To apply changes, you'll need to reboot the system.
 
