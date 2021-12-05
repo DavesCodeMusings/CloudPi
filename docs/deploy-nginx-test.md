@@ -26,10 +26,13 @@ ok: [localhost]
 TASK [Installing apt key for Docker repository] *********************************
 changed: [localhost]
 
-TASK [Adding official repository] **************************************************
+TASK [Adding official repository] ***********************************************
 changed: [localhost]
 
 TASK [Installing Docker Community Edition] **************************************
+changed: [localhost]
+
+TASK [Installing Docker Compose] ************************************************
 changed: [localhost]
 
 TASK [Deploying Nginx container] ************************************************
@@ -51,10 +54,9 @@ TASK [Reloading nginx configuration] *******************************************
 skipping: [localhost]
 
 PLAY RECAP **********************************************************************
-localhost                  : ok=7    changed=4    unreachable=0    failed=0    skipped=3    rescued=0    ignored=0
-```
+localhost                  : ok=8    changed=5    unreachable=0    failed=0    skipped=3    rescued=0    ignored=0```
 
->You may notice three tasks were skipped when running this playbook, but it was still successful. All of the skipped tasks involve SSL configuration and they've been skipped because there's no host certificate and private key on the system yet. The certificate and key will be installed in a later step, at which time you can run this playbook again to enable SSL in Nginx.
+>You may notice three tasks were three skipped when running this playbook, but it was still successful. All of the skipped tasks involve SSL configuration and they've been skipped because there's no host certificate and private key on the system yet. The certificate and key will be installed in a later step, at which time you can run this playbook again to enable SSL in Nginx.
 
 ## Testing the Deployment
 Before installing DNS or a certificate authority, you should be able to access the Nginx welcome page by navigating to the IP address of your Pi in a web browser. (For example, http://192.168.1.100)
