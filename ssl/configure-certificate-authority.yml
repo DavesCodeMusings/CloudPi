@@ -4,13 +4,6 @@
   connection: local
   become: true
 
-  # Customize values or override at runtime with --extra-vars
-  vars:
-    country: US
-    state_or_province: Wisconsin
-    locality: Madison
-    organization: Home
-
   # The high-level process for creating a self-hosted certificate authority is:
   # 1. Create a strong private key.
   # 2. Create a signing request using the private key.
@@ -19,6 +12,10 @@
   # 5. Use the intermediate certificate to sign everything else.
 
   tasks:
+  - name: Loading subject info
+    include_vars:
+      file: subject-info.yml
+
   - name: Creating directory to store signing requests
     file:
       path: /etc/ssl/csrs
