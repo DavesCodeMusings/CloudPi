@@ -5,8 +5,8 @@
   become: true
 
   vars:
-    nginx_confd_path: /opt/docker/nginx/conf.d
     mqtt_password: password
+    nginx_confd_path: /opt/docker/nginx/conf.d
 
   tasks:
   - name: Creating mqtt account and password
