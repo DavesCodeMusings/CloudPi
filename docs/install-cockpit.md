@@ -76,7 +76,7 @@ localhost                  : ok=8    changed=3    unreachable=0    failed=0    s
 ```
 
 ## Logging In the First Time
-You can access Cockpit by going to `https://mypi.home:9090` in a browser. (Replace `mypi.home` with the DNS name or IP address of your Pi.)
+You can access Cockpit by going to _https://mypi.home:9090_ in a browser. (Replace _mypi.home_ with the DNS name or IP address of your Pi.)
 
 Once you log in with the _pi_ username and password, take some time to browse around and get familiar with the available options. You can use [the official documentation](https://cockpit-project.org/documentation.html) or just learn as you go.
 
