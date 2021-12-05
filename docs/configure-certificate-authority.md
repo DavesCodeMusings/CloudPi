@@ -110,7 +110,7 @@ localhost                  : ok=5    changed=3    unreachable=0    failed=0    s
 >LDAP is not included in this multi-name certificate. It is configured separately in a later step.
 
 ## Trusting the Certificate Authority in Windows
-With any self-signed certificate, your browser will complain about the certificate issuer not being trusted. That's because the browser only has a couple dozen root certificates from the big name issuers that are in the trust store. With Firefox, you can add a certificate trust exception pretty easily.With Edge and others it's a little harder, but not too bad
+With any self-signed certificate, your browser will complain about the certificate issuer not being trusted. That's because the browser only has a couple dozen root certificates from the big name issuers that are in the trust store. With Firefox, you can add a certificate trust exception pretty easily.With Edge and others it's a little harder, but not too bad.
 
 Follow these instructions to get your Windows desktop to trust your self-hosted certificate authority:
 1. Copy the root and intermediate certificates from your Raspberry Pi to your desktop machine. You'll find them in `/etc/ssl/certs` on the Pi. Where you put them on the Windows machine doesn't matter.
@@ -126,7 +126,7 @@ This covers any application that uses the Windows trust store. Firefox uses it's
 >You can also manage your self-signed certificate using the the certificates snap-in in the Microsoft Management Console (mmc.exe). Refer to [Microsoft's Documentation](https://docs.microsoft.com/en-us/dotnet/framework/wcf/feature-details/how-to-view-certificates-with-the-mmc-snap-in) for more information.
 
 ## Trusting the Certificate Authority in Linux
-The trusted root certificate store on Raspberry Pi OS is defined by the certificates listed in `/etc/ssl/certs/ca-certificates.crt`. This is a plain text file and you can easily add your self-signed certificate by appending the contents of the root certificate (`home_CA.crt`) to `ca-certificates.crt`.
+The trusted root certificate store on Raspberry Pi OS is defined by the certificates listed in `/etc/ssl/certs/ca-certificates.crt`. This is a plain text file and you can easily add your self-signed certificate by appending the contents of the intermediate (_home.crt_) and  root certificate (_home_CA.crt_) to _ca-certificates.crt_.
 
 It may be tempting to skip this, thinking you'll never use a web bowser on the Pi, so why bother? But, when two applications use a secure channel to communicate, they may expect a trusted root certificate.
 
