@@ -65,7 +65,7 @@ localhost                  : ok=6    changed=4    unreachable=0    failed=0    s
 The _hostname_ variable sets the new hostname and _ip_ sets the new IP address. The domain will default to _home_, while gateway, mask, and DNS comes from the existing configuration. If you want to override other variables, have a look in the playbook's _vars:_ section to find out what the names are.
 
 ## Verifying the New Configuration
-Static network settings are configured in the `/etc/network/interfaces.d/eth0` file. Display the contents of the file to verify everything looks like you expect before restarting the system to apply changes.
+Static network settings are configured in the _/etc/network/interfaces.d/eth0_ file. Display the contents of the file to verify everything looks like you expect before restarting the system to apply changes.
 
 ```
 $ cat /etc/network/interfaces.d/eth0
