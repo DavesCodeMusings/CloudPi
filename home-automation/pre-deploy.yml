@@ -6,12 +6,12 @@
 
   tasks:
   # Homeassistant uses a SQLite database (among other options.)
-  - name: Install SQLite client
+  - name: Installing SQLite client
     apt:
       name: sqlite3
       state: latest
 
-  - name: Create Homeassistant configuration directory
+  - name: Creating Homeassistant configuration directory
     file:
       path: /opt/docker/homeassistant
       state: directory
@@ -19,7 +19,7 @@
       owner: root
       group: pi
 
-  - name: Create ESPHome configuration directory
+  - name: Creating ESPHome configuration directory
     file:
       path: /opt/docker/esphome
       state: directory
@@ -27,7 +27,7 @@
       owner: root
       group: pi
 
-  - name: Create Node Red configuration and directory
+  - name: Creating Node Red configuration and directory
     file:
       path: /opt/docker/node-red
       state: directory
