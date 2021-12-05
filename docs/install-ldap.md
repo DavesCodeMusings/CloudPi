@@ -92,7 +92,7 @@ What you end up with is two organizational units (OUs): _People_ and _Groups_, a
 >The _search_ user is there for applications that need an account to do user and group lookups in the LDAP directory during authentication. Normal users will not log in with _search_.
 
 ## Enabling Secure LDAP with a Certificate
-The playbook, [configure-ldap-certificate.yml](https://github.com/DavesCodeMusings/CloudPi/blob/main/configure-ldap-certificate.yml) does a couple of things.
+The playbook, [configure-ldap-secure.yml](https://github.com/DavesCodeMusings/CloudPi/blob/main/configure-ldap-secure.yml) does a couple of things.
 1. It creates the certificate and place it in the `/etc/ldap/tls` directory, along with the `.key` file, and the intermediate and root certificates generated when you built your [self-hosted certificate authority](https://github.com/DavesCodeMusings/CloudPi/blob/main/ssl/configure-certificate-authority.yml).
 2. It creates an LDIF file with the TLS configuration and import it into your LDAP configuration.
 
