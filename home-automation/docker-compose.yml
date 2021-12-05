@@ -37,8 +37,8 @@ services:
     container_name: mosquitto
     image: eclipse-mosquitto
     volumes:
-      - /opt/docker/mosquitto:/config
-      - /opt/docker/mosquitto:/data
-      - /opt/docker/mosquitto:/log
+      - /opt/docker/mosquitto/config:/config
+      - /opt/docker/mosquitto/data:/data
+      - /opt/docker/mosquitto/log:/log
     ports:
       - "1883:1883"
