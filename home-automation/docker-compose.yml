@@ -26,8 +26,8 @@ services:
     ports:
       - "1880:1880"
     volumes:
-      - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
       - /opt/docker/node-red:/data
     depends_on:
       - mosquitto
@@ -37,6 +37,6 @@ services:
     container_name: mosquitto
     image: eclipse-mosquitto
     volumes:
-      - /opt/docker/mosquitto/config:/mosquitto
+      - /opt/docker/mosquitto:/mosquitto
     ports:
       - "1883:1883"
