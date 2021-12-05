@@ -13,13 +13,17 @@
     apt:
       upgrade: full
 
-  - name: Determining if reboot is required
+  - name: Determining the system requires a reboot
     stat:
       path: /var/run/reboot-required
-    notify:
-    - Reboot required
+    register: reboot_required
 
-  handlers:
-  - name: Reboot required
+  - name: Determining if any packages require a reboot
+    stat:
+      path: /var/run/reboot-required.pkgs
+    register: reboot_required_pkgs
+
+  - name: Advising of reboot requirement
     debug:
-      msg: A reboot is required.
+      msg: One or more updates require a reboot.
+    when: reboot_required.stat.exists or reboot_required_pkgs.stat.exists
