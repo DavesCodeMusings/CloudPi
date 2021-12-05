@@ -25,11 +25,33 @@ Mosquitto is an application that provides a common communication protocol (calle
 Node-RED is for creating complex integrations with your devices and carrying out actions based on workflows that you create. You can do simple things like monitor temperature with device attached to a freezer and send an alert if it gets too warm. Or you can do complex things, enabling the tap of a button on your phone to turn on the television, power up the home theater system, and bring up the menu for your favorite streaming service.
 
 ## Deploying the Stack
-Even with the large number of applications in this stack, deploying is really no different than the others. There are the usual files, organized under a [`home-automation` directory](https://github.com/DavesCodeMusings/CloudPi/blob/main/home-automation) The same procedure applies.
+Even with the large number of applications in this stack, deploying is really no different than the others. There are the usual files: pre-deploy.yml, docker-compose.yml, and post-deploy.yml.
+
+Here are the tasks carried out by the 1. [_pre-deploy.yml_](https://github.com/DavesCodeMusings/CloudPi/tree/main/home-automation/pre-deploy.yml) playbook.
 
 ```
-ansible-playbook pre-deploy.yml
-docker-compose.yml (in Portainer)
+pi@mypi:~/cloudpi/home-automation $ ansible-playbook pre-deploy.yml
+
+TASK [Gathering Facts] **********************************************************
+ok: [localhost]
+
+TASK [Install SQLite client] ****************************************************
+ok: [localhost]
+
+TASK [Create Homeassistant configuration directory] *****************************
+changed: [localhost]
+
+TASK [Create ESPHome configuration directory] ***********************************
+changed: [localhost]
+
+TASK [Create Node Red configuration and directory] ******************************
+changed: [localhost]
+
+TASK [Create Mosquitto configuration and data directory] ************************
+changed: [localhost]
+
+PLAY RECAP **********************************************************************
+localhost                  : ok=6    changed=4    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 ```
 
 ## Configuring Components
