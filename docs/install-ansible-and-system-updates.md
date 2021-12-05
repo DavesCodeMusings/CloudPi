@@ -43,25 +43,35 @@ If all goes well, it will do the same as if you had typed `sudo apt-get update`,
 ```
 pi@raspberrypi:~/cloudpi $ vi update-system.yml
 pi@raspberrypi:~/cloudpi $ ansible-playbook update-system.yml
-pi@raspberrypi:~/cloudpi $ ansible-playbook update-system.yml
 
-PLAY [Update System to Latest Packages] ****************************************
+PLAY [Update System to Latest Packages] *****************************************
 
-TASK [Gathering Facts] *********************************************************
+TASK [Gathering Facts] **********************************************************
 ok: [localhost]
 
-TASK [Updating Apt cache] ******************************************************
+TASK [Updating Apt cache] *******************************************************
 ok: [localhost]
 
-TASK [Updating all packages] ***************************************************
+TASK [Updating all packages] ****************************************************
 changed: [localhost]
 
-TASK [Determining if reboot is required] ***************************************
+TASK [Determining the system requires a reboot] *********************************
 ok: [localhost]
 
-PLAY RECAP *********************************************************************
-localhost                  : ok=4    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+TASK [Determining if any packages require a reboot] *****************************
+ok: [localhost]
+
+TASK [Advising of reboot requirement] *******************************************
+ok: [localhost] => {
+    "msg": "One or more updates require a reboot."
+}
+
+PLAY RECAP **********************************************************************
+localhost                  : ok=6    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 ```
+
+## Delaying the Reboot
+The last task in the update-system playbook indicated a reboot is required. But you can delay it, because changing the network parameters in the next step also requires a reboot. There's no harm in delaying for such a short time.
 
 ## Next Steps
 With Ansible installed and updates done, it's time to [configure a static IP address and other network parameters](configure-static-network-params.md) for the Pi.
