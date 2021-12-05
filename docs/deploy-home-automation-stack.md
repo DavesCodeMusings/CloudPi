@@ -27,7 +27,7 @@ Node-RED is for creating complex integrations with your devices and carrying out
 ## Deploying the Stack
 Even with the large number of applications in this stack, deploying is really no different than the others. There are the usual files: pre-deploy.yml, docker-compose.yml, and post-deploy.yml.
 
-Here are the tasks carried out by the 1. [_pre-deploy.yml_](https://github.com/DavesCodeMusings/CloudPi/tree/main/home-automation/pre-deploy.yml) playbook.
+Here are the tasks carried out by the [_pre-deploy.yml_](https://github.com/DavesCodeMusings/CloudPi/tree/main/home-automation/pre-deploy.yml) playbook.
 
 ```
 pi@mypi:~/cloudpi/home-automation $ ansible-playbook pre-deploy.yml
