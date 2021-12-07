@@ -9,7 +9,7 @@
 ## Hardware, OS, and Storage
 1. [Hardware and Operating System](install-hardware-os.md)
 2. [Ansible and System Updates](install-ansible-and-system-updates.md)
-3. [Static Networking Parameters](configure-static-ip.md)
+3. [Static Networking Parameters](configure-static-network-params.md)
 4. [Storage Provisioning ](provision-storage.md)
 
 ## Optional Network Services
