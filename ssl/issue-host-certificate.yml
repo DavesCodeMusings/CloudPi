@@ -15,6 +15,11 @@
       type: RSA
       size: 2048
 
+  - name: Creating directory to store signing request
+    file:
+      path: /etc/ssl/csrs
+      state: directory
+
   - name: Generating a CSR
     openssl_csr:
       path: "/etc/ssl/csrs/{{ ansible_hostname }}.{{ ansible_domain }}.csr"
