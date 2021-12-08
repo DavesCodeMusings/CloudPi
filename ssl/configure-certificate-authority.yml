@@ -8,7 +8,7 @@
   # 1. Create a strong private key.
   # 2. Create a signing request using the private key.
   # 3. Self-sign the request to create the certificate authority (CA) root.
-  # 4. Create an intermediate certificate signed by the CA.
+  # 4. Create an intermediate certificate signed by the CA root.
   # 5. Use the intermediate certificate to sign everything else.
 
   tasks:
