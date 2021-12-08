@@ -4,6 +4,15 @@
   connection: local
   become: true
 
+  # The high-level process for creating a self-hosted certificate authority is:
+  # 1. Create a strong private key.
+  # 2. Create a signing request using the private key.
+  # 3. Self-sign the request to create the certificate authority (CA) root.
+  # 4. Create an intermediate certificate signed by the CA root.
+  # 5. Use the intermediate certificate to sign everything else.
+  #
+  # This playbook covers step 5.
+
   tasks:
   - name: Loading subject info
     include_vars:
@@ -32,7 +41,8 @@
       common_name: "{{ ansible_hostname }}.{{ ansible_domain }}"
       subject_alt_name:
       - "DNS:{{ ansible_hostname }}.{{ ansible_domain }}"
-      - "DNS:{{ ansible_hostname }}
+      - "DNS:{{ ansible_hostname }}"
+      - "IP:{{ ansible_default_ipv4.address }}"
       - "DNS:esphome.{{ ansible_hostname }}.{{ ansible_domain }}"
       - "DNS:gitea.{{ ansible_hostname }}.{{ ansible_domain }}"
       - "DNS:homeassistant.{{ ansible_hostname }}.{{ ansible_domain }}"
@@ -45,6 +55,6 @@
     openssl_certificate:
       path: "/etc/ssl/certs/{{ ansible_hostname }}.{{ ansible_domain }}.crt"
       csr_path: "/etc/ssl/csrs/{{ ansible_hostname }}.{{ ansible_domain }}.csr"
-      ownca_path: "/etc/ssl/certs/{{ ansible_domain }}.crt"
-      ownca_privatekey_path: "/etc/ssl/private/{{ ansible_domain }}.key"
+      ownca_path: "/etc/ssl/certs/{{ organization }}_Root_CA.crt"
+      ownca_privatekey_path: "/etc/ssl/private/{{ organization }}_Root_CA.key"
       provider: ownca
