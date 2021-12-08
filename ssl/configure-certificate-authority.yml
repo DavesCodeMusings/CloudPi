@@ -7,7 +7,7 @@
   # The high-level process for creating a self-hosted certificate authority is:
   # 1. Create a strong private key.
   # 2. Create a signing request using the private key.
-  # 3. Self-sign the request to create the certificate authority (CA).
+  # 3. Self-sign the request to create the certificate authority (CA) root.
   # 4. Create an intermediate certificate signed by the CA.
   # 5. Use the intermediate certificate to sign everything else.
 
