@@ -32,6 +32,7 @@
       common_name: "{{ ansible_hostname }}.{{ ansible_domain }}"
       subject_alt_name:
       - "DNS:{{ ansible_hostname }}.{{ ansible_domain }}"
+      - "DNS:{{ ansible_hostname }}
       - "DNS:esphome.{{ ansible_hostname }}.{{ ansible_domain }}"
       - "DNS:gitea.{{ ansible_hostname }}.{{ ansible_domain }}"
       - "DNS:homeassistant.{{ ansible_hostname }}.{{ ansible_domain }}"
