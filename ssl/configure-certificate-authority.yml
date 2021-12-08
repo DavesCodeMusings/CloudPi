@@ -1,5 +1,5 @@
 ---
-- name: Configure the certificate authority
+- name: Configure the root certificate authority (CA)
   hosts: localhost
   connection: local
   become: true
@@ -10,6 +10,8 @@
   # 3. Self-sign the request to create the certificate authority (CA) root.
   # 4. Create an intermediate certificate signed by the CA root.
   # 5. Use the intermediate certificate to sign everything else.
+  #
+  # This playbook covers steps 1 through 4.
 
   tasks:
   - name: Loading subject info
@@ -21,17 +23,17 @@
       path: /etc/ssl/csrs
       state: directory
 
-  - name: Generating the certificate authority (CA) private key
+  - name: Generating the root certificate authority (CA) private key
     openssl_privatekey:
-      path: /etc/ssl/private/{{ organization }}-CA.key
+      path: /etc/ssl/private/{{ organization }}_Root_CA.key
       type: RSA
       size: 4096
 
   - name: Generating a certificate signing request (CSR) for the root CA
     openssl_csr:
-      path: "/etc/ssl/csrs/{{ organization }}-CA.csr"
-      privatekey_path: "/etc/ssl/private/{{ organization }}-CA.key"
-      common_name: "{{ organization }}-CA"
+      path: "/etc/ssl/csrs/{{ organization }}_Root_CA.csr"
+      privatekey_path: "/etc/ssl/private/{{ organization }}_Root_CA.key"
+      common_name: "{{ organization }} Root CA"
       use_common_name_for_san: false
       basic_constraints:
       - 'CA:TRUE'
@@ -42,22 +44,22 @@
 
   - name: Signing the root certificate
     openssl_certificate:
-      path: "/etc/ssl/certs/{{ organization }}-CA.crt"
-      privatekey_path: "/etc/ssl/private/{{ organization }}-CA.key"
-      csr_path: "/etc/ssl/csrs/{{ organization }}-CA.csr"
+      path: "/etc/ssl/certs/{{ organization }}_Root_CA.crt"
+      privatekey_path: "/etc/ssl/private/{{ organization }}_Root_CA.key"
+      csr_path: "/etc/ssl/csrs/{{ organization }}_Root_CA.csr"
       provider: selfsigned
 
   - name: Generating the intermediate certificate private key
     openssl_privatekey:
-      path: /etc/ssl/private/{{ organization }}.key
+      path: /etc/ssl/private/{{ organization }}_Intermediate_CA.key
       type: RSA
       size: 2048
 
   - name: Generating a CSR for the intermediate certificate
     openssl_csr:
-      path: "/etc/ssl/csrs/{{ organization }}.csr"
-      privatekey_path: "/etc/ssl/private/{{ organization }}.key"
-      common_name: "{{ organization }}"
+      path: "/etc/ssl/csrs/{{ organization }}_Intermediate_CA.csr"
+      privatekey_path: "/etc/ssl/private/{{ organization }}_Intermediate_CA.key"
+      common_name: "{{ organization }} Intermediate CA"
       use_common_name_for_san: false
       basic_constraints:
       - 'CA:TRUE'
@@ -68,8 +70,8 @@
 
   - name: Signing the intermediate certificate
     openssl_certificate:
-      path: "/etc/ssl/certs/{{ organization }}.crt"
-      csr_path: "/etc/ssl/csrs/{{ organization }}.csr"
-      ownca_path: /etc/ssl/certs/{{ organization }}-CA.crt
-      ownca_privatekey_path: /etc/ssl/private/{{ organization }}-CA.key
+      path: "/etc/ssl/certs/{{ organization }}_Intermediate_CA.crt"
+      csr_path: "/etc/ssl/csrs/{{ organization }}_Intermediate_CA.csr"
+      ownca_path: /etc/ssl/certs/{{ organization }}_Root_CA.crt
+      ownca_privatekey_path: /etc/ssl/private/{{ organization }}_Root_CA.key
       provider: ownca
