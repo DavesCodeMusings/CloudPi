@@ -23,15 +23,15 @@
 
   - name: Generating the certificate authority (CA) private key
     openssl_privatekey:
-      path: /etc/ssl/private/{{ ansible_domain }}_CA.key
+      path: /etc/ssl/private/{{ organization }}-CA.key
       type: RSA
       size: 4096
 
   - name: Generating a certificate signing request (CSR) for the root CA
     openssl_csr:
-      path: "/etc/ssl/csrs/{{ ansible_domain }}_CA.csr"
-      privatekey_path: "/etc/ssl/private/{{ ansible_domain }}_CA.key"
-      common_name: "{{ organization }}_CA"
+      path: "/etc/ssl/csrs/{{ organization }}-CA.csr"
+      privatekey_path: "/etc/ssl/private/{{ organization }}-CA.key"
+      common_name: "{{ organization }}-CA"
       use_common_name_for_san: false
       basic_constraints:
       - 'CA:TRUE'
@@ -42,21 +42,21 @@
 
   - name: Signing the root certificate
     openssl_certificate:
-      path: "/etc/ssl/certs/{{ ansible_domain }}_CA.crt"
-      privatekey_path: "/etc/ssl/private/{{ ansible_domain }}_CA.key"
-      csr_path: "/etc/ssl/csrs/{{ ansible_domain }}_CA.csr"
+      path: "/etc/ssl/certs/{{ organization }}-CA.crt"
+      privatekey_path: "/etc/ssl/private/{{ organization }}-CA.key"
+      csr_path: "/etc/ssl/csrs/{{ organization }}-CA.csr"
       provider: selfsigned
 
   - name: Generating the intermediate certificate private key
     openssl_privatekey:
-      path: /etc/ssl/private/{{ ansible_domain }}.key
+      path: /etc/ssl/private/{{ organization }}.key
       type: RSA
       size: 2048
 
   - name: Generating a CSR for the intermediate certificate
     openssl_csr:
-      path: "/etc/ssl/csrs/{{ ansible_domain }}.csr"
-      privatekey_path: "/etc/ssl/private/{{ ansible_domain }}.key"
+      path: "/etc/ssl/csrs/{{ organization }}.csr"
+      privatekey_path: "/etc/ssl/private/{{ organization }}.key"
       common_name: "{{ organization }}"
       use_common_name_for_san: false
       basic_constraints:
@@ -68,8 +68,8 @@
 
   - name: Signing the intermediate certificate
     openssl_certificate:
-      path: "/etc/ssl/certs/{{ ansible_domain }}.crt"
-      csr_path: "/etc/ssl/csrs/{{ ansible_domain }}.csr"
-      ownca_path: /etc/ssl/certs/{{ ansible_domain }}_CA.crt
-      ownca_privatekey_path: /etc/ssl/private/{{ ansible_domain }}_CA.key
+      path: "/etc/ssl/certs/{{ organization }}.crt"
+      csr_path: "/etc/ssl/csrs/{{ organization }}.csr"
+      ownca_path: /etc/ssl/certs/{{ organization }}-CA.crt
+      ownca_privatekey_path: /etc/ssl/private/{{ organization }}-CA.key
       provider: ownca
