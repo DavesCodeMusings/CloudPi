@@ -27,7 +27,7 @@ Here's the procedure:
 ```
 pi@mypi:~/cloudpi/ssl $ ansible-playbook configure-certificate-authority.yml
 
-PLAY [Configure the certificate authority] **************************************
+PLAY [Configure the root certificate authority (CA)] ****************************
 
 TASK [Gathering Facts] **********************************************************
 ok: [localhost]
@@ -38,7 +38,7 @@ ok: [localhost]
 TASK [Creating directory to store signing requests] *****************************
 changed: [localhost]
 
-TASK [Generating the certificate authority (CA) private key] ********************
+TASK [Generating the root certificate authority (CA) private key] ***************
 changed: [localhost]
 
 TASK [Generating a certificate signing request (CSR) for the root CA] ***********
@@ -86,25 +86,28 @@ To generate a certificate like this, use the Ansible playbook [`issue-host-certi
 ```
 pi@mypi:~/cloudpi/ssl $ ansible-playbook issue-host-certificate.yml
 
-PLAY [Generate a certificate for multiple DNS names] *************************
+PLAY [Issue a certificate for multiple DNS names] *******************************
 
-TASK [Gathering Facts] *********************************************************
+TASK [Gathering Facts] **********************************************************
 ok: [localhost]
 
-TASK [Loading subject info] ****************************************************
+TASK [Loading subject info] *****************************************************
 ok: [localhost]
 
-TASK [Generating a private key] ************************************************
+TASK [Generating a private key] *************************************************
 changed: [localhost]
 
-TASK [Generating a CSR] ********************************************************
+TASK [Creating directory to store signing request] ******************************
+ok: [localhost]
+
+TASK [Generating a CSR] *********************************************************
 changed: [localhost]
 
-TASK [Signing the certificate] *************************************************
+TASK [Signing the certificate] **************************************************
 changed: [localhost]
 
-PLAY RECAP *********************************************************************
-localhost                  : ok=5    changed=3    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+PLAY RECAP **********************************************************************
+localhost                  : ok=6    changed=3    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 ```
 
 >LDAP is not included in this multi-name certificate. It is configured separately in a later step.
