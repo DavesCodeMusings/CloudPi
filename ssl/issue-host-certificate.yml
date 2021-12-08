@@ -43,6 +43,7 @@
       - "DNS:{{ ansible_hostname }}.{{ ansible_domain }}"
       - "DNS:{{ ansible_hostname }}"
       - "IP:{{ ansible_default_ipv4.address }}"
+      - "DNS:cockpit.{{ ansible_hostname }}.{{ ansible_domain }}"
       - "DNS:esphome.{{ ansible_hostname }}.{{ ansible_domain }}"
       - "DNS:gitea.{{ ansible_hostname }}.{{ ansible_domain }}"
       - "DNS:homeassistant.{{ ansible_hostname }}.{{ ansible_domain }}"
