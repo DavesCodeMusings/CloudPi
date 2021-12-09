@@ -35,15 +35,27 @@
       owner: pi
       group: pi
 
-  - name: Creating Mosquitto configuration, data and log directories
-    # Log messages are configured for stdout, but the directory needs to exist
-    # or else it ends up getting created as a Docker volume.
+  - name: Creating mosquitto group
+    group:
+      name: mosquitto
+      gid: 1883
+
+  - name: Creating mosquitto user account
+    user:
+      name: mosquitto
+      uid: 1883
+      group: mosquitto
+      create_home: false
+      home: /nonexistent
+      shell: /usr/sbin/nologin
+
+  - name: Creating Mosquitto configuration and data directories
     file:
       path: /opt/docker/mosquitto/{{ item }}
       state: directory
       mode: '0755'
-      owner: root
-      group: pi
+      owner: mosquitto
+      group: mosquitto
     with_items:
       - config
       - data
