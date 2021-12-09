@@ -16,12 +16,11 @@
 
   - name: Copying intermediate and root certificates
     shell:
-      cmd: cat /etc/ssl/certs/{{ ansible_domain }}.crt /etc/ssl/certs/{{ ansible_domain }}_CA.crt >ca-certificates.crt
-      chdir: /etc/ldap/tls
+      cmd: cat /etc/ssl/certs/{{ ansible_domain }}.crt /etc/ssl/certs/{{ ansible_domain }}_CA.crt /etc/ldap/tls/ca-certificates.crt
 
   - name: Setting ownership on intermediate / root bundle
     file:
-      path: /etc/ssl/certs/ca-certificates.crt
+      path: /etc/ldap/tls/ca-certificates.crt
       owner: openldap
       group: openldap
 
