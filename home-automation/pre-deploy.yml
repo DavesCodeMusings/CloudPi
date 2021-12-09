@@ -35,7 +35,9 @@
       owner: pi
       group: pi
 
-  - name: Creating Mosquitto configuration and data directories
+  - name: Creating Mosquitto configuration, data and log directories
+    # Log messages are configured for stdout, but the directory needs to exist
+    # or else it ends up getting created as a Docker volume.
     file:
       path: /opt/docker/mosquitto/{{ item }}
       state: directory
@@ -45,6 +47,7 @@
     with_items:
       - config
       - data
+      - log
 
   - name: Creating Mosquitto config file
     copy:
