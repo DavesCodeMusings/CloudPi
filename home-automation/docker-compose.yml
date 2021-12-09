@@ -40,6 +40,8 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
-      - /opt/docker/mosquitto:/mosquitto
+      - /opt/docker/mosquitto/config:/mosquitto/config
+      - /opt/docker/mosquitto/data:/mosquitto/data
+      - /opt/docker/mosquitto/logs:/mosquitto/log
     ports:
       - "1883:1883"
