@@ -12,11 +12,14 @@
       state: latest
 
   # The html directory is where NextCloud stores pretty much everything.
+  # Must be owned by the user Nextcloud runs as.
   - name: Create Nextcloud configuration data directory
     file:
       path: /opt/docker/nextcloud/html
       state: directory
       mode: '0755'
+      owner: www-data
+      group: pi
 
   # Samba shares are located under /srv.
   - name: Create directory for Samba media share
