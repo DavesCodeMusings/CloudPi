@@ -1,0 +1,33 @@
+---
+- name: Backup Mosquitto
+  hosts: anubis.home
+  become: true
+
+  vars:
+    app_name: mosquitto
+
+  tasks:
+  - name: Creating parent directory for config files
+    ansible.builtin.file:
+      path: "/media/backup/{{ ansible_hostname }}/opt/docker"
+      state: directory
+      owner: pi
+      group: root
+    delegate_to: localhost
+
+  - name: Stopping docker container
+    community.docker.docker_container:
+      name: "{{ app_name }}"
+      state: stopped
+
+  - name: Backing up config files
+    ansible.posix.synchronize:
+      mode: pull
+      src: "/opt/docker/{{ app_name }}"
+      dest: "/media/backup/{{ ansible_hostname }}/opt/docker"
+    delegate_to: localhost
+
+  - name: Starting docker container
+    community.docker.docker_container:
+      name: "{{ app_name }}"
+      state: started
