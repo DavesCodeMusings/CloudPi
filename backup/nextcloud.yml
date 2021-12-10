@@ -1,0 +1,60 @@
+---
+- name: Backup Nextcloud
+  hosts: anubis.home
+  become: true
+
+  vars:
+    app_name: nextcloud
+
+  tasks:
+  - name: Creating parent directory for config files
+    ansible.builtin.file:
+      path: "/media/backup/{{ ansible_hostname }}/opt/docker"
+      state: directory
+      owner: pi
+      group: root
+    delegate_to: localhost
+
+  - name: Entering maintenance mode
+    community.docker.docker_container_exec:
+      container: "{{ app_name }}"
+      command: php occ maintenance:mode --on
+      user: www-data
+
+  - name: Dumping database to flat file
+    shell:
+      cmd: sqlite3 owncloud.db .dump >owncloud.db.dump
+      chdir: /srv/cloud
+
+  - name: Compacting database
+    shell:
+      cmd: sqlite3 owncloud.db "VACUUM;"
+      chdir: /srv/cloud
+
+  - name: Backing up config files
+    ansible.posix.synchronize:
+      mode: pull
+      src: "/opt/docker/{{ app_name }}"
+      dest: "/media/backup/{{ ansible_hostname }}/opt/docker"
+    delegate_to: localhost
+
+  - name: Creating parent directory for data files
+    ansible.builtin.file:
+      path: "/media/backup/{{ ansible_hostname }}/srv"
+      state: directory
+      owner: pi
+      group: pi
+    delegate_to: localhost
+
+  - name: Backing up data files
+    ansible.posix.synchronize:
+      mode: pull
+      src: "/srv/cloud"
+      dest: "/media/backup/{{ ansible_hostname }}/srv"
+    delegate_to: localhost
+
+  - name: Exiting maintenance mode
+    community.docker.docker_container_exec:
+      container: "{{ app_name }}"
+      command: php occ maintenance:mode --off
+      user: www-data
