@@ -21,8 +21,8 @@ services:
       - /opt/docker/esphome:/config:rw
     command: config/ dashboard
 
-  nodered:
-    container_name: nodered
+  node-red:
+    container_name: node-red
     image: nodered/node-red
     ports:
       - "1880:1880"
