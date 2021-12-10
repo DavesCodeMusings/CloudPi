@@ -1,0 +1,37 @@
+---
+- name: Backup NodeRED
+  hosts: mypi.home
+  become: true
+
+  vars:
+    app_name: node-red
+
+  tasks:
+  - name: Creating directory for target host
+    ansible.builtin.file:
+      path: "/media/backup/{{ ansible_hostname }}"
+      state: directory
+    delegate_to: localhost
+
+  - name: Stopping docker container
+    community.docker.docker_container:
+      name: "{{ app_name }}"
+      state: stopped
+
+  - name: Creating backup directory for files in /opt/docker
+    ansible.builtin.file:
+      path: "/media/backup/{{ ansible_hostname }}/opt/docker"
+      state: directory
+    delegate_to: localhost
+
+  - name: Backing up config files
+    ansible.posix.synchronize:
+      mode: pull
+      src: "/opt/docker/{{ app_name }}"
+      dest: "/media/backup/{{ ansible_hostname }}/opt/docker"
+    delegate_to: localhost
+
+  - name: Starting docker container
+    community.docker.docker_container:
+      name: "{{ app_name }}"
+      state: started
