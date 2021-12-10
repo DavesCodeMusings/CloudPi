@@ -1,0 +1,45 @@
+---
+- name: Backup Nginx
+  hosts: anubis.home
+  become: true
+
+  vars:
+    app_name: nginx
+
+  tasks:
+  - name: Creating directory for target host
+    ansible.builtin.file:
+      path: "/media/backup/{{ ansible_hostname }}"
+      state: directory
+    delegate_to: localhost
+
+  # The Nginx Docker container is not stopped.
+  # Nginx acts as a reverse proxy for nearly all applications so the impact
+  # of stopping it would be widespread. And, the likelyhood of changes being
+  # written to Nginx data and config during backup is slim.
+
+  - name: Creating backup directory for files in /opt/docker
+    ansible.builtin.file:
+      path: "/media/backup/{{ ansible_hostname }}/opt/docker"
+      state: directory
+    delegate_to: localhost
+
+  - name: Backing up config files
+    ansible.posix.synchronize:
+      mode: pull
+      src: "/opt/docker/{{ app_name }}"
+      dest: "/media/backup/{{ ansible_hostname }}/opt/docker"
+    delegate_to: localhost
+
+  - name: Creating backup directory for files in /srv
+    ansible.builtin.file:
+      path: "/media/backup/{{ ansible_hostname }}/srv"
+      state: directory
+    delegate_to: localhost
+
+  - name: Backing up data files
+    ansible.posix.synchronize:
+      mode: pull
+      src: "/srv/www"
+      dest: "/media/backup/{{ ansible_hostname }}/srv"
+    delegate_to: localhost
