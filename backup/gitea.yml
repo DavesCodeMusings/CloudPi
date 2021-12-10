@@ -1,0 +1,58 @@
+---
+- name: Backup Gitea
+  hosts: anubis.home
+  become: true
+
+  vars:
+    app_name: gitea
+
+  tasks:
+  - name: Creating parent directory for config files
+    ansible.builtin.file:
+      path: "/media/backup/{{ ansible_hostname }}/opt/docker"
+      state: directory
+      owner: pi
+      group: root
+    delegate_to: localhost
+
+  - name: Stopping docker container
+    community.docker.docker_container:
+      name: "{{ app_name }}"
+      state: stopped
+
+  - name: Dumping database to flat file
+    shell:
+      cmd: sqlite3 gitea.db .dump >gitea.db.dump
+      chdir: /opt/docker/{{ app_name }}/gitea
+
+  - name: Compacting database
+    shell:
+      cmd: sqlite3 gitea.db "VACUUM;"
+      chdir: /opt/docker/{{ app_name }}/gitea
+
+  - name: Backing up config files
+    ansible.posix.synchronize:
+      mode: pull
+      src: "/opt/docker/{{ app_name }}"
+      dest: "/media/backup/{{ ansible_hostname }}/opt/docker"
+    delegate_to: localhost
+
+  - name: Creating parent directory for data files
+    ansible.builtin.file:
+      path: "/media/backup/{{ ansible_hostname }}/srv"
+      state: directory
+      owner: pi
+      group: pi
+    delegate_to: localhost
+
+  - name: Backing up data files
+    ansible.posix.synchronize:
+      mode: pull
+      src: "/srv/git"
+      dest: "/media/backup/{{ ansible_hostname }}/srv"
+    delegate_to: localhost
+
+  - name: Starting docker container
+    community.docker.docker_container:
+      name: "{{ app_name }}"
+      state: started
