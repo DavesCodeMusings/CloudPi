@@ -1,0 +1,54 @@
+---
+- name: Backup Samba Files
+  hosts: anubis.home
+  become: true
+
+  vars:
+    app_name: samba
+
+  tasks:
+  - name: Creating directory for target host
+    ansible.builtin.file:
+      path: "/media/backup/{{ ansible_hostname }}"
+      state: directory
+    delegate_to: localhost
+
+  # Media and public shares are read-only and unlikely to be written to during
+  # backup, so there's no need to stop the container just yet.
+
+  - name: Creating backup directory for files in /srv
+    ansible.builtin.file:
+      path: "/media/backup/{{ ansible_hostname }}/srv"
+      state: directory
+    delegate_to: localhost
+
+  - name: Backing up media files
+    ansible.posix.synchronize:
+      mode: pull
+      src: "/srv/media"
+      dest: "/media/backup/{{ ansible_hostname }}/srv"
+    delegate_to: localhost
+
+  - name: Backing up public files
+    ansible.posix.synchronize:
+      mode: pull
+      src: "/srv/public"
+      dest: "/media/backup/{{ ansible_hostname }}/srv"
+    delegate_to: localhost
+
+  - name: Stopping docker container
+    community.docker.docker_container:
+      name: "{{ app_name }}"
+      state: stopped
+
+  - name: Backing up shared files
+    ansible.posix.synchronize:
+      mode: pull
+      src: "/srv/shared"
+      dest: "/media/backup/{{ ansible_hostname }}/srv"
+    delegate_to: localhost
+
+  - name: Starting docker container
+    community.docker.docker_container:
+      name: "{{ app_name }}"
+      state: started
