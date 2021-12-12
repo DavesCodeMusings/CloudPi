@@ -37,11 +37,11 @@
             server_name esphome.{{ ansible_hostname }}.{{ ansible_domain }};
             listen 443 ssl;
             location / {
-                proxy_pass http://esphome.{{ ansible_hostname }}.{{ ansible_domain }}:6052;
+                proxy_pass http://{{ ansible_hostname }}.{{ ansible_domain }}:6052;
                 proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
             }
             location /ace {
-                proxy_pass http://esphome.{{ ansible_hostname }}.{{ ansible_domain }}:6052;
+                proxy_pass http://{{ ansible_hostname }}.{{ ansible_domain }}:6052;
                 proxy_http_version 1.1;
                 proxy_set_header Upgrade $http_upgrade;
                 proxy_set_header Connection "upgrade";
@@ -49,7 +49,7 @@
                 proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
             }
             location /logs {
-                proxy_pass http://esphome.{{ ansible_hostname }}.{{ ansible_domain }}:6052;
+                proxy_pass http://{{ ansible_hostname }}.{{ ansible_domain }}:6052;
                 proxy_http_version 1.1;
                 proxy_set_header Upgrade $http_upgrade;
                 proxy_set_header Connection "upgrade";
@@ -76,10 +76,10 @@
             server_name homeassistant.{{ ansible_hostname }}.{{ ansible_domain }};
             listen 443 ssl;
             location / {
-                proxy_pass http://homeassistant.{{ ansible_hostname }}.{{ ansible_domain }}:8123;
+                proxy_pass http://{{ ansible_hostname }}.{{ ansible_domain }}:8123;
             }
             location /api/websocket {
-                proxy_pass http://homeassistant.{{ ansible_hostname }}.{{ ansible_domain }}:8123;
+                proxy_pass http://{{ ansible_hostname }}.{{ ansible_domain }}:8123;
                 proxy_http_version 1.1;
                 proxy_set_header Upgrade $http_upgrade;
                 proxy_set_header Connection "upgrade";
@@ -103,7 +103,7 @@
             server_name nodered.{{ ansible_hostname }}.{{ ansible_domain }};
             listen 443 ssl;
             location / {
-                proxy_pass http://nodered.{{ ansible_hostname }}.{{ ansible_domain }}:1880;
+                proxy_pass http://{{ ansible_hostname }}.{{ ansible_domain }}:1880;
                 proxy_set_header X-Forwarded-For $remote_addr;
                 proxy_http_version 1.1;
                 proxy_set_header Upgrade $http_upgrade;
