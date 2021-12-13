@@ -150,6 +150,10 @@ The important file in the CA are already in plain text. You just need to keep th
 
 If you've configured your client devices to trust your CA, the intermediate and root certificates will already be in your client's certificate store. You will not have the private keys, however. Be sure to keep copies of these in a safe place.
 
+## Aditional Topics in the Wiki
+
+For more discussion on backup and other interesting things you can do with this thing you just built, see the [Cloud Pi wiki](https://github.com/DavesCodeMusings/CloudPi/wiki)
+
 ___
 
 _Every bad situation is a blues song waiting to happen. &mdash;Amy Winehouse_
