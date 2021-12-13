@@ -1,4 +1,5 @@
-There are enough applications in the home automation stack that a little text file with tips is not going to be of much help. Better to refer directly to the project home pages and documentation.
+There are enough applications in the home automation stack that a little text file with tips is not going to be of much help.
+Better to refer directly to the project home pages and documentation.
 
 ESPHome
 https://esphome.io/
