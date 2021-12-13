@@ -19,7 +19,7 @@ Spend your time using the system, not maintaining it.
 
 Sound like your kind of thing? Get yourself a 4Gig Raspberry Pi 4 and let's go!
 
-[Table of Contents](table-of-contents.md).
+[Table of Contents](table-of-contents.md)
 
 ___
 
