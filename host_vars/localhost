@@ -1,0 +1,40 @@
+# host_vars for localhost
+#
+# *** Experimental, untested, and subject to change. ***
+#
+# Format:
+#   variable: default value  # comment
+
+# Network configuration
+hostname: "{{ ansible_hostname }}"
+domain: home
+ip: "{{ ansible_default_ipv4.address }}"
+mask: "{{ ansible_default_ipv4.netmask }}"  # rename to netmask
+gateway: "{{ ansible_default_ipv4.gateway }}"
+primary_dns: "{{ ansible_dns.nameservers[0] }}"
+secondary_dns: 1.1.1.1
+
+# Storage
+device: /dev/sda # rename to lvm_device
+confirm_device: /dev/sdX  # Must be changed to match device. Rename to confirm_lvm_device
+partition: 1  # rename to lvm_partition
+volume_group: vg1
+logical_volumes:
+  - name: vol01
+    mount_point: /opt/docker
+    size: 5G
+  - name: vol02
+    mount_point: /var/lib/docker
+    size: 10G
+  - name: vol03
+    mount_point: /opt/docker
+    size: 100G
+
+# Certificate identity
+country: US # required
+state_or_province: Wisconsin  # required
+locality: Madison  # required
+organization: Home  # required
+
+# LDAP Administration
+password: password  # rename to ldap_password
