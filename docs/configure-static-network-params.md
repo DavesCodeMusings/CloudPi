@@ -1,5 +1,5 @@
 # Static Networking Parameters
-Because the Raspberry Pi will be acting as a server, there needs to be a reliable way of finding it. Configuring a static IP address, rather than relying on the whims of the DHCP built into your network router, is one way to acheive that. This step will disable the DHCP client on the Pi and configure it with a fixed address, mask, gateway, and dns server. This is all done with an Ansible playbook that makes some intelligent guesses about your configuration based on what's been assigned by DHCP. All you need to do is supply the IP address.
+Because the Raspberry Pi will be acting as a server, there needs to be a reliable way of finding it. Configuring a static IP address, rather than relying on the whims of the DHCP built into your network router, is one way to acheive that. This step will disable the DHCP client on the Pi and configure it with a fixed address, network mask, gateway, and dns server. This is all done with an Ansible playbook that makes some intelligent guesses about your configuration based on what's been assigned by DHCP. All you need to do is supply the IP address.
 
 By the end of this step, you will have:
 1. Configured static networking parameters.
@@ -62,7 +62,7 @@ PLAY RECAP *********************************************************************
 localhost                  : ok=6    changed=4    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0
 ```
 
-The _hostname_ variable sets the new hostname and _ip_ sets the new IP address. The domain will default to _home_, while gateway, mask, and DNS comes from the existing configuration. If you want to override other variables, have a look in the playbook's _vars:_ section to find out what the names are.
+The _hostname_ variable sets the new hostname and _ip_ sets the new IP address. The domain will default to _home_, while gateway, netmask, and DNS comes from the existing configuration. If you want to override other variables, have a look in the playbook's _vars:_ section to find out what the names are.
 
 ## Verifying the New Configuration
 Static network settings are configured in the _/etc/network/interfaces.d/eth0_ file. Display the contents of the file to verify everything looks like you expect before restarting the system to apply changes.
@@ -79,7 +79,7 @@ dns-nameservers 192.168.1.1 1.1.1.1
 dns-search home
 ```
 
-**_Take a good look at this file. If the _address_ or _mask_ parameters are wrong, you will not be able to make an SSH connection to your Pi._**
+**_Take a good look at this file. If the _address_ or _netmask_ parameters are wrong, you will not be able to make an SSH connection to your Pi._**
 
 ## Rebooting
 To apply changes, you'll need to reboot the system.
