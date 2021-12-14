@@ -9,7 +9,7 @@
 hostname: "{{ ansible_hostname }}"
 domain: home
 ip: "{{ ansible_default_ipv4.address }}"
-mask: "{{ ansible_default_ipv4.netmask }}"  # rename to netmask
+netmask: "{{ ansible_default_ipv4.netmask }}"
 gateway: "{{ ansible_default_ipv4.gateway }}"
 primary_dns: "{{ ansible_dns.nameservers[0] }}"
 secondary_dns: 1.1.1.1
