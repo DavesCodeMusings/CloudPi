@@ -9,7 +9,7 @@
   #   ansible-playbook --extra-vars "ip=192.168.1.100 hostname=mypi"
   vars:
     ip: "{{ ansible_default_ipv4.address }}"
-    mask: "{{ ansible_default_ipv4.netmask }}"
+    netmask: "{{ ansible_default_ipv4.netmask }}"
     gateway: "{{ ansible_default_ipv4.gateway }}"
     primary_dns: "{{ ansible_dns.nameservers[0] }}"
     secondary_dns: 1.1.1.1
@@ -35,7 +35,7 @@
         allow-hotplug eth0
         iface eth0 inet static
         address {{ ip }}
-        netmask {{ mask }}
+        netmask {{ netmask }}
         gateway {{ gateway }}
         dns-nameservers {{ primary_dns }} {{ secondary_dns }}
         dns-search {{ domain }}
