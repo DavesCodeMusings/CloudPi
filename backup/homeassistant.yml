@@ -23,7 +23,7 @@
   - name: Dumping database to flat file
     shell:
       cmd: sqlite3 home-assistant_v2.db .dump >home-assistant_v2.db.dump
-      chdir: /opt/docker/
+      chdir: "/opt/docker/{{ app_name }}"
 
   - name: Compacting database
     shell:
