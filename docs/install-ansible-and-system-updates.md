@@ -15,7 +15,7 @@ Ansible is used to automate mundane tasks. If you enjoy countless hours of error
 ## Why Ansible?
 With the exception of installing Ansible itself, we'll be using Ansible to install and configure nearly every component the system.
 * Using automated installs provides a repeatable, consistent way to configure the system.
-* Ansible playbooks are easy to read and don't require much more effor than writing a shell script.
+* Ansible playbooks are easy to read and don't require much more effort than writing a shell script.
 * You came here to build a Raspberry Pi cloud server, not learn how to type `sudo this` and `sudo that`.
 
 ## Installing Ansible
