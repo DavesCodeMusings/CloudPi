@@ -1,0 +1,26 @@
+---
+- name: Configure mailboxes for users
+  hosts: localhost
+  connection: local
+  become: true
+
+  vars:
+    accounts:
+      - pi
+
+  tasks:
+    - name: Creating mailbox
+      ansible.builtin.file:
+        path: "/var/mail/{{ item }}"
+        owner: "{{ item }}"
+        group: mail
+        state: touch
+        mode: "0660"
+      with_items: "{{ accounts }}"
+
+    - name: Adding user to mail group
+      user:
+        name: "{{ item }}"
+        groups: mail
+        append: yes
+      with_items: "{{ accounts }}"
