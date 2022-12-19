@@ -20,3 +20,5 @@ CloudPi runs...
 Build it yourself, quickly and easily, using [Ansible](https://www.ansible.com/) automation for sytem configuration and [Docker Compose](https://docs.docker.com/compose/) for application deployment.
 
 The project documentation is here: [https://davescodemusings.github.io/CloudPi/](https://davescodemusings.github.io/CloudPi/)
+
+NOTE: With all the supply chain problems impacting Pi availability, I have switched to using low-end Intel NUCs with Alpine Linux. For more info, see: https://github.com/DavesCodeMusings/nucloud
