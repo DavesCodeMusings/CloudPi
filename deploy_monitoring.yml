@@ -1,0 +1,14 @@
+---
+- name: Deploy Monitoring
+  hosts: monitoring
+  become: true
+
+  # module_defaults
+  #   ansible.posix.firewalld:
+  #     permanent: true
+
+  tasks:
+    # - name: Include redhat.rhel_system_roles.cockpit
+    
+
+    
