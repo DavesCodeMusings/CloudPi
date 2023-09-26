@@ -8,7 +8,25 @@
   #     permanent: true
 
   tasks:
-    # - name: Include redhat.rhel_system_roles.cockpit
-    
+     - name: Include redhat.rhel_system_roles.cockpit
+       ansible.builtin.include_role:
+         name: redhat.rhel_system_roles.cockpit
 
-    
+     - name: Copy files/cockpit.conf to /etc/cockpit
+       ansible.builtin.copy:
+         src: ./files/cockpit.conf
+         dest: /etc/cockpit/
+         owner: root
+         group: root
+         mode: 420
+     
+     - name: Restart cockpit service
+       ansible.builtin.service:
+         name: cockpit
+         state: restarted
+
+     - name: Allow cockpit through firewall
+       ansible.posix.firewalld:
+         service: cockpit
+         permanent: true
+         state: enabled
