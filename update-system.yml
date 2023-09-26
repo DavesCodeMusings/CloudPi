@@ -1,6 +1,6 @@
 ---
 - name: Update System to Latest Packages
-  hosts: localhost
+  hosts: 10.101.1.249,10.101.1.212
   connection: local
   become: true
 
